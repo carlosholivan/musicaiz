@@ -1,0 +1,58 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.ipynb_checkpoints/
+*.idea/
+*.py[cod]
+
+# Distribution / packaging
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Sphinx documentation
+docs/_build/
+docs/build/
+docs/source/generated/
+docs/source/auto_examples/
+
+# PyBuilder
+target/
+
+# Coverage
+htmlcov/
+.coverage
+
+# Generated files
+.DS_Store
+.vscode/
+
+# direnv
+.env
+
+# vim
+*.swp
+
+# binary data
+binaries/
+
+# notebooks
+notebooks/

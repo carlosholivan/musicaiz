@@ -1,0 +1,14 @@
+name: musicaiz
+
+channels:
+  - defaults
+  - conda-forge
+
+dependencies:
+  - python=3.8
+  - numpy==1.19
+  - jupyter
+  - pip
+
+  - pip:
+    - -r requirements.txt

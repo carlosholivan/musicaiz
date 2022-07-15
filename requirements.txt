@@ -1,0 +1,17 @@
+pretty_midi==0.2.9
+pytest==6.2.4
+matplotlib==3.4.3
+seaborn
+coverage==6.2
+pre-commit
+tqdm
+plotly==5.8.0
+mypy==0.960
+
+# For models submodule
+networkx==2.8.3
+sklearn==0.0
+gradio==3.0.15
+torchsummary==1.5.1
+prettytable==3.3.0
+torch==1.11.0 --extra-index-url https://download.pytorch.org/whl/cu113

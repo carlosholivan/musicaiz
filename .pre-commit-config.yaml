@@ -1,0 +1,33 @@
+repos:
+  - repo: https://github.com/psf/black
+    rev: 20.8b1
+    hooks:
+    - id: black
+      name: black
+      entry: black src/
+      language: python
+      stages: [commit]
+      always_run: true
+  - repo: https://gitlab.com/PyCQA/flake8
+    rev: 3.8.3
+    hooks:
+      - id: flake8
+        stages: [commit]
+  - repo: local
+    hooks:
+    - id: tests
+      name: tests
+      entry: pytest
+      language: python
+      verbose: true
+      pass_filenames: false
+      always_run: true
+      stages: [push]
+    - id: typing
+      name: typing
+      entry: mypy src/
+      verbose: true
+      always_run: true
+      language: python
+      stages: [push]
+      pass_filenames: false
