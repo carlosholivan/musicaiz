@@ -7,5 +7,4 @@ sphinx-rtd-theme==1.0.0
 sphinx-design==0.1.0
 sphinx_panels==0.6.0
 nbsphinx==0.8.8
-sphinx-rtd-book==0.3.2
 pandoc==2.2
