@@ -1,0 +1,32 @@
+﻿musicaiz.harmony.ChordType
+==========================
+
+.. currentmodule:: musicaiz.harmony
+
+.. autoclass:: ChordType
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~ChordType.get_type_from_value
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~ChordType.TRIAD
+      ~ChordType.SEVENTH
+      ~ChordType.NINTH
+      ~ChordType.ELEVENTH
+      ~ChordType.THIRTEENTH
+   
+   

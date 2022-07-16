@@ -1,0 +1,6 @@
+﻿musicaiz.features.\_all\_note\_seq\_permutations
+================================================
+
+.. currentmodule:: musicaiz.features
+
+.. autofunction:: _all_note_seq_permutations

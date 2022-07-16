@@ -1,0 +1,6 @@
+﻿musicaiz.features.get\_segment\_boundaries
+==========================================
+
+.. currentmodule:: musicaiz.features
+
+.. autofunction:: get_segment_boundaries

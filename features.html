@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Features &mdash; Musanalysis 0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/plot_directive.css" type="text/css" />
+      <link rel="stylesheet" href="_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="_static/sg_gallery-binder.css" type="text/css" />
+      <link rel="stylesheet" href="_static/sg_gallery-dataframe.css" type="text/css" />
+      <link rel="stylesheet" href="_static/sg_gallery-rendered-html.css" type="text/css" />
+      <link rel="stylesheet" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" type="text/css" />
+      <link rel="stylesheet" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/design-tabs.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="musicaiz.features.get_highest_lowest_pitches" href="generated/musicaiz.features.get_highest_lowest_pitches.html" />
+    <link rel="prev" title="musicaiz.rhythm._find_nearest" href="generated/musicaiz.rhythm._find_nearest.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #222222ff" >
+            <a href="index.html">
+            <img src="_static/logo_square_dark.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.0.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Musicaiz Documentation:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="loaders.html">Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="structure.html">Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="harmony.html">Harmony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rhythm.html">Rhythm</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pitch">Pitch</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.features.get_highest_lowest_pitches.html">musicaiz.features.get_highest_lowest_pitches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.features.get_pitch_range.html">musicaiz.features.get_pitch_range</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.features.get_note_density.html">musicaiz.features.get_note_density</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.features.get_pitch_classes.html">musicaiz.features.get_pitch_classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.features.get_note_classes.html">musicaiz.features.get_note_classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.features.pitch_counts.html">musicaiz.features.pitch_counts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.features.get_last_note_class.html">musicaiz.features.get_last_note_class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.features.pitch_class_histogram.html">musicaiz.features.pitch_class_histogram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.features.pitch_class_transition_matrix.html">musicaiz.features.pitch_class_transition_matrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.features.plot_pitch_class_transition_matrix.html">musicaiz.features.plot_pitch_class_transition_matrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.features.average_pitch_interval.html">musicaiz.features.average_pitch_interval</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#harmony">Harmony</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.features.get_chord_type_from_note_seq.html">musicaiz.features.get_chord_type_from_note_seq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.features.get_intervals_note_seq.html">musicaiz.features.get_intervals_note_seq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.features.predict_chords.html">musicaiz.features.predict_chords</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.features.predict_scales_degrees.html">musicaiz.features.predict_scales_degrees</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.features.predict_possible_progressions.html">musicaiz.features.predict_possible_progressions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.features.predict_progression.html">musicaiz.features.predict_progression</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.features._all_note_seq_permutations.html">musicaiz.features._all_note_seq_permutations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.features._delete_repeated_note_names.html">musicaiz.features._delete_repeated_note_names</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.features._extract_note_positions.html">musicaiz.features._extract_note_positions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.features._order_note_seq_by_chromatic_idx.html">musicaiz.features._order_note_seq_by_chromatic_idx</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.features.get_harmonic_density.html">musicaiz.features.get_harmonic_density</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#rhythm">Rhythm</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.features.get_start_sec.html">musicaiz.features.get_start_sec</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.features.get_ioi.html">musicaiz.features.get_ioi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.features.get_labeled_beat_vector.html">musicaiz.features.get_labeled_beat_vector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.features.compute_rhythm_self_similarity_matrix.html">musicaiz.features.compute_rhythm_self_similarity_matrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.features.plot_rmss.html">musicaiz.features.plot_rmss</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.features.compute_all_rmss.html">musicaiz.features.compute_all_rmss</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.features.get_symbolic_length_classes.html">musicaiz.features.get_symbolic_length_classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.features.note_length_histogram.html">musicaiz.features.note_length_histogram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.features.note_length_transition_matrix.html">musicaiz.features.note_length_transition_matrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.features.plot_note_length_transition_matrix.html">musicaiz.features.plot_note_length_transition_matrix</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#self-similarity-matrices">Self-Similarity Matrices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.features.compute_ssm.html">musicaiz.features.compute_ssm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.features.self_similarity_louie.html">musicaiz.features.self_similarity_louie</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.features.self_similarity_single_measure.html">musicaiz.features.self_similarity_single_measure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.features.self_similarity_measures.html">musicaiz.features.self_similarity_measures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.features.plot_ssm.html">musicaiz.features.plot_ssm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.features._self_similarity.html">musicaiz.features._self_similarity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.features.binarize_self_similarity_matrix.html">musicaiz.features.binarize_self_similarity_matrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.features.feature_vector.html">musicaiz.features.feature_vector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.features.get_novelty_func.html">musicaiz.features.get_novelty_func</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.features.get_segment_boundaries.html">musicaiz.features.get_segment_boundaries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.features.plot_novelty_from_ssm.html">musicaiz.features.plot_novelty_from_ssm</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="algorithms.html">Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tokenizers.html">Tokenizers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="evaluation.html">Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotters.html">Plotters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="converters.html">Converters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/2-write_midi.html">Writing a MIDI file from scratch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/3-plot.html">Plotting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">References:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="implementations.html">Implementation Details</a></li>
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #222222ff" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Musanalysis</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Features</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/features.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<span class="target" id="module-musicaiz.features"><span id="features"></span></span><section id="id1">
+<h1>Features<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>This module provides methods that allows to analyze symbolic music.</p>
+<section id="pitch">
+<h2>Pitch<a class="headerlink" href="#pitch" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/musicaiz.features.get_highest_lowest_pitches.html#musicaiz.features.get_highest_lowest_pitches" title="musicaiz.features.get_highest_lowest_pitches"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_highest_lowest_pitches</span></code></a>(notes)</p></td>
+<td><p>Extracts the highest and lowest pitches from a list of notes.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/musicaiz.features.get_pitch_range.html#musicaiz.features.get_pitch_range" title="musicaiz.features.get_pitch_range"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_pitch_range</span></code></a>(notes)</p></td>
+<td><p>Computes the difference between the highest and the lowest pitches in a list of notes.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/musicaiz.features.get_note_density.html#musicaiz.features.get_note_density" title="musicaiz.features.get_note_density"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_note_density</span></code></a>(notes)</p></td>
+<td><p>Counts the total number of onsets in the <code class="docutils literal notranslate"><span class="pre">Instrument</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/musicaiz.features.get_pitch_classes.html#musicaiz.features.get_pitch_classes" title="musicaiz.features.get_pitch_classes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_pitch_classes</span></code></a>(notes)</p></td>
+<td><p>Counts the total number of different note classes <a class="reference internal" href="generated/musicaiz.structure.NoteClassBase.html#musicaiz.structure.NoteClassBase" title="musicaiz.structure.NoteClassBase"><code class="xref py py-func docutils literal notranslate"><span class="pre">NoteClassBase()</span></code></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/musicaiz.features.get_note_classes.html#musicaiz.features.get_note_classes" title="musicaiz.features.get_note_classes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_note_classes</span></code></a>(notes)</p></td>
+<td><p>Counts the total number of different note classes <a class="reference internal" href="generated/musicaiz.structure.NoteClassBase.html#musicaiz.structure.NoteClassBase" title="musicaiz.structure.NoteClassBase"><code class="xref py py-func docutils literal notranslate"><span class="pre">NoteClassBase()</span></code></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/musicaiz.features.pitch_counts.html#musicaiz.features.pitch_counts" title="musicaiz.features.pitch_counts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pitch_counts</span></code></a>(notes)</p></td>
+<td><p>Calculates the number of different pitches or Pitch Counts (PC) of a list of Notes.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/musicaiz.features.get_last_note_class.html#musicaiz.features.get_last_note_class" title="musicaiz.features.get_last_note_class"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_last_note_class</span></code></a>(notes)</p></td>
+<td><p>Returns the latest note name (<cite>NoteClassBase</cite>) in the sequence.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/musicaiz.features.pitch_class_histogram.html#musicaiz.features.pitch_class_histogram" title="musicaiz.features.pitch_class_histogram"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pitch_class_histogram</span></code></a>(notes)</p></td>
+<td><p>Computes the Pitch Class Histogram (PCH) of a list of <cite>musicaiz</cite> <a class="reference internal" href="generated/musicaiz.structure.Note.html#musicaiz.structure.Note" title="musicaiz.structure.Note"><code class="xref py py-func docutils literal notranslate"><span class="pre">Note()</span></code></a> objects.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/musicaiz.features.pitch_class_transition_matrix.html#musicaiz.features.pitch_class_transition_matrix" title="musicaiz.features.pitch_class_transition_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pitch_class_transition_matrix</span></code></a>(notes)</p></td>
+<td><p>Computes the Pitch Class Transition Matrix (PCTM) of a list of <cite>musicaiz</cite> <a class="reference internal" href="generated/musicaiz.structure.Note.html#musicaiz.structure.Note" title="musicaiz.structure.Note"><code class="xref py py-func docutils literal notranslate"><span class="pre">Note()</span></code></a> objects.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/musicaiz.features.plot_pitch_class_transition_matrix.html#musicaiz.features.plot_pitch_class_transition_matrix" title="musicaiz.features.plot_pitch_class_transition_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_pitch_class_transition_matrix</span></code></a>(pctm)</p></td>
+<td><p>Plots the Pitch Class Transition Matrix (PCTM).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/musicaiz.features.average_pitch_interval.html#musicaiz.features.average_pitch_interval" title="musicaiz.features.average_pitch_interval"><code class="xref py py-obj docutils literal notranslate"><span class="pre">average_pitch_interval</span></code></a>(notes)</p></td>
+<td><p>Computes the Average Pitch Interval (PI) of a a list of <cite>musicaiz</cite> <a class="reference internal" href="generated/musicaiz.structure.Note.html#musicaiz.structure.Note" title="musicaiz.structure.Note"><code class="xref py py-func docutils literal notranslate"><span class="pre">Note()</span></code></a> objects.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="harmony">
+<h2>Harmony<a class="headerlink" href="#harmony" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/musicaiz.features.get_chord_type_from_note_seq.html#musicaiz.features.get_chord_type_from_note_seq" title="musicaiz.features.get_chord_type_from_note_seq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_chord_type_from_note_seq</span></code></a>(note_seq)</p></td>
+<td><p>Gets the chord type <a class="reference internal" href="generated/musicaiz.harmony.ChordType.html#musicaiz.harmony.ChordType" title="musicaiz.harmony.ChordType"><code class="xref py py-func docutils literal notranslate"><span class="pre">ChordType()</span></code></a> of a list of <cite>musicaiz</cite> <a class="reference internal" href="generated/musicaiz.structure.Note.html#musicaiz.structure.Note" title="musicaiz.structure.Note"><code class="xref py py-func docutils literal notranslate"><span class="pre">Note()</span></code></a> objects.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/musicaiz.features.get_intervals_note_seq.html#musicaiz.features.get_intervals_note_seq" title="musicaiz.features.get_intervals_note_seq"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_intervals_note_seq</span></code></a>(note_seq)</p></td>
+<td><p>Get the intervals between pairs of notes (1st note and the rest of the notes in the note seq) of a sorted note seq.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/musicaiz.features.predict_chords.html#musicaiz.features.predict_chords" title="musicaiz.features.predict_chords"><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict_chords</span></code></a>(note_seq)</p></td>
+<td><p>Predicts a chord in a note sequence with only note values, so no note durations atr taken into account.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/musicaiz.features.predict_scales_degrees.html#musicaiz.features.predict_scales_degrees" title="musicaiz.features.predict_scales_degrees"><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict_scales_degrees</span></code></a>(note_seq)</p></td>
+<td><p>This method is similar to <cite>Scales.get_scales_degrees_from_chord</cite> method but in this case applied to an input note_seq, not to a chord.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/musicaiz.features.predict_possible_progressions.html#musicaiz.features.predict_possible_progressions" title="musicaiz.features.predict_possible_progressions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict_possible_progressions</span></code></a>(possible_chords)</p></td>
+<td><p>Get all possible scales and degrees from a chords list (chord progression) We retrieve a list of degrees which items correspond to one time step each.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/musicaiz.features.predict_progression.html#musicaiz.features.predict_progression" title="musicaiz.features.predict_progression"><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict_progression</span></code></a>(scales, scale)</p></td>
+<td><p>Uses <cite>predict_possible_progressions</cite> to predict all the scales and progressions that belong to a note_seq but this method only returns one of them.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/musicaiz.features._all_note_seq_permutations.html#musicaiz.features._all_note_seq_permutations" title="musicaiz.features._all_note_seq_permutations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_all_note_seq_permutations</span></code></a>(note_seq)</p></td>
+<td><p>Returns a list of lists of all possible orders for a note seq.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/musicaiz.features._delete_repeated_note_names.html#musicaiz.features._delete_repeated_note_names" title="musicaiz.features._delete_repeated_note_names"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_delete_repeated_note_names</span></code></a>(note_seq)</p></td>
+<td><p>Removes a repeated note in a note_seq.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/musicaiz.features._extract_note_positions.html#musicaiz.features._extract_note_positions" title="musicaiz.features._extract_note_positions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_extract_note_positions</span></code></a>(note_seq)</p></td>
+<td><p>Extracts the note positions in the chromatic scale of the notes in a notes sequence.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/musicaiz.features._order_note_seq_by_chromatic_idx.html#musicaiz.features._order_note_seq_by_chromatic_idx" title="musicaiz.features._order_note_seq_by_chromatic_idx"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_order_note_seq_by_chromatic_idx</span></code></a>(note_seq)</p></td>
+<td><p>Sorts a note seq (list of note objects) by the index of the notes in the chromatic scale.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/musicaiz.features.get_harmonic_density.html#musicaiz.features.get_harmonic_density" title="musicaiz.features.get_harmonic_density"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_harmonic_density</span></code></a>(note_seq)</p></td>
+<td><p>Computes the maximum number of notes that are overlapped in the harmonic axis.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="rhythm">
+<h2>Rhythm<a class="headerlink" href="#rhythm" title="Permalink to this headline">¶</a></h2>
+<p>This submodule contains the implementation of part of the paper:</p>
+<div class="sphinx-bs container pb-4 docutils">
+<div class="row docutils">
+<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
+<div class="card w-100 shadow docutils">
+<div class="card-body docutils">
+<p class="card-text">[1] Roig, C., Tardón, L. J., Barbancho, I., &amp; Barbancho, A. M. (2014).
+Automatic melody composition based on a probabilistic model of music
+style and harmonic rules. Knowledge-Based Systems, 71, 419-434.
+<a class="reference external" href="http://dx.doi.org/10.1016/j.knosys.2014.08.018">http://dx.doi.org/10.1016/j.knosys.2014.08.018</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>The implementation follows the paper method to predict rhythmic patterns.
+This module contains:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><dl class="simple">
+<dt>Tempo (or bpm) estimation</dt><dd><ul class="simple">
+<li><p>get IOIs with <cite>get_ioi</cite> method.</p></li>
+<li><p>get error ej</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>Time signature estimation</dt><dd><ul class="simple">
+<li><p>get the labeled beat vector (or IOI’) from IOIs with <cite>get_labeled_beat_vector</cite></p></li>
+<li><p>get the Bar Split Vectors (BSV) for each beat (k in the paper) with <cite>get_split_bar_vector</cite>.</p></li>
+</ul>
+<p>k goes from 2 to 12 which are the most-common time_sig numerators.
+- compute the RSSM with each BSV with <cite>compute_rhythm_self_similarity_matrix</cite>.
+- get the time_sig numerator which will be the RSSM with the highest repeated bar instances.</p>
+</dd>
+</dl>
+</li>
+<li><p>Rhythm extraction</p></li>
+<li><p>Pitch contour extraction</p></li>
+</ol>
+</div></blockquote>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/musicaiz.features.get_start_sec.html#musicaiz.features.get_start_sec" title="musicaiz.features.get_start_sec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_start_sec</span></code></a>(notes)</p></td>
+<td><p>Extracts the time start of the notes in a notes sequence.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/musicaiz.features.get_ioi.html#musicaiz.features.get_ioi" title="musicaiz.features.get_ioi"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_ioi</span></code></a>(all_note_on[, delete_overlap])</p></td>
+<td><p>get ioi of a list of time start values</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/musicaiz.features.get_labeled_beat_vector.html#musicaiz.features.get_labeled_beat_vector" title="musicaiz.features.get_labeled_beat_vector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_labeled_beat_vector</span></code></a>(iois)</p></td>
+<td><p>Convert IOI to the labeled beat vector (or IOI')</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/musicaiz.features.compute_rhythm_self_similarity_matrix.html#musicaiz.features.compute_rhythm_self_similarity_matrix" title="musicaiz.features.compute_rhythm_self_similarity_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_rhythm_self_similarity_matrix</span></code></a>(...)</p></td>
+<td><p>This function computes the Rhythm Self-Similarity Matrix (RMSS).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/musicaiz.features.plot_rmss.html#musicaiz.features.plot_rmss" title="musicaiz.features.plot_rmss"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_rmss</span></code></a>(rmss[, k, save, filename])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/musicaiz.features.compute_all_rmss.html#musicaiz.features.compute_all_rmss" title="musicaiz.features.compute_all_rmss"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_all_rmss</span></code></a>(labeled_beat_vector)</p></td>
+<td><p>This function computes all the RMSS for time_sig numerators (k) 2 to 12 and outputs the beat (k) which will be the predicted time_sig numerator.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/musicaiz.features.get_symbolic_length_classes.html#musicaiz.features.get_symbolic_length_classes" title="musicaiz.features.get_symbolic_length_classes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_symbolic_length_classes</span></code></a>(notes)</p></td>
+<td><p>Counts the total number of different note (<cite>NoteClassBase</cite>) classes.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/musicaiz.features.note_length_histogram.html#musicaiz.features.note_length_histogram" title="musicaiz.features.note_length_histogram"><code class="xref py py-obj docutils literal notranslate"><span class="pre">note_length_histogram</span></code></a>(notes)</p></td>
+<td><p>Uses <cite>get_note_classes</cite> to build a 1D list vector of 12 dimensions in which each element represents the counts of each note name in the chromatic scale of 12 notes.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/musicaiz.features.note_length_transition_matrix.html#musicaiz.features.note_length_transition_matrix" title="musicaiz.features.note_length_transition_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">note_length_transition_matrix</span></code></a>(notes)</p></td>
+<td><p>Computes the Note Length Transition MAtrix (NLTM) of a list of Note objects.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/musicaiz.features.plot_note_length_transition_matrix.html#musicaiz.features.plot_note_length_transition_matrix" title="musicaiz.features.plot_note_length_transition_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_note_length_transition_matrix</span></code></a>(nltm)</p></td>
+<td><p>Take into account that if you generated a NLTM with triplets = False then the triplet argument in this function will also be False.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="self-similarity-matrices">
+<h2>Self-Similarity Matrices<a class="headerlink" href="#self-similarity-matrices" title="Permalink to this headline">¶</a></h2>
+<p>This submodule presents different implementations of self-similarity matrices.</p>
+<p>The papers that are implemented in this sumbodule are the following:</p>
+<div class="sphinx-bs container pb-4 docutils">
+<div class="row docutils">
+<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
+<div class="card w-100 shadow docutils">
+<div class="card-body docutils">
+<p class="card-text">[1] Louie, W.
+MusicPlot: Interactive Self-Similarity Matrix for Music Structure Visualization.
+<a class="reference external" href="https://wlouie1.github.io/MusicPlot/musicplot_paper.pdf">https://wlouie1.github.io/MusicPlot/musicplot_paper.pdf</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>The process to obtain the SSM with this method is:
+1. Group the notes in bars and subdivisions.
+2. Extract the highest note in each subdivision.
+3. Calculate m_prime = [p1-p2, d2/d1, …] with p the pitch and d the note duration.
+4. Compute the SSM function.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/musicaiz.features.compute_ssm.html#musicaiz.features.compute_ssm" title="musicaiz.features.compute_ssm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_ssm</span></code></a>(file[, ssm_type, measures, ...])</p></td>
+<td><p>Computes the selected SSM.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/musicaiz.features.self_similarity_louie.html#musicaiz.features.self_similarity_louie" title="musicaiz.features.self_similarity_louie"><code class="xref py py-obj docutils literal notranslate"><span class="pre">self_similarity_louie</span></code></a>(file)</p></td>
+<td><p>Computes the SSM with Louie method: <a class="reference external" href="https://wlouie1.github.io/MusicPlot/musicplot_paper.pdf">https://wlouie1.github.io/MusicPlot/musicplot_paper.pdf</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/musicaiz.features.self_similarity_single_measure.html#musicaiz.features.self_similarity_single_measure" title="musicaiz.features.self_similarity_single_measure"><code class="xref py py-obj docutils literal notranslate"><span class="pre">self_similarity_single_measure</span></code></a>(file, measure)</p></td>
+<td><p>Computes the SSM with the selected measure for all the bars.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/musicaiz.features.self_similarity_measures.html#musicaiz.features.self_similarity_measures" title="musicaiz.features.self_similarity_measures"><code class="xref py py-obj docutils literal notranslate"><span class="pre">self_similarity_measures</span></code></a>(file, measures)</p></td>
+<td><p>Computes the SSM with the selected measure for all the bars.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/musicaiz.features.plot_ssm.html#musicaiz.features.plot_ssm" title="musicaiz.features.plot_ssm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_ssm</span></code></a>(ssm[, segments, threshold, window, ...])</p></td>
+<td><p>Plots a SSM.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/musicaiz.features._self_similarity.html#musicaiz.features._self_similarity" title="musicaiz.features._self_similarity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">_self_similarity</span></code></a>(feature_vector)</p></td>
+<td><p>Converts a feature vector with the highest notes per subdivision and bar in a Self-Similarity Matrix with the  cosine distance.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/musicaiz.features.binarize_self_similarity_matrix.html#musicaiz.features.binarize_self_similarity_matrix" title="musicaiz.features.binarize_self_similarity_matrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">binarize_self_similarity_matrix</span></code></a>(ssm, threshold)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/musicaiz.features.feature_vector.html#musicaiz.features.feature_vector" title="musicaiz.features.feature_vector"><code class="xref py py-obj docutils literal notranslate"><span class="pre">feature_vector</span></code></a>(bar_highest_subdiv_notes)</p></td>
+<td><p>Computes the m_prim vector which calculates the difference between 2 consecutive note's pitches and the division of the note's durations.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/musicaiz.features.get_novelty_func.html#musicaiz.features.get_novelty_func" title="musicaiz.features.get_novelty_func"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_novelty_func</span></code></a>(ssm[, is_normalized])</p></td>
+<td><p>Computes the novelty function of a SSM.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/musicaiz.features.get_segment_boundaries.html#musicaiz.features.get_segment_boundaries" title="musicaiz.features.get_segment_boundaries"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_segment_boundaries</span></code></a>(ssm[, threshold, window])</p></td>
+<td><p>Gets the segment boundaries of a SSM.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/musicaiz.features.plot_novelty_from_ssm.html#musicaiz.features.plot_novelty_from_ssm" title="musicaiz.features.plot_novelty_from_ssm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_novelty_from_ssm</span></code></a>(ssm[, segments, ...])</p></td>
+<td><p>Plots the novelty curve from a SSM.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="generated/musicaiz.rhythm._find_nearest.html" class="btn btn-neutral float-left" title="musicaiz.rhythm._find_nearest" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="generated/musicaiz.features.get_highest_lowest_pitches.html" class="btn btn-neutral float-right" title="musicaiz.features.get_highest_lowest_pitches" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Carlos Hernandez-Olivan.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

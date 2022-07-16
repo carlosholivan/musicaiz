@@ -1,0 +1,6 @@
+﻿musicaiz.features.compute\_all\_rmss
+====================================
+
+.. currentmodule:: musicaiz.features
+
+.. autofunction:: compute_all_rmss

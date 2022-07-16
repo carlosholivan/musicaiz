@@ -1,0 +1,6 @@
+﻿musicaiz.eval.get\_distribution
+===============================
+
+.. currentmodule:: musicaiz.eval
+
+.. autofunction:: get_distribution

@@ -1,0 +1,6 @@
+﻿musicaiz.rhythm.ms\_per\_note
+=============================
+
+.. currentmodule:: musicaiz.rhythm
+
+.. autofunction:: ms_per_note

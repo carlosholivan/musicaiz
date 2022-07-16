@@ -1,0 +1,32 @@
+﻿musicaiz.rhythm.TimeSignature
+=============================
+
+.. currentmodule:: musicaiz.rhythm
+
+.. autoclass:: TimeSignature
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~TimeSignature.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~TimeSignature.beat_type
+      ~TimeSignature.beats_per_bar
+      ~TimeSignature.eights
+      ~TimeSignature.quarters
+      ~TimeSignature.sixteenths
+   
+   

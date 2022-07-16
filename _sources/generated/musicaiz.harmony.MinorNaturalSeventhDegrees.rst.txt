@@ -1,0 +1,28 @@
+﻿musicaiz.harmony.MinorNaturalSeventhDegrees
+===========================================
+
+.. currentmodule:: musicaiz.harmony
+
+.. autoclass:: MinorNaturalSeventhDegrees
+
+   
+   .. automethod:: __init__
+
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~MinorNaturalSeventhDegrees.FIRST
+      ~MinorNaturalSeventhDegrees.SECOND
+      ~MinorNaturalSeventhDegrees.THIRD
+      ~MinorNaturalSeventhDegrees.FOURTH
+      ~MinorNaturalSeventhDegrees.FIFTH
+      ~MinorNaturalSeventhDegrees.SIXTH
+      ~MinorNaturalSeventhDegrees.SEVENTH
+   
+   

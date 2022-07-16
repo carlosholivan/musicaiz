@@ -1,0 +1,25 @@
+﻿musicaiz.tokenizers.EncodeBase
+==============================
+
+.. currentmodule:: musicaiz.tokenizers
+
+.. autoclass:: EncodeBase
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~EncodeBase.__init__
+      ~EncodeBase.add_token_to_vocabulary
+      ~EncodeBase.get_vocabulary
+      ~EncodeBase.to_txt
+   
+   
+
+   
+   
+   

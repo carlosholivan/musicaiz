@@ -1,0 +1,6 @@
+﻿musicaiz.features.get\_pitch\_classes
+=====================================
+
+.. currentmodule:: musicaiz.features
+
+.. autofunction:: get_pitch_classes

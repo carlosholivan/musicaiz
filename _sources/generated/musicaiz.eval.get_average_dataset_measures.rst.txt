@@ -1,0 +1,6 @@
+﻿musicaiz.eval.get\_average\_dataset\_measures
+=============================================
+
+.. currentmodule:: musicaiz.eval
+
+.. autofunction:: get_average_dataset_measures

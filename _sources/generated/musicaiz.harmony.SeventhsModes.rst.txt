@@ -1,0 +1,38 @@
+﻿musicaiz.harmony.SeventhsModes
+==============================
+
+.. currentmodule:: musicaiz.harmony
+
+.. autoclass:: SeventhsModes
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~SeventhsModes.degree
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~SeventhsModes.MAJOR
+      ~SeventhsModes.MINOR_NATURAL
+      ~SeventhsModes.MINOR_HARMONIC
+      ~SeventhsModes.MINOR_MELODIC
+      ~SeventhsModes.IONIAN
+      ~SeventhsModes.DORIAN
+      ~SeventhsModes.PHRYGIAN
+      ~SeventhsModes.LYDIAN
+      ~SeventhsModes.MIXOLYDIAN
+      ~SeventhsModes.AEOLIAN
+      ~SeventhsModes.LOCRIAN
+   
+   

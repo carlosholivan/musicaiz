@@ -1,0 +1,6 @@
+﻿musicaiz.rhythm.\_bar\_str\_to\_tuple
+=====================================
+
+.. currentmodule:: musicaiz.rhythm
+
+.. autofunction:: _bar_str_to_tuple

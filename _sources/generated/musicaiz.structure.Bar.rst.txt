@@ -1,0 +1,27 @@
+﻿musicaiz.structure.Bar
+======================
+
+.. currentmodule:: musicaiz.structure
+
+.. autoclass:: Bar
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Bar.__init__
+      ~Bar.get_bars_durations
+      ~Bar.get_last_note
+      ~Bar.get_total_bars
+      ~Bar.group_notes_in_bars
+      ~Bar.relative_notes_timing
+   
+   
+
+   
+   
+   

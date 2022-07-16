@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Introduction &mdash; Musanalysis 0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/plot_directive.css" type="text/css" />
+      <link rel="stylesheet" href="_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="_static/sg_gallery-binder.css" type="text/css" />
+      <link rel="stylesheet" href="_static/sg_gallery-dataframe.css" type="text/css" />
+      <link rel="stylesheet" href="_static/sg_gallery-rendered-html.css" type="text/css" />
+      <link rel="stylesheet" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" type="text/css" />
+      <link rel="stylesheet" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/design-tabs.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Loaders" href="loaders.html" />
+    <link rel="prev" title="Installation instructions" href="install.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #222222ff" >
+            <a href="index.html">
+            <img src="_static/logo_square_dark.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.0.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation instructions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#quickstart">Quickstart</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#analyze-data">Analyze data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-data">Create data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tokenize">Tokenize</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Musicaiz Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="loaders.html">Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="structure.html">Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="harmony.html">Harmony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rhythm.html">Rhythm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="algorithms.html">Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tokenizers.html">Tokenizers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="evaluation.html">Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotters.html">Plotters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="converters.html">Converters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/2-write_midi.html">Writing a MIDI file from scratch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/3-plot.html">Plotting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">References:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="implementations.html">Implementation Details</a></li>
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #222222ff" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Musanalysis</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Introduction</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/introduction.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>This section covers the fundamental usage of <em>musicaiz</em>, including
+a package overview, basic and advanced usage.</p>
+<section id="quickstart">
+<h2>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this headline">¶</a></h2>
+<p>The goal of musicaiz is to provide a framwork for symbolic music generation.
+Musicaiz contains 3 basic modules that contains the music basic principles definitions: harmony, structure and rhythm.
+There are other modules that use these definitions to plot, tokenize, evaluate and generate symbolic music data.</p>
+<section id="analyze-data">
+<h3>Analyze data<a class="headerlink" href="#analyze-data" title="Permalink to this headline">¶</a></h3>
+<p>Load a MIDI file:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">musicaiz</span> <span class="kn">import</span> <span class="n">loaders</span>
+
+<span class="c1"># load file</span>
+<span class="n">midi</span> <span class="o">=</span> <span class="n">loaders</span><span class="o">.</span><span class="n">Musa</span><span class="p">(</span><span class="s2">&quot;../files/mozart.mid&quot;</span><span class="p">)</span>
+
+<span class="c1"># get instruments</span>
+<span class="n">instruments</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">instruments</span>
+</pre></div>
+</div>
+</section>
+<section id="create-data">
+<h3>Create data<a class="headerlink" href="#create-data" title="Permalink to this headline">¶</a></h3>
+<p>Obtain notes that belong to a chord:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">musicaiz</span> <span class="kn">import</span> <span class="n">harmony</span>
+
+<span class="c1"># Triad chord build from 1st degree of C major</span>
+<span class="n">harmony</span><span class="o">.</span><span class="n">Tonality</span><span class="o">.</span><span class="n">get_chord_notes_from_degree</span><span class="p">(</span><span class="n">tonality</span><span class="o">=</span><span class="s2">&quot;C_MAJOR&quot;</span><span class="p">,</span> <span class="n">degree</span><span class="o">=</span><span class="s2">&quot;I&quot;</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="s2">&quot;MAJOR&quot;</span><span class="p">)</span>
+
+<span class="c1"># Triad chord build from 1st degree of C major in dorian scale</span>
+<span class="n">harmony</span><span class="o">.</span><span class="n">Tonality</span><span class="o">.</span><span class="n">get_chord_notes_from_degree</span><span class="p">(</span><span class="n">tonality</span><span class="o">=</span><span class="s2">&quot;C_MAJOR&quot;</span><span class="p">,</span> <span class="n">degree</span><span class="o">=</span><span class="s2">&quot;I&quot;</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="s2">&quot;DORIAN&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="tokenize">
+<h3>Tokenize<a class="headerlink" href="#tokenize" title="Permalink to this headline">¶</a></h3>
+<p>We can encode MIDI data as tokens with musicaiz. The current
+implementation supports the following tokenizers:</p>
+<p><cite>MMM</cite>: Ens, J., &amp; Pasquier, P. (2020). Mmm: Exploring conditional multi-track music generation with the transformer.</p>
+<a class="reference internal image-reference" href="_images/mmm_tokens.png"><img alt="_images/mmm_tokens.png" class="align-center" src="_images/mmm_tokens.png" style="width: 75%;" /></a>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="install.html" class="btn btn-neutral float-left" title="Installation instructions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="loaders.html" class="btn btn-neutral float-right" title="Loaders" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Carlos Hernandez-Olivan.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

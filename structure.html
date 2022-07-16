@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Structure &mdash; Musanalysis 0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/plot_directive.css" type="text/css" />
+      <link rel="stylesheet" href="_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="_static/sg_gallery-binder.css" type="text/css" />
+      <link rel="stylesheet" href="_static/sg_gallery-dataframe.css" type="text/css" />
+      <link rel="stylesheet" href="_static/sg_gallery-rendered-html.css" type="text/css" />
+      <link rel="stylesheet" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" type="text/css" />
+      <link rel="stylesheet" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/design-tabs.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="musicaiz.structure.AccidentalsNames" href="generated/musicaiz.structure.AccidentalsNames.html" />
+    <link rel="prev" title="musicaiz.loaders.Musa" href="generated/musicaiz.loaders.Musa.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #222222ff" >
+            <a href="index.html">
+            <img src="_static/logo_square_dark.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.0.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Musicaiz Documentation:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="loaders.html">Loaders</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Structure</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#notes">Notes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.structure.AccidentalsNames.html">musicaiz.structure.AccidentalsNames</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.structure.AccidentalsValues.html">musicaiz.structure.AccidentalsValues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.structure.NoteClassNames.html">musicaiz.structure.NoteClassNames</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.structure.NoteClassBase.html">musicaiz.structure.NoteClassBase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.structure.NoteValue.html">musicaiz.structure.NoteValue</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.structure.NoteTiming.html">musicaiz.structure.NoteTiming</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.structure.Note.html">musicaiz.structure.Note</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#instruments">Instruments</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.structure.InstrumentMidiPrograms.html">musicaiz.structure.InstrumentMidiPrograms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.structure.InstrumentMidiFamilies.html">musicaiz.structure.InstrumentMidiFamilies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.structure.Instrument.html">musicaiz.structure.Instrument</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#bars">Bars</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.structure.Bar.html">musicaiz.structure.Bar</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="harmony.html">Harmony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rhythm.html">Rhythm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="algorithms.html">Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tokenizers.html">Tokenizers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="evaluation.html">Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotters.html">Plotters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="converters.html">Converters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/2-write_midi.html">Writing a MIDI file from scratch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/3-plot.html">Plotting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">References:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="implementations.html">Implementation Details</a></li>
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #222222ff" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Musanalysis</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Structure</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/structure.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<span class="target" id="module-musicaiz.structure"><span id="structure"></span></span><section id="id1">
+<h1>Structure<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>This module provides objects and methods that allows to create and analyze the structure parts of
+symbolic music.</p>
+<p>The basic structure elements are:</p>
+<ul class="simple">
+<li><p>Piece: The whole piece or MIDI file that contains lists of instruments, bars, notes…</p></li>
+</ul>
+<p>It can also contain harmonic attributes like Key, Chord Progressions, etc, depending if we do want
+to predict or generate them.</p>
+<ul class="simple">
+<li><p>Instruments: A list of bars or directly, notes (depending if we want to distrubte the notes in</p></li>
+</ul>
+<p>bars or not).</p>
+<ul class="simple">
+<li><p>Bar: List of notes (it can also contain a list of Chords).</p></li>
+<li><p>Notes: The basic element in music in both time and harmonic axes.</p></li>
+</ul>
+<section id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/musicaiz.structure.AccidentalsNames.html#musicaiz.structure.AccidentalsNames" title="musicaiz.structure.AccidentalsNames"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AccidentalsNames</span></code></a>(value)</p></td>
+<td><p>An enumeration.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/musicaiz.structure.AccidentalsValues.html#musicaiz.structure.AccidentalsValues" title="musicaiz.structure.AccidentalsValues"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AccidentalsValues</span></code></a>(value)</p></td>
+<td><p>The number of semitones that are added to a note if the accidental is present.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/musicaiz.structure.NoteClassNames.html#musicaiz.structure.NoteClassNames" title="musicaiz.structure.NoteClassNames"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NoteClassNames</span></code></a>(value)</p></td>
+<td><p>This class contains all the possible notes with their names</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/musicaiz.structure.NoteClassBase.html#musicaiz.structure.NoteClassBase" title="musicaiz.structure.NoteClassBase"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NoteClassBase</span></code></a>(value)</p></td>
+<td><p>The Tuples have 3 values:</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/musicaiz.structure.NoteValue.html#musicaiz.structure.NoteValue" title="musicaiz.structure.NoteValue"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NoteValue</span></code></a>(pitch)</p></td>
+<td><p>This class allows to instantiate a note object by just giving the pitch value or the name of the note in the MIDI format.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/musicaiz.structure.NoteTiming.html#musicaiz.structure.NoteTiming" title="musicaiz.structure.NoteTiming"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NoteTiming</span></code></a>(pitch, start, end[, bpm, resolution])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/musicaiz.structure.Note.html#musicaiz.structure.Note" title="musicaiz.structure.Note"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Note</span></code></a>(pitch, start, end, velocity[, ligated, ...])</p></td>
+<td><p>A note even with its relevant attributes.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="instruments">
+<h2>Instruments<a class="headerlink" href="#instruments" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/musicaiz.structure.InstrumentMidiPrograms.html#musicaiz.structure.InstrumentMidiPrograms" title="musicaiz.structure.InstrumentMidiPrograms"><code class="xref py py-obj docutils literal notranslate"><span class="pre">InstrumentMidiPrograms</span></code></a>(value)</p></td>
+<td><p>An enumeration.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/musicaiz.structure.InstrumentMidiFamilies.html#musicaiz.structure.InstrumentMidiFamilies" title="musicaiz.structure.InstrumentMidiFamilies"><code class="xref py py-obj docutils literal notranslate"><span class="pre">InstrumentMidiFamilies</span></code></a>(value)</p></td>
+<td><p>Value 1: List of Midi instrument program number Value 2: Color (for plot purposes) Value 3: Pitch range?</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/musicaiz.structure.Instrument.html#musicaiz.structure.Instrument" title="musicaiz.structure.Instrument"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Instrument</span></code></a>([program, name, family, is_drum, ...])</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="bars">
+<h2>Bars<a class="headerlink" href="#bars" title="Permalink to this headline">¶</a></h2>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/musicaiz.structure.Bar.html#musicaiz.structure.Bar" title="musicaiz.structure.Bar"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Bar</span></code></a>([time_sig, bpm, resolution, absolute_timing])</p></td>
+<td><p>Defines a class to group notes in bars.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="generated/musicaiz.loaders.Musa.html" class="btn btn-neutral float-left" title="musicaiz.loaders.Musa" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="generated/musicaiz.structure.AccidentalsNames.html" class="btn btn-neutral float-right" title="musicaiz.structure.AccidentalsNames" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Carlos Hernandez-Olivan.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

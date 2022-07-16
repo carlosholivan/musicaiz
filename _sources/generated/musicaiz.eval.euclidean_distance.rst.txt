@@ -1,0 +1,6 @@
+﻿musicaiz.eval.euclidean\_distance
+=================================
+
+.. currentmodule:: musicaiz.eval
+
+.. autofunction:: euclidean_distance

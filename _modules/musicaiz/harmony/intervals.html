@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>musicaiz.harmony.intervals &mdash; Musanalysis 0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/plot_directive.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery-binder.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery-dataframe.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery-rendered-html.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/design-tabs.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #222222ff" >
+            <a href="../../../index.html">
+            <img src="../../../_static/logo_square_dark.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.0.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Musicaiz Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../loaders.html">Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../structure.html">Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../harmony.html">Harmony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rhythm.html">Rhythm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../algorithms.html">Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tokenizers.html">Tokenizers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../evaluation.html">Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../plotters.html">Plotters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../converters.html">Converters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/2-write_midi.html">Writing a MIDI file from scratch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/3-plot.html">Plotting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">References:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../implementations.html">Implementation Details</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../genindex.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #222222ff" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Musanalysis</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>musicaiz.harmony.intervals</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for musicaiz.harmony.intervals</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">List</span>
+<span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
+<span class="kn">import</span> <span class="nn">pretty_midi</span> <span class="k">as</span> <span class="nn">pm</span>
+
+
+<span class="c1"># Our modules</span>
+<span class="kn">from</span> <span class="nn">musicaiz.structure</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">NoteClassBase</span><span class="p">,</span>
+    <span class="n">NoteValue</span><span class="p">,</span>
+    <span class="n">NoteTiming</span><span class="p">,</span>
+    <span class="n">Note</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="c1"># TODO: Allow compound intervals (reduce them to simple intervals)</span>
+<div class="viewcode-block" id="IntervalClass"><a class="viewcode-back" href="../../../generated/musicaiz.harmony.IntervalClass.html#musicaiz.harmony.IntervalClass">[docs]</a><span class="k">class</span> <span class="nc">IntervalClass</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">UNISON</span> <span class="o">=</span> <span class="s2">&quot;1&quot;</span>
+    <span class="n">SECOND</span> <span class="o">=</span> <span class="s2">&quot;2&quot;</span>
+    <span class="n">THIRD</span> <span class="o">=</span> <span class="s2">&quot;3&quot;</span>
+    <span class="n">FOURTH</span> <span class="o">=</span> <span class="s2">&quot;4&quot;</span>
+    <span class="n">FIFTH</span> <span class="o">=</span> <span class="s2">&quot;5&quot;</span>
+    <span class="n">SIXTH</span> <span class="o">=</span> <span class="s2">&quot;6&quot;</span>
+    <span class="n">SEVENTH</span> <span class="o">=</span> <span class="s2">&quot;7&quot;</span>
+    <span class="n">OCTAVE</span> <span class="o">=</span> <span class="s2">&quot;8&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">quality</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_all_interval_classes</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">interval</span><span class="o">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">interval</span> <span class="ow">in</span> <span class="n">IntervalClass</span><span class="p">]</span></div>
+
+
+<span class="c1"># TODO: Add here DOUBLY_AUGMENTED and DOUBLY_DIMINISHED</span>
+<div class="viewcode-block" id="IntervalQuality"><a class="viewcode-back" href="../../../generated/musicaiz.harmony.IntervalQuality.html#musicaiz.harmony.IntervalQuality">[docs]</a><span class="k">class</span> <span class="nc">IntervalQuality</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">MINOR</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;m&quot;</span><span class="p">,</span> <span class="s2">&quot;minor&quot;</span><span class="p">,</span> <span class="s2">&quot;min&quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">]</span>
+    <span class="n">MAJOR</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;M&quot;</span><span class="p">,</span> <span class="s2">&quot;major&quot;</span><span class="p">,</span> <span class="s2">&quot;maj&quot;</span><span class="p">,</span> <span class="s2">&quot;Δ&quot;</span><span class="p">]</span>
+    <span class="n">AUGMENTED</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;augmented&quot;</span><span class="p">,</span> <span class="s2">&quot;aug&quot;</span><span class="p">,</span> <span class="s2">&quot;+&quot;</span><span class="p">]</span>
+    <span class="n">DIMINISHED</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;dim&quot;</span><span class="p">,</span> <span class="s2">&quot;diminished&quot;</span><span class="p">,</span> <span class="s2">&quot;dim&quot;</span><span class="p">,</span> <span class="s2">&quot;°&quot;</span><span class="p">]</span>
+    <span class="n">PERFECT</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;P&quot;</span><span class="p">,</span> <span class="s2">&quot;perfect&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">large</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">medium</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">contracted</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">symbol</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_all_interval_qualities</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="n">qualities</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">quality</span> <span class="ow">in</span> <span class="n">IntervalClass</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">quality</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">q</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">qualities</span><span class="p">:</span>
+                    <span class="n">qualities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">qualities</span></div>
+
+
+<div class="viewcode-block" id="IntervalSemitones"><a class="viewcode-back" href="../../../generated/musicaiz.harmony.IntervalSemitones.html#musicaiz.harmony.IntervalSemitones">[docs]</a><span class="k">class</span> <span class="nc">IntervalSemitones</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">UNISON_PERFECT</span> <span class="o">=</span> <span class="p">(</span><span class="n">IntervalClass</span><span class="o">.</span><span class="n">UNISON</span><span class="p">,</span> <span class="n">IntervalQuality</span><span class="o">.</span><span class="n">PERFECT</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">UNISON_AUGMENTED</span> <span class="o">=</span> <span class="p">(</span><span class="n">IntervalClass</span><span class="o">.</span><span class="n">UNISON</span><span class="p">,</span> <span class="n">IntervalQuality</span><span class="o">.</span><span class="n">AUGMENTED</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">UNISON_DOUBLY_AUGMENTED</span> <span class="o">=</span> <span class="p">(</span><span class="n">IntervalClass</span><span class="o">.</span><span class="n">UNISON</span><span class="p">,</span> <span class="n">IntervalQuality</span><span class="o">.</span><span class="n">AUGMENTED</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">SECOND_DIMINISHED</span> <span class="o">=</span> <span class="p">(</span><span class="n">IntervalClass</span><span class="o">.</span><span class="n">SECOND</span><span class="p">,</span> <span class="n">IntervalQuality</span><span class="o">.</span><span class="n">DIMINISHED</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">SECOND_MINOR</span> <span class="o">=</span> <span class="p">(</span><span class="n">IntervalClass</span><span class="o">.</span><span class="n">SECOND</span><span class="p">,</span> <span class="n">IntervalQuality</span><span class="o">.</span><span class="n">MINOR</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">SECOND_MAJOR</span> <span class="o">=</span> <span class="p">(</span><span class="n">IntervalClass</span><span class="o">.</span><span class="n">SECOND</span><span class="p">,</span> <span class="n">IntervalQuality</span><span class="o">.</span><span class="n">MAJOR</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">SECOND_AUGMENTED</span> <span class="o">=</span> <span class="p">(</span><span class="n">IntervalClass</span><span class="o">.</span><span class="n">SECOND</span><span class="p">,</span> <span class="n">IntervalQuality</span><span class="o">.</span><span class="n">AUGMENTED</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="n">SECOND_DOUBLY_AUGMENTED</span> <span class="o">=</span> <span class="p">(</span><span class="n">IntervalClass</span><span class="o">.</span><span class="n">SECOND</span><span class="p">,</span> <span class="n">IntervalQuality</span><span class="o">.</span><span class="n">AUGMENTED</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+    <span class="n">THIRD_DOUBLY_DIMINISHED</span> <span class="o">=</span> <span class="p">(</span><span class="n">IntervalClass</span><span class="o">.</span><span class="n">THIRD</span><span class="p">,</span> <span class="n">IntervalQuality</span><span class="o">.</span><span class="n">DIMINISHED</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">THIRD_DIMINISHED</span> <span class="o">=</span> <span class="p">(</span><span class="n">IntervalClass</span><span class="o">.</span><span class="n">THIRD</span><span class="p">,</span> <span class="n">IntervalQuality</span><span class="o">.</span><span class="n">DIMINISHED</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">THIRD_MINOR</span> <span class="o">=</span> <span class="p">(</span><span class="n">IntervalClass</span><span class="o">.</span><span class="n">THIRD</span><span class="p">,</span> <span class="n">IntervalQuality</span><span class="o">.</span><span class="n">MINOR</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="n">THIRD_MAJOR</span> <span class="o">=</span> <span class="p">(</span><span class="n">IntervalClass</span><span class="o">.</span><span class="n">THIRD</span><span class="p">,</span> <span class="n">IntervalQuality</span><span class="o">.</span><span class="n">MAJOR</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+    <span class="n">THIRD_AUGMENTED</span> <span class="o">=</span> <span class="p">(</span><span class="n">IntervalClass</span><span class="o">.</span><span class="n">THIRD</span><span class="p">,</span> <span class="n">IntervalQuality</span><span class="o">.</span><span class="n">AUGMENTED</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+    <span class="n">THIRD_DOUBLY_AUGMENTED</span> <span class="o">=</span> <span class="p">(</span><span class="n">IntervalClass</span><span class="o">.</span><span class="n">THIRD</span><span class="p">,</span> <span class="n">IntervalQuality</span><span class="o">.</span><span class="n">AUGMENTED</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+    <span class="n">FOURTH_DOUBLY_DIMINISHED</span> <span class="o">=</span> <span class="p">(</span><span class="n">IntervalClass</span><span class="o">.</span><span class="n">FOURTH</span><span class="p">,</span> <span class="n">IntervalQuality</span><span class="o">.</span><span class="n">DIMINISHED</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="n">FOURTH_DIMINISHED</span> <span class="o">=</span> <span class="p">(</span><span class="n">IntervalClass</span><span class="o">.</span><span class="n">FOURTH</span><span class="p">,</span> <span class="n">IntervalQuality</span><span class="o">.</span><span class="n">DIMINISHED</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+    <span class="n">FOURTH_PERFECT</span> <span class="o">=</span> <span class="p">(</span><span class="n">IntervalClass</span><span class="o">.</span><span class="n">FOURTH</span><span class="p">,</span> <span class="n">IntervalQuality</span><span class="o">.</span><span class="n">PERFECT</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+    <span class="n">FOURTH_AUGMENTED</span> <span class="o">=</span> <span class="p">(</span><span class="n">IntervalClass</span><span class="o">.</span><span class="n">FOURTH</span><span class="p">,</span> <span class="n">IntervalQuality</span><span class="o">.</span><span class="n">AUGMENTED</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+    <span class="n">FOURTH_DOUBLY_AUGMENTED</span> <span class="o">=</span> <span class="p">(</span><span class="n">IntervalClass</span><span class="o">.</span><span class="n">FOURTH</span><span class="p">,</span> <span class="n">IntervalQuality</span><span class="o">.</span><span class="n">AUGMENTED</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+    <span class="n">FIFTH_PERFECT</span> <span class="o">=</span> <span class="p">(</span><span class="n">IntervalClass</span><span class="o">.</span><span class="n">FIFTH</span><span class="p">,</span> <span class="n">IntervalQuality</span><span class="o">.</span><span class="n">PERFECT</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+    <span class="n">FIFTH_DOUBLY_DIMINISHED</span> <span class="o">=</span> <span class="p">(</span><span class="n">IntervalClass</span><span class="o">.</span><span class="n">FIFTH</span><span class="p">,</span> <span class="n">IntervalQuality</span><span class="o">.</span><span class="n">DIMINISHED</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+    <span class="n">FIFTH_DIMINISHED</span> <span class="o">=</span> <span class="p">(</span><span class="n">IntervalClass</span><span class="o">.</span><span class="n">FIFTH</span><span class="p">,</span> <span class="n">IntervalQuality</span><span class="o">.</span><span class="n">DIMINISHED</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+    <span class="n">FIFTH_AUGMENTED</span> <span class="o">=</span> <span class="p">(</span><span class="n">IntervalClass</span><span class="o">.</span><span class="n">FIFTH</span><span class="p">,</span> <span class="n">IntervalQuality</span><span class="o">.</span><span class="n">AUGMENTED</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+    <span class="n">FIFTH_DOUBLY_AUGMENTED</span> <span class="o">=</span> <span class="p">(</span><span class="n">IntervalClass</span><span class="o">.</span><span class="n">FIFTH</span><span class="p">,</span> <span class="n">IntervalQuality</span><span class="o">.</span><span class="n">AUGMENTED</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+    <span class="n">SIXTH_DIMINISHED</span> <span class="o">=</span> <span class="p">(</span><span class="n">IntervalClass</span><span class="o">.</span><span class="n">SIXTH</span><span class="p">,</span> <span class="n">IntervalQuality</span><span class="o">.</span><span class="n">DIMINISHED</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+    <span class="n">SIXTH_DOUBLY_DIMINISHED</span> <span class="o">=</span> <span class="p">(</span><span class="n">IntervalClass</span><span class="o">.</span><span class="n">SIXTH</span><span class="p">,</span> <span class="n">IntervalQuality</span><span class="o">.</span><span class="n">DIMINISHED</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+    <span class="n">SIXTH_MINOR</span> <span class="o">=</span> <span class="p">(</span><span class="n">IntervalClass</span><span class="o">.</span><span class="n">SIXTH</span><span class="p">,</span> <span class="n">IntervalQuality</span><span class="o">.</span><span class="n">MINOR</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+    <span class="n">SIXTH_MAJOR</span> <span class="o">=</span> <span class="p">(</span><span class="n">IntervalClass</span><span class="o">.</span><span class="n">SIXTH</span><span class="p">,</span> <span class="n">IntervalQuality</span><span class="o">.</span><span class="n">MAJOR</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+    <span class="n">SIXTH_AUGMENTED</span> <span class="o">=</span> <span class="p">(</span><span class="n">IntervalClass</span><span class="o">.</span><span class="n">SIXTH</span><span class="p">,</span> <span class="n">IntervalQuality</span><span class="o">.</span><span class="n">AUGMENTED</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="n">SIXTH_DOUBLY_AUGMENTED</span> <span class="o">=</span> <span class="p">(</span><span class="n">IntervalClass</span><span class="o">.</span><span class="n">SIXTH</span><span class="p">,</span> <span class="n">IntervalQuality</span><span class="o">.</span><span class="n">AUGMENTED</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
+    <span class="n">SEVENTH_DOUBLY_DIMINISHED</span> <span class="o">=</span> <span class="p">(</span><span class="n">IntervalClass</span><span class="o">.</span><span class="n">SEVENTH</span><span class="p">,</span> <span class="n">IntervalQuality</span><span class="o">.</span><span class="n">DIMINISHED</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+    <span class="n">SEVENTH_DIMINISHED</span> <span class="o">=</span> <span class="p">(</span><span class="n">IntervalClass</span><span class="o">.</span><span class="n">SEVENTH</span><span class="p">,</span> <span class="n">IntervalQuality</span><span class="o">.</span><span class="n">DIMINISHED</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+    <span class="n">SEVENTH_MINOR</span> <span class="o">=</span> <span class="p">(</span><span class="n">IntervalClass</span><span class="o">.</span><span class="n">SEVENTH</span><span class="p">,</span> <span class="n">IntervalQuality</span><span class="o">.</span><span class="n">MINOR</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="n">SEVENTH_MAJOR</span> <span class="o">=</span> <span class="p">(</span><span class="n">IntervalClass</span><span class="o">.</span><span class="n">SEVENTH</span><span class="p">,</span> <span class="n">IntervalQuality</span><span class="o">.</span><span class="n">MAJOR</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
+    <span class="n">SEVENTH_AUGMENTED</span> <span class="o">=</span> <span class="p">(</span><span class="n">IntervalClass</span><span class="o">.</span><span class="n">SEVENTH</span><span class="p">,</span> <span class="n">IntervalQuality</span><span class="o">.</span><span class="n">AUGMENTED</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+    <span class="n">SEVENTH_DOUBLY_AUGMENTED</span> <span class="o">=</span> <span class="p">(</span><span class="n">IntervalClass</span><span class="o">.</span><span class="n">SEVENTH</span><span class="p">,</span> <span class="n">IntervalQuality</span><span class="o">.</span><span class="n">AUGMENTED</span><span class="p">,</span> <span class="mi">13</span><span class="p">)</span>
+    <span class="n">OCTAVE_DIMINISHED</span> <span class="o">=</span> <span class="p">(</span><span class="n">IntervalClass</span><span class="o">.</span><span class="n">OCTAVE</span><span class="p">,</span> <span class="n">IntervalQuality</span><span class="o">.</span><span class="n">DIMINISHED</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
+    <span class="n">OCTAVE_PERFECT</span> <span class="o">=</span> <span class="p">(</span><span class="n">IntervalClass</span><span class="o">.</span><span class="n">OCTAVE</span><span class="p">,</span> <span class="n">IntervalQuality</span><span class="o">.</span><span class="n">PERFECT</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;&lt;</span><span class="si">%s</span><span class="s2">.</span><span class="si">%s</span><span class="s2">&gt;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">semitones</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">names</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">quality</span> <span class="o">+</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">large</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">quality</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">large</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">medium</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">quality</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">medium</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">contracted</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">quality</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">contracted</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">symbol</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">quality</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">symbol</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">all_interval_names</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="n">interval_names</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">interval</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__members__</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="n">interval_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">interval</span><span class="o">.</span><span class="n">large</span><span class="p">)</span>
+            <span class="n">interval_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">interval</span><span class="o">.</span><span class="n">medium</span><span class="p">)</span>
+            <span class="n">interval_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">interval</span><span class="o">.</span><span class="n">contracted</span><span class="p">)</span>
+            <span class="n">interval_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">interval</span><span class="o">.</span><span class="n">symbol</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">interval_names</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">check_interval_exists</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="n">interval_names</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">all_interval_names</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">interval_names</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_interval_from_semitones</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">semitones</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">IntervalSemitones</span><span class="p">]:</span>
+        <span class="n">possible_intervals</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">interval</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__members__</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">semitones</span> <span class="o">==</span> <span class="n">interval</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span>
+                <span class="n">possible_intervals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">interval</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">possible_intervals</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Not interval found for the input semitones.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">possible_intervals</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_qualities_from_semitones</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">semitones</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IntervalQuality</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Returns a list of all possible interval qualities for the</span>
+<span class="sd">        input semitones.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_get_qualities_classes_from_semitones</span><span class="p">(</span><span class="n">semitones</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_classes_from_semitones</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">semitones</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IntervalQuality</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Returns a list of all possible interval classes for the</span>
+<span class="sd">        input semitones.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_get_qualities_classes_from_semitones</span><span class="p">(</span><span class="n">semitones</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_class_from_quality_semitones</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">quality</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">semitones</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IntervalQuality</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Returns the only interval class that blongs to the input quality and semitones.</span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">            ValueError</span>
+<span class="sd">                if the combination of semitones and quality does not match any interval&quot;&quot;&quot;</span>
+        <span class="n">intervals</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">get_interval_from_semitones</span><span class="p">(</span><span class="n">semitones</span><span class="p">)</span>
+        <span class="n">interval_class</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">interval</span> <span class="ow">in</span> <span class="n">intervals</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">quality</span> <span class="ow">in</span> <span class="n">interval</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">value</span> <span class="ow">and</span> <span class="n">semitones</span> <span class="o">==</span> <span class="n">interval</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span>
+                <span class="n">interval_class</span> <span class="o">=</span> <span class="n">interval</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">interval_class</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Interval class not fuond for the input quality and semitones.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">interval_class</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_quality_from_class_semitones</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">interval_class</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">semitones</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IntervalQuality</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Returns the only interval class that blongs to the input quality and semitones.</span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">            ValueError</span>
+<span class="sd">                if the combination of semitones and quality does not match any interval&quot;&quot;&quot;</span>
+        <span class="n">intervals</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">get_interval_from_semitones</span><span class="p">(</span><span class="n">semitones</span><span class="p">)</span>
+        <span class="n">quality</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">interval</span> <span class="ow">in</span> <span class="n">intervals</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">interval_class</span> <span class="o">==</span> <span class="n">interval</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">value</span> <span class="ow">and</span> <span class="n">semitones</span> <span class="o">==</span> <span class="n">interval</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span>
+                <span class="n">quality</span> <span class="o">=</span> <span class="n">interval</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">quality</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Interval class not found for the input quality and semitones.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">quality</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_interval_from_name</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">interval</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IntervalSemitones</span><span class="p">:</span>
+        <span class="n">interval_obj</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">interval_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;([A-Za-z]+)&#39;</span><span class="p">,</span> <span class="n">interval</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span><span class="p">]</span>
+        <span class="n">interval_class</span> <span class="o">=</span> <span class="n">interval_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">quality</span> <span class="o">=</span> <span class="n">interval_data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">interval</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__members__</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">interval_class</span> <span class="o">==</span> <span class="n">interval</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">value</span> <span class="ow">and</span> <span class="n">quality</span> <span class="ow">in</span> <span class="n">interval</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
+                <span class="n">interval_obj</span> <span class="o">=</span> <span class="n">interval</span>
+        <span class="k">if</span> <span class="n">interval_obj</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Interval </span><span class="si">{</span><span class="n">interval</span><span class="si">}</span><span class="s2"> does not exist.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">interval_obj</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_get_qualities_classes_from_semitones</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">semitones</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IntervalQuality</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Returns a list of all possible interval classes and qualities for the</span>
+<span class="sd">        input semitones.</span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">            ValueError</span>
+<span class="sd">                if semitones cannot be found in the intervals.&quot;&quot;&quot;</span>
+        <span class="n">possible_intervals</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">get_interval_from_semitones</span><span class="p">(</span><span class="n">semitones</span><span class="p">)</span>
+        <span class="n">classes</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">qualities</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">interval</span> <span class="ow">in</span> <span class="n">possible_intervals</span><span class="p">:</span>
+            <span class="n">classes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">interval</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">qualities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">interval</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">classes</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">qualities</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Not valid semitones value.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">qualities</span><span class="p">,</span> <span class="n">classes</span></div>
+
+
+<span class="c1"># TODO: I don&#39;t know yet where I&#39;ll use this, but this is useful</span>
+<div class="viewcode-block" id="IntervalComplexity"><a class="viewcode-back" href="../../../generated/musicaiz.harmony.IntervalComplexity.html#musicaiz.harmony.IntervalComplexity">[docs]</a><span class="k">class</span> <span class="nc">IntervalComplexity</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">SIMPLE</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># interval class is more than an onctave</span>
+    <span class="n">COMPOUND</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># interval class is less than an onctave</span></div>
+
+
+<div class="viewcode-block" id="Interval"><a class="viewcode-back" href="../../../generated/musicaiz.harmony.Interval.html#musicaiz.harmony.Interval">[docs]</a><span class="k">class</span> <span class="nc">Interval</span><span class="p">:</span>
+
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;interval&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;interval_class&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;quality&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;semitones&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;form&quot;</span>
+    <span class="p">]</span>
+
+<div class="viewcode-block" id="Interval.__init__"><a class="viewcode-back" href="../../../generated/musicaiz.harmony.Interval.html#musicaiz.harmony.Interval.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interval</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">IntervalSemitones</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The Interval object can be initialized with a valid interval name</span>
+<span class="sd">        or not. The logic behind this is having methods for generating and analyzing data.</span>
+
+<span class="sd">        Initialization:</span>
+<span class="sd">            - By initializing this class with an interval name, the use of this class&#39; methods</span>
+<span class="sd">                will be to generate data with the interval information.</span>
+<span class="sd">            - By initializing this class with no input arguments, the use of this class&#39; methods</span>
+<span class="sd">                is more related to analize data.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            if input interval name is invalid.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        - Get interval between 2 notes</span>
+
+<span class="sd">        &gt;&gt;&gt; interval = Interval()</span>
+<span class="sd">        &gt;&gt;&gt; note1 = &quot;C0&quot;</span>
+<span class="sd">        &gt;&gt;&gt; note2 = &quot;G0&quot;</span>
+<span class="sd">        &gt;&gt;&gt; interval_name = interval.get_interval(note1, note2)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">interval</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">interval_class</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">quality</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">semitones</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">form</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="n">interval</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">all_intervals</span> <span class="o">=</span> <span class="n">IntervalSemitones</span><span class="o">.</span><span class="n">all_interval_names</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">interval</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">interval</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">all_intervals</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Input interval </span><span class="si">{</span><span class="n">interval</span><span class="si">}</span><span class="s2"> is not a valid interval.&quot;</span><span class="p">)</span>
+                <span class="n">interval_obj</span> <span class="o">=</span> <span class="n">IntervalSemitones</span><span class="o">.</span><span class="n">get_interval_from_name</span><span class="p">(</span><span class="n">interval</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">interval</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">IntervalSemitones</span><span class="o">.</span><span class="n">__members__</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Input interval </span><span class="si">{</span><span class="n">interval</span><span class="si">}</span><span class="s2"> is not a valid interval.&quot;</span><span class="p">)</span>
+                <span class="n">interval_obj</span> <span class="o">=</span> <span class="n">interval</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">interval</span> <span class="o">=</span> <span class="n">interval_obj</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">interval_class</span> <span class="o">=</span> <span class="n">interval_obj</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">quality</span> <span class="o">=</span> <span class="n">interval_obj</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">semitones</span> <span class="o">=</span> <span class="n">interval_obj</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">interval_class</span><span class="o">.</span><span class="n">value</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">8</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">form</span> <span class="o">=</span> <span class="s2">&quot;compound&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">form</span> <span class="o">=</span> <span class="s2">&quot;simple&quot;</span></div>
+
+    <span class="k">def</span> <span class="nf">transpose_note</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">note</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="n">Note</span><span class="p">,</span> <span class="n">NoteValue</span><span class="p">,</span> <span class="n">NoteTiming</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">Note</span><span class="p">,</span> <span class="n">NoteValue</span><span class="p">,</span> <span class="n">NoteTiming</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Transposes the input note a given interval.&quot;&quot;&quot;</span>
+        <span class="n">note</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_initialize_note</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
+        <span class="n">new_pitch</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">pitch</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">semitones</span>
+        <span class="k">return</span> <span class="n">NoteValue</span><span class="p">(</span><span class="n">new_pitch</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_initialize_note</span><span class="p">(</span>
+        <span class="n">note</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="n">Note</span><span class="p">,</span> <span class="n">NoteValue</span><span class="p">,</span> <span class="n">NoteTiming</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">Note</span><span class="p">,</span> <span class="n">NoteValue</span><span class="p">,</span> <span class="n">NoteTiming</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">note</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">)):</span>
+            <span class="k">return</span> <span class="n">NoteValue</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">note</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_possible_intervals</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span>
+        <span class="n">note1</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="n">Note</span><span class="p">],</span>
+        <span class="n">note2</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="n">Note</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">IntervalSemitones</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculates the interval for a given pair of notes.</span>
+<span class="sd">        This takes into account also the enharmonic notes because if we try to predict</span>
+<span class="sd">        intervals from MIDIs, we do know the pitch of the notes but not the note names.</span>
+<span class="sd">        Ex.: 24 is C but also B#. Depending on the scale which we don&#39;t know in MIDI files,</span>
+<span class="sd">        the pitch will  correspond to C or B#.</span>
+<span class="sd">        The interval will be calculated in its simplest form. That means that if the notes</span>
+<span class="sd">        form a compound interval (distances higher than an 8ve), the notes</span>
+<span class="sd">        will be by rooted to the same octave.</span>
+<span class="sd">        Important: We measure the intervals in ascendent order.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            [type]: [description]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">intervals</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># Initialize note objects if inputs note is int or str</span>
+        <span class="n">note1</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_initialize_note</span><span class="p">(</span><span class="n">note1</span><span class="p">)</span>
+        <span class="n">note2</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_initialize_note</span><span class="p">(</span><span class="n">note2</span><span class="p">)</span>
+        <span class="n">note1_enh</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_initialize_note</span><span class="p">(</span><span class="n">note1</span><span class="o">.</span><span class="n">enharmonic</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">note1</span><span class="o">.</span><span class="n">octave</span><span class="p">)</span>
+        <span class="n">note2_enh</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_initialize_note</span><span class="p">(</span><span class="n">note2</span><span class="o">.</span><span class="n">enharmonic</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">note2</span><span class="o">.</span><span class="n">octave</span><span class="p">)</span>
+
+        <span class="c1"># Build the notes combinations.</span>
+        <span class="c1"># When enharmonic note is the same note as the base note we don&#39;t build a combination.</span>
+        <span class="c1"># Ex.: D has no enharmonics, so if note1 is D, then note1_enh will be also D.</span>
+        <span class="c1"># TODO: Helper method for this</span>
+        <span class="n">combinations</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">combinations</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">note1</span><span class="p">,</span> <span class="n">note2</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">note1</span><span class="o">.</span><span class="n">note_name</span> <span class="o">!=</span> <span class="n">note1_enh</span><span class="o">.</span><span class="n">note_name</span><span class="p">:</span>
+            <span class="n">combinations</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">note1_enh</span><span class="p">,</span> <span class="n">note2</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">note2</span><span class="o">.</span><span class="n">note_name</span> <span class="o">!=</span> <span class="n">note2_enh</span><span class="o">.</span><span class="n">note_name</span><span class="p">:</span>
+            <span class="n">combinations</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">note1</span><span class="p">,</span> <span class="n">note2_enh</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">note1</span><span class="o">.</span><span class="n">note_name</span> <span class="o">!=</span> <span class="n">note1_enh</span><span class="o">.</span><span class="n">note_name</span> <span class="ow">and</span> <span class="n">note2</span><span class="o">.</span><span class="n">note_name</span> <span class="o">!=</span> <span class="n">note2_enh</span><span class="o">.</span><span class="n">note_name</span><span class="p">:</span>
+            <span class="n">combinations</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">note1_enh</span><span class="p">,</span> <span class="n">note2_enh</span><span class="p">))</span>
+
+        <span class="c1"># TODO: Refactor this to another method `get_interval` that takes 2 note names C#...</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">combinations</span><span class="p">)):</span>
+            <span class="n">note_names_str</span> <span class="o">=</span> <span class="n">combinations</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">note_name</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span> <span class="o">+</span> <span class="n">combinations</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">note_name</span>
+            <span class="c1"># Get notes indexes in the chromatic scale to obtain their distance</span>
+            <span class="n">note_1_index</span> <span class="o">=</span> <span class="n">combinations</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+            <span class="n">note_2_index</span> <span class="o">=</span> <span class="n">combinations</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+            <span class="c1"># we&#39;ll know the exact interval class by measuring the distance</span>
+            <span class="c1"># between the notes in the natural scale</span>
+            <span class="c1"># We convert the notes in their natural scale form (`C#` -&gt; `C`)</span>
+            <span class="n">natural_note1</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">NoteValue</span><span class="o">.</span><span class="n">split_note_name</span><span class="p">(</span><span class="n">combinations</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">note_name</span><span class="p">)</span>
+            <span class="n">natural_note2</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">NoteValue</span><span class="o">.</span><span class="n">split_note_name</span><span class="p">(</span><span class="n">combinations</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">note_name</span><span class="p">)</span>
+
+            <span class="c1"># Get the distance (class) of the interval with the semitones diff in hte natural scale</span>
+            <span class="n">note1_natural_index</span> <span class="o">=</span> <span class="n">NoteClassBase</span><span class="p">[</span><span class="n">natural_note1</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">note2_natural_index</span> <span class="o">=</span> <span class="n">NoteClassBase</span><span class="p">[</span><span class="n">natural_note2</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+            <span class="c1"># if the notes are exactly the same (unison), they&#39;re in perfect octave</span>
+            <span class="k">if</span> <span class="n">note_2_index</span> <span class="o">==</span> <span class="n">note_1_index</span> <span class="ow">and</span> <span class="n">natural_note1</span> <span class="o">==</span> <span class="n">natural_note2</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">combinations</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">pitch</span> <span class="o">==</span> <span class="n">combinations</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">pitch</span><span class="p">:</span>
+                    <span class="n">intervals</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">note_names_str</span><span class="p">,</span> <span class="n">IntervalSemitones</span><span class="o">.</span><span class="n">UNISON_PERFECT</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">intervals</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">note_names_str</span><span class="p">,</span> <span class="n">IntervalSemitones</span><span class="o">.</span><span class="n">OCTAVE_PERFECT</span><span class="p">))</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">note_2_index</span> <span class="o">-</span> <span class="n">note_1_index</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">note1_natural_index</span> <span class="o">-</span> <span class="n">note2_natural_index</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">intervals</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">note_names_str</span><span class="p">,</span> <span class="n">IntervalSemitones</span><span class="o">.</span><span class="n">UNISON_AUGMENTED</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">intervals</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">note_names_str</span><span class="p">,</span> <span class="n">IntervalSemitones</span><span class="o">.</span><span class="n">SECOND_MINOR</span><span class="p">))</span>
+                <span class="k">continue</span>
+            <span class="c1"># If our interval has a C in the middle of its path, we cont +1 in the quality</span>
+            <span class="c1"># D-G is a 4th but G-D is a 5th bc we have C in the middle from G-D but not from D-G</span>
+            <span class="k">elif</span> <span class="n">note1_natural_index</span> <span class="o">&gt;</span> <span class="n">note2_natural_index</span><span class="p">:</span>
+                <span class="n">interval_class</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">note2_natural_index</span> <span class="o">+</span> <span class="mi">7</span> <span class="o">-</span> <span class="n">note1_natural_index</span><span class="p">)</span>
+                <span class="n">semitones_scale_diff</span> <span class="o">=</span> <span class="p">(</span><span class="n">note_2_index</span> <span class="o">+</span> <span class="mi">12</span><span class="p">)</span> <span class="o">-</span> <span class="n">note_1_index</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">combinations</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">note</span> <span class="o">==</span> <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">B_SHARP</span> <span class="ow">or</span> <span class="n">combinations</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">note</span> <span class="o">==</span> <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">B_SHARP</span><span class="p">:</span>
+                    <span class="c1"># Get the possible interval classes with the distances in semitones</span>
+                    <span class="c1"># In the case note2 is lower, as we have C in the middle we traspose its idx 1 8ve</span>
+                    <span class="n">interval_class</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="nb">abs</span><span class="p">(</span><span class="n">note1_natural_index</span> <span class="o">-</span> <span class="n">note2_natural_index</span><span class="p">))</span>
+                    <span class="n">semitones_scale_diff</span> <span class="o">=</span> <span class="p">(</span><span class="n">note_2_index</span> <span class="o">+</span> <span class="mi">12</span><span class="p">)</span> <span class="o">-</span> <span class="n">note_1_index</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">semitones_scale_diff</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">note_2_index</span> <span class="o">-</span> <span class="n">note_1_index</span><span class="p">)</span>
+                    <span class="n">interval_class</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="nb">abs</span><span class="p">(</span><span class="n">note1_natural_index</span> <span class="o">-</span> <span class="n">note2_natural_index</span><span class="p">))</span>
+            <span class="c1"># We finally match the interval_class and the semitones diff to get the interval</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">IntervalSemitones</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">interval_class</span> <span class="o">==</span> <span class="n">j</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">value</span> <span class="ow">and</span> <span class="n">semitones_scale_diff</span> <span class="o">==</span> <span class="n">j</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span>
+                    <span class="n">interval</span> <span class="o">=</span> <span class="n">j</span>
+                    <span class="k">break</span>
+            <span class="n">intervals</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">note_names_str</span><span class="p">,</span> <span class="n">interval</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">intervals</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;Interval(interval=</span><span class="si">{}</span><span class="s2">, interval_class=</span><span class="si">{}</span><span class="s2">, quality=&#39;</span><span class="si">{}</span><span class="s2">&#39;, semitones=</span><span class="si">{}</span><span class="s2">, form=</span><span class="si">{}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">interval</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">interval_class</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">quality</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">semitones</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">form</span><span class="p">,</span>
+        <span class="p">)</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Carlos Hernandez-Olivan.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

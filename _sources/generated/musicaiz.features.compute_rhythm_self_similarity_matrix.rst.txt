@@ -1,0 +1,6 @@
+﻿musicaiz.features.compute\_rhythm\_self\_similarity\_matrix
+===========================================================
+
+.. currentmodule:: musicaiz.features
+
+.. autofunction:: compute_rhythm_self_similarity_matrix

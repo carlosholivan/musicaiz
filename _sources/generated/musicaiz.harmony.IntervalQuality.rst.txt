@@ -1,0 +1,36 @@
+﻿musicaiz.harmony.IntervalQuality
+================================
+
+.. currentmodule:: musicaiz.harmony
+
+.. autoclass:: IntervalQuality
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~IntervalQuality.get_all_interval_qualities
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~IntervalQuality.MINOR
+      ~IntervalQuality.MAJOR
+      ~IntervalQuality.AUGMENTED
+      ~IntervalQuality.DIMINISHED
+      ~IntervalQuality.PERFECT
+      ~IntervalQuality.large
+      ~IntervalQuality.medium
+      ~IntervalQuality.contracted
+      ~IntervalQuality.symbol
+   
+   

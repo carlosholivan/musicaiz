@@ -1,0 +1,45 @@
+﻿musicaiz.structure.InstrumentMidiFamilies
+=========================================
+
+.. currentmodule:: musicaiz.structure
+
+.. autoclass:: InstrumentMidiFamilies
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~InstrumentMidiFamilies.get_family_from_instrument_name
+      ~InstrumentMidiFamilies.get_family_from_instrument_program
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~InstrumentMidiFamilies.PIANO
+      ~InstrumentMidiFamilies.CHROMATIC_PERCUSSION
+      ~InstrumentMidiFamilies.ORGAN
+      ~InstrumentMidiFamilies.GUITAR
+      ~InstrumentMidiFamilies.BASS
+      ~InstrumentMidiFamilies.STRINGS
+      ~InstrumentMidiFamilies.ENSEMBLE
+      ~InstrumentMidiFamilies.BRASS
+      ~InstrumentMidiFamilies.REED
+      ~InstrumentMidiFamilies.PIPE
+      ~InstrumentMidiFamilies.SYNTH_LEAD
+      ~InstrumentMidiFamilies.SYNTH_PAD
+      ~InstrumentMidiFamilies.SYNTH_EFFECTS
+      ~InstrumentMidiFamilies.ETHNIC
+      ~InstrumentMidiFamilies.PERCUSSION
+      ~InstrumentMidiFamilies.SOUND_EFFECTS
+      ~InstrumentMidiFamilies.program_range
+   
+   

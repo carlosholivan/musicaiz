@@ -1,0 +1,6 @@
+﻿musicaiz.features.feature\_vector
+=================================
+
+.. currentmodule:: musicaiz.features
+
+.. autofunction:: feature_vector

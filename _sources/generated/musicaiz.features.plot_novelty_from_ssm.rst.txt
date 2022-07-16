@@ -1,0 +1,6 @@
+﻿musicaiz.features.plot\_novelty\_from\_ssm
+==========================================
+
+.. currentmodule:: musicaiz.features
+
+.. autofunction:: plot_novelty_from_ssm

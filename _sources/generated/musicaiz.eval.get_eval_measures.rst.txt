@@ -1,0 +1,6 @@
+﻿musicaiz.eval.get\_eval\_measures
+=================================
+
+.. currentmodule:: musicaiz.eval
+
+.. autofunction:: get_eval_measures

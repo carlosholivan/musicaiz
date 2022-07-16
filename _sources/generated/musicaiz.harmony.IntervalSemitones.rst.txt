@@ -1,0 +1,78 @@
+﻿musicaiz.harmony.IntervalSemitones
+==================================
+
+.. currentmodule:: musicaiz.harmony
+
+.. autoclass:: IntervalSemitones
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~IntervalSemitones.all_interval_names
+      ~IntervalSemitones.check_interval_exists
+      ~IntervalSemitones.get_interval_from_semitones
+      ~IntervalSemitones.get_qualities_from_semitones
+      ~IntervalSemitones.get_classes_from_semitones
+      ~IntervalSemitones.get_class_from_quality_semitones
+      ~IntervalSemitones.get_quality_from_class_semitones
+      ~IntervalSemitones.get_interval_from_name
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~IntervalSemitones.UNISON_PERFECT
+      ~IntervalSemitones.UNISON_AUGMENTED
+      ~IntervalSemitones.UNISON_DOUBLY_AUGMENTED
+      ~IntervalSemitones.SECOND_DIMINISHED
+      ~IntervalSemitones.SECOND_MINOR
+      ~IntervalSemitones.SECOND_MAJOR
+      ~IntervalSemitones.SECOND_AUGMENTED
+      ~IntervalSemitones.SECOND_DOUBLY_AUGMENTED
+      ~IntervalSemitones.THIRD_DOUBLY_DIMINISHED
+      ~IntervalSemitones.THIRD_DIMINISHED
+      ~IntervalSemitones.THIRD_MINOR
+      ~IntervalSemitones.THIRD_MAJOR
+      ~IntervalSemitones.THIRD_AUGMENTED
+      ~IntervalSemitones.THIRD_DOUBLY_AUGMENTED
+      ~IntervalSemitones.FOURTH_DOUBLY_DIMINISHED
+      ~IntervalSemitones.FOURTH_DIMINISHED
+      ~IntervalSemitones.FOURTH_PERFECT
+      ~IntervalSemitones.FOURTH_AUGMENTED
+      ~IntervalSemitones.FOURTH_DOUBLY_AUGMENTED
+      ~IntervalSemitones.FIFTH_PERFECT
+      ~IntervalSemitones.FIFTH_DOUBLY_DIMINISHED
+      ~IntervalSemitones.FIFTH_DIMINISHED
+      ~IntervalSemitones.FIFTH_AUGMENTED
+      ~IntervalSemitones.FIFTH_DOUBLY_AUGMENTED
+      ~IntervalSemitones.SIXTH_DIMINISHED
+      ~IntervalSemitones.SIXTH_DOUBLY_DIMINISHED
+      ~IntervalSemitones.SIXTH_MINOR
+      ~IntervalSemitones.SIXTH_MAJOR
+      ~IntervalSemitones.SIXTH_AUGMENTED
+      ~IntervalSemitones.SIXTH_DOUBLY_AUGMENTED
+      ~IntervalSemitones.SEVENTH_DOUBLY_DIMINISHED
+      ~IntervalSemitones.SEVENTH_DIMINISHED
+      ~IntervalSemitones.SEVENTH_MINOR
+      ~IntervalSemitones.SEVENTH_MAJOR
+      ~IntervalSemitones.SEVENTH_AUGMENTED
+      ~IntervalSemitones.SEVENTH_DOUBLY_AUGMENTED
+      ~IntervalSemitones.OCTAVE_DIMINISHED
+      ~IntervalSemitones.OCTAVE_PERFECT
+      ~IntervalSemitones.semitones
+      ~IntervalSemitones.names
+      ~IntervalSemitones.large
+      ~IntervalSemitones.medium
+      ~IntervalSemitones.contracted
+      ~IntervalSemitones.symbol
+   
+   

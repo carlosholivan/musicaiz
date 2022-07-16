@@ -1,0 +1,28 @@
+﻿musicaiz.harmony.MajorSeventhDegrees
+====================================
+
+.. currentmodule:: musicaiz.harmony
+
+.. autoclass:: MajorSeventhDegrees
+
+   
+   .. automethod:: __init__
+
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~MajorSeventhDegrees.FIRST
+      ~MajorSeventhDegrees.SECOND
+      ~MajorSeventhDegrees.THIRD
+      ~MajorSeventhDegrees.FOURTH
+      ~MajorSeventhDegrees.FIFTH
+      ~MajorSeventhDegrees.SIXTH
+      ~MajorSeventhDegrees.SEVENTH
+   
+   

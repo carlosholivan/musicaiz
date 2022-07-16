@@ -1,0 +1,6 @@
+﻿musicaiz.features.note\_length\_histogram
+=========================================
+
+.. currentmodule:: musicaiz.features
+
+.. autofunction:: note_length_histogram

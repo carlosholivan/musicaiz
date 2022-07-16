@@ -1,0 +1,25 @@
+﻿musicaiz.structure.NoteValue
+============================
+
+.. currentmodule:: musicaiz.structure
+
+.. autoclass:: NoteValue
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~NoteValue.__init__
+      ~NoteValue.pitch_value_in_range
+      ~NoteValue.split_note_name
+      ~NoteValue.split_pitch_name
+   
+   
+
+   
+   
+   

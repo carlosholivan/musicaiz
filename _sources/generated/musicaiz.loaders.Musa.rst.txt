@@ -1,0 +1,49 @@
+﻿musicaiz.loaders.Musa
+=====================
+
+.. currentmodule:: musicaiz.loaders
+
+.. autoclass:: Musa
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Musa.__init__
+      ~Musa.fluidsynth
+      ~Musa.get_file_extension
+      ~Musa.get_total_bars
+      ~Musa.group_instrument_bar_notes
+      ~Musa.is_midi
+      ~Musa.is_musicxml
+      ~Musa.is_valid
+      ~Musa.write_midi
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Musa.file
+      ~Musa.structure
+      ~Musa.tonality
+      ~Musa.time_sig
+      ~Musa.bpm
+      ~Musa.resolution
+      ~Musa.data
+      ~Musa.instruments
+      ~Musa.bars
+      ~Musa.is_quantized
+      ~Musa.notes
+      ~Musa.total_bars
+      ~Musa.absolute_timing
+      ~Musa.cut_notes
+   
+   
