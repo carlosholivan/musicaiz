@@ -11,6 +11,7 @@
 
 Python library for symbolic music analysis, generation and evaluation.
 
+See the docs [here](https://carlosholivan.github.io/musicaiz)
 
 The modules contained in this library are:
 
@@ -42,7 +43,7 @@ This project is licensed under the terms of the [AGPL v3 license](LICENSE).
 
 ## Install
 
-To install the latest version run: `pip install musicaiz`
+To install the latest stable version run: `pip install musicaiz`
 
 To install the latest version, clone this repository and run:
 
