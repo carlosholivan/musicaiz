@@ -1,0 +1,1690 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>musicaiz.harmony.keys &mdash; Musicaiz 0.0.2 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/plot_directive.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery-binder.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery-dataframe.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery-rendered-html.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/design-tabs.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #222222ff" >
+            <a href="../../../index.html">
+            <img src="../../../_static/logo_square_dark.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.0.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Musicaiz Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../loaders.html">Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../structure.html">Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../harmony.html">Harmony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rhythm.html">Rhythm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../algorithms.html">Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tokenizers.html">Tokenizers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../evaluation.html">Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../plotters.html">Plotters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../converters.html">Converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../datasets.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../models.html">Models</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/2-write_midi.html">Writing a MIDI file from scratch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/3-plot.html">Plotting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">References:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../implementations.html">Implementation Details</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../genindex.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #222222ff" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Musicaiz</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>musicaiz.harmony.keys</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for musicaiz.harmony.keys</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+<span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+
+
+<span class="c1"># Our modules</span>
+<span class="kn">from</span> <span class="nn">musicaiz.structure</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">NoteClassBase</span><span class="p">,</span>
+    <span class="n">AccidentalsNames</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">musicaiz.harmony</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">AllChords</span><span class="p">,</span>
+    <span class="n">Interval</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">https://www.dolmetsch.com/musictheory17.htm</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="k">class</span> <span class="nc">AccidentalsNum</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">ONE_SHARP</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">TWO_SHARPS</span> <span class="o">=</span> <span class="mi">2</span>
+
+
+<div class="viewcode-block" id="DegreesQualities"><a class="viewcode-back" href="../../../generated/musicaiz.harmony.DegreesQualities.html#musicaiz.harmony.DegreesQualities">[docs]</a><span class="k">class</span> <span class="nc">DegreesQualities</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class defines the qualities of the degree&#39;s chords</span>
+<span class="sd">    from triads to 11th chords.</span>
+
+<span class="sd">    Properties:</span>
+<span class="sd">        contracted: contracted notation.</span>
+<span class="sd">        large: full description.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># triads</span>
+    <span class="n">MINOR</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;minor&quot;</span><span class="p">]</span>
+    <span class="n">MAJOR</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;major&quot;</span><span class="p">]</span>
+    <span class="n">AUGMENTED</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;+&quot;</span><span class="p">,</span> <span class="s2">&quot;augmented&quot;</span><span class="p">]</span>
+    <span class="n">DIMINISHED</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="s2">&quot;diminished&quot;</span><span class="p">]</span>
+    <span class="c1"># 7ths</span>
+    <span class="n">MAJOR_SEVENTH</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;M7&quot;</span><span class="p">,</span> <span class="s2">&quot;major seventh&quot;</span><span class="p">]</span>
+    <span class="n">MINOR_SEVENTH</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;7&quot;</span><span class="p">,</span> <span class="s2">&quot;minor seventh&quot;</span><span class="p">]</span>
+    <span class="c1"># TODO: finnish this</span>
+    <span class="n">DOMINANT_SEVENTH</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;7&quot;</span><span class="p">,</span> <span class="s2">&quot;dominant seventh&quot;</span><span class="p">]</span>
+    <span class="n">DIMINISHED_SEVENTH</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;ø7&quot;</span><span class="p">,</span> <span class="s2">&quot;diminished seventh&quot;</span><span class="p">]</span>
+    <span class="n">HALF_DIMINISHED_SEVENTH</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;ø7&quot;</span><span class="p">,</span> <span class="s2">&quot;half-diminished seventh&quot;</span><span class="p">]</span>
+
+    <span class="n">MINOR_MAJOR_SEVENTH</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;mM7&quot;</span><span class="p">,</span> <span class="s2">&quot;minor major seventh&quot;</span><span class="p">,</span> <span class="s2">&quot;m maj7&quot;</span><span class="p">,</span> <span class="s2">&quot;mΔ7&quot;</span><span class="p">,</span> <span class="s2">&quot;-Δ7&quot;</span><span class="p">]</span>
+    <span class="n">AUGMENTED_MAJOR_SEVENTH</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;maj7#5&quot;</span><span class="p">,</span> <span class="s2">&quot;augmented major seventh&quot;</span><span class="p">,</span> <span class="s2">&quot;+M7&quot;</span><span class="p">,</span> <span class="s2">&quot;+Δ7&quot;</span><span class="p">]</span>
+    <span class="n">AUGMENTED_SEVENTH</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;aug7&quot;</span><span class="p">,</span> <span class="s2">&quot;augmented seventh&quot;</span><span class="p">,</span> <span class="s2">&quot;+7&quot;</span><span class="p">]</span>
+    <span class="n">DIMINISHED_MAJOR_SEVENTH</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;mM7b5&quot;</span><span class="p">,</span> <span class="s2">&quot;diminished major seventh&quot;</span><span class="p">,</span> <span class="s2">&quot;−Δ7b5&quot;</span><span class="p">]</span>
+    <span class="n">DOMINANT_SEVENTH_FLAT_FIVE</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;7b5&quot;</span><span class="p">,</span> <span class="s2">&quot;dominant seventh flat five&quot;</span><span class="p">]</span>
+    <span class="n">MAJOR_SEVENTH_FLAT_FIVE</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;M7b5&quot;</span><span class="p">,</span> <span class="s2">&quot;major seventh flat five&quot;</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">contracted</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">large</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="DegreesRoman"><a class="viewcode-back" href="../../../generated/musicaiz.harmony.DegreesRoman.html#musicaiz.harmony.DegreesRoman">[docs]</a><span class="k">class</span> <span class="nc">DegreesRoman</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">FIRST</span> <span class="o">=</span> <span class="s2">&quot;I&quot;</span>
+    <span class="n">SECOND</span> <span class="o">=</span> <span class="s2">&quot;II&quot;</span>
+    <span class="n">THIRD</span> <span class="o">=</span> <span class="s2">&quot;III&quot;</span>
+    <span class="n">FOURTH</span> <span class="o">=</span> <span class="s2">&quot;IV&quot;</span>
+    <span class="n">FIFTH</span> <span class="o">=</span> <span class="s2">&quot;V&quot;</span>
+    <span class="n">SIXTH</span> <span class="o">=</span> <span class="s2">&quot;VI&quot;</span>
+    <span class="n">SEVENTH</span> <span class="o">=</span> <span class="s2">&quot;VII&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">major</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">minor</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">diminished</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;ø&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">half_diminished</span><span class="p">():</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">deg</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">DegreesRoman</span><span class="o">.</span><span class="n">__members__</span><span class="o">.</span><span class="n">values</span><span class="p">()):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="n">deg</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">i</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_name_with_degree</span><span class="p">(</span><span class="n">degree</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DegreesRoman</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">__members__</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="n">degree</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">i</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_degree_from_index</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">degree_index</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DegreesRoman</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">deg</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">DegreesRoman</span><span class="o">.</span><span class="n">__members__</span><span class="o">.</span><span class="n">values</span><span class="p">()):</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">degree_index</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">deg</span></div>
+
+
+<div class="viewcode-block" id="Degrees"><a class="viewcode-back" href="../../../generated/musicaiz.harmony.Degrees.html#musicaiz.harmony.Degrees">[docs]</a><span class="k">class</span> <span class="nc">Degrees</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Parent class for degrees naming conventions.&quot;&quot;&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">contracted_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">contracted</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">large_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">large</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">chord</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;&lt;</span><span class="si">%s</span><span class="s2">.</span><span class="si">%s</span><span class="s2">&gt;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span></div>
+
+
+<span class="c1"># ===================Triads========================</span>
+<div class="viewcode-block" id="MajorTriadDegrees"><a class="viewcode-back" href="../../../generated/musicaiz.harmony.MajorTriadDegrees.html#musicaiz.harmony.MajorTriadDegrees">[docs]</a><span class="k">class</span> <span class="nc">MajorTriadDegrees</span><span class="p">(</span><span class="n">Degrees</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
+    <span class="n">FIRST</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MAJOR_TRIAD</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FIRST</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MAJOR</span>
+    <span class="p">)</span>
+    <span class="n">SECOND</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MINOR_TRIAD</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SECOND</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MINOR</span>
+    <span class="p">)</span>
+    <span class="n">THIRD</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MINOR_TRIAD</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">THIRD</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MINOR</span>
+    <span class="p">)</span>
+    <span class="n">FOURTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MAJOR_TRIAD</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FOURTH</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MAJOR</span>
+    <span class="p">)</span>
+    <span class="n">FIFTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MAJOR_TRIAD</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FIFTH</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MAJOR</span>
+    <span class="p">)</span>
+    <span class="n">SIXTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MINOR_TRIAD</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SIXTH</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MINOR</span>
+    <span class="p">)</span>
+    <span class="n">SEVENTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">DIMINISHED_TRIAD</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SEVENTH</span><span class="o">.</span><span class="n">diminished</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">DIMINISHED</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MinorNaturalTriadDegrees"><a class="viewcode-back" href="../../../generated/musicaiz.harmony.MinorNaturalTriadDegrees.html#musicaiz.harmony.MinorNaturalTriadDegrees">[docs]</a><span class="k">class</span> <span class="nc">MinorNaturalTriadDegrees</span><span class="p">(</span><span class="n">Degrees</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
+    <span class="n">FIRST</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MINOR_TRIAD</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FIRST</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MINOR</span>
+    <span class="p">)</span>
+    <span class="n">SECOND</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">DIMINISHED_TRIAD</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SECOND</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">DIMINISHED</span>
+    <span class="p">)</span>
+    <span class="n">THIRD</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MAJOR_TRIAD</span><span class="p">,</span>
+        <span class="s2">&quot;b&quot;</span> <span class="o">+</span> <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">THIRD</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MAJOR</span>
+    <span class="p">)</span>
+    <span class="n">FOURTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MINOR_TRIAD</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FOURTH</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MINOR</span>
+    <span class="p">)</span>
+    <span class="n">FIFTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MINOR_TRIAD</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FIFTH</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MINOR</span>
+    <span class="p">)</span>
+    <span class="n">SIXTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MAJOR_TRIAD</span><span class="p">,</span>
+        <span class="s2">&quot;b&quot;</span> <span class="o">+</span> <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SIXTH</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MAJOR</span>
+    <span class="p">)</span>
+    <span class="n">SEVENTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MAJOR_TRIAD</span><span class="p">,</span>
+        <span class="s2">&quot;b&quot;</span> <span class="o">+</span> <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SEVENTH</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MAJOR</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MinorHarmonicTriadDegrees"><a class="viewcode-back" href="../../../generated/musicaiz.harmony.MinorHarmonicTriadDegrees.html#musicaiz.harmony.MinorHarmonicTriadDegrees">[docs]</a><span class="k">class</span> <span class="nc">MinorHarmonicTriadDegrees</span><span class="p">(</span><span class="n">Degrees</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
+    <span class="n">FIRST</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MINOR_TRIAD</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FIRST</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MINOR</span>
+    <span class="p">)</span>
+    <span class="n">SECOND</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">DIMINISHED_TRIAD</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SECOND</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">DIMINISHED</span>
+    <span class="p">)</span>
+    <span class="n">THIRD</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">AUGMENTED_TRIAD</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">THIRD</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">AUGMENTED</span>
+    <span class="p">)</span>
+    <span class="n">FOURTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MINOR_TRIAD</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FOURTH</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MINOR</span>
+    <span class="p">)</span>
+    <span class="n">FIFTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MAJOR_TRIAD</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FIFTH</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MAJOR</span>
+    <span class="p">)</span>
+    <span class="n">SIXTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MAJOR_TRIAD</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SIXTH</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MAJOR</span>
+    <span class="p">)</span>
+    <span class="n">SEVENTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">DIMINISHED_TRIAD</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SEVENTH</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">DIMINISHED</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MinorMelodicTriadDegrees"><a class="viewcode-back" href="../../../generated/musicaiz.harmony.MinorMelodicTriadDegrees.html#musicaiz.harmony.MinorMelodicTriadDegrees">[docs]</a><span class="k">class</span> <span class="nc">MinorMelodicTriadDegrees</span><span class="p">(</span><span class="n">Degrees</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
+    <span class="n">FIRST</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MINOR_TRIAD</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FIRST</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MINOR</span>
+    <span class="p">)</span>
+    <span class="n">SECOND</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MINOR_TRIAD</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SECOND</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MINOR</span>
+    <span class="p">)</span>
+    <span class="n">THIRD</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">AUGMENTED_TRIAD</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">THIRD</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">AUGMENTED</span>
+    <span class="p">)</span>
+    <span class="n">FOURTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MAJOR_TRIAD</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FOURTH</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MAJOR</span>
+    <span class="p">)</span>
+    <span class="n">FIFTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MAJOR_TRIAD</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FIFTH</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MAJOR</span>
+    <span class="p">)</span>
+    <span class="n">SIXTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">DIMINISHED_TRIAD</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SIXTH</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">DIMINISHED</span>
+    <span class="p">)</span>
+    <span class="n">SEVENTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">DIMINISHED_TRIAD</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SEVENTH</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">DIMINISHED</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="DorianTriadDegrees"><a class="viewcode-back" href="../../../generated/musicaiz.harmony.DorianTriadDegrees.html#musicaiz.harmony.DorianTriadDegrees">[docs]</a><span class="k">class</span> <span class="nc">DorianTriadDegrees</span><span class="p">(</span><span class="n">Degrees</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
+    <span class="n">FIRST</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MINOR_TRIAD</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FIRST</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MINOR</span>
+    <span class="p">)</span>
+    <span class="n">SECOND</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MINOR_TRIAD</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SECOND</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MINOR</span>
+    <span class="p">)</span>
+    <span class="n">THIRD</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MAJOR_TRIAD</span><span class="p">,</span>
+        <span class="s2">&quot;b&quot;</span> <span class="o">+</span> <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">THIRD</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MAJOR</span>
+    <span class="p">)</span>
+    <span class="n">FOURTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MAJOR_TRIAD</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FOURTH</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MAJOR</span>
+    <span class="p">)</span>
+    <span class="n">FIFTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MINOR_TRIAD</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FIFTH</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MINOR</span>
+    <span class="p">)</span>
+    <span class="n">SIXTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">DIMINISHED_TRIAD</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SIXTH</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">DIMINISHED</span>
+    <span class="p">)</span>
+    <span class="n">SEVENTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MAJOR_TRIAD</span><span class="p">,</span>
+        <span class="s2">&quot;b&quot;</span> <span class="o">+</span> <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SEVENTH</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MAJOR</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="PhrygianTriadDegrees"><a class="viewcode-back" href="../../../generated/musicaiz.harmony.PhrygianTriadDegrees.html#musicaiz.harmony.PhrygianTriadDegrees">[docs]</a><span class="k">class</span> <span class="nc">PhrygianTriadDegrees</span><span class="p">(</span><span class="n">Degrees</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
+    <span class="n">FIRST</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MINOR_TRIAD</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FIRST</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MINOR</span>
+    <span class="p">)</span>
+    <span class="n">SECOND</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MAJOR_TRIAD</span><span class="p">,</span>
+        <span class="s2">&quot;b&quot;</span> <span class="o">+</span> <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SECOND</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MAJOR</span>
+    <span class="p">)</span>
+    <span class="n">THIRD</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MAJOR_TRIAD</span><span class="p">,</span>
+        <span class="s2">&quot;b&quot;</span> <span class="o">+</span> <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">THIRD</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MAJOR</span>
+    <span class="p">)</span>
+    <span class="n">FOURTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MINOR_TRIAD</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FOURTH</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MINOR</span>
+    <span class="p">)</span>
+    <span class="n">FIFTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">DIMINISHED_TRIAD</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FIFTH</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">DIMINISHED</span>
+    <span class="p">)</span>
+    <span class="n">SIXTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MAJOR_TRIAD</span><span class="p">,</span>
+        <span class="s2">&quot;b&quot;</span> <span class="o">+</span> <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SIXTH</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MAJOR</span>
+    <span class="p">)</span>
+    <span class="n">SEVENTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MINOR_TRIAD</span><span class="p">,</span>
+        <span class="s2">&quot;b&quot;</span> <span class="o">+</span> <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SEVENTH</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MINOR</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="LydianTriadDegrees"><a class="viewcode-back" href="../../../generated/musicaiz.harmony.LydianTriadDegrees.html#musicaiz.harmony.LydianTriadDegrees">[docs]</a><span class="k">class</span> <span class="nc">LydianTriadDegrees</span><span class="p">(</span><span class="n">Degrees</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
+    <span class="n">FIRST</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MAJOR_TRIAD</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FIRST</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MAJOR</span>
+    <span class="p">)</span>
+    <span class="n">SECOND</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MAJOR_TRIAD</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SECOND</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MAJOR</span>
+    <span class="p">)</span>
+    <span class="n">THIRD</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MINOR_TRIAD</span><span class="p">,</span>
+        <span class="s2">&quot;b&quot;</span> <span class="o">+</span> <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">THIRD</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MINOR</span>
+    <span class="p">)</span>
+    <span class="n">FOURTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">DIMINISHED_TRIAD</span><span class="p">,</span>
+        <span class="s2">&quot;#&quot;</span> <span class="o">+</span> <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FOURTH</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">DIMINISHED</span>
+    <span class="p">)</span>
+    <span class="n">FIFTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MAJOR_TRIAD</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FIFTH</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MAJOR</span>
+    <span class="p">)</span>
+    <span class="n">SIXTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MINOR_TRIAD</span><span class="p">,</span>
+        <span class="s2">&quot;b&quot;</span> <span class="o">+</span> <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SIXTH</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MINOR</span>
+    <span class="p">)</span>
+    <span class="n">SEVENTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MINOR_TRIAD</span><span class="p">,</span>
+        <span class="s2">&quot;b&quot;</span> <span class="o">+</span> <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SEVENTH</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MINOR</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MixolydianTriadDegrees"><a class="viewcode-back" href="../../../generated/musicaiz.harmony.MixolydianTriadDegrees.html#musicaiz.harmony.MixolydianTriadDegrees">[docs]</a><span class="k">class</span> <span class="nc">MixolydianTriadDegrees</span><span class="p">(</span><span class="n">Degrees</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
+    <span class="n">FIRST</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MAJOR_TRIAD</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FIRST</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MAJOR</span>
+    <span class="p">)</span>
+    <span class="n">SECOND</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MINOR_TRIAD</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SECOND</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MINOR</span>
+    <span class="p">)</span>
+    <span class="n">THIRD</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">DIMINISHED_TRIAD</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">THIRD</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">DIMINISHED</span>
+    <span class="p">)</span>
+    <span class="n">FOURTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MAJOR_TRIAD</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FOURTH</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MAJOR</span>
+    <span class="p">)</span>
+    <span class="n">FIFTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MINOR_TRIAD</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FIFTH</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MINOR</span>
+    <span class="p">)</span>
+    <span class="n">SIXTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MINOR_TRIAD</span><span class="p">,</span>
+        <span class="s2">&quot;b&quot;</span> <span class="o">+</span> <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SIXTH</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MINOR</span>
+    <span class="p">)</span>
+    <span class="n">SEVENTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MAJOR_TRIAD</span><span class="p">,</span>
+        <span class="s2">&quot;b&quot;</span> <span class="o">+</span> <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SEVENTH</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MAJOR</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="LocrianTriadDegrees"><a class="viewcode-back" href="../../../generated/musicaiz.harmony.LocrianTriadDegrees.html#musicaiz.harmony.LocrianTriadDegrees">[docs]</a><span class="k">class</span> <span class="nc">LocrianTriadDegrees</span><span class="p">(</span><span class="n">Degrees</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
+    <span class="n">FIRST</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">DIMINISHED_TRIAD</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FIRST</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">DIMINISHED</span>
+    <span class="p">)</span>
+    <span class="n">SECOND</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MAJOR_TRIAD</span><span class="p">,</span>
+        <span class="s2">&quot;b&quot;</span> <span class="o">+</span> <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SECOND</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MAJOR</span>
+    <span class="p">)</span>
+    <span class="n">THIRD</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MINOR_TRIAD</span><span class="p">,</span>
+        <span class="s2">&quot;b&quot;</span> <span class="o">+</span> <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">THIRD</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MINOR</span>
+    <span class="p">)</span>
+    <span class="n">FOURTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MINOR_TRIAD</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FOURTH</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MINOR</span>
+    <span class="p">)</span>
+    <span class="n">FIFTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MAJOR_TRIAD</span><span class="p">,</span>
+        <span class="s2">&quot;b&quot;</span> <span class="o">+</span> <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FIFTH</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MAJOR</span>
+    <span class="p">)</span>
+    <span class="n">SIXTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MAJOR_TRIAD</span><span class="p">,</span>
+        <span class="s2">&quot;b&quot;</span> <span class="o">+</span> <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SIXTH</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MAJOR</span>
+    <span class="p">)</span>
+    <span class="n">SEVENTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MINOR_TRIAD</span><span class="p">,</span>
+        <span class="s2">&quot;b&quot;</span> <span class="o">+</span> <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SEVENTH</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MINOR</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TriadsModes"><a class="viewcode-back" href="../../../generated/musicaiz.harmony.TriadsModes.html#musicaiz.harmony.TriadsModes">[docs]</a><span class="k">class</span> <span class="nc">TriadsModes</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">MAJOR</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">MajorTriadDegrees</span><span class="p">]</span>
+    <span class="n">MINOR_NATURAL</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">MinorNaturalTriadDegrees</span><span class="p">]</span>
+    <span class="n">MINOR_HARMONIC</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">MinorHarmonicTriadDegrees</span><span class="p">]</span>
+    <span class="n">MINOR_MELODIC</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">MinorMelodicTriadDegrees</span><span class="p">]</span>
+    <span class="c1"># Greek modes</span>
+    <span class="n">IONIAN</span> <span class="o">=</span> <span class="n">MAJOR</span>
+    <span class="n">DORIAN</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">DorianTriadDegrees</span><span class="p">]</span>
+    <span class="n">PHRYGIAN</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">PhrygianTriadDegrees</span><span class="p">]</span>
+    <span class="n">LYDIAN</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">LydianTriadDegrees</span><span class="p">]</span>
+    <span class="n">MIXOLYDIAN</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">MixolydianTriadDegrees</span><span class="p">]</span>
+    <span class="n">AEOLIAN</span> <span class="o">=</span> <span class="n">MINOR_NATURAL</span>
+    <span class="n">LOCRIAN</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">LocrianTriadDegrees</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">degree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">degree_index</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="n">degree_index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span></div>
+
+
+<span class="c1"># ===================7ths========================</span>
+<div class="viewcode-block" id="MajorSeventhDegrees"><a class="viewcode-back" href="../../../generated/musicaiz.harmony.MajorSeventhDegrees.html#musicaiz.harmony.MajorSeventhDegrees">[docs]</a><span class="k">class</span> <span class="nc">MajorSeventhDegrees</span><span class="p">(</span><span class="n">Degrees</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
+    <span class="n">FIRST</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MAJOR_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FIRST</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MAJOR_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">SECOND</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MINOR_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SECOND</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MINOR_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">THIRD</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MINOR_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">THIRD</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MINOR_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">FOURTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MAJOR_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FOURTH</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MAJOR_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">FIFTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">DOMINANT_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FIFTH</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">DOMINANT_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">SIXTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MINOR_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SIXTH</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MINOR_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">SEVENTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">DIMINISHED_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SEVENTH</span><span class="o">.</span><span class="n">diminished</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">DIMINISHED_SEVENTH</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MinorNaturalSeventhDegrees"><a class="viewcode-back" href="../../../generated/musicaiz.harmony.MinorNaturalSeventhDegrees.html#musicaiz.harmony.MinorNaturalSeventhDegrees">[docs]</a><span class="k">class</span> <span class="nc">MinorNaturalSeventhDegrees</span><span class="p">(</span><span class="n">Degrees</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
+    <span class="n">FIRST</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MINOR_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FIRST</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MINOR_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">SECOND</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">HALF_DIMINISHED_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SECOND</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">HALF_DIMINISHED_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">THIRD</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MAJOR_SEVENTH</span><span class="p">,</span>
+        <span class="s2">&quot;b&quot;</span> <span class="o">+</span> <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">THIRD</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MAJOR_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">FOURTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MINOR_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FOURTH</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MINOR_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">FIFTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MINOR_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FIFTH</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MINOR_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">SIXTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MAJOR_SEVENTH</span><span class="p">,</span>
+        <span class="s2">&quot;b&quot;</span> <span class="o">+</span> <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SIXTH</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MAJOR_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">SEVENTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">DOMINANT_SEVENTH</span><span class="p">,</span>
+        <span class="s2">&quot;b&quot;</span> <span class="o">+</span> <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SEVENTH</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">DOMINANT_SEVENTH</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MinorHarmonicSeventhDegrees"><a class="viewcode-back" href="../../../generated/musicaiz.harmony.MinorHarmonicSeventhDegrees.html#musicaiz.harmony.MinorHarmonicSeventhDegrees">[docs]</a><span class="k">class</span> <span class="nc">MinorHarmonicSeventhDegrees</span><span class="p">(</span><span class="n">Degrees</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
+    <span class="n">FIRST</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MINOR_MAJOR_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FIRST</span><span class="o">.</span><span class="n">minor</span> <span class="o">+</span> <span class="s2">&quot;♮7&quot;</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MINOR_MAJOR_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">SECOND</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">HALF_DIMINISHED_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SECOND</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">HALF_DIMINISHED_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">THIRD</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">AUGMENTED_MAJOR_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">THIRD</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">AUGMENTED_MAJOR_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">FOURTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MINOR_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FOURTH</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MINOR_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">FIFTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">DOMINANT_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FIFTH</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">DOMINANT_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">SIXTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MAJOR_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SIXTH</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MAJOR_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">SEVENTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">DIMINISHED_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SEVENTH</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">DIMINISHED_SEVENTH</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MinorMelodicSeventhDegrees"><a class="viewcode-back" href="../../../generated/musicaiz.harmony.MinorMelodicSeventhDegrees.html#musicaiz.harmony.MinorMelodicSeventhDegrees">[docs]</a><span class="k">class</span> <span class="nc">MinorMelodicSeventhDegrees</span><span class="p">(</span><span class="n">Degrees</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
+    <span class="n">FIRST</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MINOR_MAJOR_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FIRST</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MINOR_MAJOR_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">SECOND</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MINOR_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SECOND</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MINOR_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">THIRD</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">AUGMENTED_MAJOR_SEVENTH</span><span class="p">,</span>
+        <span class="s2">&quot;b&quot;</span> <span class="o">+</span> <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">THIRD</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">AUGMENTED_MAJOR_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">FOURTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">DOMINANT_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FOURTH</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">DOMINANT_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">FIFTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">DOMINANT_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FIFTH</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">DOMINANT_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">SIXTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">HALF_DIMINISHED_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SIXTH</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">HALF_DIMINISHED_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">SEVENTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">HALF_DIMINISHED_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SEVENTH</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">HALF_DIMINISHED_SEVENTH</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="DorianSeventhDegrees"><a class="viewcode-back" href="../../../generated/musicaiz.harmony.DorianSeventhDegrees.html#musicaiz.harmony.DorianSeventhDegrees">[docs]</a><span class="k">class</span> <span class="nc">DorianSeventhDegrees</span><span class="p">(</span><span class="n">Degrees</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
+    <span class="n">FIRST</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MINOR_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FIRST</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MINOR_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">SECOND</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MINOR_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SECOND</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MINOR_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">THIRD</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MAJOR_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">THIRD</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MAJOR_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">FOURTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">DOMINANT_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FOURTH</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">DOMINANT_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">FIFTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MINOR_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FIFTH</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MINOR_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">SIXTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">HALF_DIMINISHED_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SIXTH</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">HALF_DIMINISHED_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">SEVENTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MAJOR_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SEVENTH</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MAJOR_SEVENTH</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="PhrygianSeventhDegrees"><a class="viewcode-back" href="../../../generated/musicaiz.harmony.PhrygianSeventhDegrees.html#musicaiz.harmony.PhrygianSeventhDegrees">[docs]</a><span class="k">class</span> <span class="nc">PhrygianSeventhDegrees</span><span class="p">(</span><span class="n">Degrees</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
+    <span class="n">FIRST</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MINOR_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FIRST</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MINOR_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">SECOND</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MAJOR_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SECOND</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MAJOR_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">THIRD</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">DOMINANT_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">THIRD</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">DOMINANT_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">FOURTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MINOR_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FOURTH</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MINOR_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">FIFTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">HALF_DIMINISHED_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FIFTH</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">HALF_DIMINISHED_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">SIXTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MAJOR_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SIXTH</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MAJOR_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">SEVENTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MINOR_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SEVENTH</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MINOR_SEVENTH</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="LydianSeventhDegrees"><a class="viewcode-back" href="../../../generated/musicaiz.harmony.LydianSeventhDegrees.html#musicaiz.harmony.LydianSeventhDegrees">[docs]</a><span class="k">class</span> <span class="nc">LydianSeventhDegrees</span><span class="p">(</span><span class="n">Degrees</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
+    <span class="n">FIRST</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MAJOR_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FIRST</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MAJOR_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">SECOND</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">DOMINANT_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SECOND</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">DOMINANT_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">THIRD</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MINOR_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">THIRD</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MINOR_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">FOURTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">HALF_DIMINISHED_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FOURTH</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">HALF_DIMINISHED_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">FIFTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MAJOR_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FIFTH</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MAJOR_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">SIXTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MINOR_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SIXTH</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MINOR_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">SEVENTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MINOR_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SEVENTH</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MINOR_SEVENTH</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MixolydianSeventhDegrees"><a class="viewcode-back" href="../../../generated/musicaiz.harmony.MixolydianSeventhDegrees.html#musicaiz.harmony.MixolydianSeventhDegrees">[docs]</a><span class="k">class</span> <span class="nc">MixolydianSeventhDegrees</span><span class="p">(</span><span class="n">Degrees</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
+    <span class="n">FIRST</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">DOMINANT_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FIRST</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">DOMINANT_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">SECOND</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MINOR_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SECOND</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MINOR_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">THIRD</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">HALF_DIMINISHED_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">THIRD</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">HALF_DIMINISHED_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">FOURTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MAJOR_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FOURTH</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MAJOR_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">FIFTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MINOR_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FIFTH</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MINOR_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">SIXTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MINOR_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SIXTH</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MINOR_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">SEVENTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MAJOR_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SEVENTH</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MAJOR_SEVENTH</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="LocrianSeventhDegrees"><a class="viewcode-back" href="../../../generated/musicaiz.harmony.LocrianSeventhDegrees.html#musicaiz.harmony.LocrianSeventhDegrees">[docs]</a><span class="k">class</span> <span class="nc">LocrianSeventhDegrees</span><span class="p">(</span><span class="n">Degrees</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
+    <span class="n">FIRST</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">HALF_DIMINISHED_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FIRST</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">HALF_DIMINISHED_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">SECOND</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MAJOR_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SECOND</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MAJOR_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">THIRD</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MINOR_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">THIRD</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MINOR_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">FOURTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MINOR_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FOURTH</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MINOR_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">FIFTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MAJOR_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FIFTH</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MAJOR_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">SIXTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">DOMINANT_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SIXTH</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">DOMINANT_SEVENTH</span>
+    <span class="p">)</span>
+    <span class="n">SEVENTH</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AllChords</span><span class="o">.</span><span class="n">MAJOR_SEVENTH</span><span class="p">,</span>
+        <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SEVENTH</span><span class="o">.</span><span class="n">major</span><span class="p">,</span>
+        <span class="n">DegreesQualities</span><span class="o">.</span><span class="n">MAJOR_SEVENTH</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="SeventhsModes"><a class="viewcode-back" href="../../../generated/musicaiz.harmony.SeventhsModes.html#musicaiz.harmony.SeventhsModes">[docs]</a><span class="k">class</span> <span class="nc">SeventhsModes</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">MAJOR</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">MajorSeventhDegrees</span><span class="p">]</span>
+    <span class="n">MINOR_NATURAL</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">MinorNaturalSeventhDegrees</span><span class="p">]</span>
+    <span class="n">MINOR_HARMONIC</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">MinorHarmonicSeventhDegrees</span><span class="p">]</span>
+    <span class="n">MINOR_MELODIC</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">MinorMelodicSeventhDegrees</span><span class="p">]</span>
+    <span class="c1"># Greek modes</span>
+    <span class="n">IONIAN</span> <span class="o">=</span> <span class="n">MAJOR</span>
+    <span class="n">DORIAN</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">DorianSeventhDegrees</span><span class="p">]</span>
+    <span class="n">PHRYGIAN</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">PhrygianSeventhDegrees</span><span class="p">]</span>
+    <span class="n">LYDIAN</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">LydianSeventhDegrees</span><span class="p">]</span>
+    <span class="n">MIXOLYDIAN</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">MixolydianSeventhDegrees</span><span class="p">]</span>
+    <span class="n">AEOLIAN</span> <span class="o">=</span> <span class="n">MINOR_NATURAL</span>
+    <span class="n">LOCRIAN</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">LocrianSeventhDegrees</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">degree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">degree_index</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="n">degree_index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span></div>
+
+
+<span class="c1"># ===================9ths========================</span>
+<span class="k">class</span> <span class="nc">MajorNinthDegrees</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="k">pass</span>
+<span class="k">class</span> <span class="nc">MinorNaturalNinthDegrees</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="k">pass</span>
+<span class="k">class</span> <span class="nc">MinorHarmonicNinthDegrees</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="k">pass</span>
+<span class="k">class</span> <span class="nc">MinorMelodicNinthDegrees</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="k">pass</span>
+<span class="k">class</span> <span class="nc">DorianNinthDegrees</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="k">pass</span>
+<span class="k">class</span> <span class="nc">PhrygianNinthDegrees</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="k">pass</span>
+<span class="k">class</span> <span class="nc">LydianNinthDegrees</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="k">pass</span>
+<span class="k">class</span> <span class="nc">MixolydianNinthDegrees</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="k">pass</span>
+<span class="k">class</span> <span class="nc">LocrianNinthDegrees</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+
+<span class="k">class</span> <span class="nc">NinthsModes</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">MAJOR</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">MajorNinthDegrees</span><span class="p">]</span>
+    <span class="n">MINOR_NATURAL</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">MinorNaturalNinthDegrees</span><span class="p">]</span>
+    <span class="n">MINOR_HARMONIC</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">MinorHarmonicNinthDegrees</span><span class="p">]</span>
+    <span class="n">MINOR_MELODIC</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">MinorMelodicNinthDegrees</span><span class="p">]</span>
+    <span class="c1"># Greek modes</span>
+    <span class="n">IONIAN</span> <span class="o">=</span> <span class="n">MAJOR</span>
+    <span class="n">DORIAN</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">DorianNinthDegrees</span><span class="p">]</span>
+    <span class="n">PHRYGIAN</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">PhrygianNinthDegrees</span><span class="p">]</span>
+    <span class="n">LYDIAN</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">LydianNinthDegrees</span><span class="p">]</span>
+    <span class="n">MIXOLYDIAN</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">MixolydianNinthDegrees</span><span class="p">]</span>
+    <span class="n">AEOLIAN</span> <span class="o">=</span> <span class="n">MINOR_NATURAL</span>
+    <span class="n">LOCRIAN</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">LocrianNinthDegrees</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">degree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">degree_index</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="n">degree_index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="AccidentalNotes"><a class="viewcode-back" href="../../../generated/musicaiz.harmony.AccidentalNotes.html#musicaiz.harmony.AccidentalNotes">[docs]</a><span class="k">class</span> <span class="nc">AccidentalNotes</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Altered notes in order of accidentals number in major</span>
+<span class="sd">    and minor natural modes.&quot;&quot;&quot;</span>
+    <span class="n">SHARPS</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">F_SHARP</span><span class="p">,</span>
+        <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">C_SHARP</span><span class="p">,</span>
+        <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">G_SHARP</span><span class="p">,</span>
+        <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">D_SHARP</span><span class="p">,</span>
+        <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">A_SHARP</span><span class="p">,</span>
+        <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">E_SHARP</span><span class="p">,</span>
+        <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">B_SHARP</span><span class="p">,</span>
+    <span class="p">]</span>
+    <span class="n">FLATS</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">B_FLAT</span><span class="p">,</span>
+        <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">E_FLAT</span><span class="p">,</span>
+        <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">A_FLAT</span><span class="p">,</span>
+        <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">D_FLAT</span><span class="p">,</span>
+        <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">G_FLAT</span><span class="p">,</span>
+        <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">C_FLAT</span><span class="p">,</span>
+        <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">F_FLAT</span><span class="p">,</span>
+    <span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="AccidentalDegrees"><a class="viewcode-back" href="../../../generated/musicaiz.harmony.AccidentalDegrees.html#musicaiz.harmony.AccidentalDegrees">[docs]</a><span class="k">class</span> <span class="nc">AccidentalDegrees</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Altered degrees in minor and greek modes derived from the major mode.</span>
+
+<span class="sd">    (Altered Degrees, Accidental Type)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Alter notes in minor natural scale and add these accidentals</span>
+    <span class="n">MINOR_HARMONIC</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">[</span><span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SEVENTH</span><span class="p">],</span>
+        <span class="n">AccidentalsNames</span><span class="o">.</span><span class="n">SHARP</span>
+    <span class="p">)</span>
+    <span class="n">MINOR_MELODIC</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">[</span><span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SIXTH</span><span class="p">,</span> <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SEVENTH</span><span class="p">],</span>
+        <span class="n">AccidentalsNames</span><span class="o">.</span><span class="n">SHARP</span>
+    <span class="p">)</span>
+    <span class="c1"># Alter notes in major scale and add these accidentals</span>
+    <span class="n">DORIAN</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">[</span><span class="n">DegreesRoman</span><span class="o">.</span><span class="n">THIRD</span><span class="p">,</span> <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SEVENTH</span><span class="p">],</span>
+        <span class="n">AccidentalsNames</span><span class="o">.</span><span class="n">FLAT</span>
+    <span class="p">)</span>
+    <span class="n">PHRYGIAN</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">[</span><span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SECOND</span><span class="p">,</span> <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">THIRD</span><span class="p">,</span> <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SIXTH</span><span class="p">,</span> <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SEVENTH</span><span class="p">],</span>
+        <span class="n">AccidentalsNames</span><span class="o">.</span><span class="n">FLAT</span>
+    <span class="p">)</span>
+    <span class="n">LYDIAN</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">[</span><span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FOURTH</span><span class="p">],</span>
+        <span class="n">AccidentalsNames</span><span class="o">.</span><span class="n">SHARP</span>
+    <span class="p">)</span>
+    <span class="n">MIXOLYDIAN</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">[</span><span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SEVENTH</span><span class="p">],</span>
+        <span class="n">AccidentalsNames</span><span class="o">.</span><span class="n">FLAT</span>
+    <span class="p">)</span>
+    <span class="n">LOCRIAN</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">[</span><span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SECOND</span><span class="p">,</span> <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">THIRD</span><span class="p">,</span> <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">FIFTH</span><span class="p">,</span> <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SIXTH</span><span class="p">,</span> <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">SEVENTH</span><span class="p">],</span>
+        <span class="n">AccidentalsNames</span><span class="o">.</span><span class="n">FLAT</span>
+    <span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">degrees</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">DegreesRoman</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">symbol_accidentals</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AccidentalsNames</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="ModeConstructors"><a class="viewcode-back" href="../../../generated/musicaiz.harmony.ModeConstructors.html#musicaiz.harmony.ModeConstructors">[docs]</a><span class="k">class</span> <span class="nc">ModeConstructors</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="c1"># Major modes</span>
+    <span class="n">MAJOR</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span>
+        <span class="n">TriadsModes</span><span class="o">.</span><span class="n">MAJOR</span><span class="p">,</span>
+        <span class="n">SeventhsModes</span><span class="o">.</span><span class="n">MAJOR</span>
+    <span class="p">)</span>
+    <span class="n">DORIAN</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AccidentalDegrees</span><span class="o">.</span><span class="n">DORIAN</span><span class="p">,</span>
+        <span class="n">TriadsModes</span><span class="o">.</span><span class="n">DORIAN</span><span class="p">,</span>
+        <span class="n">SeventhsModes</span><span class="o">.</span><span class="n">DORIAN</span>
+    <span class="p">)</span>
+    <span class="n">PHRYGIAN</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AccidentalDegrees</span><span class="o">.</span><span class="n">PHRYGIAN</span><span class="p">,</span>
+        <span class="n">TriadsModes</span><span class="o">.</span><span class="n">PHRYGIAN</span><span class="p">,</span>
+        <span class="n">SeventhsModes</span><span class="o">.</span><span class="n">PHRYGIAN</span>
+    <span class="p">)</span>
+    <span class="n">LYDIAN</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AccidentalDegrees</span><span class="o">.</span><span class="n">LYDIAN</span><span class="p">,</span>
+        <span class="n">TriadsModes</span><span class="o">.</span><span class="n">LYDIAN</span><span class="p">,</span>
+        <span class="n">SeventhsModes</span><span class="o">.</span><span class="n">LYDIAN</span>
+    <span class="p">)</span>
+    <span class="n">MIXOLYDIAN</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AccidentalDegrees</span><span class="o">.</span><span class="n">MIXOLYDIAN</span><span class="p">,</span>
+        <span class="n">TriadsModes</span><span class="o">.</span><span class="n">MIXOLYDIAN</span><span class="p">,</span>
+        <span class="n">SeventhsModes</span><span class="o">.</span><span class="n">MIXOLYDIAN</span>
+    <span class="p">)</span>
+    <span class="n">LOCRIAN</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AccidentalDegrees</span><span class="o">.</span><span class="n">LOCRIAN</span><span class="p">,</span>
+        <span class="n">TriadsModes</span><span class="o">.</span><span class="n">LOCRIAN</span><span class="p">,</span>
+        <span class="n">SeventhsModes</span><span class="o">.</span><span class="n">LOCRIAN</span>
+    <span class="p">)</span>
+    <span class="c1"># Minor modes</span>
+    <span class="n">NATURAL</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="kc">None</span><span class="p">,</span>
+        <span class="n">TriadsModes</span><span class="o">.</span><span class="n">MINOR_NATURAL</span><span class="p">,</span>
+        <span class="n">SeventhsModes</span><span class="o">.</span><span class="n">MINOR_NATURAL</span>
+    <span class="p">)</span>
+    <span class="n">HARMONIC</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AccidentalDegrees</span><span class="o">.</span><span class="n">MINOR_HARMONIC</span><span class="p">,</span>
+        <span class="n">TriadsModes</span><span class="o">.</span><span class="n">MINOR_HARMONIC</span><span class="p">,</span>
+        <span class="n">SeventhsModes</span><span class="o">.</span><span class="n">MINOR_HARMONIC</span>
+    <span class="p">)</span>
+    <span class="n">MELODIC</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">AccidentalDegrees</span><span class="o">.</span><span class="n">MINOR_MELODIC</span><span class="p">,</span>
+        <span class="n">TriadsModes</span><span class="o">.</span><span class="n">MINOR_MELODIC</span><span class="p">,</span>
+        <span class="n">SeventhsModes</span><span class="o">.</span><span class="n">MINOR_MELODIC</span>
+    <span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;&lt;</span><span class="si">%s</span><span class="s2">.</span><span class="si">%s</span><span class="s2">&gt;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">accidentals</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AccidentalDegrees</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">triads</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TriadsModes</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">sevenths</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SeventhsModes</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">ninths</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NinthsModes</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="Scales"><a class="viewcode-back" href="../../../generated/musicaiz.harmony.Scales.html#musicaiz.harmony.Scales">[docs]</a><span class="k">class</span> <span class="nc">Scales</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">MAJOR</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;MAJOR&quot;</span><span class="p">:</span> <span class="n">ModeConstructors</span><span class="o">.</span><span class="n">MAJOR</span><span class="p">,</span>
+        <span class="s2">&quot;LYDIAN&quot;</span><span class="p">:</span> <span class="n">ModeConstructors</span><span class="o">.</span><span class="n">LYDIAN</span><span class="p">,</span>
+        <span class="s2">&quot;MIXOLYDIAN&quot;</span><span class="p">:</span> <span class="n">ModeConstructors</span><span class="o">.</span><span class="n">MIXOLYDIAN</span><span class="p">,</span>
+        <span class="s2">&quot;IONIAN&quot;</span><span class="p">:</span> <span class="n">ModeConstructors</span><span class="o">.</span><span class="n">MAJOR</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="n">MINOR</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;NATURAL&quot;</span><span class="p">:</span> <span class="n">ModeConstructors</span><span class="o">.</span><span class="n">NATURAL</span><span class="p">,</span>
+        <span class="s2">&quot;HARMONIC&quot;</span><span class="p">:</span> <span class="n">ModeConstructors</span><span class="o">.</span><span class="n">HARMONIC</span><span class="p">,</span>
+        <span class="s2">&quot;MELODIC&quot;</span><span class="p">:</span> <span class="n">ModeConstructors</span><span class="o">.</span><span class="n">MELODIC</span><span class="p">,</span>
+        <span class="s2">&quot;DORIAN&quot;</span><span class="p">:</span> <span class="n">ModeConstructors</span><span class="o">.</span><span class="n">DORIAN</span><span class="p">,</span>
+        <span class="s2">&quot;PHRYGIAN&quot;</span><span class="p">:</span> <span class="n">ModeConstructors</span><span class="o">.</span><span class="n">PHRYGIAN</span><span class="p">,</span>
+        <span class="s2">&quot;LOCRIAN&quot;</span><span class="p">:</span> <span class="n">ModeConstructors</span><span class="o">.</span><span class="n">LOCRIAN</span><span class="p">,</span>
+        <span class="s2">&quot;AEOLIAN&quot;</span><span class="p">:</span> <span class="n">ModeConstructors</span><span class="o">.</span><span class="n">NATURAL</span><span class="p">,</span>
+    <span class="p">}</span></div>
+
+
+<span class="c1"># Greek scales heritance the accidentals from major mode.</span>
+<span class="c1"># This tonalities haver more than 7 accidentals in the major mode</span>
+<span class="c1"># so we won&#39;t get the greek modes for them</span>
+<span class="n">NON_EXISTING_SCALES</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;G_SHARP_MINOR&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;D_SHARP_MINOR&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;A_SHARP_MINOR&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<div class="viewcode-block" id="Tonality"><a class="viewcode-back" href="../../../generated/musicaiz.harmony.Tonality.html#musicaiz.harmony.Tonality">[docs]</a><span class="k">class</span> <span class="nc">Tonality</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Args:</span>
+<span class="sd">        Enum ([type]): (</span>
+<span class="sd">            Root note,</span>
+<span class="sd">            Num Accidentals,</span>
+<span class="sd">            Accidental object,</span>
+<span class="sd">            {Additional Accidentals, Triads, Sevenths}</span>
+<span class="sd">        )</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># ----------- 0#, 0b -----------</span>
+    <span class="n">C_MAJOR</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">C</span><span class="p">,</span>
+        <span class="mi">0</span><span class="p">,</span>
+        <span class="kc">None</span><span class="p">,</span>
+        <span class="n">Scales</span><span class="o">.</span><span class="n">MAJOR</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">A_MINOR</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">A</span><span class="p">,</span>
+        <span class="mi">0</span><span class="p">,</span>
+        <span class="kc">None</span><span class="p">,</span>
+        <span class="n">Scales</span><span class="o">.</span><span class="n">MINOR</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="c1"># ----------- 1# ---------------</span>
+    <span class="n">G_MAJOR</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">G</span><span class="p">,</span>
+        <span class="mi">1</span><span class="p">,</span>
+        <span class="n">AccidentalsNames</span><span class="o">.</span><span class="n">SHARP</span><span class="p">,</span>
+        <span class="n">Scales</span><span class="o">.</span><span class="n">MAJOR</span>
+    <span class="p">)</span>
+    <span class="n">E_MINOR</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">E</span><span class="p">,</span>
+        <span class="mi">1</span><span class="p">,</span>
+        <span class="n">AccidentalsNames</span><span class="o">.</span><span class="n">SHARP</span><span class="p">,</span>
+        <span class="n">Scales</span><span class="o">.</span><span class="n">MINOR</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="c1"># ----------- 1b ---------------</span>
+    <span class="n">F_MAJOR</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">F</span><span class="p">,</span>
+        <span class="mi">1</span><span class="p">,</span>
+        <span class="n">AccidentalsNames</span><span class="o">.</span><span class="n">FLAT</span><span class="p">,</span>
+        <span class="n">Scales</span><span class="o">.</span><span class="n">MAJOR</span>
+    <span class="p">)</span>
+    <span class="n">D_MINOR</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">D</span><span class="p">,</span>
+        <span class="mi">1</span><span class="p">,</span>
+        <span class="n">AccidentalsNames</span><span class="o">.</span><span class="n">FLAT</span><span class="p">,</span>
+        <span class="n">Scales</span><span class="o">.</span><span class="n">MINOR</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="c1"># ----------- 2# ---------------</span>
+    <span class="n">D_MAJOR</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">D</span><span class="p">,</span>
+        <span class="mi">2</span><span class="p">,</span>
+        <span class="n">AccidentalsNames</span><span class="o">.</span><span class="n">SHARP</span><span class="p">,</span>
+        <span class="n">Scales</span><span class="o">.</span><span class="n">MAJOR</span>
+    <span class="p">)</span>
+    <span class="n">B_MINOR</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">B</span><span class="p">,</span>
+        <span class="mi">2</span><span class="p">,</span>
+        <span class="n">AccidentalsNames</span><span class="o">.</span><span class="n">SHARP</span><span class="p">,</span>
+        <span class="n">Scales</span><span class="o">.</span><span class="n">MINOR</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="c1"># ----------- 2b ---------------</span>
+    <span class="n">B_FLAT_MAJOR</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">B</span><span class="p">,</span>
+        <span class="mi">2</span><span class="p">,</span>
+        <span class="n">AccidentalsNames</span><span class="o">.</span><span class="n">FLAT</span><span class="p">,</span>
+        <span class="n">Scales</span><span class="o">.</span><span class="n">MAJOR</span>
+    <span class="p">)</span>
+    <span class="n">G_MINOR</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">G</span><span class="p">,</span>
+        <span class="mi">2</span><span class="p">,</span>
+        <span class="n">AccidentalsNames</span><span class="o">.</span><span class="n">FLAT</span><span class="p">,</span>
+        <span class="n">Scales</span><span class="o">.</span><span class="n">MINOR</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="c1"># ----------- 3# ---------------</span>
+    <span class="n">A_MAJOR</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">A</span><span class="p">,</span>
+        <span class="mi">3</span><span class="p">,</span>
+        <span class="n">AccidentalsNames</span><span class="o">.</span><span class="n">SHARP</span><span class="p">,</span>
+        <span class="n">Scales</span><span class="o">.</span><span class="n">MAJOR</span>
+    <span class="p">)</span>
+    <span class="n">F_SHARP_MINOR</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">F</span><span class="p">,</span>
+        <span class="mi">3</span><span class="p">,</span>
+        <span class="n">AccidentalsNames</span><span class="o">.</span><span class="n">SHARP</span><span class="p">,</span>
+        <span class="n">Scales</span><span class="o">.</span><span class="n">MINOR</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="c1"># ----------- 3b ---------------</span>
+    <span class="n">E_FLAT_MAJOR</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">E</span><span class="p">,</span>
+        <span class="mi">3</span><span class="p">,</span>
+        <span class="n">AccidentalsNames</span><span class="o">.</span><span class="n">FLAT</span><span class="p">,</span>
+        <span class="n">Scales</span><span class="o">.</span><span class="n">MAJOR</span>
+    <span class="p">)</span>
+    <span class="n">C_MINOR</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">C</span><span class="p">,</span>
+        <span class="mi">3</span><span class="p">,</span>
+        <span class="n">AccidentalsNames</span><span class="o">.</span><span class="n">FLAT</span><span class="p">,</span>
+        <span class="n">Scales</span><span class="o">.</span><span class="n">MINOR</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="c1"># ----------- 4# ---------------</span>
+    <span class="n">E_MAJOR</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">E</span><span class="p">,</span>
+        <span class="mi">4</span><span class="p">,</span>
+        <span class="n">AccidentalsNames</span><span class="o">.</span><span class="n">SHARP</span><span class="p">,</span>
+        <span class="n">Scales</span><span class="o">.</span><span class="n">MAJOR</span>
+    <span class="p">)</span>
+    <span class="n">C_SHARP_MINOR</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">C</span><span class="p">,</span>
+        <span class="mi">4</span><span class="p">,</span>
+        <span class="n">AccidentalsNames</span><span class="o">.</span><span class="n">SHARP</span><span class="p">,</span>
+        <span class="n">Scales</span><span class="o">.</span><span class="n">MINOR</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="c1"># ----------- 4b ---------------</span>
+    <span class="n">A_FLAT_MAJOR</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">A</span><span class="p">,</span>
+        <span class="mi">4</span><span class="p">,</span>
+        <span class="n">AccidentalsNames</span><span class="o">.</span><span class="n">FLAT</span><span class="p">,</span>
+        <span class="n">Scales</span><span class="o">.</span><span class="n">MAJOR</span>
+    <span class="p">)</span>
+    <span class="n">F_MINOR</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">F</span><span class="p">,</span>
+        <span class="mi">4</span><span class="p">,</span>
+        <span class="n">AccidentalsNames</span><span class="o">.</span><span class="n">FLAT</span><span class="p">,</span>
+        <span class="n">Scales</span><span class="o">.</span><span class="n">MINOR</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="c1"># ----------- 5# ---------------</span>
+    <span class="n">B_MAJOR</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">B</span><span class="p">,</span>
+        <span class="mi">5</span><span class="p">,</span>
+        <span class="n">AccidentalsNames</span><span class="o">.</span><span class="n">SHARP</span><span class="p">,</span>
+        <span class="n">Scales</span><span class="o">.</span><span class="n">MAJOR</span>
+    <span class="p">)</span>
+    <span class="n">G_SHARP_MINOR</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">G</span><span class="p">,</span>
+        <span class="mi">5</span><span class="p">,</span>
+        <span class="n">AccidentalsNames</span><span class="o">.</span><span class="n">SHARP</span><span class="p">,</span>
+        <span class="n">Scales</span><span class="o">.</span><span class="n">MINOR</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="c1"># ----------- 5b ---------------</span>
+    <span class="n">D_FLAT_MAJOR</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">D</span><span class="p">,</span>
+        <span class="mi">5</span><span class="p">,</span>
+        <span class="n">AccidentalsNames</span><span class="o">.</span><span class="n">FLAT</span><span class="p">,</span>
+        <span class="n">Scales</span><span class="o">.</span><span class="n">MAJOR</span>
+    <span class="p">)</span>
+    <span class="n">B_FLAT_MINOR</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">B</span><span class="p">,</span>
+        <span class="mi">5</span><span class="p">,</span>
+        <span class="n">AccidentalsNames</span><span class="o">.</span><span class="n">FLAT</span><span class="p">,</span>
+        <span class="n">Scales</span><span class="o">.</span><span class="n">MINOR</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="c1"># ----------- 6# ---------------</span>
+    <span class="n">F_SHARP_MAJOR</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">F</span><span class="p">,</span>
+        <span class="mi">6</span><span class="p">,</span>
+        <span class="n">AccidentalsNames</span><span class="o">.</span><span class="n">SHARP</span><span class="p">,</span>
+        <span class="n">Scales</span><span class="o">.</span><span class="n">MAJOR</span>
+    <span class="p">)</span>
+    <span class="n">D_SHARP_MINOR</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">D</span><span class="p">,</span>
+        <span class="mi">6</span><span class="p">,</span>
+        <span class="n">AccidentalsNames</span><span class="o">.</span><span class="n">SHARP</span><span class="p">,</span>
+        <span class="n">Scales</span><span class="o">.</span><span class="n">MINOR</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="c1"># ----------- 6b ---------------</span>
+    <span class="n">G_FLAT_MAJOR</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">G</span><span class="p">,</span>
+        <span class="mi">6</span><span class="p">,</span>
+        <span class="n">AccidentalsNames</span><span class="o">.</span><span class="n">FLAT</span><span class="p">,</span>
+        <span class="n">Scales</span><span class="o">.</span><span class="n">MAJOR</span>
+    <span class="p">)</span>
+    <span class="n">E_FLAT_MINOR</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">E</span><span class="p">,</span>
+        <span class="mi">6</span><span class="p">,</span>
+        <span class="n">AccidentalsNames</span><span class="o">.</span><span class="n">FLAT</span><span class="p">,</span>
+        <span class="n">Scales</span><span class="o">.</span><span class="n">MINOR</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="c1"># ----------- 7# ---------------</span>
+    <span class="n">C_SHARP_MAJOR</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">C</span><span class="p">,</span>
+        <span class="mi">7</span><span class="p">,</span>
+        <span class="n">AccidentalsNames</span><span class="o">.</span><span class="n">SHARP</span><span class="p">,</span>
+        <span class="n">Scales</span><span class="o">.</span><span class="n">MAJOR</span>
+    <span class="p">)</span>
+    <span class="n">A_SHARP_MINOR</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">A</span><span class="p">,</span>
+        <span class="mi">7</span><span class="p">,</span>
+        <span class="n">AccidentalsNames</span><span class="o">.</span><span class="n">SHARP</span><span class="p">,</span>
+        <span class="n">Scales</span><span class="o">.</span><span class="n">MINOR</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="c1"># ----------- 7b ---------------</span>
+    <span class="n">C_FLAT_MAJOR</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">C</span><span class="p">,</span>
+        <span class="mi">7</span><span class="p">,</span>
+        <span class="n">AccidentalsNames</span><span class="o">.</span><span class="n">FLAT</span><span class="p">,</span>
+        <span class="n">Scales</span><span class="o">.</span><span class="n">MAJOR</span>
+    <span class="p">)</span>
+    <span class="n">A_FLAT_MINOR</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">A</span><span class="p">,</span>
+        <span class="mi">7</span><span class="p">,</span>
+        <span class="n">AccidentalsNames</span><span class="o">.</span><span class="n">FLAT</span><span class="p">,</span>
+        <span class="n">Scales</span><span class="o">.</span><span class="n">MINOR</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">root_note</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">num_accidentals</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AccidentalsNames</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">symbol_accidentals</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AccidentalsNames</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">major</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ModeConstructors</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">scales</span><span class="p">(</span><span class="s2">&quot;MAJOR&quot;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">dorian</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ModeConstructors</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">NON_EXISTING_SCALES</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">scales</span><span class="p">(</span><span class="s2">&quot;DORIAN&quot;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">phrygian</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ModeConstructors</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">NON_EXISTING_SCALES</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">scales</span><span class="p">(</span><span class="s2">&quot;PHRYGIAN&quot;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">lydian</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ModeConstructors</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">scales</span><span class="p">(</span><span class="s2">&quot;LYDIAN&quot;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">mixolydian</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ModeConstructors</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">scales</span><span class="p">(</span><span class="s2">&quot;MIXOLYDIAN&quot;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">locrian</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ModeConstructors</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">NON_EXISTING_SCALES</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">scales</span><span class="p">(</span><span class="s2">&quot;LOCRIAN&quot;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">natural</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ModeConstructors</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">scales</span><span class="p">(</span><span class="s2">&quot;NATURAL&quot;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">harmonic</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ModeConstructors</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">scales</span><span class="p">(</span><span class="s2">&quot;HARMONIC&quot;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">melodic</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ModeConstructors</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">scales</span><span class="p">(</span><span class="s2">&quot;MELODIC&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">scales</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scale</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ModeConstructors</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">scale</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="n">scale</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">all_scales</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AccidentalsNames</span><span class="p">:</span>
+        <span class="n">all_scales</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="s2">&quot;MAJOR&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">:</span>
+            <span class="n">all_scales</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">major</span><span class="p">)</span>
+            <span class="n">all_scales</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lydian</span><span class="p">)</span>
+            <span class="n">all_scales</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mixolydian</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="s2">&quot;MINOR&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">:</span>
+            <span class="n">all_scales</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">natural</span><span class="p">)</span>
+            <span class="n">all_scales</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">harmonic</span><span class="p">)</span>
+            <span class="n">all_scales</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">melodic</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">NON_EXISTING_SCALES</span><span class="p">:</span>
+                <span class="n">all_scales</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dorian</span><span class="p">)</span>
+                <span class="n">all_scales</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">phrygian</span><span class="p">)</span>
+                <span class="n">all_scales</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">locrian</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">all_scales</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">altered_notes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">NoteClassBase</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Returns the altered notes in the scale.</span>
+<span class="sd">        This method only returns the altered nottes for the major and minor</span>
+<span class="sd">        natural modes which are the &quot;parent&quot; modes.</span>
+<span class="sd">        To obtain the additional accidentals of the submodes (minor harmonic...),</span>
+<span class="sd">        use the `submode_altered_notes` method.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">symbol_accidentals</span> <span class="o">==</span> <span class="n">AccidentalsNames</span><span class="o">.</span><span class="n">FLAT</span><span class="p">:</span>
+            <span class="n">notes</span> <span class="o">=</span> <span class="p">[</span><span class="n">note</span> <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">AccidentalNotes</span><span class="o">.</span><span class="n">FLATS</span><span class="o">.</span><span class="n">value</span><span class="p">[:</span><span class="bp">self</span><span class="o">.</span><span class="n">num_accidentals</span><span class="p">]]</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">symbol_accidentals</span> <span class="o">==</span> <span class="n">AccidentalsNames</span><span class="o">.</span><span class="n">SHARP</span><span class="p">:</span>
+            <span class="n">notes</span> <span class="o">=</span> <span class="p">[</span><span class="n">note</span> <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">AccidentalNotes</span><span class="o">.</span><span class="n">SHARPS</span><span class="o">.</span><span class="n">value</span><span class="p">[:</span><span class="bp">self</span><span class="o">.</span><span class="n">num_accidentals</span><span class="p">]]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">notes</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">return</span> <span class="n">notes</span>
+
+    <span class="k">def</span> <span class="nf">scale_notes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scale</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">NoteClassBase</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;This method returns the notes of the scale corresponding to</span>
+<span class="sd">        a submode.&quot;&quot;&quot;</span>
+        <span class="c1"># Obtain altered notes depending on the scale (minor harmonic...)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">scale</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">scale_inst</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scales</span><span class="p">(</span><span class="n">scale</span><span class="p">)</span>  <span class="c1"># initialize scale</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">scale_inst</span> <span class="o">=</span> <span class="n">scale</span>
+        <span class="n">more_accidentals</span> <span class="o">=</span> <span class="n">scale_inst</span><span class="o">.</span><span class="n">accidentals</span>
+        <span class="k">if</span> <span class="n">more_accidentals</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">notes</span>
+        <span class="n">altered_degrees</span> <span class="o">=</span> <span class="n">more_accidentals</span><span class="o">.</span><span class="n">degrees</span>
+        <span class="n">symbol</span> <span class="o">=</span> <span class="n">more_accidentals</span><span class="o">.</span><span class="n">symbol_accidentals</span>
+        <span class="c1"># All the greek scales inherit the accidentals from major mode</span>
+        <span class="c1"># but the melodic and harmonic scales have the accidentals of the minor natural mode</span>
+        <span class="k">if</span> <span class="p">(</span><span class="s2">&quot;MINOR&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">scale</span> <span class="o">!=</span> <span class="s2">&quot;NATURAL&quot;</span> <span class="ow">and</span> <span class="n">scale</span> <span class="o">!=</span> <span class="s2">&quot;MELODIC&quot;</span> <span class="ow">and</span> <span class="n">scale</span> <span class="o">!=</span> <span class="s2">&quot;HARMONIC&quot;</span><span class="p">):</span>
+            <span class="c1"># count &quot;_&quot; in tonality name</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">major_tonality</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="s2">&quot;MAJOR&quot;</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">major_tonality</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="s2">&quot;MAJOR&quot;</span>
+            <span class="n">notes</span> <span class="o">=</span> <span class="n">Tonality</span><span class="p">[</span><span class="n">major_tonality</span><span class="p">]</span><span class="o">.</span><span class="n">notes</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">notes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notes</span>
+        <span class="k">for</span> <span class="n">degree</span> <span class="ow">in</span> <span class="n">altered_degrees</span><span class="p">:</span>
+            <span class="c1"># Obtain the note that corresponds to the degree</span>
+            <span class="n">note</span> <span class="o">=</span> <span class="n">notes</span><span class="p">[</span><span class="n">degree</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">symbol</span> <span class="o">==</span> <span class="n">AccidentalsNames</span><span class="o">.</span><span class="n">SHARP</span><span class="p">:</span>
+                <span class="n">notes</span><span class="p">[</span><span class="n">degree</span><span class="o">.</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">add_sharp</span>
+            <span class="k">elif</span> <span class="n">symbol</span> <span class="o">==</span> <span class="n">AccidentalsNames</span><span class="o">.</span><span class="n">FLAT</span><span class="p">:</span>
+                <span class="n">notes</span><span class="p">[</span><span class="n">degree</span><span class="o">.</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">add_flat</span>
+        <span class="k">return</span> <span class="n">notes</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">notes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">NoteClassBase</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Uses `altered_notes` property to generate the notes in the scale.&quot;&quot;&quot;</span>
+        <span class="c1"># list of the 7 notes in natural scale</span>
+        <span class="n">notes</span> <span class="o">=</span> <span class="p">[</span><span class="n">note</span> <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">NoteClassBase</span> <span class="k">if</span> <span class="n">note</span><span class="o">.</span><span class="n">natural_scale_index</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
+        <span class="c1"># sort the list of the notes in natural scale from root note</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_note</span><span class="o">.</span><span class="n">natural_scale_index</span><span class="p">):</span>
+            <span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">notes</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+        <span class="c1"># Now we alter the notes with accidentals depending on the scale and mode</span>
+        <span class="n">scale_notes</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">note</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">scale_notes</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">altered_note</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">altered_notes</span><span class="p">:</span>
+                <span class="n">natural_note</span> <span class="o">=</span> <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">get_natural_note</span><span class="p">(</span><span class="n">altered_note</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">natural_note</span> <span class="o">==</span> <span class="n">note</span><span class="p">:</span>
+                    <span class="n">scale_notes</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">altered_note</span>
+        <span class="k">return</span> <span class="n">scale_notes</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;&lt;</span><span class="si">%s</span><span class="s2">.</span><span class="si">%s</span><span class="s2">&gt;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="c1"># TODO</span>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_scale_from_accidentals_num</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Scales</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="c1"># TODO</span>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_scale_from_accidentals_symbol</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Scales</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="c1"># TODO</span>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_scale_from_accidentals_num_symbol</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Scales</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_chord_from_degree</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span>
+        <span class="n">tonality</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">degree</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">scale</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ModeConstructors</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">chord_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;triad&quot;</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">(</span><span class="n">NoteClassBase</span><span class="p">,</span> <span class="n">AllChords</span><span class="p">):</span>
+        <span class="c1"># TODO: Add Non valid scale exception</span>
+        <span class="c1"># TODO: Add Non valid degree exception</span>
+        <span class="c1"># TODO: Add Non valid scale for mode exception</span>
+        <span class="c1"># TODO: Add non valid chord type exception</span>
+        <span class="c1"># Get the notes in the scale</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tonality</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">tonality</span> <span class="o">=</span> <span class="n">tonality</span><span class="o">.</span><span class="n">name</span>
+        <span class="c1"># Get scale inside the tonality</span>
+        <span class="n">scale_mode</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_get_scale</span><span class="p">(</span><span class="n">tonality</span><span class="p">,</span> <span class="n">scale</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">scale</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">notes</span> <span class="o">=</span> <span class="n">Tonality</span><span class="p">[</span><span class="n">tonality</span><span class="p">]</span><span class="o">.</span><span class="n">notes</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">notes</span> <span class="o">=</span> <span class="n">Tonality</span><span class="p">[</span><span class="n">tonality</span><span class="p">]</span><span class="o">.</span><span class="n">scale_notes</span><span class="p">(</span><span class="n">scale_mode</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="c1"># Get degree index in the scale</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">degree</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="c1"># Get degree obj</span>
+            <span class="n">degree_obj</span> <span class="o">=</span> <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">get_name_with_degree</span><span class="p">(</span><span class="n">degree</span><span class="p">)</span>
+            <span class="n">degree_idx</span> <span class="o">=</span> <span class="n">degree_obj</span><span class="o">.</span><span class="n">index</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">degree</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="n">degree_idx</span> <span class="o">=</span> <span class="n">degree</span>
+
+        <span class="k">if</span> <span class="n">chord_type</span> <span class="o">==</span> <span class="s2">&quot;triad&quot;</span><span class="p">:</span>
+            <span class="n">chord</span> <span class="o">=</span> <span class="n">scale_mode</span><span class="o">.</span><span class="n">triads</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="n">degree_idx</span><span class="p">]</span><span class="o">.</span><span class="n">chord</span>
+        <span class="k">elif</span> <span class="n">chord_type</span> <span class="o">==</span> <span class="s2">&quot;seventh&quot;</span><span class="p">:</span>
+            <span class="n">chord</span> <span class="o">=</span> <span class="n">scale_mode</span><span class="o">.</span><span class="n">sevenths</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="n">degree_idx</span><span class="p">]</span><span class="o">.</span><span class="n">chord</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Input chord type </span><span class="si">{</span><span class="n">chord_type</span><span class="si">}</span><span class="s2"> not known.&quot;</span><span class="p">)</span>
+        <span class="c1"># Get root note</span>
+        <span class="n">root_note</span> <span class="o">=</span> <span class="n">notes</span><span class="p">[</span><span class="n">degree_idx</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">root_note</span><span class="p">,</span> <span class="n">chord</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_get_scale</span><span class="p">(</span>
+        <span class="n">tonality</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">scale</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ModeConstructors</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ModeConstructors</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;For major mode the default is the major scale. For</span>
+<span class="sd">        the minor mode the default is the minor natural scale.&quot;&quot;&quot;</span>
+        <span class="n">tonality_inst</span> <span class="o">=</span> <span class="n">Tonality</span><span class="p">[</span><span class="n">tonality</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">scale</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">scale</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">scale_mode</span> <span class="o">=</span> <span class="n">tonality_inst</span><span class="o">.</span><span class="n">scales</span><span class="p">(</span><span class="n">scale</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">scale_mode</span> <span class="o">=</span> <span class="n">scale</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">&quot;MAJOR&quot;</span> <span class="ow">in</span> <span class="n">tonality</span><span class="p">:</span>
+                <span class="n">scale_mode</span> <span class="o">=</span> <span class="n">tonality_inst</span><span class="o">.</span><span class="n">scales</span><span class="p">(</span><span class="s2">&quot;MAJOR&quot;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="s2">&quot;MINOR&quot;</span> <span class="ow">in</span> <span class="n">tonality</span><span class="p">:</span>
+                <span class="n">scale_mode</span> <span class="o">=</span> <span class="n">tonality_inst</span><span class="o">.</span><span class="n">scales</span><span class="p">(</span><span class="s2">&quot;MINOR&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">scale_mode</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_all_chords_from_scale</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span>
+        <span class="n">tonality</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">scale</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ModeConstructors</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">chord_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;triad&quot;</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">NoteClassBase</span><span class="p">,</span> <span class="n">AllChords</span><span class="p">]]:</span>
+        <span class="n">chords</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">scale</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_get_scale</span><span class="p">(</span><span class="n">tonality</span><span class="p">,</span> <span class="n">scale</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">):</span>
+            <span class="n">chords</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">get_chord_from_degree</span><span class="p">(</span><span class="n">tonality</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">chord_type</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">chords</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_chord_notes_from_degree</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span>
+        <span class="n">tonality</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">degree</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">scale</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ModeConstructors</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">chord_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;triad&quot;</span><span class="p">,</span>
+        <span class="n">inversion</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">NoteClassBase</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Return a list of the notes that corresponds to the input degree chord.&quot;&quot;&quot;</span>
+        <span class="c1"># TODO: Take into account inversion and chord_type</span>
+        <span class="c1"># Get the notes in the scale</span>
+        <span class="n">root_note</span><span class="p">,</span> <span class="n">chord</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">get_chord_from_degree</span><span class="p">(</span><span class="n">tonality</span><span class="p">,</span> <span class="n">degree</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">chord_type</span><span class="p">)</span>
+        <span class="c1"># Get intervals from root note</span>
+        <span class="n">intervals</span> <span class="o">=</span> <span class="n">chord</span><span class="o">.</span><span class="n">intervals</span>
+        <span class="n">notes</span> <span class="o">=</span> <span class="p">[</span><span class="n">root_note</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">interval</span> <span class="ow">in</span> <span class="n">intervals</span><span class="p">:</span>
+            <span class="n">interval_inst</span> <span class="o">=</span> <span class="n">Interval</span><span class="p">(</span><span class="n">interval</span><span class="p">)</span>
+            <span class="c1"># Initialize note with name and octave</span>
+            <span class="c1"># TODO: Maybe this will go in a helper method in intervals module</span>
+            <span class="n">degree_root</span> <span class="o">=</span> <span class="n">root_note</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">contracted</span> <span class="o">+</span> <span class="s2">&quot;1&quot;</span>
+            <span class="n">note_obj</span> <span class="o">=</span> <span class="n">Interval</span><span class="o">.</span><span class="n">_initialize_note</span><span class="p">(</span><span class="n">degree_root</span><span class="p">)</span>
+            <span class="n">note_dest_obj</span> <span class="o">=</span> <span class="n">interval_inst</span><span class="o">.</span><span class="n">transpose_note</span><span class="p">(</span><span class="n">note_obj</span><span class="p">)</span>
+            <span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note_dest_obj</span><span class="o">.</span><span class="n">note</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">notes</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_scales_degrees_from_chord</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span>
+        <span class="n">chord</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">NoteClassBase</span><span class="p">,</span> <span class="n">AllChords</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">DegreesRoman</span><span class="p">,</span> <span class="n">Tonality</span><span class="p">,</span> <span class="n">ModeConstructors</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;Returns all the scales with their corresponding degree</span>
+<span class="sd">        that belong to the input chord.&quot;&quot;&quot;</span>
+        <span class="c1"># Go through all the tonalities</span>
+        <span class="n">scales_degrees</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">tonality</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__members__</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="c1"># Loop through all the scales in each tonality</span>
+            <span class="k">for</span> <span class="n">scale</span> <span class="ow">in</span> <span class="n">tonality</span><span class="o">.</span><span class="n">all_scales</span><span class="p">:</span>
+                <span class="n">chords_scale</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">get_all_chords_from_scale</span><span class="p">(</span><span class="n">tonality</span><span class="o">=</span><span class="n">tonality</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">scale</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+                <span class="c1"># Go through all the degrees chords in the scale</span>
+                <span class="c1"># TODO: Take into account 7ths</span>
+                <span class="k">for</span> <span class="n">degree_idx</span><span class="p">,</span> <span class="n">degree_chord</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">chords_scale</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="nb">set</span><span class="p">(</span><span class="n">chord</span><span class="p">)</span> <span class="o">==</span> <span class="nb">set</span><span class="p">(</span><span class="n">degree_chord</span><span class="p">):</span>
+                        <span class="n">degree_obj</span> <span class="o">=</span> <span class="n">DegreesRoman</span><span class="o">.</span><span class="n">get_degree_from_index</span><span class="p">(</span><span class="n">degree_idx</span><span class="p">)</span>
+                        <span class="n">scales_degrees</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">degree_obj</span><span class="p">,</span> <span class="n">tonality</span><span class="p">,</span> <span class="n">scale</span><span class="p">))</span>
+                        <span class="c1"># TODO: break this loop and go to scales loop, there&#39;re not 2 same chords in a scale</span>
+        <span class="k">return</span> <span class="n">scales_degrees</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_modes_degrees_from_chord</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span>
+        <span class="n">chord</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">NoteClassBase</span><span class="p">,</span> <span class="n">AllChords</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">DegreesRoman</span><span class="p">,</span> <span class="n">Tonality</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;Same as `get_scales_degrees_from_chord` but this method only returns</span>
+<span class="sd">        the tonality and degree, not the specific scale.&quot;&quot;&quot;</span>
+        <span class="n">all_degrees</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">get_scales_degrees_from_chord</span><span class="p">(</span><span class="n">chord</span><span class="p">)</span>
+        <span class="n">prev_degree</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">degree_tonalities</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">degree</span> <span class="ow">in</span> <span class="n">all_degrees</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">degree</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">prev_degree</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="n">degree</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">prev_degree</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="n">degree_tonalities</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">degree</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">degree</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+            <span class="n">prev_degree</span> <span class="o">=</span> <span class="n">degree</span>
+        <span class="k">return</span> <span class="n">degree_tonalities</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Carlos Hernandez-Olivan.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

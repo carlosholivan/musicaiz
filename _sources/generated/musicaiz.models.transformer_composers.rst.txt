@@ -1,0 +1,23 @@
+﻿musicaiz.models.transformer\_composers
+======================================
+
+.. automodule:: musicaiz.models.transformer_composers
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+

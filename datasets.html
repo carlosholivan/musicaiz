@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Datasets &mdash; Musicaiz 0.0.2 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/plot_directive.css" type="text/css" />
+      <link rel="stylesheet" href="_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="_static/sg_gallery-binder.css" type="text/css" />
+      <link rel="stylesheet" href="_static/sg_gallery-dataframe.css" type="text/css" />
+      <link rel="stylesheet" href="_static/sg_gallery-rendered-html.css" type="text/css" />
+      <link rel="stylesheet" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" type="text/css" />
+      <link rel="stylesheet" href="_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/design-tabs.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Models" href="models.html" />
+    <link rel="prev" title="musicaiz.converters.pretty_midi_note_to_musanalysis" href="generated/musicaiz.converters.pretty_midi_note_to_musanalysis.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #222222ff" >
+            <a href="index.html">
+            <img src="_static/logo_square_dark.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.0.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Musicaiz Documentation:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="loaders.html">Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="structure.html">Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="harmony.html">Harmony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rhythm.html">Rhythm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="algorithms.html">Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tokenizers.html">Tokenizers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="evaluation.html">Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotters.html">Plotters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="converters.html">Converters</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Datasets</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#music-composition-or-generation">Music Composition or Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#automatic-chord-recognition">Automatic Chord Recognition</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">Models</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/2-write_midi.html">Writing a MIDI file from scratch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/3-plot.html">Plotting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">References:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="implementations.html">Implementation Details</a></li>
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #222222ff" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Musicaiz</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Datasets</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/datasets.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<span class="target" id="module-musicaiz.datasets"><span id="datasets"></span></span><section id="id1">
+<h1>Datasets<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>This submodule presents helper functions to works and process MIR datasets for
+different tasks such as:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Automatic Chord Recognition: ACR</p></li>
+<li><p>Music Generation or Composition</p></li>
+</ul>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Not all the datasets shown here are included in <cite>musicaiz</cite> souce code.
+Some of these datasets have their own GitHub repository with their corresponding helper functions.</p>
+</div>
+<section id="music-composition-or-generation">
+<h2>Music Composition or Generation<a class="headerlink" href="#music-composition-or-generation" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul>
+<li><p>JS Bach Chorales</p>
+<blockquote>
+<div><p>Boulanger-Lewandowski, N., Bengio, Y., &amp; Vincent, P. (2012).
+Modeling temporal dependencies in high-dimensional sequences:
+Application to polyphonic music generation and transcription.
+arXiv preprint arXiv:1206.6392.</p>
+<div class="line-block">
+<div class="line">Download: <a class="reference external" href="http://www-ens.iro.umontreal.ca/~boulanni/icml2012">http://www-ens.iro.umontreal.ca/~boulanni/icml2012</a></div>
+<div class="line">Paper: <a class="reference external" href="https://arxiv.org/abs/1206.6392">https://arxiv.org/abs/1206.6392</a></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>JS Bach Fakes</p>
+<blockquote>
+<div><p>Peracha, O. (2021).
+Js fake chorales: a synthetic dataset of polyphonic music with human annotation.
+arXiv preprint arXiv:2107.10388.</p>
+<div class="line-block">
+<div class="line">Paper: <a class="reference external" href="https://arxiv.org/abs/2107.10388">https://arxiv.org/abs/2107.10388</a></div>
+<div class="line">Repository &amp; Download: <a class="reference external" href="https://github.com/omarperacha/js-fakes">https://github.com/omarperacha/js-fakes</a></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Lakh MIDI Dataset (LMD)</p>
+<blockquote>
+<div><p>Raffel, C. (2016).
+Learning-based methods for comparing sequences, with applications to audio-to-midi alignment and matching.
+Columbia University.</p>
+<div class="line-block">
+<div class="line">Thesis: <a class="reference external" href="http://colinraffel.com/publications/thesis.pdf">http://colinraffel.com/publications/thesis.pdf</a></div>
+<div class="line">Download: <a class="reference external" href="https://colinraffel.com/projects/lmd/">https://colinraffel.com/projects/lmd/</a></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>MAESTRO</p>
+<blockquote>
+<div><p>Hawthorne, C., Stasyuk, A., Roberts, A., Simon, I., Huang, C. Z. A., Dieleman, S., … &amp; Eck, D. (2018).
+Enabling factorized piano music modeling and generation with the MAESTRO dataset. arXiv preprint arXiv:1810.12247.</p>
+<div class="line-block">
+<div class="line">Download: <a class="reference external" href="https://magenta.tensorflow.org/datasets/maestro">https://magenta.tensorflow.org/datasets/maestro</a></div>
+<div class="line">Paper: <a class="reference external" href="https://arxiv.org/abs/1810.12247">https://arxiv.org/abs/1810.12247</a></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Slakh2100</p>
+<blockquote>
+<div><p>Manilow, E., Wichern, G., Seetharaman, P., &amp; Le Roux, J. (2019).
+Cutting music source separation some Slakh: A dataset to study the impact of training data quality and quantity.
+In 2019 IEEE Workshop on Applications of Signal Processing to Audio and Acoustics (WASPAA) (pp. 45-49). IEEE.</p>
+<div class="line-block">
+<div class="line">Download link: <a class="reference external" href="https://zenodo.org/record/4599666#.YpD8ZO7P1PY">https://zenodo.org/record/4599666#.YpD8ZO7P1PY</a></div>
+<div class="line">Paper: <a class="reference external" href="https://ieeexplore.ieee.org/abstract/document/8937170">https://ieeexplore.ieee.org/abstract/document/8937170</a></div>
+<div class="line">Repository: <a class="reference external" href="https://github.com/ethman/Slakh">https://github.com/ethman/Slakh</a></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Meta-MIDI Dataset</p>
+<blockquote>
+<div><p>Ens, J., &amp; Pasquier, P. (2021).
+Building the metamidi dataset: Linking symbolic and audio musical data.
+In Proceedings of 22st International Conference on Music Information Retrieval, ISMIR.</p>
+<div class="line-block">
+<div class="line">Download link: <a class="reference external" href="https://zenodo.org/record/5142664#.YpD8he7P1PY">https://zenodo.org/record/5142664#.YpD8he7P1PY</a></div>
+<div class="line">Paper: <a class="reference external" href="https://archives.ismir.net/ismir2021/paper/000022.pdf">https://archives.ismir.net/ismir2021/paper/000022.pdf</a></div>
+<div class="line">Repository: <a class="reference external" href="https://github.com/jeffreyjohnens/MetaMIDIDataset">https://github.com/jeffreyjohnens/MetaMIDIDataset</a></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</section>
+<section id="automatic-chord-recognition">
+<h2>Automatic Chord Recognition<a class="headerlink" href="#automatic-chord-recognition" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul>
+<li><p>Schubert Winterreise Dataset</p>
+<blockquote>
+<div><p>Christof Weiß, Frank Zalkow, Vlora Arifi-Müller, Meinard Müller, Hendrik Vincent Koops, Anja Volk, &amp; Harald G. Grohganz.
+(2020). Schubert Winterreise Dataset [Data set]. In ACM Journal on Computing and Cultural Heritage (1.0).</p>
+<div class="line-block">
+<div class="line">Download: <a class="reference external" href="https://doi.org/10.5281/zenodo.3968389">https://doi.org/10.5281/zenodo.3968389</a></div>
+<div class="line">Paper: <a class="reference external" href="https://dl.acm.org/doi/10.1145/3429743">https://dl.acm.org/doi/10.1145/3429743</a></div>
+</div>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+</tbody>
+</table>
+</div></blockquote>
+</li>
+<li><p>BPS-FH Dataset</p>
+<blockquote>
+<div><p>Chen, T. P., &amp; Su, L. (2018).
+Functional Harmony Recognition of Symbolic Music Data with Multi-task Recurrent Neural Networks.
+In Proceedings of 19th International Conference on Music Information Retrieval, ISMIR. pp. 90-97.</p>
+<div class="line-block">
+<div class="line">Repository &amp; Download: <a class="reference external" href="https://github.com/Tsung-Ping/functional-harmony">https://github.com/Tsung-Ping/functional-harmony</a></div>
+<div class="line">Paper: <a class="reference external" href="http://ismir2018.ircam.fr/doc/pdfs/178_Paper.pdf">http://ismir2018.ircam.fr/doc/pdfs/178_Paper.pdf</a></div>
+</div>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+</tbody>
+</table>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="generated/musicaiz.converters.pretty_midi_note_to_musanalysis.html" class="btn btn-neutral float-left" title="musicaiz.converters.pretty_midi_note_to_musanalysis" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="models.html" class="btn btn-neutral float-right" title="Models" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Carlos Hernandez-Olivan.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

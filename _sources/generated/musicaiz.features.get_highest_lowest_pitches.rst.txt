@@ -1,0 +1,6 @@
+﻿musicaiz.features.get\_highest\_lowest\_pitches
+===============================================
+
+.. currentmodule:: musicaiz.features
+
+.. autofunction:: get_highest_lowest_pitches

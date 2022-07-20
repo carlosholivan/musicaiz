@@ -1,0 +1,23 @@
+﻿musicaiz.harmony.IntervalComplexity
+===================================
+
+.. currentmodule:: musicaiz.harmony
+
+.. autoclass:: IntervalComplexity
+
+   
+   .. automethod:: __init__
+
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~IntervalComplexity.SIMPLE
+      ~IntervalComplexity.COMPOUND
+   
+   

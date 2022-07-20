@@ -1,0 +1,28 @@
+﻿musicaiz.harmony.LocrianTriadDegrees
+====================================
+
+.. currentmodule:: musicaiz.harmony
+
+.. autoclass:: LocrianTriadDegrees
+
+   
+   .. automethod:: __init__
+
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~LocrianTriadDegrees.FIRST
+      ~LocrianTriadDegrees.SECOND
+      ~LocrianTriadDegrees.THIRD
+      ~LocrianTriadDegrees.FOURTH
+      ~LocrianTriadDegrees.FIFTH
+      ~LocrianTriadDegrees.SIXTH
+      ~LocrianTriadDegrees.SEVENTH
+   
+   

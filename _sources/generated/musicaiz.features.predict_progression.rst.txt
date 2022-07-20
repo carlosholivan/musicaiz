@@ -1,0 +1,6 @@
+﻿musicaiz.features.predict\_progression
+======================================
+
+.. currentmodule:: musicaiz.features
+
+.. autofunction:: predict_progression

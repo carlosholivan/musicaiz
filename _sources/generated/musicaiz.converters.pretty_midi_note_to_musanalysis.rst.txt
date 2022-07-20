@@ -1,0 +1,6 @@
+﻿musicaiz.converters.pretty\_midi\_note\_to\_musanalysis
+=======================================================
+
+.. currentmodule:: musicaiz.converters
+
+.. autofunction:: pretty_midi_note_to_musanalysis

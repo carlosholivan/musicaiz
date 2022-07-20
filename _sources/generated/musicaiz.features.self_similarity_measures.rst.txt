@@ -1,0 +1,6 @@
+﻿musicaiz.features.self\_similarity\_measures
+============================================
+
+.. currentmodule:: musicaiz.features
+
+.. autofunction:: self_similarity_measures

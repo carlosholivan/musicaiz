@@ -1,0 +1,28 @@
+﻿musicaiz.harmony.MajorTriadDegrees
+==================================
+
+.. currentmodule:: musicaiz.harmony
+
+.. autoclass:: MajorTriadDegrees
+
+   
+   .. automethod:: __init__
+
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~MajorTriadDegrees.FIRST
+      ~MajorTriadDegrees.SECOND
+      ~MajorTriadDegrees.THIRD
+      ~MajorTriadDegrees.FOURTH
+      ~MajorTriadDegrees.FIFTH
+      ~MajorTriadDegrees.SIXTH
+      ~MajorTriadDegrees.SEVENTH
+   
+   

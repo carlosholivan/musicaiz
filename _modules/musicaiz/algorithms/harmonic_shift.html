@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>musicaiz.algorithms.harmonic_shift &mdash; Musicaiz 0.0.2 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/plot_directive.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery-binder.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery-dataframe.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery-rendered-html.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/design-tabs.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #222222ff" >
+            <a href="../../../index.html">
+            <img src="../../../_static/logo_square_dark.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.0.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Musicaiz Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../loaders.html">Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../structure.html">Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../harmony.html">Harmony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rhythm.html">Rhythm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../algorithms.html">Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tokenizers.html">Tokenizers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../evaluation.html">Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../plotters.html">Plotters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../converters.html">Converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../datasets.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../models.html">Models</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/2-write_midi.html">Writing a MIDI file from scratch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/3-plot.html">Plotting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">References:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../implementations.html">Implementation Details</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../genindex.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #222222ff" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Musicaiz</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>musicaiz.algorithms.harmonic_shift</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for musicaiz.algorithms.harmonic_shift</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">pretty_midi</span> <span class="k">as</span> <span class="nn">pm</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Dict</span>
+
+
+<span class="kn">from</span> <span class="nn">musicaiz.harmony</span> <span class="kn">import</span> <span class="n">Tonality</span>
+<span class="kn">from</span> <span class="nn">musicaiz.structure</span> <span class="kn">import</span> <span class="n">NoteClassBase</span><span class="p">,</span> <span class="n">Note</span>
+<span class="kn">from</span> <span class="nn">musicaiz.converters</span> <span class="kn">import</span> <span class="n">pretty_midi_note_to_musanalysis</span>
+
+
+<div class="viewcode-block" id="harmonic_shifting"><a class="viewcode-back" href="../../../generated/musicaiz.algorithms.harmonic_shifting.html#musicaiz.algorithms.harmonic_shifting">[docs]</a><span class="k">def</span> <span class="nf">harmonic_shifting</span><span class="p">(</span>
+    <span class="n">origin_notes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Note</span><span class="p">],</span>
+    <span class="n">origin_progression</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
+    <span class="n">origin_tonality</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">origin_scale</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">target_progression</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
+    <span class="n">target_tonality</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">target_scale</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Note</span><span class="p">]:</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function maps the pitches of a midi to a new scale and chord progression.</span>
+<span class="sd">    To do that, given the progression of the input midi and the target scale and</span>
+<span class="sd">    progression, we analyze the note position in the chord built from a degree and</span>
+<span class="sd">    we map the pitch to the same position in the target degree chord.</span>
+<span class="sd">    Note that for using this function we should know in advance the degrees that</span>
+<span class="sd">    are contained in each bar, but we don&#39;t need to know where are the transitions</span>
+<span class="sd">    from a degree to another inside the bar.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    origin_notes: List[Note]</span>
+<span class="sd">        the original midi data.</span>
+
+<span class="sd">    origin_progression: List[List[str]]</span>
+<span class="sd">        the target degrees per bar.</span>
+
+<span class="sd">    origin_tonality: str</span>
+<span class="sd">        the origin tonality.</span>
+
+<span class="sd">    origin_scale: str</span>
+<span class="sd">        the origin scale.</span>
+
+<span class="sd">    target_progression: List[List[str]]</span>
+<span class="sd">        the target degrees per bar.</span>
+
+<span class="sd">    target_tonality: str</span>
+<span class="sd">        the target scale.</span>
+
+<span class="sd">    target_scale: str</span>
+<span class="sd">        the target scale.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    origin_notes: List[Note]</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    Example of 2 bars, 1st bar with 3 notes and 2nd bar with 1 note:</span>
+
+<span class="sd">    &gt;&gt;&gt; origin_notes = [  # each list corresponds to the notes in a bar</span>
+<span class="sd">    &gt;&gt;&gt;     [</span>
+<span class="sd">    &gt;&gt;&gt;         Note(pitch=43, start=0, end=96, velocity=82),</span>
+<span class="sd">    &gt;&gt;&gt;         Note(pitch=58, start=96, end=96*2, velocity=82),</span>
+<span class="sd">    &gt;&gt;&gt;         Note(pitch=60, start=96*2, end=96*3, velocity=82),</span>
+<span class="sd">    &gt;&gt;&gt;     ],</span>
+<span class="sd">    &gt;&gt;&gt;     [</span>
+<span class="sd">    &gt;&gt;&gt;         Note(pitch=72, start=96*4, end=96*5, velocity=44)</span>
+<span class="sd">    &gt;&gt;&gt;     ]</span>
+<span class="sd">    &gt;&gt;&gt; ]</span>
+<span class="sd">    &gt;&gt;&gt; origin_bars = [[&quot;II&quot;, &quot;IV&quot;], [&quot;VII&quot;]]</span>
+<span class="sd">    &gt;&gt;&gt; origin_tonality = &quot;G_MINOR&quot;</span>
+<span class="sd">    &gt;&gt;&gt; origin_scale = &quot;NATURAL&quot;</span>
+<span class="sd">    &gt;&gt;&gt; target_progression = [[&quot;I&quot;, &quot;V&quot;], [&quot;IV&quot;]]</span>
+<span class="sd">    &gt;&gt;&gt; target_tonality = &quot;C_MINOR&quot;</span>
+<span class="sd">    &gt;&gt;&gt; target_scale = &quot;NATURAL&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">for</span> <span class="n">bar_idx</span><span class="p">,</span> <span class="n">bar</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">origin_notes</span><span class="p">):</span>
+        <span class="n">note_idx</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="p">(</span><span class="n">orig_degree</span><span class="p">,</span> <span class="n">target_degree</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span>
+            <span class="nb">zip</span><span class="p">(</span><span class="n">origin_progression</span><span class="p">[</span><span class="n">bar_idx</span><span class="p">],</span> <span class="n">target_progression</span><span class="p">[</span><span class="n">bar_idx</span><span class="p">])</span>
+        <span class="p">):</span>
+            <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">bar</span><span class="p">[</span><span class="n">note_idx</span><span class="p">:]:</span>
+                <span class="n">new_pitch</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="c1"># CHECK IF NOTE IS IN THE DEGREE</span>
+                <span class="n">orig_pitch</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">pitch</span>
+                <span class="c1"># get the note name from pitch</span>
+                <span class="n">orig_note_name</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">note_number_to_name</span><span class="p">(</span><span class="n">orig_pitch</span><span class="p">)</span>
+                <span class="c1"># Extract octave</span>
+                <span class="n">octave</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">isdigit</span><span class="p">,</span> <span class="n">orig_note_name</span><span class="p">)))</span>
+                <span class="c1"># Get the note name without the octave</span>
+                <span class="n">orig_note_name</span> <span class="o">=</span> <span class="n">orig_note_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">octave</span><span class="p">),</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+                <span class="c1"># get notes from chord degree</span>
+                <span class="n">orig_note_names_str</span> <span class="o">=</span> <span class="n">_get_chord_note_names</span><span class="p">(</span>
+                    <span class="n">origin_tonality</span><span class="p">,</span> <span class="n">origin_scale</span><span class="p">,</span> <span class="n">orig_degree</span>
+                <span class="p">)</span>
+                <span class="c1"># Get the note position in the chord of the degree</span>
+                <span class="n">note_position</span> <span class="o">=</span> <span class="p">[</span>
+                    <span class="n">i</span>
+                    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">note</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">orig_note_names_str</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">note</span> <span class="o">==</span> <span class="n">orig_note_name</span>
+                <span class="p">]</span>
+
+                <span class="c1"># if no note has been matched with the chord, we&#39;ll check if there&#39;s other degree in the bar</span>
+                <span class="c1"># to see if the note can belong to the other degree. If the note does not belong to any</span>
+                <span class="c1"># degree chord in the bar, it&#39;s a passing note</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">note_position</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="c1"># check if note belongs to the next degree</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">origin_progression</span><span class="p">[</span><span class="n">bar_idx</span><span class="p">][</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span> <span class="p">:])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="n">next_degree_in_bar</span> <span class="o">=</span> <span class="n">origin_progression</span><span class="p">[</span><span class="n">bar_idx</span><span class="p">][</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+                        <span class="c1"># get notes from chord degree</span>
+                        <span class="n">orig_note_names_str</span> <span class="o">=</span> <span class="n">_get_chord_note_names</span><span class="p">(</span>
+                            <span class="n">origin_tonality</span><span class="p">,</span> <span class="n">origin_scale</span><span class="p">,</span> <span class="n">next_degree_in_bar</span>
+                        <span class="p">)</span>
+                        <span class="n">note_position</span> <span class="o">=</span> <span class="p">[</span>
+                            <span class="n">i</span>
+                            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">note</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">orig_note_names_str</span><span class="p">)</span>
+                            <span class="k">if</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">orig_note_name</span>
+                        <span class="p">]</span>
+                        <span class="c1"># if note is in the next degree break loop to go to next degree</span>
+                        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">note_position</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                            <span class="c1"># ==============NOTE IN NEXT DEGREE========</span>
+                            <span class="k">break</span>
+                        <span class="c1"># if note is not in the next degree we assume it&#39;s a passing note</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="c1"># ==============PASSING NOTE===============</span>
+                            <span class="n">target_pitch</span> <span class="o">=</span> <span class="n">_map_passing_note</span><span class="p">(</span>
+                                <span class="n">orig_pitch</span><span class="p">,</span>
+                                <span class="n">origin_tonality</span><span class="p">,</span>
+                                <span class="n">origin_scale</span><span class="p">,</span>
+                                <span class="n">orig_degree</span><span class="p">,</span>
+                                <span class="n">target_tonality</span><span class="p">,</span>
+                                <span class="n">target_scale</span><span class="p">,</span>
+                                <span class="n">target_degree</span><span class="p">,</span>
+                            <span class="p">)</span>
+                            <span class="k">if</span> <span class="n">orig_pitch</span> <span class="o">&lt;=</span> <span class="n">new_pitch</span><span class="p">:</span>
+                                <span class="n">note</span><span class="o">.</span><span class="n">pitch</span> <span class="o">=</span> <span class="n">target_pitch</span>
+                            <span class="k">else</span><span class="p">:</span>
+                                <span class="n">note</span><span class="o">.</span><span class="n">pitch</span> <span class="o">=</span> <span class="n">target_pitch</span> <span class="o">+</span> <span class="mi">12</span>
+
+                            <span class="c1"># we already wrote the note pitch so we&#39;ll go to the next one</span>
+                            <span class="n">note_idx</span> <span class="o">+=</span> <span class="mi">1</span>
+                            <span class="k">continue</span>
+                    <span class="c1"># if there aren&#39;t more degrees in the bar to check we assume it&#39;s a passing note</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="c1"># ==============PASSING NOTE===============</span>
+                        <span class="n">target_pitch</span> <span class="o">=</span> <span class="n">_map_passing_note</span><span class="p">(</span>
+                            <span class="n">orig_pitch</span><span class="p">,</span>
+                            <span class="n">origin_tonality</span><span class="p">,</span>
+                            <span class="n">origin_scale</span><span class="p">,</span>
+                            <span class="n">orig_degree</span><span class="p">,</span>
+                            <span class="n">target_tonality</span><span class="p">,</span>
+                            <span class="n">target_scale</span><span class="p">,</span>
+                            <span class="n">target_degree</span><span class="p">,</span>
+                        <span class="p">)</span>
+
+                        <span class="k">if</span> <span class="n">orig_pitch</span> <span class="o">&lt;=</span> <span class="n">new_pitch</span><span class="p">:</span>
+                            <span class="n">note</span><span class="o">.</span><span class="n">pitch</span> <span class="o">=</span> <span class="n">target_pitch</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">note</span><span class="o">.</span><span class="n">pitch</span> <span class="o">=</span> <span class="n">target_pitch</span> <span class="o">+</span> <span class="mi">12</span>
+
+                        <span class="c1"># we already wrote the note pitch so we&#39;ll go to the next one</span>
+                        <span class="n">note_idx</span> <span class="o">+=</span> <span class="mi">1</span>
+                        <span class="k">continue</span>
+
+                <span class="n">note_position</span> <span class="o">=</span> <span class="n">note_position</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">note_idx</span> <span class="o">+=</span> <span class="mi">1</span>
+
+                <span class="c1"># With this position, go to the destination degree and get the note</span>
+                <span class="n">dest_note_names_str</span> <span class="o">=</span> <span class="n">_get_chord_note_names</span><span class="p">(</span>
+                    <span class="n">target_tonality</span><span class="p">,</span> <span class="n">target_scale</span><span class="p">,</span> <span class="n">target_degree</span>
+                <span class="p">)</span>
+                <span class="n">new_note_name</span> <span class="o">=</span> <span class="n">dest_note_names_str</span><span class="p">[</span><span class="n">note_position</span><span class="p">]</span>
+                <span class="n">new_note</span> <span class="o">=</span> <span class="n">new_note_name</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">octave</span><span class="p">)</span>
+                <span class="c1"># convert note into pitch</span>
+                <span class="n">new_pitch</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">note_name_to_number</span><span class="p">(</span><span class="n">new_note</span><span class="p">)</span>
+                <span class="c1"># substitute the old pitch by the new one</span>
+                <span class="c1"># we sum an octave to the note if the original note is higher than the</span>
+                <span class="c1"># new mapped note to perserve the pitch contour of the dataset execution&#39;s id</span>
+                <span class="k">if</span> <span class="n">orig_pitch</span> <span class="o">&lt;=</span> <span class="n">new_pitch</span><span class="p">:</span>
+                    <span class="n">note</span><span class="o">.</span><span class="n">pitch</span> <span class="o">=</span> <span class="n">new_pitch</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">note</span><span class="o">.</span><span class="n">pitch</span> <span class="o">=</span> <span class="n">new_pitch</span> <span class="o">+</span> <span class="mi">12</span>
+
+    <span class="k">return</span> <span class="n">origin_notes</span></div>
+
+
+<span class="k">def</span> <span class="nf">_map_passing_note</span><span class="p">(</span>
+    <span class="n">origin_pitch</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">origin_tonality</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">origin_scale</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">origin_degree</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">target_tonality</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">target_scale</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">target_degree</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Map a passing note to a passing note in the new scale.</span>
+<span class="sd">    For doing that, we measure the semitones distance between the</span>
+<span class="sd">    note and the tonic of the 1st degree of the scale. Then, we take the</span>
+<span class="sd">    tonic of the 1st degree of the target scale and we sum those semitones to it</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># get the pitch of the tonic of the 1st degree</span>
+    <span class="n">orig_tonic_note_name_str</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">_get_chord_note_names</span><span class="p">(</span><span class="n">origin_tonality</span><span class="p">,</span> <span class="n">origin_scale</span><span class="p">,</span> <span class="n">origin_degree</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;1&quot;</span>
+    <span class="p">)</span>  <span class="c1"># octave=1 just to get the pitch of the scales&#39; tonic</span>
+    <span class="n">orig_tonic_pitch</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">note_name_to_number</span><span class="p">(</span><span class="n">orig_tonic_note_name_str</span><span class="p">)</span>
+
+    <span class="c1"># get the target tonic pitch</span>
+    <span class="n">target_tonic_note_name_str</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">_get_chord_note_names</span><span class="p">(</span><span class="n">target_tonality</span><span class="p">,</span> <span class="n">target_scale</span><span class="p">,</span> <span class="n">target_degree</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;1&quot;</span>
+    <span class="p">)</span>
+    <span class="n">target_tonic_pitch</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">note_name_to_number</span><span class="p">(</span><span class="n">target_tonic_note_name_str</span><span class="p">)</span>
+
+    <span class="n">diff_semitones</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">origin_pitch</span> <span class="o">-</span> <span class="n">orig_tonic_pitch</span><span class="p">)</span>
+    <span class="n">target_pitch</span> <span class="o">=</span> <span class="n">diff_semitones</span> <span class="o">+</span> <span class="n">target_tonic_pitch</span>
+
+    <span class="c1"># Check if target pitch corresponds to a note in the scale, if not,</span>
+    <span class="c1"># convert the note to the closest note in the scale</span>
+    <span class="n">target_name</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">note_number_to_name</span><span class="p">(</span><span class="n">target_pitch</span><span class="p">)</span>
+    <span class="n">target_name</span><span class="p">,</span> <span class="n">target_octave</span> <span class="o">=</span> <span class="n">pretty_midi_note_to_musanalysis</span><span class="p">(</span><span class="n">target_name</span><span class="p">)</span>
+
+    <span class="c1"># Get the notes in the scale</span>
+    <span class="n">all_degs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;I&quot;</span><span class="p">,</span> <span class="s2">&quot;II&quot;</span><span class="p">,</span> <span class="s2">&quot;III&quot;</span><span class="p">,</span> <span class="s2">&quot;IV&quot;</span><span class="p">,</span> <span class="s2">&quot;V&quot;</span><span class="p">,</span> <span class="s2">&quot;VI&quot;</span><span class="p">,</span> <span class="s2">&quot;VII&quot;</span><span class="p">]</span>
+    <span class="n">notes_target_tonality</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">all_degs</span><span class="p">:</span>
+        <span class="n">notes_target_tonality</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="n">Tonality</span><span class="o">.</span><span class="n">get_chord_from_degree</span><span class="p">(</span><span class="n">target_tonality</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">target_scale</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="p">)</span>
+    <span class="c1"># notes_target_tonality = harmony.Tonality[target_tonality].notes</span>
+    <span class="n">notes_target_tonality</span> <span class="o">=</span> <span class="p">[</span><span class="n">note</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">notes_target_tonality</span><span class="p">]</span>
+
+    <span class="c1"># get index in chromatic scale of the notes in the scale and the target note</span>
+    <span class="n">index_target_note</span> <span class="o">=</span> <span class="n">NoteClassBase</span><span class="p">[</span><span class="n">target_name</span><span class="p">]</span><span class="o">.</span><span class="n">chromatic_scale_index</span>
+    <span class="n">indexes_scale_notes</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">NoteClassBase</span><span class="p">[</span><span class="n">note</span><span class="p">]</span><span class="o">.</span><span class="n">chromatic_scale_index</span>
+        <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">notes_target_tonality</span>
+    <span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">index_target_note</span> <span class="ow">in</span> <span class="n">indexes_scale_notes</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">target_pitch</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># check the closest index of the note in the scale notes</span>
+        <span class="c1"># Correct the note by assuming the correct one is the min closest note to the target note</span>
+        <span class="n">index_target</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span>
+            <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">indexes_scale_notes</span><span class="p">)),</span>
+            <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="nb">abs</span><span class="p">(</span><span class="n">indexes_scale_notes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">index_target_note</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="c1"># assign the target note name to the selected index</span>
+        <span class="n">name_target</span> <span class="o">=</span> <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">_get_note_from_chromatic_idx</span><span class="p">(</span>
+            <span class="n">indexes_scale_notes</span><span class="p">[</span><span class="n">index_target</span><span class="p">]</span>
+        <span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span>
+        <span class="c1"># name_target to pretty midi nomenclature</span>
+        <span class="n">name_target</span> <span class="o">=</span> <span class="n">NoteClassBase</span><span class="p">[</span><span class="n">name_target</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">contracted</span>
+        <span class="c1"># convert the note name to the pitch with the octave</span>
+        <span class="n">target_pitch</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">note_name_to_number</span><span class="p">(</span><span class="n">name_target</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">target_octave</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">target_pitch</span>
+
+
+<span class="k">def</span> <span class="nf">_get_chord_note_names</span><span class="p">(</span><span class="n">tonality</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">scale</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">degree</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Get the note name of a chord built from a degree of a scale.&quot;&quot;&quot;</span>
+    <span class="n">chord_notes</span> <span class="o">=</span> <span class="n">Tonality</span><span class="o">.</span><span class="n">get_chord_notes_from_degree</span><span class="p">(</span>
+        <span class="n">tonality</span><span class="o">=</span><span class="n">tonality</span><span class="p">,</span>
+        <span class="n">degree</span><span class="o">=</span><span class="n">degree</span><span class="p">,</span>
+        <span class="n">scale</span><span class="o">=</span><span class="n">scale</span><span class="p">,</span>
+        <span class="n">chord_type</span><span class="o">=</span><span class="s2">&quot;triad&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">note_names_str</span> <span class="o">=</span> <span class="p">[</span><span class="n">note</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">contracted</span> <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">chord_notes</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">note_names_str</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Carlos Hernandez-Olivan.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

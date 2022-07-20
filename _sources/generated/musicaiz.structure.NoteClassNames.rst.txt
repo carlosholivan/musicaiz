@@ -1,0 +1,54 @@
+﻿musicaiz.structure.NoteClassNames
+=================================
+
+.. currentmodule:: musicaiz.structure
+
+.. autoclass:: NoteClassNames
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~NoteClassNames.get_all_names
+      ~NoteClassNames.check_note_name_exists
+      ~NoteClassNames.get_note_with_name
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~NoteClassNames.C
+      ~NoteClassNames.C_SHARP
+      ~NoteClassNames.C_FLAT
+      ~NoteClassNames.D
+      ~NoteClassNames.D_SHARP
+      ~NoteClassNames.D_FLAT
+      ~NoteClassNames.E
+      ~NoteClassNames.E_SHARP
+      ~NoteClassNames.E_FLAT
+      ~NoteClassNames.F
+      ~NoteClassNames.F_SHARP
+      ~NoteClassNames.F_FLAT
+      ~NoteClassNames.G
+      ~NoteClassNames.G_SHARP
+      ~NoteClassNames.G_FLAT
+      ~NoteClassNames.A
+      ~NoteClassNames.A_SHARP
+      ~NoteClassNames.A_FLAT
+      ~NoteClassNames.B
+      ~NoteClassNames.B_SHARP
+      ~NoteClassNames.B_FLAT
+      ~NoteClassNames.spanish_contracted
+      ~NoteClassNames.contracted
+      ~NoteClassNames.expanded
+      ~NoteClassNames.spanish_expanded
+   
+   

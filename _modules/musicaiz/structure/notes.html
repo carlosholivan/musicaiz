@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>musicaiz.structure.notes &mdash; Musicaiz 0.0.2 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/plot_directive.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery-binder.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery-dataframe.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery-rendered-html.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/design-tabs.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #222222ff" >
+            <a href="../../../index.html">
+            <img src="../../../_static/logo_square_dark.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.0.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Musicaiz Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../loaders.html">Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../structure.html">Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../harmony.html">Harmony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rhythm.html">Rhythm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../algorithms.html">Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tokenizers.html">Tokenizers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../evaluation.html">Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../plotters.html">Plotters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../converters.html">Converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../datasets.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../models.html">Models</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/2-write_midi.html">Writing a MIDI file from scratch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/3-plot.html">Plotting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">References:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../implementations.html">Implementation Details</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../genindex.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #222222ff" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Musicaiz</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>musicaiz.structure.notes</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for musicaiz.structure.notes</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+<span class="kn">import</span> <span class="nn">pretty_midi</span> <span class="k">as</span> <span class="nn">pm</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
+
+<span class="c1"># Our modules</span>
+<span class="kn">from</span> <span class="nn">musicaiz.rhythm</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">TimingConsts</span><span class="p">,</span>
+    <span class="n">ms_per_tick</span><span class="p">,</span>
+    <span class="n">get_symbolic_duration</span><span class="p">,</span>
+    <span class="n">SymbolicNoteLengths</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="AccidentalsNames"><a class="viewcode-back" href="../../../generated/musicaiz.structure.AccidentalsNames.html#musicaiz.structure.AccidentalsNames">[docs]</a><span class="k">class</span> <span class="nc">AccidentalsNames</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">SHARP</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;#&quot;</span><span class="p">,</span> <span class="s2">&quot;sharp&quot;</span><span class="p">,</span> <span class="s2">&quot;sostenido&quot;</span><span class="p">]</span>
+    <span class="n">FLAT</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;flat&quot;</span><span class="p">,</span> <span class="s2">&quot;bemol&quot;</span><span class="p">]</span>
+    <span class="n">NATURAL</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;♮&quot;</span><span class="p">,</span> <span class="s2">&quot;natural&quot;</span><span class="p">,</span> <span class="s2">&quot;becuadro&quot;</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">contracted</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">expanded</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">spanish</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span></div>
+
+
+<span class="c1"># TODO: This might be necessary in future methods/classes</span>
+<div class="viewcode-block" id="AccidentalsValues"><a class="viewcode-back" href="../../../generated/musicaiz.structure.AccidentalsValues.html#musicaiz.structure.AccidentalsValues">[docs]</a><span class="k">class</span> <span class="nc">AccidentalsValues</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;The number of semitones that are added to a note if</span>
+<span class="sd">    the accidental is present.</span>
+<span class="sd">    Note that the `natural` accidental will cancel the effect of other accidental</span>
+<span class="sd">    but only one (if the note has 2 sharps, the `natural` will only</span>
+<span class="sd">    cancel the effect of one sharp).&quot;&quot;&quot;</span>
+    <span class="n">SHARP</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">FLAT</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="n">NATURAL</span> <span class="o">=</span> <span class="mi">0</span></div>
+
+
+<span class="k">class</span> <span class="nc">NotesMidiOctaves</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">MIN_OCTAVE</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="n">MAX_OCTAVE</span> <span class="o">=</span> <span class="mi">9</span>
+
+
+<div class="viewcode-block" id="NoteClassNames"><a class="viewcode-back" href="../../../generated/musicaiz.structure.NoteClassNames.html#musicaiz.structure.NoteClassNames">[docs]</a><span class="k">class</span> <span class="nc">NoteClassNames</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class contains all the possible notes with their names</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; NoteClassNames.check_note_name_exists(&quot;C&quot;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">C</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;Do&quot;</span><span class="p">]</span>
+    <span class="n">C_SHARP</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;C#&quot;</span><span class="p">,</span> <span class="s2">&quot;Do #&quot;</span><span class="p">,</span> <span class="s2">&quot;C sharp&quot;</span><span class="p">,</span> <span class="s2">&quot;Do sostenido&quot;</span><span class="p">]</span>
+    <span class="n">C_FLAT</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Cb&quot;</span><span class="p">,</span> <span class="s2">&quot;Do b&quot;</span><span class="p">,</span> <span class="s2">&quot;C flat&quot;</span><span class="p">,</span> <span class="s2">&quot;Do bemol&quot;</span><span class="p">]</span>
+    <span class="n">D</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="s2">&quot;Re&quot;</span><span class="p">]</span>
+    <span class="n">D_SHARP</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;D#&quot;</span><span class="p">,</span> <span class="s2">&quot;Re #&quot;</span><span class="p">,</span> <span class="s2">&quot;D sharp&quot;</span><span class="p">,</span> <span class="s2">&quot;Re sostenido&quot;</span><span class="p">]</span>
+    <span class="n">D_FLAT</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Db&quot;</span><span class="p">,</span> <span class="s2">&quot;Re b&quot;</span><span class="p">,</span> <span class="s2">&quot;D flat&quot;</span><span class="p">,</span> <span class="s2">&quot;Re bemol&quot;</span><span class="p">]</span>
+    <span class="n">E</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="s2">&quot;Mi&quot;</span><span class="p">]</span>
+    <span class="n">E_SHARP</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;E#&quot;</span><span class="p">,</span> <span class="s2">&quot;Mi #&quot;</span><span class="p">,</span> <span class="s2">&quot;E sharp&quot;</span><span class="p">,</span> <span class="s2">&quot;Mi sostenido&quot;</span><span class="p">]</span>
+    <span class="n">E_FLAT</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Eb&quot;</span><span class="p">,</span> <span class="s2">&quot;Mi b&quot;</span><span class="p">,</span> <span class="s2">&quot;E flat&quot;</span><span class="p">,</span> <span class="s2">&quot;Mi bemol&quot;</span><span class="p">]</span>
+    <span class="n">F</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;F&quot;</span><span class="p">,</span> <span class="s2">&quot;Fa&quot;</span><span class="p">]</span>
+    <span class="n">F_SHARP</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;F#&quot;</span><span class="p">,</span> <span class="s2">&quot;Fa #&quot;</span><span class="p">,</span> <span class="s2">&quot;F sharp&quot;</span><span class="p">,</span> <span class="s2">&quot;Fa sostenido&quot;</span><span class="p">]</span>
+    <span class="n">F_FLAT</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Fb&quot;</span><span class="p">,</span> <span class="s2">&quot;Fa b&quot;</span><span class="p">,</span> <span class="s2">&quot;F flat&quot;</span><span class="p">,</span> <span class="s2">&quot;Fa bemol&quot;</span><span class="p">]</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;G&quot;</span><span class="p">,</span> <span class="s2">&quot;Sol&quot;</span><span class="p">]</span>
+    <span class="n">G_SHARP</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;G#&quot;</span><span class="p">,</span> <span class="s2">&quot;Sol #&quot;</span><span class="p">,</span> <span class="s2">&quot;G sharp&quot;</span><span class="p">,</span> <span class="s2">&quot;Sol sostenido&quot;</span><span class="p">]</span>
+    <span class="n">G_FLAT</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Gb&quot;</span><span class="p">,</span> <span class="s2">&quot;Sol b&quot;</span><span class="p">,</span> <span class="s2">&quot;G flat&quot;</span><span class="p">,</span> <span class="s2">&quot;Sol bemol&quot;</span><span class="p">]</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;La&quot;</span><span class="p">]</span>
+    <span class="n">A_SHARP</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;A#&quot;</span><span class="p">,</span> <span class="s2">&quot;La #&quot;</span><span class="p">,</span> <span class="s2">&quot;A sharp&quot;</span><span class="p">,</span> <span class="s2">&quot;La sostenido&quot;</span><span class="p">]</span>
+    <span class="n">A_FLAT</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Ab&quot;</span><span class="p">,</span> <span class="s2">&quot;La b&quot;</span><span class="p">,</span> <span class="s2">&quot;A flat&quot;</span><span class="p">,</span> <span class="s2">&quot;La bemol&quot;</span><span class="p">]</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;Si&quot;</span><span class="p">]</span>
+    <span class="n">B_SHARP</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;B#&quot;</span><span class="p">,</span> <span class="s2">&quot;Si #&quot;</span><span class="p">,</span> <span class="s2">&quot;B sharp&quot;</span><span class="p">,</span> <span class="s2">&quot;Si sostenido&quot;</span><span class="p">]</span>
+    <span class="n">B_FLAT</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Bb&quot;</span><span class="p">,</span> <span class="s2">&quot;Si b&quot;</span><span class="p">,</span> <span class="s2">&quot;B flat&quot;</span><span class="p">,</span> <span class="s2">&quot;Si bemol&quot;</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">spanish_contracted</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">contracted</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">expanded</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">spanish_expanded</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_all_names</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="n">all_notes</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__members__</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">note</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
+                <span class="n">all_notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">all_notes</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">check_note_name_exists</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="n">all_notes</span> <span class="o">=</span> <span class="n">NoteClassNames</span><span class="o">.</span><span class="n">get_all_names</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">all_notes</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_note_with_name</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">note_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NoteClassNames</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__members__</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">note</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">note_name</span> <span class="o">==</span> <span class="n">n</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">note</span></div>
+
+
+<div class="viewcode-block" id="NoteClassBase"><a class="viewcode-back" href="../../../generated/musicaiz.structure.NoteClassBase.html#musicaiz.structure.NoteClassBase">[docs]</a><span class="k">class</span> <span class="nc">NoteClassBase</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The Tuples have 3 values:</span>
+<span class="sd">        Value 1: the most common and abbreviate note name</span>
+<span class="sd">        Value 2: index of note in natural scale (no accidentals)</span>
+<span class="sd">            This index is the one that we&#39;ll use to calculate the interval class (2nd, 3rd...)</span>
+<span class="sd">        Value 3: index of the note in chromatic scale</span>
+<span class="sd">            This value will give us the distance in semitones between 2 notes.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">C</span> <span class="o">=</span> <span class="p">(</span><span class="n">NoteClassNames</span><span class="o">.</span><span class="n">C</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">B_SHARP</span> <span class="o">=</span> <span class="p">(</span><span class="n">NoteClassNames</span><span class="o">.</span><span class="n">B_SHARP</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">C_SHARP</span> <span class="o">=</span> <span class="p">(</span><span class="n">NoteClassNames</span><span class="o">.</span><span class="n">C_SHARP</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">D_FLAT</span> <span class="o">=</span> <span class="p">(</span><span class="n">NoteClassNames</span><span class="o">.</span><span class="n">D_FLAT</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">D</span> <span class="o">=</span> <span class="p">(</span><span class="n">NoteClassNames</span><span class="o">.</span><span class="n">D</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">D_SHARP</span> <span class="o">=</span> <span class="p">(</span><span class="n">NoteClassNames</span><span class="o">.</span><span class="n">D_SHARP</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="n">E_FLAT</span> <span class="o">=</span> <span class="p">(</span><span class="n">NoteClassNames</span><span class="o">.</span><span class="n">E_FLAT</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="n">E</span> <span class="o">=</span> <span class="p">(</span><span class="n">NoteClassNames</span><span class="o">.</span><span class="n">E</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+    <span class="n">F_FLAT</span> <span class="o">=</span> <span class="p">(</span><span class="n">NoteClassNames</span><span class="o">.</span><span class="n">F_FLAT</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+    <span class="n">E_SHARP</span> <span class="o">=</span> <span class="p">(</span><span class="n">NoteClassNames</span><span class="o">.</span><span class="n">E_SHARP</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+    <span class="n">F</span> <span class="o">=</span> <span class="p">(</span><span class="n">NoteClassNames</span><span class="o">.</span><span class="n">F</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+    <span class="n">F_SHARP</span> <span class="o">=</span> <span class="p">(</span><span class="n">NoteClassNames</span><span class="o">.</span><span class="n">F_SHARP</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+    <span class="n">G_FLAT</span> <span class="o">=</span> <span class="p">(</span><span class="n">NoteClassNames</span><span class="o">.</span><span class="n">G_FLAT</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="p">(</span><span class="n">NoteClassNames</span><span class="o">.</span><span class="n">G</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+    <span class="n">G_SHARP</span> <span class="o">=</span> <span class="p">(</span><span class="n">NoteClassNames</span><span class="o">.</span><span class="n">G_SHARP</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+    <span class="n">A_FLAT</span> <span class="o">=</span> <span class="p">(</span><span class="n">NoteClassNames</span><span class="o">.</span><span class="n">A_FLAT</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="p">(</span><span class="n">NoteClassNames</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+    <span class="n">A_SHARP</span> <span class="o">=</span> <span class="p">(</span><span class="n">NoteClassNames</span><span class="o">.</span><span class="n">A_SHARP</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="n">B_FLAT</span> <span class="o">=</span> <span class="p">(</span><span class="n">NoteClassNames</span><span class="o">.</span><span class="n">B_FLAT</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="p">(</span><span class="n">NoteClassNames</span><span class="o">.</span><span class="n">B</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
+    <span class="n">C_FLAT</span> <span class="o">=</span> <span class="p">(</span><span class="n">NoteClassNames</span><span class="o">.</span><span class="n">C_FLAT</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;&lt;</span><span class="si">%s</span><span class="s2">.</span><span class="si">%s</span><span class="s2">&gt;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">natural_scale_index</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">chromatic_scale_index</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">add_sharp</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NoteClassBase</span><span class="p">:</span>
+        <span class="n">new_semitones</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">AccidentalsValues</span><span class="o">.</span><span class="n">SHARP</span><span class="o">.</span><span class="n">value</span>
+        <span class="k">return</span> <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">_get_note_from_chromatic_idx</span><span class="p">(</span><span class="n">new_semitones</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">add_flat</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NoteClassNames</span><span class="p">:</span>
+        <span class="n">new_semitones</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">AccidentalsValues</span><span class="o">.</span><span class="n">SHARP</span><span class="o">.</span><span class="n">value</span>
+        <span class="k">return</span> <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">_get_note_from_chromatic_idx</span><span class="p">(</span><span class="n">new_semitones</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_natural_note</span><span class="p">(</span><span class="n">note</span><span class="p">:</span> <span class="n">NoteClassBase</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NoteClassNames</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Returns the natural note corresponding to an altered note.&quot;&quot;&quot;</span>
+        <span class="c1"># if note name has _ it&#39;s an altered note</span>
+        <span class="k">if</span> <span class="s2">&quot;_&quot;</span> <span class="ow">in</span> <span class="n">note</span><span class="o">.</span><span class="n">name</span><span class="p">:</span>
+            <span class="n">natural_note_name</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">NoteClassBase</span><span class="p">[</span><span class="n">natural_note_name</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">note</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_get_note_from_chromatic_idx</span><span class="p">(</span><span class="n">semitones</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NoteClassNames</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Look for the note idx in the chromatic scale&quot;&quot;&quot;</span>
+        <span class="n">notes</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">semitones</span> <span class="o">=</span> <span class="n">semitones</span> <span class="o">%</span> <span class="mi">12</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">__members__</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">semitones</span><span class="p">:</span>
+                <span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">notes</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">all_chromatic_scale_indexes</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">note</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">NoteClassBase</span><span class="p">]</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">all_natural_scale_indexes</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">note</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">NoteClassBase</span><span class="p">]</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_note_with_name</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">note_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NoteClassBase</span><span class="p">:</span>
+        <span class="n">note_class</span> <span class="o">=</span> <span class="n">NoteClassNames</span><span class="o">.</span><span class="n">get_note_with_name</span><span class="p">(</span><span class="n">note_name</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__members__</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">note_class</span> <span class="o">==</span> <span class="n">note</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                <span class="k">return</span> <span class="n">note</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_natural_scale_notes</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">NoteClassBase</span><span class="p">]:</span>
+        <span class="n">notes</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__members__</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">cls</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">note</span><span class="p">)]</span><span class="o">.</span><span class="n">natural_scale_index</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">cls</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">note</span><span class="p">)])</span>
+        <span class="k">return</span> <span class="n">notes</span>
+    
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_all_chromatic_scale_notes</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">NoteClassBase</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Returns all the notes in chromatic scale (flats AND sharps).&quot;&quot;&quot;</span>
+        <span class="n">notes</span> <span class="o">=</span> <span class="p">[</span><span class="bp">cls</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">note</span><span class="p">)]</span> <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__members__</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">notes</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_notes_chromatic_scale</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">alteration</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;FLAT&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">NoteClassBase</span><span class="p">]:</span>
+        <span class="n">notes</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">get_all_chromatic_scale_notes</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">alteration</span> <span class="o">==</span> <span class="s2">&quot;FLAT&quot;</span><span class="p">:</span>
+            <span class="n">contrary_alt</span> <span class="o">=</span> <span class="s2">&quot;SHARP&quot;</span>
+        <span class="k">elif</span> <span class="n">alteration</span> <span class="o">==</span> <span class="s2">&quot;SHARP&quot;</span><span class="p">:</span>
+            <span class="n">contrary_alt</span> <span class="o">=</span> <span class="s2">&quot;FLAT&quot;</span>
+
+        <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">get_all_chromatic_scale_notes</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">alteration</span> <span class="o">==</span> <span class="s2">&quot;SHARP&quot;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">alteration</span> <span class="ow">in</span> <span class="n">note</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="s2">&quot;B_&quot;</span> <span class="ow">in</span> <span class="n">note</span><span class="o">.</span><span class="n">name</span> <span class="ow">or</span> <span class="s2">&quot;E_&quot;</span> <span class="ow">in</span> <span class="n">note</span><span class="o">.</span><span class="n">name</span><span class="p">):</span>
+                    <span class="n">notes</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">alteration</span> <span class="o">==</span> <span class="s2">&quot;FLAT&quot;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">alteration</span> <span class="ow">in</span> <span class="n">note</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="s2">&quot;F_&quot;</span> <span class="ow">in</span> <span class="n">note</span><span class="o">.</span><span class="n">name</span> <span class="ow">or</span> <span class="s2">&quot;C_&quot;</span> <span class="ow">in</span> <span class="n">note</span><span class="o">.</span><span class="n">name</span><span class="p">):</span>
+                    <span class="n">notes</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">contrary_alt</span> <span class="ow">in</span> <span class="n">note</span><span class="o">.</span><span class="n">name</span><span class="p">:</span>
+                <span class="n">notes</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">notes</span></div>
+
+
+<div class="viewcode-block" id="NoteValue"><a class="viewcode-back" href="../../../generated/musicaiz.structure.NoteValue.html#musicaiz.structure.NoteValue">[docs]</a><span class="k">class</span> <span class="nc">NoteValue</span><span class="p">:</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class allows to instantiate a note object by just giving the pitch</span>
+<span class="sd">    value or the name of the note in the MIDI format.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        if the input pitch value is out of the range 0-127 (MIDI format).</span>
+
+<span class="sd">    ValueError</span>
+<span class="sd">        if the input note name does not exists in the MIDI format.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+
+<span class="sd">    &gt;&gt;&gt; note_1 = musanalysis.NoteValue(&quot;C4&quot;)</span>
+<span class="sd">    &gt;&gt;&gt; note_2 = musanalysis.NoteValue(120)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="NoteValue.__init__"><a class="viewcode-back" href="../../../generated/musicaiz.structure.NoteValue.html#musicaiz.structure.NoteValue.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pitch</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]):</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pitch</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pitch_value_in_range</span><span class="p">(</span><span class="n">pitch</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">pitch_name</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">note_number_to_name</span><span class="p">(</span><span class="n">pitch</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">pitch</span> <span class="o">=</span> <span class="n">pitch</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">note_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">octave</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">split_pitch_name</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pitch_name</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">note</span> <span class="o">=</span> <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">get_note_with_name</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">note_name</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Introduced pitch value </span><span class="si">{</span><span class="n">pitch</span><span class="si">}</span><span class="s2"> is not valid.&quot;</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pitch</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># Get octave and pitch name</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">note_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">octave</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">split_pitch_name</span><span class="p">(</span><span class="n">pitch</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Introduced note </span><span class="si">{</span><span class="n">pitch</span><span class="si">}</span><span class="s2"> is not in a valid format.&quot;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">NotesMidiOctaves</span><span class="o">.</span><span class="n">MIN_OCTAVE</span><span class="o">.</span><span class="n">value</span> <span class="o">&lt;=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">octave</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">NotesMidiOctaves</span><span class="o">.</span><span class="n">MAX_OCTAVE</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
+                <span class="c1"># the pitch name is in the midi range (ex: `C#50` does not exist)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">pitch</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">note_name_to_number</span><span class="p">(</span><span class="n">pitch</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">pitch_name</span> <span class="o">=</span> <span class="n">pitch</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">note_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">octave</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">split_pitch_name</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pitch_name</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">note</span> <span class="o">=</span> <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">get_note_with_name</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">note_name</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Note octave is not in a valid MIDI range.&quot;</span><span class="p">)</span>
+
+        <span class="n">chromatic_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">note</span><span class="o">.</span><span class="n">chromatic_scale_index</span>
+        <span class="n">note_enharmonics</span> <span class="o">=</span> <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">_get_note_from_chromatic_idx</span><span class="p">(</span><span class="n">chromatic_index</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">note_enharmonics</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">enharmonic</span> <span class="o">=</span> <span class="n">note_enharmonics</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">enharmonic</span> <span class="o">=</span> <span class="p">[</span><span class="n">note</span> <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">note_enharmonics</span> <span class="k">if</span> <span class="n">note</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">note</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span></div>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">split_pitch_name</span><span class="p">(</span><span class="n">pitch_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Splits a note name (`C#1` or `Cb-1`...) into a note name (`C` or `Cb` ...)</span>
+<span class="sd">        and the octave (`1` or `1` ...)&quot;&quot;&quot;</span>
+
+        <span class="n">note</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;([A-Za-z#]+)&#39;</span><span class="p">,</span> <span class="n">pitch_name</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span><span class="p">]</span>
+        <span class="n">note_name</span> <span class="o">=</span> <span class="n">note</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">octave</span> <span class="o">=</span> <span class="n">note</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">note_name</span><span class="p">,</span> <span class="n">octave</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">split_note_name</span><span class="p">(</span><span class="n">note_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Splits a note name (`C#` or `Cb`...) into a note name (`C`)</span>
+<span class="sd">        and the accidental (`#` or `b` ...)&quot;&quot;&quot;</span>
+
+        <span class="n">note</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;([A-Z]+)&#39;</span><span class="p">,</span> <span class="n">note_name</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span><span class="p">]</span>
+        <span class="n">note_natural</span> <span class="o">=</span> <span class="n">note</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">accidental</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">note</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">accidental</span> <span class="o">=</span> <span class="n">note</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">note_natural</span><span class="p">,</span> <span class="n">accidental</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">pitch_value_in_range</span><span class="p">(</span><span class="n">pitch_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">pitch_value</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">pitch_value</span> <span class="o">&lt;=</span> <span class="mi">127</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;Note(pitch=</span><span class="si">{}</span><span class="s2">, name=</span><span class="si">{}</span><span class="s2">, octave=</span><span class="si">{}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pitch</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">note_name</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">octave</span>
+        <span class="p">)</span></div>
+
+
+<span class="c1"># TODO: Maybe here instead of passing int for ticks or float for sec which can be tricky,</span>
+<span class="c1"># we should write an additional arg called `unit` = &quot;secs&quot; or &quot;ticks&quot; so then</span>
+<span class="c1"># and then initialize the note just passing start and end and being the time</span>
+<span class="c1"># unit the one specified in `unit` argument. (Then, check that ticks are int and</span>
+<span class="c1"># secs are float will always be mandatory).</span>
+<div class="viewcode-block" id="NoteTiming"><a class="viewcode-back" href="../../../generated/musicaiz.structure.NoteTiming.html#musicaiz.structure.NoteTiming">[docs]</a><span class="k">class</span> <span class="nc">NoteTiming</span><span class="p">(</span><span class="n">NoteValue</span><span class="p">):</span>
+
+<div class="viewcode-block" id="NoteTiming.__init__"><a class="viewcode-back" href="../../../generated/musicaiz.structure.NoteTiming.html#musicaiz.structure.NoteTiming.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">pitch</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
+        <span class="n">start</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+        <span class="n">end</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+        <span class="n">bpm</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">TimingConsts</span><span class="o">.</span><span class="n">DEFAULT_BPM</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+        <span class="n">resolution</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">TimingConsts</span><span class="o">.</span><span class="n">RESOLUTION</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+    <span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Attributes</span>
+<span class="sd">        ----------</span>
+<span class="sd">        pitch: int</span>
+
+<span class="sd">        start: Union[str, int]</span>
+<span class="sd">            the note on. If the input argument is an int we consider</span>
+<span class="sd">            that the value correspond to ticks unit, and if the</span>
+<span class="sd">            argument is a float we assume the value corresponds to seconds.</span>
+
+<span class="sd">        end: Union[int, float]</span>
+<span class="sd">            the note off. If the input argument is an int we consider</span>
+<span class="sd">            that the value correspond to ticks unit, and if the</span>
+<span class="sd">            argument is a float we assume the value corresponds to seconds.</span>
+
+<span class="sd">        delta_time: int</span>
+<span class="sd">            the note duration in 16th notes.</span>
+
+<span class="sd">        bpm: int</span>
+<span class="sd">        the tempo or bpms.</span>
+
+<span class="sd">        resolution: int</span>
+<span class="sd">            the pulses o ticks per quarter note (PPQ or TPQN).</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ValueError: [description]</span>
+<span class="sd">            ValueError: [description]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># TODO: What if we include `delta_time` as an input arg, and if it&#39;s not None</span>
+        <span class="c1"># we calculate the start_sec, end_sec, start_tick and end_ticks automatically?</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">pitch</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">ms_tick</span> <span class="o">=</span> <span class="n">ms_per_tick</span><span class="p">(</span><span class="n">bpm</span><span class="p">,</span> <span class="n">resolution</span><span class="p">)</span>
+
+        <span class="c1"># inital checks</span>
+        <span class="k">if</span> <span class="n">start</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">end</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Start and end must be positive.&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">start</span> <span class="o">&gt;=</span> <span class="n">end</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Start time must be lower than the end time.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># ticks must be int, secs must be float</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">end</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">start_ticks</span> <span class="o">=</span> <span class="n">start</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">end_ticks</span> <span class="o">=</span> <span class="n">end</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">start_sec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_ticks</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">ms_tick</span> <span class="o">/</span> <span class="mi">1000</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">end_sec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">end_ticks</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">ms_tick</span> <span class="o">/</span> <span class="mi">1000</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">end</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">start_sec</span> <span class="o">=</span> <span class="n">start</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">end_sec</span> <span class="o">=</span> <span class="n">end</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">start_ticks</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">start_sec</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ms_tick</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">)))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">end_ticks</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">end_sec</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ms_tick</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">)))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">symbolic</span> <span class="o">=</span> <span class="n">get_symbolic_duration</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">end_ticks</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_ticks</span><span class="p">,</span>
+            <span class="kc">True</span>
+        <span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;Note(pitch=</span><span class="si">{}</span><span class="s2">, &quot;</span> \
+               <span class="s2">&quot;name=</span><span class="si">{}</span><span class="s2">, &quot;</span> \
+               <span class="s2">&quot;start_sec=</span><span class="si">{}</span><span class="s2">, &quot;</span> \
+               <span class="s2">&quot;end_sec=</span><span class="si">{}</span><span class="s2">, &quot;</span> \
+               <span class="s2">&quot;start_ticks=</span><span class="si">{}</span><span class="s2">, &quot;</span> \
+               <span class="s2">&quot;end_ticks=</span><span class="si">{}</span><span class="s2">, &quot;</span> \
+               <span class="s2">&quot;symbolic=</span><span class="si">{}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                   <span class="bp">self</span><span class="o">.</span><span class="n">pitch</span><span class="p">,</span>
+                   <span class="bp">self</span><span class="o">.</span><span class="n">note_name</span><span class="p">,</span>
+                   <span class="bp">self</span><span class="o">.</span><span class="n">start_sec</span><span class="p">,</span>
+                   <span class="bp">self</span><span class="o">.</span><span class="n">end_sec</span><span class="p">,</span>
+                   <span class="bp">self</span><span class="o">.</span><span class="n">start_ticks</span><span class="p">,</span>
+                   <span class="bp">self</span><span class="o">.</span><span class="n">end_ticks</span><span class="p">,</span>
+                   <span class="n">SymbolicNoteLengths</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">symbolic</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Note"><a class="viewcode-back" href="../../../generated/musicaiz.structure.Note.html#musicaiz.structure.Note">[docs]</a><span class="k">class</span> <span class="nc">Note</span><span class="p">(</span><span class="n">NoteTiming</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;A note even with its relevant attributes.</span>
+
+<span class="sd">    Initializing:</span>
+
+<span class="sd">    - Time: A note can be initialized in seconds with the note start `note_on` and</span>
+<span class="sd">            note end `note_off` attributes or in ticks with `start_ticks` and</span>
+<span class="sd">            `duration_ticks`.</span>
+
+<span class="sd">            If note on, note off, start_icks and end_ticks are given, the object will</span>
+<span class="sd">            be initialized with the `note_on` and `note_off` values ignoring the</span>
+<span class="sd">            `start_ticks` and ènd_ticks` input values.</span>
+
+<span class="sd">    - Pitch: A note can be initialized by giving the name of the pitch: `C0`...or by</span>
+<span class="sd">            giving the pitch value: 12...</span>
+
+<span class="sd">            If the pitch value is provided, the note name is ignored if it is also provided.</span>
+<span class="sd">            This is done for preventing non valid pitch name and values pairs.</span>
+
+<span class="sd">    Params:</span>
+<span class="sd">        pitch: [description]</span>
+<span class="sd">        note_on: [description]</span>
+<span class="sd">        note_off: [description]</span>
+<span class="sd">        velocity: [description]</span>
+<span class="sd">        start_ticks: [description]</span>
+<span class="sd">        duration_ticks: [description]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;note&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;pitch&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;pitch_name&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;note_name&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;octave&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;enharmonic&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;start_sec&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;end_sec&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;start_ticks&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;end_ticks&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;symbolic&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;velocity&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;bpm&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;resolution&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;ligated&quot;</span>
+    <span class="p">]</span>
+
+<div class="viewcode-block" id="Note.__init__"><a class="viewcode-back" href="../../../generated/musicaiz.structure.Note.html#musicaiz.structure.Note.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">pitch</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
+        <span class="n">start</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+        <span class="n">end</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+        <span class="n">velocity</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">ligated</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">bpm</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">TimingConsts</span><span class="o">.</span><span class="n">DEFAULT_BPM</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+        <span class="n">resolution</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">TimingConsts</span><span class="o">.</span><span class="n">RESOLUTION</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+    <span class="p">):</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">pitch</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">bpm</span><span class="p">,</span> <span class="n">resolution</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">velocity</span> <span class="o">=</span> <span class="n">velocity</span>
+
+        <span class="c1"># if a note belongs to 2 bars and we split the tracks by bars</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ligated</span> <span class="o">=</span> <span class="n">ligated</span></div>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;Note(pitch=</span><span class="si">{}</span><span class="s2">, &quot;</span> \
+               <span class="s2">&quot;name=</span><span class="si">{}</span><span class="s2">, &quot;</span> \
+               <span class="s2">&quot;start_sec=</span><span class="si">{:f}</span><span class="s2">, &quot;</span> \
+               <span class="s2">&quot;end_sec=</span><span class="si">{:f}</span><span class="s2">, &quot;</span> \
+               <span class="s2">&quot;start_ticks=</span><span class="si">{}</span><span class="s2">, &quot;</span> \
+               <span class="s2">&quot;end_ticks=</span><span class="si">{}</span><span class="s2">, &quot;</span> \
+               <span class="s2">&quot;symbolic=</span><span class="si">{}</span><span class="s2">, &quot;</span> \
+               <span class="s2">&quot;velocity=</span><span class="si">{}</span><span class="s2">, &quot;</span> \
+               <span class="s2">&quot;ligated=</span><span class="si">{}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                   <span class="bp">self</span><span class="o">.</span><span class="n">pitch</span><span class="p">,</span>
+                   <span class="bp">self</span><span class="o">.</span><span class="n">note_name</span><span class="p">,</span>
+                   <span class="bp">self</span><span class="o">.</span><span class="n">start_sec</span><span class="p">,</span>
+                   <span class="bp">self</span><span class="o">.</span><span class="n">end_sec</span><span class="p">,</span>
+                   <span class="bp">self</span><span class="o">.</span><span class="n">start_ticks</span><span class="p">,</span>
+                   <span class="bp">self</span><span class="o">.</span><span class="n">end_ticks</span><span class="p">,</span>
+                   <span class="n">SymbolicNoteLengths</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">symbolic</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+                   <span class="bp">self</span><span class="o">.</span><span class="n">velocity</span><span class="p">,</span>
+                   <span class="bp">self</span><span class="o">.</span><span class="n">ligated</span>
+                <span class="p">)</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Carlos Hernandez-Olivan.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

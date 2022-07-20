@@ -1,0 +1,25 @@
+﻿musicaiz.rhythm.TimingConsts
+============================
+
+.. currentmodule:: musicaiz.rhythm
+
+.. autoclass:: TimingConsts
+
+   
+   .. automethod:: __init__
+
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~TimingConsts.RESOLUTION
+      ~TimingConsts.TICKS_PER_SEC
+      ~TimingConsts.DEFAULT_BPM
+      ~TimingConsts.DEFAULT_TIME_SIGNATURE
+   
+   

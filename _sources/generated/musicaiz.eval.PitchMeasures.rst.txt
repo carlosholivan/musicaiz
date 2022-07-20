@@ -1,0 +1,26 @@
+﻿musicaiz.eval.PitchMeasures
+===========================
+
+.. currentmodule:: musicaiz.eval
+
+.. autoclass:: PitchMeasures
+
+   
+   .. automethod:: __init__
+
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~PitchMeasures.PC
+      ~PitchMeasures.PCH
+      ~PitchMeasures.PR
+      ~PitchMeasures.PCTM
+      ~PitchMeasures.PI
+   
+   

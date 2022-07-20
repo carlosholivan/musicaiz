@@ -1,0 +1,6 @@
+﻿musicaiz.features.\_order\_note\_seq\_by\_chromatic\_idx
+========================================================
+
+.. currentmodule:: musicaiz.features
+
+.. autofunction:: _order_note_seq_by_chromatic_idx

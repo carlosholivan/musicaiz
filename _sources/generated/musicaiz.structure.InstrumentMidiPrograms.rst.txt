@@ -1,0 +1,159 @@
+﻿musicaiz.structure.InstrumentMidiPrograms
+=========================================
+
+.. currentmodule:: musicaiz.structure
+
+.. autoclass:: InstrumentMidiPrograms
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~InstrumentMidiPrograms.get_all_instrument_names
+      ~InstrumentMidiPrograms.get_all_possible_names
+      ~InstrumentMidiPrograms.map_name
+      ~InstrumentMidiPrograms.get_name_from_program
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~InstrumentMidiPrograms.ACOUSTIC_GRAND_PIANO
+      ~InstrumentMidiPrograms.BRIGHT_ACOUSTIC_PIANO
+      ~InstrumentMidiPrograms.ELECTRIC_GRAND_PIANO
+      ~InstrumentMidiPrograms.HONKY_TONK_PIANO
+      ~InstrumentMidiPrograms.ELECTRIC_PIANO_1
+      ~InstrumentMidiPrograms.ELECTRIC_PIANO_2
+      ~InstrumentMidiPrograms.HARPSICHORD
+      ~InstrumentMidiPrograms.CLAVI
+      ~InstrumentMidiPrograms.CELESTA
+      ~InstrumentMidiPrograms.GLOCKENSPIEL
+      ~InstrumentMidiPrograms.MUSIC_BOX
+      ~InstrumentMidiPrograms.VIBRAPHONE
+      ~InstrumentMidiPrograms.MARIMBA
+      ~InstrumentMidiPrograms.XYLOPHONE
+      ~InstrumentMidiPrograms.TUBULAR_BELLS
+      ~InstrumentMidiPrograms.DULCIMER
+      ~InstrumentMidiPrograms.DRAWBAR_ORGAN
+      ~InstrumentMidiPrograms.PERCUSSIVE_ORGAN
+      ~InstrumentMidiPrograms.ROCK_ORGAN
+      ~InstrumentMidiPrograms.CHURCH_ORGAN
+      ~InstrumentMidiPrograms.REED_ORGAN
+      ~InstrumentMidiPrograms.ACCORDION
+      ~InstrumentMidiPrograms.HARMONICA
+      ~InstrumentMidiPrograms.TANGO_ACCORDION
+      ~InstrumentMidiPrograms.ACOUSTIC_GUITAR_NYLON
+      ~InstrumentMidiPrograms.ACOUSTIC_GUITAR_STEEL
+      ~InstrumentMidiPrograms.ACOUSTIC_GUITAR_JAZZ
+      ~InstrumentMidiPrograms.ACOUSTIC_GUITAR_CLEAN
+      ~InstrumentMidiPrograms.ACOUSTIC_GUITAR_MUTED
+      ~InstrumentMidiPrograms.OVERDRIVEN_GUITAR
+      ~InstrumentMidiPrograms.DISTORSION_GUITAR
+      ~InstrumentMidiPrograms.GUITAR_HARMONICS
+      ~InstrumentMidiPrograms.ACOUSTIC_BASS
+      ~InstrumentMidiPrograms.ELECTRIC_BASS_FINGER
+      ~InstrumentMidiPrograms.ELECTRIC_BASS_PICK
+      ~InstrumentMidiPrograms.FRETLESS_BASS
+      ~InstrumentMidiPrograms.SLAP_BASS_1
+      ~InstrumentMidiPrograms.SLAP_BASS_2
+      ~InstrumentMidiPrograms.SYNTH_BASS_1
+      ~InstrumentMidiPrograms.SYNTH_BASS_2
+      ~InstrumentMidiPrograms.VIOLIN
+      ~InstrumentMidiPrograms.VIOLA
+      ~InstrumentMidiPrograms.CELLO
+      ~InstrumentMidiPrograms.CONTRABASS
+      ~InstrumentMidiPrograms.TREMOLO_STRINGS
+      ~InstrumentMidiPrograms.PIZZICATO_STRINGS
+      ~InstrumentMidiPrograms.ORCHESTRAL_HARP
+      ~InstrumentMidiPrograms.TIMPANI
+      ~InstrumentMidiPrograms.STRING_ENSEMBLE_1
+      ~InstrumentMidiPrograms.STRING_ENSEMBLE_2
+      ~InstrumentMidiPrograms.SYNTH_STRINGS_1
+      ~InstrumentMidiPrograms.SYNTH_STRINGS_2
+      ~InstrumentMidiPrograms.CHOIR_AAHS
+      ~InstrumentMidiPrograms.VOICE_OOHS
+      ~InstrumentMidiPrograms.SYNTH_VOICE
+      ~InstrumentMidiPrograms.ORCHESTRA_HIT
+      ~InstrumentMidiPrograms.TRUMPET
+      ~InstrumentMidiPrograms.TROMBONE
+      ~InstrumentMidiPrograms.TUBA
+      ~InstrumentMidiPrograms.MUTED_TRUMPET
+      ~InstrumentMidiPrograms.FRENCH_HORN
+      ~InstrumentMidiPrograms.BRASS_SECTION
+      ~InstrumentMidiPrograms.SYNTH_BRASS_1
+      ~InstrumentMidiPrograms.SYNTH_BRASS_2
+      ~InstrumentMidiPrograms.SOPRANO_SAX
+      ~InstrumentMidiPrograms.ALTO_SAX
+      ~InstrumentMidiPrograms.TENOR_SAX
+      ~InstrumentMidiPrograms.BARITONE_SAX
+      ~InstrumentMidiPrograms.OBOE
+      ~InstrumentMidiPrograms.ENGLISH_HORN
+      ~InstrumentMidiPrograms.BASOON
+      ~InstrumentMidiPrograms.CLARINET
+      ~InstrumentMidiPrograms.PICCOLO
+      ~InstrumentMidiPrograms.FLUTE
+      ~InstrumentMidiPrograms.RECORDER
+      ~InstrumentMidiPrograms.PLAN_FLUTE
+      ~InstrumentMidiPrograms.BLOWN_BOTTLE
+      ~InstrumentMidiPrograms.SHAKUHACHI
+      ~InstrumentMidiPrograms.WHISTLE
+      ~InstrumentMidiPrograms.OCARINA
+      ~InstrumentMidiPrograms.LEAD_1_SQUARE
+      ~InstrumentMidiPrograms.LEAD_2_SAWTOOTH
+      ~InstrumentMidiPrograms.LEAD_3_CALLIOPE
+      ~InstrumentMidiPrograms.LEAD_4_CHIFF
+      ~InstrumentMidiPrograms.LEAD_5_CHARANG
+      ~InstrumentMidiPrograms.LEAD_6_VOICE
+      ~InstrumentMidiPrograms.LEAD_7_FIFTHS
+      ~InstrumentMidiPrograms.LEAD_8_BASS_LEAD
+      ~InstrumentMidiPrograms.PAD_1_NEW_AGE
+      ~InstrumentMidiPrograms.PAD_2_WARM
+      ~InstrumentMidiPrograms.PAD_3_POLYSYNTH
+      ~InstrumentMidiPrograms.PAD_4_CHOIR
+      ~InstrumentMidiPrograms.PAD_5_COWED
+      ~InstrumentMidiPrograms.PAD_6_METALLIC
+      ~InstrumentMidiPrograms.PAD_7_HALO
+      ~InstrumentMidiPrograms.PAD_8_SWEEP
+      ~InstrumentMidiPrograms.FX_1_RAIN
+      ~InstrumentMidiPrograms.FX_2_SOUNDTRACK
+      ~InstrumentMidiPrograms.FX_3_CRYSTAL
+      ~InstrumentMidiPrograms.FX_4_ATMOSPHERE
+      ~InstrumentMidiPrograms.FX_5_BRIGHTNESS
+      ~InstrumentMidiPrograms.FX_6_GOBLINS
+      ~InstrumentMidiPrograms.FX_7_ECHOES
+      ~InstrumentMidiPrograms.FX_8_SCI_FI
+      ~InstrumentMidiPrograms.SITAR
+      ~InstrumentMidiPrograms.BANJO
+      ~InstrumentMidiPrograms.SHAMISEN
+      ~InstrumentMidiPrograms.KOTO
+      ~InstrumentMidiPrograms.KALIMBA
+      ~InstrumentMidiPrograms.BAG_PIPE
+      ~InstrumentMidiPrograms.FIDDLE
+      ~InstrumentMidiPrograms.SHANAI
+      ~InstrumentMidiPrograms.TINKLE_BELL
+      ~InstrumentMidiPrograms.AGOGO
+      ~InstrumentMidiPrograms.STEEL_DRUMS
+      ~InstrumentMidiPrograms.WOODBLOCK
+      ~InstrumentMidiPrograms.TAIKO_DRUM
+      ~InstrumentMidiPrograms.MELODIC_TOM
+      ~InstrumentMidiPrograms.SYNTH_DRUM
+      ~InstrumentMidiPrograms.REVERSE_CYMBAL
+      ~InstrumentMidiPrograms.GUITAR_FRET_NOISE
+      ~InstrumentMidiPrograms.BREADTH_NOISE
+      ~InstrumentMidiPrograms.SEASHORE
+      ~InstrumentMidiPrograms.BIRD_TWEET
+      ~InstrumentMidiPrograms.TELEPHONE_RING
+      ~InstrumentMidiPrograms.HELICOPTER
+      ~InstrumentMidiPrograms.APPLAUSE
+      ~InstrumentMidiPrograms.GUNSHOT
+      ~InstrumentMidiPrograms.possible_names
+   
+   

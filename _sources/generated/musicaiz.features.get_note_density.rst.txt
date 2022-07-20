@@ -1,0 +1,6 @@
+﻿musicaiz.features.get\_note\_density
+====================================
+
+.. currentmodule:: musicaiz.features
+
+.. autofunction:: get_note_density

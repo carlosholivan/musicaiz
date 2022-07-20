@@ -1,0 +1,45 @@
+﻿musicaiz.structure.Note
+=======================
+
+.. currentmodule:: musicaiz.structure
+
+.. autoclass:: Note
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Note.__init__
+      ~Note.pitch_value_in_range
+      ~Note.split_note_name
+      ~Note.split_pitch_name
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Note.note
+      ~Note.pitch
+      ~Note.pitch_name
+      ~Note.note_name
+      ~Note.octave
+      ~Note.enharmonic
+      ~Note.start_sec
+      ~Note.end_sec
+      ~Note.start_ticks
+      ~Note.end_ticks
+      ~Note.symbolic
+      ~Note.velocity
+      ~Note.bpm
+      ~Note.resolution
+      ~Note.ligated
+   
+   

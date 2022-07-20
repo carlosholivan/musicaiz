@@ -1,0 +1,81 @@
+﻿musicaiz.harmony.Tonality
+=========================
+
+.. currentmodule:: musicaiz.harmony
+
+.. autoclass:: Tonality
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Tonality.scales
+      ~Tonality.scale_notes
+      ~Tonality.get_scale_from_accidentals_num
+      ~Tonality.get_scale_from_accidentals_symbol
+      ~Tonality.get_scale_from_accidentals_num_symbol
+      ~Tonality.get_chord_from_degree
+      ~Tonality.get_all_chords_from_scale
+      ~Tonality.get_chord_notes_from_degree
+      ~Tonality.get_scales_degrees_from_chord
+      ~Tonality.get_modes_degrees_from_chord
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Tonality.C_MAJOR
+      ~Tonality.A_MINOR
+      ~Tonality.G_MAJOR
+      ~Tonality.E_MINOR
+      ~Tonality.F_MAJOR
+      ~Tonality.D_MINOR
+      ~Tonality.D_MAJOR
+      ~Tonality.B_MINOR
+      ~Tonality.B_FLAT_MAJOR
+      ~Tonality.G_MINOR
+      ~Tonality.A_MAJOR
+      ~Tonality.F_SHARP_MINOR
+      ~Tonality.E_FLAT_MAJOR
+      ~Tonality.C_MINOR
+      ~Tonality.E_MAJOR
+      ~Tonality.C_SHARP_MINOR
+      ~Tonality.A_FLAT_MAJOR
+      ~Tonality.F_MINOR
+      ~Tonality.B_MAJOR
+      ~Tonality.G_SHARP_MINOR
+      ~Tonality.D_FLAT_MAJOR
+      ~Tonality.B_FLAT_MINOR
+      ~Tonality.F_SHARP_MAJOR
+      ~Tonality.D_SHARP_MINOR
+      ~Tonality.G_FLAT_MAJOR
+      ~Tonality.E_FLAT_MINOR
+      ~Tonality.C_SHARP_MAJOR
+      ~Tonality.A_SHARP_MINOR
+      ~Tonality.C_FLAT_MAJOR
+      ~Tonality.A_FLAT_MINOR
+      ~Tonality.root_note
+      ~Tonality.num_accidentals
+      ~Tonality.symbol_accidentals
+      ~Tonality.major
+      ~Tonality.dorian
+      ~Tonality.phrygian
+      ~Tonality.lydian
+      ~Tonality.mixolydian
+      ~Tonality.locrian
+      ~Tonality.natural
+      ~Tonality.harmonic
+      ~Tonality.melodic
+      ~Tonality.all_scales
+      ~Tonality.altered_notes
+      ~Tonality.notes
+   
+   

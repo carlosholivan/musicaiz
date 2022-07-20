@@ -1,0 +1,28 @@
+﻿musicaiz.harmony.DorianTriadDegrees
+===================================
+
+.. currentmodule:: musicaiz.harmony
+
+.. autoclass:: DorianTriadDegrees
+
+   
+   .. automethod:: __init__
+
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~DorianTriadDegrees.FIRST
+      ~DorianTriadDegrees.SECOND
+      ~DorianTriadDegrees.THIRD
+      ~DorianTriadDegrees.FOURTH
+      ~DorianTriadDegrees.FIFTH
+      ~DorianTriadDegrees.SIXTH
+      ~DorianTriadDegrees.SEVENTH
+   
+   

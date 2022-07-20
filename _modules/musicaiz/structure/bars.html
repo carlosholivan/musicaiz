@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>musicaiz.structure.bars &mdash; Musicaiz 0.0.2 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/plot_directive.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery-binder.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery-dataframe.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery-rendered-html.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/design-tabs.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #222222ff" >
+            <a href="../../../index.html">
+            <img src="../../../_static/logo_square_dark.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.0.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Musicaiz Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../loaders.html">Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../structure.html">Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../harmony.html">Harmony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rhythm.html">Rhythm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../algorithms.html">Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tokenizers.html">Tokenizers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../evaluation.html">Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../plotters.html">Plotters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../converters.html">Converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../datasets.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../models.html">Models</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/2-write_midi.html">Writing a MIDI file from scratch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/3-plot.html">Plotting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">References:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../implementations.html">Implementation Details</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../genindex.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #222222ff" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Musicaiz</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>musicaiz.structure.bars</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for musicaiz.structure.bars</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+<span class="kn">from</span> <span class="nn">musicaiz.rhythm</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">TimingConsts</span><span class="p">,</span>
+    <span class="n">ms_per_bar</span><span class="p">,</span>
+    <span class="n">ms_per_tick</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">musicaiz.structure</span> <span class="kn">import</span> <span class="n">Note</span>
+
+
+<div class="viewcode-block" id="Bar"><a class="viewcode-back" href="../../../generated/musicaiz.structure.Bar.html#musicaiz.structure.Bar">[docs]</a><span class="k">class</span> <span class="nc">Bar</span><span class="p">:</span>
+
+    <span class="sd">&quot;&quot;&quot;Defines a class to group notes in bars.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+
+<span class="sd">    time_sig: str</span>
+<span class="sd">        If we do know the time signature in advance, we can initialize Musa object with it.</span>
+<span class="sd">        This will assume that all the MIDI has the same time signature.</span>
+
+<span class="sd">    bpm: int</span>
+<span class="sd">        The tempo or bpm of the MIDI file. If this parameter is not initialized we suppose</span>
+<span class="sd">        120bpm with a resolution (sequencer ticks) of 960 ticks, which means that we have</span>
+<span class="sd">        500 ticks per quarter note.</span>
+
+<span class="sd">    resolution: int</span>
+<span class="sd">        the pulses o ticks per quarter note (PPQ or TPQN). If this parameter is not initialized</span>
+<span class="sd">        we suppose a resolution (sequencer ticks) of 960 ticks.</span>
+
+<span class="sd">    absolute_timing: bool</span>
+<span class="sd">        selects how note timing attributes are initialized when reading a MIDI file.</span>
+<span class="sd">        If `absolute_timing` is True, notes will be written in absolute times.</span>
+<span class="sd">        If `absolute_timing` is False, times will be relative to the bar start.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Bar.__init__"><a class="viewcode-back" href="../../../generated/musicaiz.structure.Bar.html#musicaiz.structure.Bar.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">time_sig</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">TimingConsts</span><span class="o">.</span><span class="n">DEFAULT_TIME_SIGNATURE</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+        <span class="n">bpm</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">TimingConsts</span><span class="o">.</span><span class="n">DEFAULT_BPM</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+        <span class="n">resolution</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">TimingConsts</span><span class="o">.</span><span class="n">RESOLUTION</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+        <span class="n">absolute_timing</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bpm</span> <span class="o">=</span> <span class="n">bpm</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">time_sig</span> <span class="o">=</span> <span class="n">time_sig</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">resolution</span> <span class="o">=</span> <span class="n">resolution</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">absolute_timing</span> <span class="o">=</span> <span class="n">absolute_timing</span>
+
+        <span class="c1"># The following attributes are set when loading a MIDI file</span>
+        <span class="c1"># with Musa class</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">notes</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">note_density</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">harmonic_density</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start_ticks</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">end_ticks</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start_sec</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">end_sec</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+    <span class="k">def</span> <span class="nf">relative_notes_timing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bar_start</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The bar start is the value in ticks where the bar starts&quot;&quot;&quot;</span>
+        <span class="n">ms_tick</span> <span class="o">=</span> <span class="n">ms_per_tick</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bpm</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">resolution</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">:</span>
+            <span class="n">note</span><span class="o">.</span><span class="n">start_ticks</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">start_ticks</span> <span class="o">-</span> <span class="n">bar_start</span>
+            <span class="n">note</span><span class="o">.</span><span class="n">end_ticks</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">end_ticks</span> <span class="o">-</span> <span class="n">bar_start</span>
+            <span class="n">note</span><span class="o">.</span><span class="n">start_sec</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">start_ticks</span> <span class="o">*</span> <span class="n">ms_tick</span> <span class="o">/</span> <span class="mi">1000</span>
+            <span class="n">note</span><span class="o">.</span><span class="n">end_sec</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">end_ticks</span> <span class="o">*</span> <span class="n">ms_tick</span> <span class="o">/</span> <span class="mi">1000</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_last_note</span><span class="p">(</span><span class="n">note_seq</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Note</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Get last note in note_seq.&quot;&quot;&quot;</span>
+        <span class="n">end_secs</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">note_seq</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">note</span><span class="o">.</span><span class="n">end_sec</span> <span class="o">&gt;</span> <span class="n">end_secs</span><span class="p">:</span>
+                <span class="n">last_note</span> <span class="o">=</span> <span class="n">note</span>
+        <span class="k">return</span> <span class="n">last_note</span>
+
+    <span class="k">def</span> <span class="nf">get_bars_durations</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">note_seq</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Note</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Build array of bar durations.</span>
+<span class="sd">        We suppose that the note_seq is in the same time signature.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">last_note</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_last_note</span><span class="p">(</span><span class="n">note_seq</span><span class="p">)</span>
+        <span class="n">end_secs</span> <span class="o">=</span> <span class="n">last_note</span><span class="o">.</span><span class="n">end_secs</span>
+        <span class="n">sec_measure</span> <span class="o">=</span> <span class="n">ms_per_bar</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">time_sig</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">bpm</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1000</span>
+        <span class="n">bar_durations</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">end_secs</span><span class="p">,</span> <span class="n">sec_measure</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">end_secs</span> <span class="o">%</span> <span class="n">sec_measure</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">bar_durations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bar_durations</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">sec_measure</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">bar_durations</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_total_bars</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">note_seq</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Note</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">get_bars_durations</span><span class="p">(</span><span class="n">note_seq</span><span class="p">))</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">group_notes_in_bars</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">note_seq</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Note</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Note</span><span class="p">]]:</span>
+        <span class="n">bars_durations</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">get_bars_durations</span><span class="p">(</span><span class="n">note_seq</span><span class="p">)</span>
+        <span class="n">bars</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">prev_bar_sec</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">bar_sec</span> <span class="ow">in</span> <span class="n">bars_durations</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">note_seq</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">bar_sec</span> <span class="o">&gt;=</span> <span class="n">note</span><span class="o">.</span><span class="n">end_sec</span> <span class="ow">and</span> <span class="n">prev_bar_sec</span> <span class="o">&lt;</span> <span class="n">note</span><span class="o">.</span><span class="n">end_sec</span><span class="p">:</span>
+                    <span class="n">bars</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
+            <span class="n">prev_bar_sec</span> <span class="o">=</span> <span class="n">bar_sec</span>
+        <span class="k">return</span> <span class="n">bars</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_sec</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">start_sec</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">start_sec</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">start_sec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_sec</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">end_sec</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">end_sec</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">end_sec</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">end_sec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">end_sec</span>
+
+        <span class="k">return</span> <span class="s2">&quot;Bar(note_density=</span><span class="si">{}</span><span class="s2">, &quot;</span> \
+                <span class="s2">&quot;harmonic_density=</span><span class="si">{}</span><span class="s2"> &quot;</span> \
+                <span class="s2">&quot;start_ticks=</span><span class="si">{}</span><span class="s2"> &quot;</span> \
+                <span class="s2">&quot;end_ticks=</span><span class="si">{}</span><span class="s2"> &quot;</span> \
+                <span class="s2">&quot;start_sec=</span><span class="si">{}</span><span class="s2"> &quot;</span> \
+                <span class="s2">&quot;end_sec=</span><span class="si">{}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">note_density</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">harmonic_density</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">start_ticks</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">end_ticks</span><span class="p">,</span>
+                    <span class="n">start_sec</span><span class="p">,</span>
+                    <span class="n">end_sec</span>
+                <span class="p">)</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Carlos Hernandez-Olivan.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

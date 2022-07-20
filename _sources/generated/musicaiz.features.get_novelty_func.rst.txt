@@ -1,0 +1,6 @@
+﻿musicaiz.features.get\_novelty\_func
+====================================
+
+.. currentmodule:: musicaiz.features
+
+.. autofunction:: get_novelty_func

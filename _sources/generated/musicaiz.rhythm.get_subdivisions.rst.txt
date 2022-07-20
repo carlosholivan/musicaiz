@@ -1,0 +1,6 @@
+﻿musicaiz.rhythm.get\_subdivisions
+=================================
+
+.. currentmodule:: musicaiz.rhythm
+
+.. autofunction:: get_subdivisions

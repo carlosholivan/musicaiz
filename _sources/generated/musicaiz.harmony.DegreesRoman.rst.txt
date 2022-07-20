@@ -1,0 +1,40 @@
+﻿musicaiz.harmony.DegreesRoman
+=============================
+
+.. currentmodule:: musicaiz.harmony
+
+.. autoclass:: DegreesRoman
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~DegreesRoman.get_name_with_degree
+      ~DegreesRoman.get_degree_from_index
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~DegreesRoman.FIRST
+      ~DegreesRoman.SECOND
+      ~DegreesRoman.THIRD
+      ~DegreesRoman.FOURTH
+      ~DegreesRoman.FIFTH
+      ~DegreesRoman.SIXTH
+      ~DegreesRoman.SEVENTH
+      ~DegreesRoman.major
+      ~DegreesRoman.minor
+      ~DegreesRoman.diminished
+      ~DegreesRoman.half_diminished
+      ~DegreesRoman.index
+   
+   

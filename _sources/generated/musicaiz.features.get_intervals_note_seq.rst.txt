@@ -1,0 +1,6 @@
+﻿musicaiz.features.get\_intervals\_note\_seq
+===========================================
+
+.. currentmodule:: musicaiz.features
+
+.. autofunction:: get_intervals_note_seq

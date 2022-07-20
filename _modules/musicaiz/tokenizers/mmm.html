@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>musicaiz.tokenizers.mmm &mdash; Musicaiz 0.0.2 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/plot_directive.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery-binder.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery-dataframe.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery-rendered-html.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/design-tabs.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #222222ff" >
+            <a href="../../../index.html">
+            <img src="../../../_static/logo_square_dark.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.0.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Musicaiz Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../loaders.html">Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../structure.html">Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../harmony.html">Harmony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rhythm.html">Rhythm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../algorithms.html">Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tokenizers.html">Tokenizers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../evaluation.html">Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../plotters.html">Plotters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../converters.html">Converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../datasets.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../models.html">Models</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/2-write_midi.html">Writing a MIDI file from scratch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/3-plot.html">Plotting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">References:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../implementations.html">Implementation Details</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../genindex.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #222222ff" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Musicaiz</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>musicaiz.tokenizers.mmm</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for musicaiz.tokenizers.mmm</h1><div class="highlight"><pre>
+<span></span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">TextIO</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+
+<span class="kn">from</span> <span class="nn">musicaiz.loaders</span> <span class="kn">import</span> <span class="n">Musa</span>
+<span class="kn">from</span> <span class="nn">musicaiz.structure</span> <span class="kn">import</span> <span class="n">Note</span><span class="p">,</span> <span class="n">Instrument</span><span class="p">,</span> <span class="n">Bar</span>
+<span class="kn">from</span> <span class="nn">musicaiz.tokenizers</span> <span class="kn">import</span> <span class="n">EncodeBase</span>
+<span class="kn">from</span> <span class="nn">musicaiz.rhythm</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">TimingConsts</span><span class="p">,</span>
+    <span class="n">ticks_per_bar</span><span class="p">,</span>
+    <span class="n">get_symbolic_duration</span><span class="p">,</span>
+    <span class="n">NoteLengths</span><span class="p">,</span>
+    <span class="n">TimeSignature</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">musicaiz</span> <span class="kn">import</span> <span class="n">wrappers</span>
+<span class="kn">from</span> <span class="nn">musicaiz.utils</span> <span class="kn">import</span> <span class="n">sort_notes</span>
+
+
+<span class="c1"># time units available to tokenize</span>
+<span class="n">VALID_TIME_UNITS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;SIXTEENTH&quot;</span><span class="p">,</span> <span class="s2">&quot;THIRTY_SECOND&quot;</span><span class="p">,</span> <span class="s2">&quot;SIXTY_FOUR&quot;</span><span class="p">,</span> <span class="s2">&quot;HUNDRED_TWENTY_EIGHT&quot;</span><span class="p">]</span>
+
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;mmm-tokenizer&quot;</span><span class="p">)</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="MMMTokenizer"><a class="viewcode-back" href="../../../generated/musicaiz.tokenizers.MMMTokenizer.html#musicaiz.tokenizers.MMMTokenizer">[docs]</a><span class="k">class</span> <span class="nc">MMMTokenizer</span><span class="p">(</span><span class="n">EncodeBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class presents methods to compute the Multi-Track Music Machine Encoding.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    file: Optional[Union[str, TextIO, Path]] = None,</span>
+<span class="sd">        genre: Optional[str] = None,</span>
+<span class="sd">        subgenre: Optional[str] = None,</span>
+<span class="sd">        chords: bool = False,</span>
+<span class="sd">        key: bool = False,</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="MMMTokenizer.__init__"><a class="viewcode-back" href="../../../generated/musicaiz.tokenizers.MMMTokenizer.html#musicaiz.tokenizers.MMMTokenizer.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">file</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">TextIO</span><span class="p">,</span> <span class="n">Path</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">midi_object</span> <span class="o">=</span> <span class="n">Musa</span><span class="p">(</span>
+            <span class="n">file</span><span class="o">=</span><span class="n">file</span><span class="p">,</span>
+            <span class="n">structure</span><span class="o">=</span><span class="s2">&quot;bars&quot;</span><span class="p">,</span>
+            <span class="n">absolute_timing</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">quantize</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">cut_notes</span><span class="o">=</span><span class="kc">False</span>
+        <span class="p">)</span></div>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@wrappers</span><span class="o">.</span><span class="n">timeis</span>
+    <span class="k">def</span> <span class="nf">tokenize_path</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span>
+        <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span>
+        <span class="n">output_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">tokens</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">windowing</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">time_unit</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;THIRTY_SECOND&quot;</span><span class="p">,</span>
+        <span class="n">num_programs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">shuffle_tracks</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">track_density</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">window_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+        <span class="n">hop_length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Tokenizes the MIDI files inside the given path.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">        path: Union[str, Path]</span>
+<span class="sd">            the path to tokenize.</span>
+
+<span class="sd">        output_file: str</span>
+<span class="sd">            the output file.</span>
+
+<span class="sd">        windowing: bool</span>
+<span class="sd">            if True, the method tokenizes each file by applying bars windowing.</span>
+<span class="sd">        </span>
+<span class="sd">        num_programs: List[int]</span>
+<span class="sd">            the number of programs to tokenize. If None, the method tokenizes all the tracks.</span>
+<span class="sd">        </span>
+<span class="sd">        shuffle_tracks: bool</span>
+<span class="sd">            shuffles the order of tracks in each window (PIECE).</span>
+<span class="sd">        </span>
+<span class="sd">        track_density: bool</span>
+<span class="sd">            if True a token DENSITY is added at the beggining of each track.</span>
+<span class="sd">        </span>
+<span class="sd">        window_size: int</span>
+<span class="sd">            the number of bars per track to tokenize.</span>
+<span class="sd">        </span>
+<span class="sd">        hop_length: int</span>
+<span class="sd">            the number of bars to slice when tokenizing.</span>
+<span class="sd">            If a MIDI file contains 5 bars and the window size is 4 and the hop length is 1,</span>
+<span class="sd">            it&#39;ll be splitted in 2 PIECE tokens, one from bar 1 to 4 and the other on from</span>
+<span class="sd">            bar 2 to 5 (somehow like audio FFT).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">text_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_file</span> <span class="o">+</span> <span class="s2">&quot;.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span>
+
+        <span class="n">tokens_list</span> <span class="o">=</span> <span class="n">wrappers</span><span class="o">.</span><span class="n">multiprocess_path</span><span class="p">(</span>
+            <span class="n">func</span><span class="o">=</span><span class="bp">cls</span><span class="o">.</span><span class="n">tokenize_file</span><span class="p">,</span>
+            <span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span>
+            <span class="n">args</span><span class="o">=</span><span class="p">[</span>
+                <span class="n">tokens</span><span class="p">,</span>
+                <span class="n">windowing</span><span class="p">,</span>
+                <span class="n">time_unit</span><span class="p">,</span>
+                <span class="n">num_programs</span><span class="p">,</span>
+                <span class="n">shuffle_tracks</span><span class="p">,</span>
+                <span class="n">track_density</span><span class="p">,</span>
+                <span class="n">window_size</span><span class="p">,</span>
+                <span class="n">hop_length</span><span class="p">,</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
+        <span class="n">tokens</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tokens_list</span><span class="p">])</span>
+
+        <span class="c1"># write and close file</span>
+        <span class="n">text_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+        <span class="n">text_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Written </span><span class="si">{</span><span class="n">text_file</span><span class="si">}</span><span class="s2"> file.&quot;</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">tokenize_file</span><span class="p">(</span>
+        <span class="n">file</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span>
+        <span class="n">prev_tokens</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">windowing</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">time_unit</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;THIRTY_SECOND&quot;</span><span class="p">,</span>
+        <span class="n">num_programs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">shuffle_tracks</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">track_density</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">window_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+        <span class="n">hop_length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">time_sig</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">velocity</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Tokenizes a MIDI file.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">        file: Union[str, TextIO]</span>
+<span class="sd">            The input MIDI file.</span>
+<span class="sd">        </span>
+<span class="sd">        prev_tokens: str</span>
+<span class="sd">            Previous tokens to the 1st TRACK_START token.</span>
+<span class="sd">        </span>
+<span class="sd">        output_file: str</span>
+<span class="sd">            the output file.</span>
+
+<span class="sd">        windowing: bool</span>
+<span class="sd">            if True, the method tokenizes each file by applying bars windowing.</span>
+<span class="sd">        </span>
+<span class="sd">        num_programs: List[int]</span>
+<span class="sd">            the number of programs to tokenize. If None, the method tokenizes all the tracks.</span>
+<span class="sd">        </span>
+<span class="sd">        shuffle_tracks: bool</span>
+<span class="sd">            shuffles the order of tracks in each window (PIECE).</span>
+<span class="sd">        </span>
+<span class="sd">        track_density: bool</span>
+<span class="sd">            if True a token DENSITY is added at the beggining of each track.</span>
+<span class="sd">        </span>
+<span class="sd">        window_size: int</span>
+<span class="sd">            the number of bars per track to tokenize.</span>
+<span class="sd">        </span>
+<span class="sd">        hop_length: int</span>
+<span class="sd">            the number of bars to slice when tokenizing.</span>
+<span class="sd">            If a MIDI file contains 5 bars and the window size is 4 and the hop length is 1,</span>
+<span class="sd">            it&#39;ll be splitted in 2 PIECE tokens, one from bar 1 to 4 and the other on from</span>
+<span class="sd">            bar 2 to 5 (somehow like audio FFT).</span>
+<span class="sd">        </span>
+<span class="sd">        velocity: bool = False</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        </span>
+<span class="sd">        tokens: str</span>
+<span class="sd">            The sequence ob tokens corresponding to the input file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">mmm_tok</span> <span class="o">=</span> <span class="n">MMMTokenizer</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+        <span class="n">tokens</span> <span class="o">=</span> <span class="n">mmm_tok</span><span class="o">.</span><span class="n">tokenize_musa_obj</span><span class="p">(</span>
+            <span class="n">prev_tokens</span><span class="o">=</span><span class="n">prev_tokens</span><span class="p">,</span>
+            <span class="n">windowing</span><span class="o">=</span><span class="n">windowing</span><span class="p">,</span>
+            <span class="n">time_unit</span><span class="o">=</span><span class="n">time_unit</span><span class="p">,</span>
+            <span class="n">num_programs</span><span class="o">=</span><span class="n">num_programs</span><span class="p">,</span>
+            <span class="n">shuffle_tracks</span><span class="o">=</span><span class="n">shuffle_tracks</span><span class="p">,</span>
+            <span class="n">track_density</span><span class="o">=</span><span class="n">track_density</span><span class="p">,</span>
+            <span class="n">window_size</span><span class="o">=</span><span class="n">window_size</span><span class="p">,</span>
+            <span class="n">hop_length</span><span class="o">=</span><span class="n">hop_length</span><span class="p">,</span>
+            <span class="n">time_sig</span><span class="o">=</span><span class="n">time_sig</span><span class="p">,</span>
+            <span class="n">velocity</span><span class="o">=</span><span class="n">velocity</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">tokens</span>
+    
+    <span class="k">def</span> <span class="nf">tokenize_musa_obj</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">prev_tokens</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">windowing</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">time_unit</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;SIXTY_FOUR&quot;</span><span class="p">,</span>
+        <span class="n">num_programs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">shuffle_tracks</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">track_density</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">window_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+        <span class="n">hop_length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">time_sig</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">velocity</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method tokenizes a Musa (MIDI) object.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">        prev_tokens: str</span>
+<span class="sd">            Previous tokens to the 1st TRACK_START token.</span>
+
+<span class="sd">        num_programs: List[int]</span>
+<span class="sd">            the number of programs to tokenize. If None, the method</span>
+<span class="sd">            tokenizes all the tracks.</span>
+
+<span class="sd">        shuffle_tracks: bool</span>
+<span class="sd">            shuffles the order of tracks in each window (PIECE).</span>
+
+<span class="sd">        track_density: bool</span>
+<span class="sd">            if True a token DENSITY is added at the beggining of each track.</span>
+<span class="sd">            The token DENSITY is the total notes of the track or instrument.</span>
+
+<span class="sd">        window_size: int</span>
+<span class="sd">            the number of bars per track to tokenize.</span>
+
+<span class="sd">        hop_length: int</span>
+<span class="sd">            the number of bars to slice when tokenizing.</span>
+<span class="sd">            If a MIDI file contains 5 bars and the window size is 4 and the hop length is 1,</span>
+<span class="sd">            it&#39;ll be splitted in 2 PIECE tokens, one from bar 1 to 4 and the other on from</span>
+<span class="sd">            bar 2 to 5 (somehow like audio FFT).</span>
+<span class="sd">        </span>
+<span class="sd">        velocity: bool = False</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+
+<span class="sd">        all_tokens: List[str]</span>
+<span class="sd">            the list of tokens corresponding to all the windows.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Do not tokenize the tracks that are not in num_programs</span>
+        <span class="c1"># but if num_programs is None then tokenize all instruments</span>
+
+        <span class="n">tokenized_instruments</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">num_programs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">inst</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">midi_object</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">inst</span><span class="o">.</span><span class="n">program</span> <span class="ow">in</span> <span class="n">num_programs</span><span class="p">:</span>
+                    <span class="n">tokenized_instruments</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">inst</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">tokenized_instruments</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">midi_object</span><span class="o">.</span><span class="n">instruments</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">windowing</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">time_sig</span><span class="p">:</span>
+                <span class="n">time_sig_tok</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;TIME_SIG=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">midi_object</span><span class="o">.</span><span class="n">time_sig</span><span class="o">.</span><span class="n">time_sig</span><span class="si">}</span><span class="s2"> &quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">time_sig_tok</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+            <span class="n">tokens</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tokenize_tracks</span><span class="p">(</span>
+                <span class="n">instruments</span><span class="o">=</span><span class="n">tokenized_instruments</span><span class="p">,</span>
+                <span class="n">bar_start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                <span class="n">tokens</span><span class="o">=</span><span class="s2">&quot;PIECE_START &quot;</span> <span class="o">+</span> <span class="n">prev_tokens</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">time_sig_tok</span><span class="p">,</span>
+                <span class="n">track_density</span><span class="o">=</span><span class="n">track_density</span><span class="p">,</span>
+                <span class="n">time_unit</span><span class="o">=</span><span class="n">time_unit</span><span class="p">,</span>
+                <span class="n">velocity</span><span class="o">=</span><span class="n">velocity</span>
+            <span class="p">)</span>
+            <span class="n">tokens</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Now tokenize and create a PIECE for each window</span>
+            <span class="c1"># that is defined in terms of bars</span>
+            <span class="c1"># loop in bars</span>
+            <span class="n">tokens</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">midi_object</span><span class="o">.</span><span class="n">total_bars</span><span class="p">,</span> <span class="n">hop_length</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">i</span> <span class="o">+</span> <span class="n">window_size</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">midi_object</span><span class="o">.</span><span class="n">total_bars</span><span class="p">:</span>
+                    <span class="k">break</span>
+                <span class="k">if</span> <span class="n">time_sig</span><span class="p">:</span>
+                    <span class="n">time_sig_tok</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;TIME_SIG=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">midi_object</span><span class="o">.</span><span class="n">time_sig</span><span class="o">.</span><span class="n">time_sig</span><span class="si">}</span><span class="s2"> &quot;</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">time_sig_tok</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+                <span class="n">tokens</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tokenize_tracks</span><span class="p">(</span>
+                    <span class="n">tokenized_instruments</span><span class="p">,</span>
+                    <span class="n">bar_start</span><span class="o">=</span><span class="n">i</span><span class="p">,</span>
+                    <span class="n">bar_end</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="n">window_size</span><span class="p">,</span>
+                    <span class="n">tokens</span><span class="o">=</span><span class="s2">&quot;PIECE_START &quot;</span> <span class="o">+</span> <span class="n">prev_tokens</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">time_sig_tok</span><span class="p">,</span>
+                    <span class="n">time_unit</span><span class="o">=</span><span class="n">time_unit</span><span class="p">,</span>
+                    <span class="n">track_density</span><span class="o">=</span><span class="n">track_density</span><span class="p">,</span>
+                    <span class="n">velocity</span><span class="o">=</span><span class="n">velocity</span>
+                <span class="p">)</span>
+                <span class="n">tokens</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">return</span> <span class="n">tokens</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">tokenize_tracks</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span>
+        <span class="n">instruments</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Instrument</span><span class="p">],</span>
+        <span class="n">bar_start</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">bar_end</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">tokens</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">time_unit</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;SIXTY_FOUR&quot;</span><span class="p">,</span>
+        <span class="n">track_density</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">velocity</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method tokenizes a Musa (MIDI) object.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">        instruments: List[Instrument]</span>
+<span class="sd">            the list of instruments to tokenize.</span>
+
+<span class="sd">        track_density: bool</span>
+<span class="sd">            if True a token DENSITY is added at the beggining of each track.</span>
+<span class="sd">            The token DENSITY is the total notes of the track or instrument.</span>
+<span class="sd">        </span>
+<span class="sd">        velocity: bool = False</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+
+<span class="sd">        tokens: str</span>
+<span class="sd">            the list of tokens corresponding to all the windows.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">tokens</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">tokens</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+        <span class="c1"># loop in instruments</span>
+        <span class="k">for</span> <span class="n">inst_idx</span><span class="p">,</span> <span class="n">inst</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">instruments</span><span class="p">):</span>
+            <span class="n">tokens</span> <span class="o">+=</span> <span class="s2">&quot;TRACK_START &quot;</span>
+            <span class="n">tokens</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;INST=</span><span class="si">{</span><span class="n">inst</span><span class="o">.</span><span class="n">program</span><span class="si">}</span><span class="s2"> &quot;</span>
+            <span class="k">if</span> <span class="n">track_density</span><span class="p">:</span>
+                <span class="n">tokens</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;DENSITY=</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">inst</span><span class="o">.</span><span class="n">notes</span><span class="p">)</span><span class="si">}</span><span class="s2"> &quot;</span>
+            <span class="c1"># loop in bars</span>
+            <span class="k">if</span> <span class="n">bar_end</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">bar_end</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">inst</span><span class="o">.</span><span class="n">bars</span><span class="p">)</span>
+            <span class="n">bars</span> <span class="o">=</span> <span class="n">inst</span><span class="o">.</span><span class="n">bars</span><span class="p">[</span><span class="n">bar_start</span><span class="p">:</span><span class="n">bar_end</span><span class="p">]</span>
+            <span class="n">tokens</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">tokenize_track_bars</span><span class="p">(</span><span class="n">bars</span><span class="p">,</span> <span class="n">tokens</span><span class="p">,</span> <span class="n">time_unit</span><span class="p">,</span> <span class="n">velocity</span><span class="o">=</span><span class="n">velocity</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">inst_idx</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">instruments</span><span class="p">):</span>
+                <span class="n">tokens</span> <span class="o">+=</span> <span class="s2">&quot;TRACK_END&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">tokens</span> <span class="o">+=</span> <span class="s2">&quot;TRACK_END &quot;</span>
+        <span class="k">return</span> <span class="n">tokens</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">tokenize_track_bars</span><span class="p">(</span>
+        <span class="n">bars</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Bar</span><span class="p">],</span>
+        <span class="n">tokens</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">time_unit</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;SIXTY_FOUR&quot;</span><span class="p">,</span>
+        <span class="n">velocity</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method tokenizes a given list of musicaiz bar objects.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">        bars: List[Bar]</span>
+
+<span class="sd">        tokens: str</span>
+<span class="sd">            the number of bars per track to tokenize.</span>
+<span class="sd">        </span>
+<span class="sd">        time_unit: str = &quot;SIXTY_FOUR&quot;</span>
+
+<span class="sd">        time_sig: str = TimingConsts.DEFAULT_TIME_SIGNATURE.value</span>
+
+<span class="sd">        velocity: bool = False</span>
+<span class="sd">            If we want to include the token `VELOCITY` (not included in the original MMM encoding paper.)</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+
+<span class="sd">        tokens: str</span>
+<span class="sd">            the tokens corresponding to the bars.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">tokens</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">tokens</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+        <span class="c1"># check valid time unit</span>
+        <span class="k">if</span> <span class="n">time_unit</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">VALID_TIME_UNITS</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid time unit: </span><span class="si">{</span><span class="n">time_unit</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">bar</span> <span class="ow">in</span> <span class="n">bars</span><span class="p">:</span>
+            <span class="n">bar_start</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">start_ticks</span>
+            <span class="n">bar_end</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">end_ticks</span>
+            <span class="c1"># sort notes by start_ticks</span>
+            <span class="n">bar</span><span class="o">.</span><span class="n">notes</span> <span class="o">=</span> <span class="n">sort_notes</span><span class="p">(</span><span class="n">bar</span><span class="o">.</span><span class="n">notes</span><span class="p">)</span>            
+            <span class="n">all_note_starts</span> <span class="o">=</span> <span class="p">[</span><span class="n">note</span><span class="o">.</span><span class="n">start_ticks</span> <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">bar</span><span class="o">.</span><span class="n">notes</span><span class="p">]</span>
+            <span class="n">all_note_ends</span> <span class="o">=</span> <span class="p">[</span><span class="n">note</span><span class="o">.</span><span class="n">end_ticks</span> <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">bar</span><span class="o">.</span><span class="n">notes</span><span class="p">]</span>
+
+            <span class="n">tokens</span> <span class="o">+=</span> <span class="s2">&quot;BAR_START &quot;</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">bar</span><span class="o">.</span><span class="n">notes</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">delta_symb</span> <span class="o">=</span> <span class="n">get_symbolic_duration</span><span class="p">(</span>
+                    <span class="n">bar_end</span> <span class="o">-</span> <span class="n">bar_start</span><span class="p">,</span> <span class="kc">True</span>
+                <span class="p">)</span>
+                <span class="n">delta_val</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span>
+                    <span class="n">NoteLengths</span><span class="p">[</span><span class="n">delta_symb</span><span class="p">]</span><span class="o">.</span><span class="n">value</span> <span class="o">/</span> <span class="n">NoteLengths</span><span class="p">[</span><span class="n">time_unit</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+                <span class="p">)</span>
+                <span class="c1">#tokens += f&quot;TIME_DELTA={delta_val} &quot; if delta_val != 0 else &quot;TIME_DELTA=1 &quot;</span>
+                <span class="k">if</span> <span class="n">delta_val</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span> <span class="n">tokens</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;TIME_DELTA=</span><span class="si">{</span><span class="n">delta_val</span><span class="si">}</span><span class="s2"> &quot;</span>
+                <span class="n">tokens</span> <span class="o">+=</span> <span class="s2">&quot;BAR_END &quot;</span>
+                <span class="k">continue</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">bar</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">start_ticks</span> <span class="o">-</span> <span class="n">bar_start</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">delta_symb</span> <span class="o">=</span> <span class="n">get_symbolic_duration</span><span class="p">(</span>
+                        <span class="n">bar</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">start_ticks</span><span class="p">,</span> <span class="kc">True</span>
+                    <span class="p">)</span>
+                    <span class="n">delta_val</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span>
+                        <span class="n">NoteLengths</span><span class="p">[</span><span class="n">delta_symb</span><span class="p">]</span><span class="o">.</span><span class="n">value</span> <span class="o">/</span> <span class="n">NoteLengths</span><span class="p">[</span><span class="n">time_unit</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+                    <span class="p">)</span>
+                    <span class="c1">#tokens += f&quot;TIME_DELTA={delta_val - bar_start} &quot; if delta_val - bar_start != 0 else &quot;TIME_DELTA=1 &quot;</span>
+                    <span class="k">if</span> <span class="n">delta_val</span> <span class="o">-</span> <span class="n">bar_start</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span> <span class="n">tokens</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;TIME_DELTA=</span><span class="si">{</span><span class="n">delta_val</span> <span class="o">-</span> <span class="n">bar_start</span><span class="si">}</span><span class="s2"> &quot;</span>
+            
+            <span class="n">all_time_events</span> <span class="o">=</span> <span class="n">all_note_starts</span> <span class="o">+</span> <span class="n">all_note_ends</span>
+            <span class="n">num_notes</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_note_starts</span><span class="p">)</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">event_idx</span><span class="p">,</span> <span class="n">note_idx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+            <span class="n">event_idxs</span><span class="p">,</span> <span class="n">diffs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[]</span>
+            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="c1"># The 1st note event will always be the 1st note on</span>
+                <span class="n">note_idx</span> <span class="o">=</span> <span class="n">event_idx</span> <span class="o">%</span> <span class="n">num_notes</span>
+                <span class="k">if</span> <span class="n">event_idx</span> <span class="o">&lt;</span> <span class="n">num_notes</span><span class="p">:</span>
+                    <span class="n">tokens</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;NOTE_ON=</span><span class="si">{</span><span class="n">bar</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="n">note_idx</span><span class="p">]</span><span class="o">.</span><span class="n">pitch</span><span class="si">}</span><span class="s2"> &quot;</span>
+                    <span class="k">if</span> <span class="n">velocity</span><span class="p">:</span>
+                        <span class="n">tokens</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;VELOCITY=</span><span class="si">{</span><span class="n">bar</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="n">note_idx</span><span class="p">]</span><span class="o">.</span><span class="n">velocity</span><span class="si">}</span><span class="s2"> &quot;</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">tokens</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;NOTE_OFF=</span><span class="si">{</span><span class="n">bar</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="n">note_idx</span><span class="p">]</span><span class="o">.</span><span class="n">pitch</span><span class="si">}</span><span class="s2"> &quot;</span>
+                
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">event_idxs</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_time_events</span><span class="p">):</span>
+                    <span class="k">break</span>
+
+                <span class="n">diffs</span> <span class="o">=</span> <span class="p">[</span><span class="n">event</span> <span class="o">-</span> <span class="n">all_time_events</span><span class="p">[</span><span class="n">event_idx</span><span class="p">]</span> <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">all_time_events</span><span class="p">]</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">time_delta</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">diff</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">diff</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">diffs</span><span class="p">)</span> <span class="k">if</span> <span class="n">diff</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">event_idxs</span><span class="p">)</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="k">break</span>
+                <span class="k">if</span> <span class="n">time_delta</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">delta_symb</span> <span class="o">=</span> <span class="n">get_symbolic_duration</span><span class="p">(</span>
+                        <span class="n">time_delta</span><span class="p">,</span> <span class="kc">True</span>
+                    <span class="p">)</span>
+                    <span class="n">delta_val</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span>
+                        <span class="n">NoteLengths</span><span class="p">[</span><span class="n">delta_symb</span><span class="p">]</span><span class="o">.</span><span class="n">value</span> <span class="o">/</span> <span class="n">NoteLengths</span><span class="p">[</span><span class="n">time_unit</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+                    <span class="p">)</span>
+                    <span class="c1">#tokens += f&quot;TIME_DELTA={delta_val} &quot; if delta_val != 0 else &quot;TIME_DELTA=1 &quot;</span>
+                    <span class="k">if</span> <span class="n">delta_val</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span> <span class="n">tokens</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;TIME_DELTA=</span><span class="si">{</span><span class="n">delta_val</span><span class="si">}</span><span class="s2"> &quot;</span>
+
+                <span class="n">list_indexes</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">diff</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">diffs</span><span class="p">)</span> <span class="k">if</span> <span class="n">diff</span> <span class="o">==</span> <span class="n">time_delta</span> <span class="ow">and</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">event_idxs</span><span class="p">]</span>
+                
+                <span class="n">els_on</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">list_indexes</span> <span class="k">if</span> <span class="n">el</span> <span class="o">&lt;</span> <span class="n">num_notes</span><span class="p">]</span>
+                <span class="n">els_off</span> <span class="o">=</span> <span class="p">[</span><span class="n">el</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">list_indexes</span> <span class="k">if</span> <span class="n">el</span> <span class="o">&gt;=</span> <span class="n">num_notes</span><span class="p">]</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">els_on</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">els_off</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">event_idx</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">els_off</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">els_on</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">els_off</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">event_idx</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">els_off</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">els_on</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">els_off</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">event_idx</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">els_on</span><span class="p">)</span>
+                <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">event_idxs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">event_idx</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">bar</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">end_ticks</span> <span class="o">&lt;</span> <span class="n">bar_end</span><span class="p">:</span>
+                <span class="n">delta_symb</span> <span class="o">=</span> <span class="n">get_symbolic_duration</span><span class="p">(</span>
+                        <span class="n">bar_end</span> <span class="o">-</span> <span class="n">bar</span><span class="o">.</span><span class="n">notes</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">end_ticks</span><span class="p">,</span> <span class="kc">True</span>
+                <span class="p">)</span>
+                <span class="n">delta_val</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span>
+                    <span class="n">NoteLengths</span><span class="p">[</span><span class="n">delta_symb</span><span class="p">]</span><span class="o">.</span><span class="n">value</span> <span class="o">/</span> <span class="n">NoteLengths</span><span class="p">[</span><span class="n">time_unit</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+                <span class="p">)</span>
+                <span class="c1">#tokens += f&quot;TIME_DELTA={delta_val} &quot; if delta_val != 0 else &quot;TIME_DELTA=1 &quot;</span>
+                <span class="k">if</span> <span class="n">delta_val</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span> <span class="n">tokens</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;TIME_DELTA=</span><span class="si">{</span><span class="n">delta_val</span><span class="si">}</span><span class="s2"> &quot;</span>
+            <span class="n">tokens</span> <span class="o">+=</span> <span class="s2">&quot;BAR_END &quot;</span>
+        <span class="k">return</span> <span class="n">tokens</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_split_tokens</span><span class="p">(</span>
+        <span class="n">piece_tokens</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="n">token_start</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">token_end</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+        <span class="n">instr_tokens</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">token</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">piece_tokens</span><span class="p">):</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="n">token</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="n">token_start</span><span class="p">:</span>
+                <span class="n">new_instr</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">tok</span> <span class="ow">in</span> <span class="n">piece_tokens</span><span class="p">[</span><span class="n">idx</span><span class="p">:]:</span>
+                    <span class="k">if</span> <span class="n">tok</span> <span class="o">!=</span> <span class="n">token_end</span><span class="p">:</span>
+                        <span class="n">new_instr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tok</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">new_instr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tok</span><span class="p">)</span>
+                        <span class="k">break</span>
+                <span class="n">instr_tokens</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_instr</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">instr_tokens</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">split_tokens_by_track</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">piece_tokens</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;Split tokens list by instrument&quot;&quot;&quot;</span>
+        <span class="n">instr_tokens</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_split_tokens</span><span class="p">(</span><span class="n">piece_tokens</span><span class="p">,</span> <span class="s2">&quot;TRACK_START&quot;</span><span class="p">,</span> <span class="s2">&quot;TRACK_END&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">instr_tokens</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">split_tokens_by_bar</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">instr_tokens</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;Split tokens list by bars&quot;&quot;&quot;</span>
+        <span class="n">bar_tokens</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_split_tokens</span><span class="p">(</span><span class="n">instr_tokens</span><span class="p">,</span> <span class="s2">&quot;BAR_START&quot;</span><span class="p">,</span> <span class="s2">&quot;BAR_END&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">bar_tokens</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">tokens_to_musa</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span>
+        <span class="n">tokens</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="n">absolute_timing</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">time_unit</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;SIXTY_FOUR&quot;</span><span class="p">,</span>
+        <span class="n">time_sig</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">TimingConsts</span><span class="o">.</span><span class="n">DEFAULT_TIME_SIGNATURE</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+        <span class="n">resolution</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">TimingConsts</span><span class="o">.</span><span class="n">RESOLUTION</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Musa</span><span class="p">:</span>
+
+        <span class="c1"># TODO: Support time sig. changes</span>
+
+        <span class="k">if</span> <span class="n">absolute_timing</span><span class="p">:</span>
+            <span class="n">_</span><span class="p">,</span> <span class="n">ticks_bar</span> <span class="o">=</span> <span class="n">ticks_per_bar</span><span class="p">(</span><span class="n">time_sig</span><span class="p">,</span> <span class="n">resolution</span><span class="p">)</span>
+
+        <span class="sd">&quot;&quot;&quot;Converts a str valid tokens sequence in Musa objects.&quot;&quot;&quot;</span>
+        <span class="c1"># Initialize midi file to write</span>
+        <span class="n">midi</span> <span class="o">=</span> <span class="n">Musa</span><span class="p">()</span>
+        <span class="n">midi</span><span class="o">.</span><span class="n">time_sig</span> <span class="o">=</span> <span class="n">TimeSignature</span><span class="p">(</span><span class="n">time_sig</span><span class="p">)</span>
+
+        <span class="n">instruments_tokens</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">split_tokens_by_track</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">inst_idx</span><span class="p">,</span> <span class="n">instr_tokens</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">instruments_tokens</span><span class="p">):</span>
+            <span class="c1"># First index in instr_tokens is the instr program</span>
+            <span class="c1"># We just want the INST token in this loop</span>
+            <span class="n">midi</span><span class="o">.</span><span class="n">instruments</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">Instrument</span><span class="p">(</span>
+                    <span class="n">program</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">instr_tokens</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]),</span>
+                    <span class="n">general_midi</span><span class="o">=</span><span class="kc">True</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+            <span class="n">bar_tokens</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">split_tokens_by_bar</span><span class="p">(</span><span class="n">instr_tokens</span><span class="p">)</span>
+            <span class="n">global_time_delta</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">bar_idx</span><span class="p">,</span> <span class="n">bar</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">bar_tokens</span><span class="p">):</span>
+                <span class="n">bar_obj</span> <span class="o">=</span> <span class="n">Bar</span><span class="p">()</span>
+                <span class="n">midi</span><span class="o">.</span><span class="n">instruments</span><span class="p">[</span><span class="n">inst_idx</span><span class="p">]</span><span class="o">.</span><span class="n">bars</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bar_obj</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">absolute_timing</span><span class="p">:</span>
+                    <span class="n">global_time_delta_ticks</span> <span class="o">=</span> <span class="n">bar_idx</span> <span class="o">*</span> <span class="n">ticks_bar</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">global_time_delta_ticks</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">global_time_delta</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">token</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">bar</span><span class="p">):</span>
+                    <span class="n">key</span> <span class="o">=</span> <span class="n">token</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;TIME_DELTA&quot;</span><span class="p">:</span>
+                        <span class="n">global_time_delta</span> <span class="o">+=</span> <span class="nb">int</span><span class="p">(</span><span class="n">token</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+                    <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;NOTE_ON&quot;</span><span class="p">:</span>
+                        <span class="n">pitch_value</span> <span class="o">=</span> <span class="n">token</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+                        <span class="c1"># if we encode velocity we&#39;ll write its value in the notes</span>
+                        <span class="k">if</span> <span class="n">bar</span><span class="p">[</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;VELOCITY&quot;</span><span class="p">:</span>
+                            <span class="n">vel</span> <span class="o">=</span> <span class="n">bar</span><span class="p">[</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">vel</span> <span class="o">=</span> <span class="mi">127</span>
+                        <span class="n">time_deltas</span> <span class="o">=</span> <span class="p">[]</span>
+                        <span class="k">for</span> <span class="n">tok</span> <span class="ow">in</span> <span class="n">bar</span><span class="p">[</span><span class="n">idx</span><span class="p">:]:</span>
+                            <span class="n">tok_key</span> <span class="o">=</span> <span class="n">tok</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                            <span class="k">if</span> <span class="n">tok_key</span> <span class="o">==</span> <span class="s2">&quot;TIME_DELTA&quot;</span><span class="p">:</span>
+                                <span class="n">time_deltas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">tok</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]))</span>
+                            <span class="k">elif</span> <span class="n">tok</span> <span class="o">==</span> <span class="p">(</span><span class="s2">&quot;NOTE_OFF=&quot;</span> <span class="o">+</span> <span class="n">pitch_value</span><span class="p">):</span>
+                                <span class="c1"># create Note object and append it to the bars ans instr.</span>
+                                <span class="k">if</span> <span class="n">absolute_timing</span><span class="p">:</span>
+                                    <span class="n">global_time_delta</span> <span class="o">=</span> <span class="n">global_time_delta</span>
+                                <span class="n">duration</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">time_deltas</span><span class="p">)</span>
+                                <span class="n">start_time</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">global_time_delta</span> <span class="o">*</span> <span class="n">NoteLengths</span><span class="p">[</span><span class="n">time_unit</span><span class="p">]</span><span class="o">.</span><span class="n">ticks</span><span class="p">())</span> <span class="o">+</span> <span class="n">global_time_delta_ticks</span>
+                                <span class="n">end_time</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">global_time_delta</span> <span class="o">+</span> <span class="n">duration</span><span class="p">)</span> <span class="o">*</span> <span class="n">NoteLengths</span><span class="p">[</span><span class="n">time_unit</span><span class="p">]</span><span class="o">.</span><span class="n">ticks</span><span class="p">())</span> <span class="o">+</span> <span class="n">global_time_delta_ticks</span>
+                                <span class="k">if</span> <span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+                                    <span class="k">continue</span>
+                                <span class="n">note</span> <span class="o">=</span> <span class="n">Note</span><span class="p">(</span>
+                                    <span class="n">pitch</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">pitch_value</span><span class="p">),</span>
+                                    <span class="n">start</span><span class="o">=</span><span class="n">start_time</span><span class="p">,</span>
+                                    <span class="n">end</span><span class="o">=</span><span class="n">end_time</span><span class="p">,</span>
+                                    <span class="n">velocity</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">vel</span><span class="p">),</span>
+                                <span class="p">)</span>
+                                <span class="n">midi</span><span class="o">.</span><span class="n">instruments</span><span class="p">[</span><span class="n">inst_idx</span><span class="p">]</span><span class="o">.</span><span class="n">bars</span><span class="p">[</span><span class="n">bar_idx</span><span class="p">]</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
+                                <span class="k">break</span>
+                            <span class="k">else</span><span class="p">:</span>
+                                <span class="k">continue</span>
+        <span class="k">return</span> <span class="n">midi</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_get_pieces_tokens</span><span class="p">(</span><span class="n">tokens</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;Converts the tokens str that can contain one or more</span>
+<span class="sd">        pieces into a list of pieces that are also lists which contain</span>
+<span class="sd">        one item per token.</span>
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        &gt;&gt;&gt; tokens = &quot;PIECE_START INST=0 ... PIECE_START ...&quot;</span>
+<span class="sd">        &gt;&gt;&gt; dataset_tokens = _get_pieces_tokens(tokens)</span>
+<span class="sd">        &gt;&gt;&gt; [</span>
+<span class="sd">                [&quot;PIECE_START INST=0 ...],</span>
+<span class="sd">                [&quot;PIECE_START ...],</span>
+<span class="sd">            ]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">tokens</span> <span class="o">=</span> <span class="n">tokens</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;PIECE_START&quot;</span><span class="p">)</span>
+        <span class="n">tokens</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="n">dataset_tokens</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">piece</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">:</span>
+            <span class="n">piece_tokens</span> <span class="o">=</span> <span class="n">piece</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+            <span class="n">piece_tokens</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="n">dataset_tokens</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">piece_tokens</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">dataset_tokens</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_tokens_analytics</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">tokens</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Extracts features to aanlyze the given token sequence.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">        tokens: str</span>
+<span class="sd">            A token sequence.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+
+<span class="sd">        analytics: Dict[str, int]</span>
+<span class="sd">            The ``analytics`` dict keys are:</span>
+<span class="sd">                - ``total_tokens``</span>
+<span class="sd">                - ``unique_tokens``</span>
+<span class="sd">                - ``total_notes``</span>
+<span class="sd">                - ``unique_notes``</span>
+<span class="sd">                - ``total_bars``</span>
+<span class="sd">                - ``total_instruments``</span>
+<span class="sd">                - ``unique_instruments``</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Convert str in list of pieces that contain tokens</span>
+        <span class="n">dataset_tokens</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_get_pieces_tokens</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+        <span class="c1"># Start the analysis</span>
+        <span class="n">note_counts</span><span class="p">,</span> <span class="n">bar_counts</span><span class="p">,</span> <span class="n">instr_counts</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>  <span class="c1"># total notes and bars (also repeated note values)</span>
+        <span class="n">total_toks</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">unique_tokens</span><span class="p">,</span> <span class="n">unique_notes</span><span class="p">,</span> <span class="n">unique_instr</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>  <span class="c1"># total non-repeated tokens</span>
+        <span class="n">unique_genres</span><span class="p">,</span> <span class="n">unique_composers</span><span class="p">,</span> <span class="n">unique_periods</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">piece</span><span class="p">,</span> <span class="n">toks</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dataset_tokens</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">tok</span> <span class="ow">in</span> <span class="n">toks</span><span class="p">:</span>
+                <span class="n">total_toks</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">tok</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">unique_tokens</span><span class="p">:</span>
+                    <span class="n">unique_tokens</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tok</span><span class="p">)</span>
+                <span class="k">if</span> <span class="s2">&quot;NOTE_ON&quot;</span> <span class="ow">in</span> <span class="n">tok</span><span class="p">:</span>
+                    <span class="n">note_counts</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="s2">&quot;BAR_START&quot;</span> <span class="ow">in</span> <span class="n">tok</span><span class="p">:</span>
+                    <span class="n">bar_counts</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="s2">&quot;INST&quot;</span> <span class="ow">in</span> <span class="n">tok</span><span class="p">:</span>
+                    <span class="n">instr_counts</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="s2">&quot;NOTE_ON&quot;</span> <span class="ow">in</span> <span class="n">tok</span> <span class="ow">and</span> <span class="n">tok</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">unique_notes</span><span class="p">:</span>
+                    <span class="n">unique_notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tok</span><span class="p">)</span>
+                <span class="k">if</span> <span class="s2">&quot;INST&quot;</span> <span class="ow">in</span> <span class="n">tok</span> <span class="ow">and</span> <span class="n">tok</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">unique_instr</span><span class="p">:</span>
+                    <span class="n">unique_instr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tok</span><span class="p">)</span>
+                <span class="k">if</span> <span class="s2">&quot;GENRE&quot;</span> <span class="ow">in</span> <span class="n">tok</span> <span class="ow">and</span> <span class="n">tok</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">unique_genres</span><span class="p">:</span>
+                    <span class="n">unique_genres</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tok</span><span class="p">)</span>
+                <span class="k">if</span> <span class="s2">&quot;PERIOD&quot;</span> <span class="ow">in</span> <span class="n">tok</span> <span class="ow">and</span> <span class="n">tok</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">unique_periods</span><span class="p">:</span>
+                    <span class="n">unique_periods</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tok</span><span class="p">)</span>
+                <span class="k">if</span> <span class="s2">&quot;COMPOSER&quot;</span> <span class="ow">in</span> <span class="n">tok</span> <span class="ow">and</span> <span class="n">tok</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">unique_composers</span><span class="p">:</span>
+                    <span class="n">unique_composers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tok</span><span class="p">)</span>
+
+        <span class="n">analytics</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;total_pieces&quot;</span><span class="p">:</span> <span class="n">piece</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">&quot;total_tokens&quot;</span><span class="p">:</span> <span class="n">total_toks</span><span class="p">,</span>
+            <span class="s2">&quot;unique_tokens&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">unique_tokens</span><span class="p">),</span>
+            <span class="s2">&quot;total_notes&quot;</span><span class="p">:</span> <span class="n">note_counts</span><span class="p">,</span>
+            <span class="s2">&quot;unique_notes&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">unique_notes</span><span class="p">),</span>
+            <span class="s2">&quot;total_bars&quot;</span><span class="p">:</span> <span class="n">bar_counts</span><span class="p">,</span>
+            <span class="s2">&quot;total_instruments&quot;</span><span class="p">:</span> <span class="n">instr_counts</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">unique_genres</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">analytics</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;unique_genres&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">unique_genres</span><span class="p">)})</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">unique_periods</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">analytics</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;unique_periods&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">unique_periods</span><span class="p">)})</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">unique_composers</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">analytics</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;unique_composers&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">unique_composers</span><span class="p">)})</span>
+
+        <span class="k">return</span> <span class="n">analytics</span></div>
+
+
+<span class="k">def</span> <span class="nf">parse_args</span><span class="p">():</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--output_file&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Output file to write&quot;</span><span class="p">,</span>
+        <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--path&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;path with midi files to tokenize&quot;</span><span class="p">,</span>
+        <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--windowing&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">bool</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Applies windowing to tokenize the files&quot;</span><span class="p">,</span>
+        <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--window_size&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;the bars of the midi file to tokenize for each PIECE token&quot;</span><span class="p">,</span>
+        <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--hop_length&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;the slicing to apply to the midi file to tokenize&quot;</span><span class="p">,</span>
+        <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--num_programs&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Program numbers of the tracks to tokenize&quot;</span><span class="p">,</span>
+        <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--shuffle_tracks&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">bool</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;shuffles the tracks if true and if windowing is also true&quot;</span><span class="p">,</span>
+        <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--track_density&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">bool</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;adds the note density token&quot;</span><span class="p">,</span>
+        <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+    
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c1"># use the arg parser to get the tokenize</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parse_args</span><span class="p">()</span>
+    <span class="n">MMMTokenizer</span><span class="o">.</span><span class="n">tokenize_path</span><span class="p">(</span>
+        <span class="n">output_file</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">output_file</span><span class="p">,</span>
+        <span class="n">path</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">path</span><span class="p">,</span>
+        <span class="n">windowing</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">windowing</span><span class="p">,</span>
+        <span class="n">window_size</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">window_size</span><span class="p">,</span>
+        <span class="n">hop_length</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">hop_length</span><span class="p">,</span>
+        <span class="n">num_programs</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">num_programs</span><span class="p">,</span>
+        <span class="n">shuffle_tracks</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">shuffle_tracks</span><span class="p">,</span>
+        <span class="n">track_density</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">track_density</span><span class="p">,</span>
+    <span class="p">)</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Carlos Hernandez-Olivan.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

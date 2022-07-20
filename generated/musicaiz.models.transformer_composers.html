@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>musicaiz.models.transformer_composers &mdash; Musicaiz 0.0.2 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sg_gallery-binder.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sg_gallery-dataframe.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sg_gallery-rendered-html.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/design-tabs.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="musicaiz.models.transformer_composers.GPTConfigs" href="generated/musicaiz.models.transformer_composers.GPTConfigs.html" />
+    <link rel="prev" title="Models" href="../models.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #222222ff" >
+            <a href="../index.html">
+            <img src="../_static/logo_square_dark.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.0.2
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Musicaiz Documentation:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../loaders.html">Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../structure.html">Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../harmony.html">Harmony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rhythm.html">Rhythm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../algorithms.html">Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tokenizers.html">Tokenizers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../evaluation.html">Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plotters.html">Plotters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../converters.html">Converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../datasets.html">Datasets</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../models.html">Models</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../models.html#transformer-composers">Transformer Composers</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">musicaiz.models.transformer_composers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#transformer-composers">Transformer Composers</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/2-write_midi.html">Writing a MIDI file from scratch</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/3-plot.html">Plotting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">References:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../implementations.html">Implementation Details</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #222222ff" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Musicaiz</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../models.html">Models</a> &raquo;</li>
+      <li>musicaiz.models.transformer_composers</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/generated/musicaiz.models.transformer_composers.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="module-musicaiz.models.transformer_composers">
+<span id="musicaiz-models-transformer-composers"></span><h1>musicaiz.models.transformer_composers<a class="headerlink" href="#module-musicaiz.models.transformer_composers" title="Permalink to this headline">¶</a></h1>
+<section id="transformer-composers">
+<h2>Transformer Composers<a class="headerlink" href="#transformer-composers" title="Permalink to this headline">¶</a></h2>
+<p>This submodule presents a GPT2 model that generates music.</p>
+<p>The tokenization is previously done with <cite>musanalysis</cite>
+<code class="xref py py-func docutils literal notranslate"><span class="pre">MMMTokenizer()</span></code> class.</p>
+<section id="installation">
+<h3>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h3>
+<p>To train these models you should install torch with cuda. We recommend torch version 1.11.0
+with cuda 113:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pip3</span> <span class="n">install</span> <span class="n">torch</span><span class="o">==</span><span class="mf">1.11.0</span> <span class="o">--</span><span class="n">extra</span><span class="o">-</span><span class="n">index</span><span class="o">-</span><span class="n">url</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">download</span><span class="o">.</span><span class="n">pytorch</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">whl</span><span class="o">/</span><span class="n">cu113</span>
+</pre></div>
+</div>
+<p>Apart from that, <cite>apex</cite> is also necessary. To install it properly, follow the instructions in: 
+<a class="reference external" href="https://github.com/NVIDIA/apex">https://github.com/NVIDIA/apex</a></p>
+</section>
+<section id="configurations">
+<h3>Configurations<a class="headerlink" href="#configurations" title="Permalink to this headline">¶</a></h3>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/musicaiz.models.transformer_composers.GPTConfigs.html#musicaiz.models.transformer_composers.GPTConfigs" title="musicaiz.models.transformer_composers.GPTConfigs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GPTConfigs</span></code></a>()</p></td>
+<td><p><p>...</p>
+</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/musicaiz.models.transformer_composers.TrainConfigs.html#musicaiz.models.transformer_composers.TrainConfigs" title="musicaiz.models.transformer_composers.TrainConfigs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TrainConfigs</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dataloaders">
+<h3>Dataloaders<a class="headerlink" href="#dataloaders" title="Permalink to this headline">¶</a></h3>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/musicaiz.models.transformer_composers.build_torch_loaders.html#musicaiz.models.transformer_composers.build_torch_loaders" title="musicaiz.models.transformer_composers.build_torch_loaders"><code class="xref py py-obj docutils literal notranslate"><span class="pre">build_torch_loaders</span></code></a>(dataset_path, ...[, ...])</p></td>
+<td><p>Builds the train a validation dataloaders.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/musicaiz.models.transformer_composers.get_vocabulary.html#musicaiz.models.transformer_composers.get_vocabulary" title="musicaiz.models.transformer_composers.get_vocabulary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_vocabulary</span></code></a>(dataset_path)</p></td>
+<td><p>Read one txt file and retrieves the vocabulary.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="model">
+<h3>Model<a class="headerlink" href="#model" title="Permalink to this headline">¶</a></h3>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/musicaiz.models.transformer_composers.self_attention.html#musicaiz.models.transformer_composers.self_attention" title="musicaiz.models.transformer_composers.self_attention"><code class="xref py py-obj docutils literal notranslate"><span class="pre">self_attention</span></code></a>(query, key, value, device[, ...])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/musicaiz.models.transformer_composers.MultiheadAttention.html#musicaiz.models.transformer_composers.MultiheadAttention" title="musicaiz.models.transformer_composers.MultiheadAttention"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MultiheadAttention</span></code></a>(n_heads, embed_dim, device)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/musicaiz.models.transformer_composers.PositionalEncoding.html#musicaiz.models.transformer_composers.PositionalEncoding" title="musicaiz.models.transformer_composers.PositionalEncoding"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PositionalEncoding</span></code></a>(d_model[, dropout, max_len])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/musicaiz.models.transformer_composers.Embedding.html#musicaiz.models.transformer_composers.Embedding" title="musicaiz.models.transformer_composers.Embedding"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Embedding</span></code></a>(vocab_size, embedding_dim, device)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/musicaiz.models.transformer_composers.ResidualConnection.html#musicaiz.models.transformer_composers.ResidualConnection" title="musicaiz.models.transformer_composers.ResidualConnection"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ResidualConnection</span></code></a>(size, dropout)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/musicaiz.models.transformer_composers.FeedForward.html#musicaiz.models.transformer_composers.FeedForward" title="musicaiz.models.transformer_composers.FeedForward"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FeedForward</span></code></a>(d_model[, dropout, activation])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/musicaiz.models.transformer_composers.Decoder.html#musicaiz.models.transformer_composers.Decoder" title="musicaiz.models.transformer_composers.Decoder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Decoder</span></code></a>(d_model, n_head, dropout, device[, ...])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/musicaiz.models.transformer_composers.GPT2.html#musicaiz.models.transformer_composers.GPT2" title="musicaiz.models.transformer_composers.GPT2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GPT2</span></code></a>(vocab_size, embedding_dim, n_decoders, ...)</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="train">
+<h3>Train<a class="headerlink" href="#train" title="Permalink to this headline">¶</a></h3>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/musicaiz.models.transformer_composers.train.html#musicaiz.models.transformer_composers.train" title="musicaiz.models.transformer_composers.train"><code class="xref py py-obj docutils literal notranslate"><span class="pre">train</span></code></a>(dataset_path[, sequence_length, ...])</p></td>
+<td><p><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="generation">
+<h3>Generation<a class="headerlink" href="#generation" title="Permalink to this headline">¶</a></h3>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/musicaiz.models.transformer_composers.sample_sequence.html#musicaiz.models.transformer_composers.sample_sequence" title="musicaiz.models.transformer_composers.sample_sequence"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sample_sequence</span></code></a>(dataset_path[, ...])</p></td>
+<td><p>This function generates a sequence from a pretrained model.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="gradio-app">
+<h3>Gradio App<a class="headerlink" href="#gradio-app" title="Permalink to this headline">¶</a></h3>
+<p>There’s a simple app for this model built with Gradio.
+To try the demo locally run:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">python</span> <span class="n">models</span><span class="o">/</span><span class="n">transformer_composers</span><span class="o">/</span><span class="n">app</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+</section>
+<section id="examples">
+<h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
+<p>Train model:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">python</span> <span class="n">models</span><span class="o">/</span><span class="n">transformer_composers</span><span class="o">/</span><span class="n">train</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">dataset_path</span><span class="o">=</span><span class="s2">&quot;...&quot;</span> <span class="o">--</span><span class="n">is_splitted</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>Generate Sequence:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">python</span> <span class="n">models</span><span class="o">/</span><span class="n">transformer_composers</span><span class="o">/</span><span class="n">generate</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">dataset_path</span> <span class="n">H</span><span class="p">:</span><span class="o">/</span><span class="n">GitHub</span><span class="o">/</span><span class="n">musicaiz</span><span class="o">-</span><span class="n">datasets</span><span class="o">/</span><span class="n">jsbchorales</span><span class="o">/</span><span class="n">mmm</span><span class="o">/</span><span class="n">all_bars</span> <span class="o">--</span><span class="n">dataset_name</span> <span class="n">jsbchorales</span> <span class="o">--</span><span class="n">save_midi</span> <span class="kc">True</span> <span class="o">--</span><span class="n">file_path</span> <span class="o">../</span><span class="n">midi</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../models.html" class="btn btn-neutral float-left" title="Models" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="generated/musicaiz.models.transformer_composers.GPTConfigs.html" class="btn btn-neutral float-right" title="musicaiz.models.transformer_composers.GPTConfigs" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Carlos Hernandez-Olivan.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

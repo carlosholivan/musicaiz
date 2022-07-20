@@ -1,0 +1,28 @@
+﻿musicaiz.harmony.MinorMelodicTriadDegrees
+=========================================
+
+.. currentmodule:: musicaiz.harmony
+
+.. autoclass:: MinorMelodicTriadDegrees
+
+   
+   .. automethod:: __init__
+
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~MinorMelodicTriadDegrees.FIRST
+      ~MinorMelodicTriadDegrees.SECOND
+      ~MinorMelodicTriadDegrees.THIRD
+      ~MinorMelodicTriadDegrees.FOURTH
+      ~MinorMelodicTriadDegrees.FIFTH
+      ~MinorMelodicTriadDegrees.SIXTH
+      ~MinorMelodicTriadDegrees.SEVENTH
+   
+   

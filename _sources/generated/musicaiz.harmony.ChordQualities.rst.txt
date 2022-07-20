@@ -1,0 +1,43 @@
+﻿musicaiz.harmony.ChordQualities
+===============================
+
+.. currentmodule:: musicaiz.harmony
+
+.. autoclass:: ChordQualities
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~ChordQualities.all_chord_qualities
+      ~ChordQualities.check_quality_exists
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~ChordQualities.MINOR
+      ~ChordQualities.MAJOR
+      ~ChordQualities.AUGMENTED
+      ~ChordQualities.DIMINISHED
+      ~ChordQualities.MAJOR_SEVENTH
+      ~ChordQualities.MINOR_SEVENTH
+      ~ChordQualities.DOMINANT_SEVENTH
+      ~ChordQualities.DIMINISHED_SEVENTH
+      ~ChordQualities.HALF_DIMINISHED_SEVENTH
+      ~ChordQualities.MINOR_MAJOR_SEVENTH
+      ~ChordQualities.AUGMENTED_MAJOR_SEVENTH
+      ~ChordQualities.AUGMENTED_SEVENTH
+      ~ChordQualities.DIMINISHED_MAJOR_SEVENTH
+      ~ChordQualities.DOMINANT_SEVENTH_FLAT_FIVE
+      ~ChordQualities.MAJOR_SEVENTH_FLAT_FIVE
+   
+   

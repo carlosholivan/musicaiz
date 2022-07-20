@@ -1,0 +1,32 @@
+﻿musicaiz.converters.MusaJSON
+============================
+
+.. currentmodule:: musicaiz.converters
+
+.. autoclass:: MusaJSON
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~MusaJSON.__init__
+      ~MusaJSON.add_bar_field
+      ~MusaJSON.add_header_field
+      ~MusaJSON.add_instrument_field
+      ~MusaJSON.add_note_field
+      ~MusaJSON.delete_bar_field
+      ~MusaJSON.delete_header_field
+      ~MusaJSON.delete_instrument_field
+      ~MusaJSON.delete_note_field
+      ~MusaJSON.save
+      ~MusaJSON.to_json
+   
+   
+
+   
+   
+   

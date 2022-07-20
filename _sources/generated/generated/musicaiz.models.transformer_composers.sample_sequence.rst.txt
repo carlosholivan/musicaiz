@@ -1,0 +1,6 @@
+﻿musicaiz.models.transformer\_composers.sample\_sequence
+=======================================================
+
+.. currentmodule:: musicaiz.models.transformer_composers
+
+.. autofunction:: sample_sequence

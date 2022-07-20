@@ -1,0 +1,6 @@
+﻿musicaiz.features.get\_chord\_type\_from\_note\_seq
+===================================================
+
+.. currentmodule:: musicaiz.features
+
+.. autofunction:: get_chord_type_from_note_seq

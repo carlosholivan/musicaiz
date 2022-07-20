@@ -1,0 +1,23 @@
+﻿musicaiz.harmony.AccidentalNotes
+================================
+
+.. currentmodule:: musicaiz.harmony
+
+.. autoclass:: AccidentalNotes
+
+   
+   .. automethod:: __init__
+
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~AccidentalNotes.SHARPS
+      ~AccidentalNotes.FLATS
+   
+   

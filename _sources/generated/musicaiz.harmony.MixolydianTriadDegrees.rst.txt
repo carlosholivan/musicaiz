@@ -1,0 +1,28 @@
+﻿musicaiz.harmony.MixolydianTriadDegrees
+=======================================
+
+.. currentmodule:: musicaiz.harmony
+
+.. autoclass:: MixolydianTriadDegrees
+
+   
+   .. automethod:: __init__
+
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~MixolydianTriadDegrees.FIRST
+      ~MixolydianTriadDegrees.SECOND
+      ~MixolydianTriadDegrees.THIRD
+      ~MixolydianTriadDegrees.FOURTH
+      ~MixolydianTriadDegrees.FIFTH
+      ~MixolydianTriadDegrees.SIXTH
+      ~MixolydianTriadDegrees.SEVENTH
+   
+   
