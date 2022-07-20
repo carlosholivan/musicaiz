@@ -81,8 +81,9 @@ If you use this software for your research, please cite:
 ````
 @article{HernandezOlivan22,
     author    = {
-      Carlos Hernandez{-}Olivan, Ignacio Zay Pinilla, Jose Ramon Beltran},
-    title = {musicaiz: A Python Framework for Symbolic Music Generation, Evaluation and Analysis.},
+      Carlos Hernandez-Olivan and Jose Ramon Beltran},
+    title = {musicaiz: A Python Library for Symbolic Music
+Generation, Analysis and Visualization},
     journal   = {XX},
     volume    = {x},
     number    = {x},
