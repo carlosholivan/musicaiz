@@ -8,3 +8,4 @@ from .tokenizers import *
 from .datasets import *
 from .converters import *
 from .algorithms import *
+from .models import *
