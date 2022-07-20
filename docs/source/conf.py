@@ -17,15 +17,21 @@ sys.path.insert(0, os.path.abspath('../..'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'Musanalysis'
-copyright = '2021, Carlos Hernandez-Olivan'
+project = 'Musicaiz'
+copyright = '2022, Carlos Hernandez-Olivan'
 author = 'Carlos Hernandez-Olivan'
 
-# The short X.Y version
-version = '0.0.0'
+# The version
+from importlib.machinery import SourceFileLoader
+from pathlib import Path
+musicaiz_version = SourceFileLoader(
+    "", "../../musicaiz/version.py"
+).load_module()
 
-# The full version, including alpha/beta/rc tags
-release = '0'
+# The short X.Y version.
+version = musicaiz_version.__version__
+# The full version, including alpha/beta/rc tags.
+release = musicaiz_version.__version__
 
 
 # -- General configuration ---------------------------------------------------
