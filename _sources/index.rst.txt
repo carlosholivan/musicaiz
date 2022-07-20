@@ -31,6 +31,7 @@ Musicaiz can be used for generating, analyzing or evaluating symbolic music data
    plotters
    converters
    datasets
+   models
 
    
 .. toctree::

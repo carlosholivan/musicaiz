@@ -1,0 +1,71 @@
+musicaiz.models.transformer\_composers.FeedForward
+==================================================
+
+.. currentmodule:: musicaiz.models.transformer_composers
+
+.. autoclass:: FeedForward
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~FeedForward.__init__
+      ~FeedForward.add_module
+      ~FeedForward.apply
+      ~FeedForward.bfloat16
+      ~FeedForward.buffers
+      ~FeedForward.children
+      ~FeedForward.cpu
+      ~FeedForward.cuda
+      ~FeedForward.double
+      ~FeedForward.eval
+      ~FeedForward.extra_repr
+      ~FeedForward.float
+      ~FeedForward.forward
+      ~FeedForward.get_buffer
+      ~FeedForward.get_extra_state
+      ~FeedForward.get_parameter
+      ~FeedForward.get_submodule
+      ~FeedForward.half
+      ~FeedForward.load_state_dict
+      ~FeedForward.modules
+      ~FeedForward.named_buffers
+      ~FeedForward.named_children
+      ~FeedForward.named_modules
+      ~FeedForward.named_parameters
+      ~FeedForward.parameters
+      ~FeedForward.register_backward_hook
+      ~FeedForward.register_buffer
+      ~FeedForward.register_forward_hook
+      ~FeedForward.register_forward_pre_hook
+      ~FeedForward.register_full_backward_hook
+      ~FeedForward.register_module
+      ~FeedForward.register_parameter
+      ~FeedForward.requires_grad_
+      ~FeedForward.set_extra_state
+      ~FeedForward.share_memory
+      ~FeedForward.state_dict
+      ~FeedForward.to
+      ~FeedForward.to_empty
+      ~FeedForward.train
+      ~FeedForward.type
+      ~FeedForward.xpu
+      ~FeedForward.zero_grad
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~FeedForward.T_destination
+      ~FeedForward.dump_patches
+      ~FeedForward.training
+   
+   

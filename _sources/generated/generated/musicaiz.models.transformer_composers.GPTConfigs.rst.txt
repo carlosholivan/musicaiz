@@ -1,0 +1,32 @@
+﻿musicaiz.models.transformer\_composers.GPTConfigs
+=================================================
+
+.. currentmodule:: musicaiz.models.transformer_composers
+
+.. autoclass:: GPTConfigs
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~GPTConfigs.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~GPTConfigs.DROPOUT
+      ~GPTConfigs.EMBED_DIM
+      ~GPTConfigs.N_DECODERS
+      ~GPTConfigs.N_HEADS
+      ~GPTConfigs.SEQ_LEN
+   
+   

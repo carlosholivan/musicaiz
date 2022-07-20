@@ -1,0 +1,71 @@
+musicaiz.models.transformer\_composers.Embedding
+================================================
+
+.. currentmodule:: musicaiz.models.transformer_composers
+
+.. autoclass:: Embedding
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Embedding.__init__
+      ~Embedding.add_module
+      ~Embedding.apply
+      ~Embedding.bfloat16
+      ~Embedding.buffers
+      ~Embedding.children
+      ~Embedding.cpu
+      ~Embedding.cuda
+      ~Embedding.double
+      ~Embedding.eval
+      ~Embedding.extra_repr
+      ~Embedding.float
+      ~Embedding.forward
+      ~Embedding.get_buffer
+      ~Embedding.get_extra_state
+      ~Embedding.get_parameter
+      ~Embedding.get_submodule
+      ~Embedding.half
+      ~Embedding.load_state_dict
+      ~Embedding.modules
+      ~Embedding.named_buffers
+      ~Embedding.named_children
+      ~Embedding.named_modules
+      ~Embedding.named_parameters
+      ~Embedding.parameters
+      ~Embedding.register_backward_hook
+      ~Embedding.register_buffer
+      ~Embedding.register_forward_hook
+      ~Embedding.register_forward_pre_hook
+      ~Embedding.register_full_backward_hook
+      ~Embedding.register_module
+      ~Embedding.register_parameter
+      ~Embedding.requires_grad_
+      ~Embedding.set_extra_state
+      ~Embedding.share_memory
+      ~Embedding.state_dict
+      ~Embedding.to
+      ~Embedding.to_empty
+      ~Embedding.train
+      ~Embedding.type
+      ~Embedding.xpu
+      ~Embedding.zero_grad
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Embedding.T_destination
+      ~Embedding.dump_patches
+      ~Embedding.training
+   
+   
