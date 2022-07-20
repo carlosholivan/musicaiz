@@ -1,6 +1,0 @@
-﻿musicaiz.rhythm.\_find\_nearest
-===============================
-
-.. currentmodule:: musicaiz.rhythm
-
-.. autofunction:: _find_nearest

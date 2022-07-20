@@ -1,6 +1,0 @@
-musicaiz.models.transformer\_composers.train
-============================================
-
-.. currentmodule:: musicaiz.models.transformer_composers
-
-.. autofunction:: train

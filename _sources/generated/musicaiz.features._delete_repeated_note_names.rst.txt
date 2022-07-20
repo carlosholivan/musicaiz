@@ -1,6 +1,0 @@
-﻿musicaiz.features.\_delete\_repeated\_note\_names
-=================================================
-
-.. currentmodule:: musicaiz.features
-
-.. autofunction:: _delete_repeated_note_names

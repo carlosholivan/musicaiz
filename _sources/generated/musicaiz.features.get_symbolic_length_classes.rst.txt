@@ -1,6 +1,0 @@
-﻿musicaiz.features.get\_symbolic\_length\_classes
-================================================
-
-.. currentmodule:: musicaiz.features
-
-.. autofunction:: get_symbolic_length_classes

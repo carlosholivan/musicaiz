@@ -1,6 +1,0 @@
-﻿musicaiz.eval.model\_features\_violinplot
-=========================================
-
-.. currentmodule:: musicaiz.eval
-
-.. autofunction:: model_features_violinplot

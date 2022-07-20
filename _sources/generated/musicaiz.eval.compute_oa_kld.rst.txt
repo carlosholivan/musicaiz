@@ -1,6 +1,0 @@
-﻿musicaiz.eval.compute\_oa\_kld
-==============================
-
-.. currentmodule:: musicaiz.eval
-
-.. autofunction:: compute_oa_kld

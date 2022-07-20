@@ -1,6 +1,0 @@
-﻿musicaiz.rhythm.ms\_per\_tick
-=============================
-
-.. currentmodule:: musicaiz.rhythm
-
-.. autofunction:: ms_per_tick

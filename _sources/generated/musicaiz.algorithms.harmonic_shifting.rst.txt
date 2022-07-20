@@ -1,6 +1,0 @@
-﻿musicaiz.algorithms.harmonic\_shifting
-======================================
-
-.. currentmodule:: musicaiz.algorithms
-
-.. autofunction:: harmonic_shifting

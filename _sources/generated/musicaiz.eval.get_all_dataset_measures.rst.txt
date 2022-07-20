@@ -1,6 +1,0 @@
-﻿musicaiz.eval.get\_all\_dataset\_measures
-=========================================
-
-.. currentmodule:: musicaiz.eval
-
-.. autofunction:: get_all_dataset_measures

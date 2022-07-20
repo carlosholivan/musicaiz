@@ -1,6 +1,0 @@
-﻿musicaiz.features.compute\_ssm
-==============================
-
-.. currentmodule:: musicaiz.features
-
-.. autofunction:: compute_ssm

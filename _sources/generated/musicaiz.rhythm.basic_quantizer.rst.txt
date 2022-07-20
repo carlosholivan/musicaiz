@@ -1,6 +1,0 @@
-﻿musicaiz.rhythm.basic\_quantizer
-================================
-
-.. currentmodule:: musicaiz.rhythm
-
-.. autofunction:: basic_quantizer

@@ -1,6 +1,0 @@
-﻿musicaiz.features.get\_harmonic\_density
-========================================
-
-.. currentmodule:: musicaiz.features
-
-.. autofunction:: get_harmonic_density

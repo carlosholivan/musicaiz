@@ -1,6 +1,0 @@
-﻿musicaiz.features.pitch\_class\_histogram
-=========================================
-
-.. currentmodule:: musicaiz.features
-
-.. autofunction:: pitch_class_histogram

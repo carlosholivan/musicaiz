@@ -1,6 +1,0 @@
-﻿musicaiz.features.plot\_rmss
-============================
-
-.. currentmodule:: musicaiz.features
-
-.. autofunction:: plot_rmss

@@ -1,6 +1,0 @@
-﻿musicaiz.features.predict\_chords
-=================================
-
-.. currentmodule:: musicaiz.features
-
-.. autofunction:: predict_chords

@@ -1,6 +1,0 @@
-﻿musicaiz.features.self\_similarity\_louie
-=========================================
-
-.. currentmodule:: musicaiz.features
-
-.. autofunction:: self_similarity_louie

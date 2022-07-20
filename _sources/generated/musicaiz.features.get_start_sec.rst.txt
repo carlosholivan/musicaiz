@@ -1,6 +1,0 @@
-﻿musicaiz.features.get\_start\_sec
-=================================
-
-.. currentmodule:: musicaiz.features
-
-.. autofunction:: get_start_sec

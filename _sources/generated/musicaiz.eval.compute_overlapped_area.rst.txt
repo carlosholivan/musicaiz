@@ -1,6 +1,0 @@
-﻿musicaiz.eval.compute\_overlapped\_area
-=======================================
-
-.. currentmodule:: musicaiz.eval
-
-.. autofunction:: compute_overlapped_area

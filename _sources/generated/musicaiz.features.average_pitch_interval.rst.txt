@@ -1,6 +1,0 @@
-﻿musicaiz.features.average\_pitch\_interval
-==========================================
-
-.. currentmodule:: musicaiz.features
-
-.. autofunction:: average_pitch_interval

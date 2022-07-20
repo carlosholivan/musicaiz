@@ -1,6 +1,0 @@
-﻿musicaiz.features.get\_last\_note\_class
-========================================
-
-.. currentmodule:: musicaiz.features
-
-.. autofunction:: get_last_note_class

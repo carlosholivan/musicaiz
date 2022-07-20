@@ -1,6 +1,0 @@
-musicaiz.models.transformer\_composers.get\_vocabulary
-======================================================
-
-.. currentmodule:: musicaiz.models.transformer_composers
-
-.. autofunction:: get_vocabulary

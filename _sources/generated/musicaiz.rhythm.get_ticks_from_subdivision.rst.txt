@@ -1,6 +1,0 @@
-﻿musicaiz.rhythm.get\_ticks\_from\_subdivision
-=============================================
-
-.. currentmodule:: musicaiz.rhythm
-
-.. autofunction:: get_ticks_from_subdivision

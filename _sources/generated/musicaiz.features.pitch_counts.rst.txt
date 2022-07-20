@@ -1,6 +1,0 @@
-﻿musicaiz.features.pitch\_counts
-===============================
-
-.. currentmodule:: musicaiz.features
-
-.. autofunction:: pitch_counts

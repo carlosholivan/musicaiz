@@ -1,6 +1,0 @@
-﻿musicaiz.features.plot\_ssm
-===========================
-
-.. currentmodule:: musicaiz.features
-
-.. autofunction:: plot_ssm

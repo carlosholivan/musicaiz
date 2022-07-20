@@ -1,6 +1,0 @@
-﻿musicaiz.features.note\_length\_transition\_matrix
-==================================================
-
-.. currentmodule:: musicaiz.features
-
-.. autofunction:: note_length_transition_matrix

@@ -1,6 +1,0 @@
-musicaiz.models.transformer\_composers.build\_torch\_loaders
-============================================================
-
-.. currentmodule:: musicaiz.models.transformer_composers
-
-.. autofunction:: build_torch_loaders

@@ -1,6 +1,0 @@
-﻿musicaiz.rhythm.ticks\_per\_bar
-===============================
-
-.. currentmodule:: musicaiz.rhythm
-
-.. autofunction:: ticks_per_bar

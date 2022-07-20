@@ -1,6 +1,0 @@
-﻿musicaiz.features.get\_labeled\_beat\_vector
-============================================
-
-.. currentmodule:: musicaiz.features
-
-.. autofunction:: get_labeled_beat_vector

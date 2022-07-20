@@ -1,6 +1,0 @@
-﻿musicaiz.features.predict\_scales\_degrees
-==========================================
-
-.. currentmodule:: musicaiz.features
-
-.. autofunction:: predict_scales_degrees

@@ -1,6 +1,0 @@
-﻿musicaiz.features.\_self\_similarity
-====================================
-
-.. currentmodule:: musicaiz.features
-
-.. autofunction:: _self_similarity

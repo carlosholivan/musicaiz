@@ -1,6 +1,0 @@
-﻿musicaiz.features.binarize\_self\_similarity\_matrix
-====================================================
-
-.. currentmodule:: musicaiz.features
-
-.. autofunction:: binarize_self_similarity_matrix

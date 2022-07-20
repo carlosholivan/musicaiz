@@ -1,6 +1,0 @@
-﻿musicaiz.features.\_extract\_note\_positions
-============================================
-
-.. currentmodule:: musicaiz.features
-
-.. autofunction:: _extract_note_positions

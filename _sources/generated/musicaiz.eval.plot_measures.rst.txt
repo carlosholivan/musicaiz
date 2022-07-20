@@ -1,6 +1,0 @@
-﻿musicaiz.eval.plot\_measures
-============================
-
-.. currentmodule:: musicaiz.eval
-
-.. autofunction:: plot_measures

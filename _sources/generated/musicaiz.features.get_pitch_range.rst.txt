@@ -1,6 +1,0 @@
-﻿musicaiz.features.get\_pitch\_range
-===================================
-
-.. currentmodule:: musicaiz.features
-
-.. autofunction:: get_pitch_range

@@ -1,6 +1,0 @@
-﻿musicaiz.features.get\_ioi
-==========================
-
-.. currentmodule:: musicaiz.features
-
-.. autofunction:: get_ioi

@@ -1,6 +1,0 @@
-﻿musicaiz.features.get\_note\_classes
-====================================
-
-.. currentmodule:: musicaiz.features
-
-.. autofunction:: get_note_classes

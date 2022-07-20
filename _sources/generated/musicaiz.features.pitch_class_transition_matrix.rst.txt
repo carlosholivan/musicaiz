@@ -1,6 +1,0 @@
-﻿musicaiz.features.pitch\_class\_transition\_matrix
-==================================================
-
-.. currentmodule:: musicaiz.features
-
-.. autofunction:: pitch_class_transition_matrix
