@@ -1,11 +1,9 @@
-### TODOs
-- [ ] datasets submodule to download and process common datasets for music generation
-
 ## Improvements
 ### Converters
 - [ ] Add protobufs.
 - [ ] Add MusicXML
 - [ ] Add ABC notation.
+- [ ] JSON to musicaiz objects.
 
 ### Rhythm
 - [ ] Support time signature changes in middle of a piece when loading with ``loaders.Musa`` object.
@@ -20,7 +18,6 @@ numbers can overlap and the plot won't be clean.
 - [ ] Measure just the correct interval (and not all the possible intervals based on the pitch) if note name is known (now it measures all the possible intervals given pitch, but if we do know the note name the interval is just one)
 
 ### Features
-- [ ] Implement paper for rhythm patterns detection
 - [ ] Initialize note names correctly if tonality is known (know the note name initialization is arbitrary, can be the enharmonic or not)
 
 ### Tokenizers
