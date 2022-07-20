@@ -53,6 +53,7 @@ htmlcov/
 
 # binary data
 binaries/
+results/
 
 # notebooks
 notebooks/
