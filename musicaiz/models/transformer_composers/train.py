@@ -1,7 +1,12 @@
 import logging
 from datetime import datetime
+import warnings
 from tqdm import tqdm
-from apex import amp
+try:
+    from apex import amp
+except warnings.warn(Warning()):
+    print("No module apex installed!")
+
 import json
 from pathlib import Path
 import argparse
