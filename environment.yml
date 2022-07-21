@@ -8,6 +8,10 @@ dependencies:
   - numpy>=1.17.0
   - jupyter
   - pip
+  - coverage
+  - pytest-mpl
+  - pytest-cov
+  - pytest
 
   - pip:
     - -r requirements.txt
