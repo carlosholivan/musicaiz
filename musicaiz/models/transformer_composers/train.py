@@ -4,8 +4,8 @@ import warnings
 from tqdm import tqdm
 try:
     from apex import amp
-except warnings.warn(Warning()):
-    print("No module apex installed!")
+except ImportError:
+    amp = None
 
 import json
 from pathlib import Path
