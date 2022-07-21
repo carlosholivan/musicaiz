@@ -21,17 +21,6 @@ jobs:
             fail-fast: false
             matrix:
                 include:
-                    - os: ubuntu-18.04
-                      python-version: "3.6"
-                      envfile: "environment.yml"
-                      channel-priority: "flexible"
-                      name: "Minimal dependencies"
-
-                    - os: ubuntu-latest
-                      python-version: "3.7"
-                      channel-priority: "strict"
-                      envfile: "environment.yml"
-
                     - os: ubuntu-latest
                       python-version: "3.8"
                       channel-priority: "strict"

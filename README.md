@@ -4,8 +4,8 @@
 
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/musicaiz)](https://pypi.org/project/musicaiz)
-![tests](https://github.com/carlosholivan/musicaiz/actions/workflows/pytest.yml/badge.svg)
-![Build Status](https://github.com/carlosholivan/musicaiz/actions/workflows/coverage.yml/badge.svg)
+[![CI](https://github.com/carlosholivan/musicaiz/actions/workflows/ci.yml/badge.svg)](https://github.com/carlosholivan/musicaiz/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/carlosholivan/musicaiz/branch/main/graph/badge.svg?token=ULWnUHaIJC)](https://codecov.io/gh/carlosholivan/musicaiz)
 [![Supported Platforms](https://img.shields.io/badge/platforms-macOS%20%7C%20Windows%20%7C%20Linux-green)](https://pypi.org/project/musanalysis)
 [![PyPI - Downloads](https://img.shields.io/pypi/dm/musicaiz)](https://pypistats.org/packages/musicaiz)
 
