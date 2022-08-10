@@ -4,9 +4,6 @@ import json
 from dataclasses import dataclass
 
 
-from musicaiz.loaders import Musa
-
-
 @dataclass
 class NoteJSON:
     start: int  # ticks
@@ -67,7 +64,7 @@ class MusaJSON:
 
     def __init__(
         self,
-        musa_obj: Musa,
+        musa_obj,  # An initialized Musa object
     ):
         self.midi = musa_obj
         self.json = self.to_json(musa_obj=self.midi)
