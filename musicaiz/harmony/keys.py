@@ -1258,6 +1258,13 @@ class Tonality(Enum):
     )
 
     @property
+    def relative(self) -> Tonality:
+
+        for tonality in Tonality.__members__.values():
+            if self.value[1] == tonality.value[1] and self.value[2] == tonality.value[2] and self.value[3] != tonality.value[3]:
+                return tonality
+
+    @property
     def root_note(self) -> int:
         return self.value[0]
 
