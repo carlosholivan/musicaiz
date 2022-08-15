@@ -118,26 +118,25 @@ class Musa:
         "data",
         "instruments",
         "bars",
-        "structure",
         "is_quantized",
         "notes",
         "total_bars",
         "absolute_timing",
-        "cut_notes"
+        "cut_notes",
     ]
 
     def __init__(
         self,
         file: Optional[Union[str, TextIO, Path]] = None,
         structure: str = "instruments",
-        quantize: bool = True,
+        quantize: bool = False,
         quantize_note: Optional[str] = "sixteenth",
         cut_notes: bool = False,
         tonality: Optional[str] = None,
         time_sig: str = TimingConsts.DEFAULT_TIME_SIGNATURE.value,
         bpm: int = TimingConsts.DEFAULT_BPM.value,
         resolution: int = TimingConsts.RESOLUTION.value,
-        absolute_timing: bool = True
+        absolute_timing: bool = True,
     ):
 
         self.file = None
