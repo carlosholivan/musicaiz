@@ -50,7 +50,8 @@ Music Perception: An Interdisciplinary Journal, 31(1), 59-67.
 """
 
 from .harmonic_shift import (
-    harmonic_shifting
+    harmonic_shifting,
+    scale_change
 )
 
 from .key_profiles import (
@@ -70,6 +71,7 @@ from .key_profiles import (
 
 __all__ = [
     "harmonic_shifting",
+    "scale_change",
     "KrumhanslKessler",
     "Temperley",
     "AlbrechtShanahan",
