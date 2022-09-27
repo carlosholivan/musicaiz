@@ -1,5 +1,5 @@
 from musicaiz.converters.protobuf import musicaiz_pb2
-from musicaiz.structure import Note, Instrument
+from musicaiz.structure import Note, Instrument, Bar
 from musicaiz.loaders import Musa
 
 
@@ -85,6 +85,11 @@ def proto_to_musa(protobuf) -> Musa:
 
     """
     Converts a protobuf to a Musa object.
+    The Musa object will be constructed
+    with the same way data structure of the proto.
+    Ex.: If the notes in the proto are organized inside bars, the
+    Musa object will store the notes inside Bar Bar objects, as if
+    we initialized the Musa object with `structure="bars"` argument.
 
     Returns
     -------
@@ -104,16 +109,47 @@ def proto_to_musa(protobuf) -> Musa:
                 general_midi=False,
             )
         )
-        for note in instr.notes:
-            # Initialize the note with musicaiz `Note` object
-            midi.instruments[i].notes.append(
-                Note(
-                    pitch=note.pitch,
-                    start=note.start,
-                    end=note.end,
-                    velocity=note.velocity,
-                    bpm=protobuf.bpm,
-                    resolution=protobuf.resolution,
+        if len(instr.notes) != 0:
+            # the notes are stored inside instruments, but not in bars
+            for note in instr.notes:
+                # Initialize the note with musicaiz `Note` object
+                midi.instruments[i].notes.append(
+                    Note(
+                        pitch=note.pitch,
+                        start=note.start_ticks,
+                        end=note.end_ticks,
+                        velocity=note.velocity,
+                        bpm=bar.bpm,
+                        resolution=bar.resolution,
+                    )
                 )
-            )
+        elif len(instr.notes) == 0:
+            # the notes are stored inside bars that are stored inside instruments
+            for j, bar in enumerate(instr.bars):
+                # Initialize the bar with musicaiz `Bar` object
+                midi.instruments[i].bars.append(
+                    Bar(
+                        time_sig=bar.time_sig,
+                        bpm=bar.bpm,
+                        resolution=bar.resolution,
+                        absolute_timing=bar.absolute_timing,
+                    )
+                )
+                for note in bar.notes:
+                    midi.instruments[i].bars[j].notes.append(
+                        Note(
+                            pitch=note.pitch,
+                            start=note.start_ticks,
+                            end=note.end_ticks,
+                            velocity=note.velocity,
+                            bpm=bar.bpm,
+                            resolution=bar.resolution,
+                        )
+                )
+                midi.instruments[i].bars[j].note_density = bar.note_density
+                midi.instruments[i].bars[j].harmonic_density = bar.harmonic_density
+                midi.instruments[i].bars[j].start_ticks = bar.start_ticks
+                midi.instruments[i].bars[j].end_ticks = bar.end_ticks
+                midi.instruments[i].bars[j].start_sec = bar.start_sec
+                midi.instruments[i].bars[j].end_sec = bar.end_sec
     return midi
