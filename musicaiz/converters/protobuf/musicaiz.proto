@@ -1,0 +1,96 @@
+syntax = "proto3";
+
+package musicaiz;
+
+// protobuf of Musa object initialized with the arg `structure="bars"`
+// protoc musicaiz/converters/protobuf/music $1.proto --python_out=. --grpc_python_out=.
+
+message Musa {
+
+    repeated TimeSignature time_signatures = 5;
+    repeated Instrument instruments = 6;
+
+    message Note {
+
+    }
+
+    // time attributes: musicaiz.rhythm
+    message TimeSignature {
+        int32 num = 2;
+        int32 denom = 3;
+    }
+
+    // harmony attributes: musicaiz.harmony
+    message Tonality {
+
+    }
+
+    message Instrument {
+        // Instrument index.
+        int32 instrument = 1;
+        // The n program of the instrument.
+        int32 program = 2;
+        // The name of the instrument.
+        string name = 3;
+        // The instrument's family.
+        string family = 4;
+        bool is_drum = 5;
+        repeated Bar bars = 6;
+        repeated Note notes = 7;
+
+        message Note {
+            int32 pitch = 1;
+            string pitch_name = 2;
+            string note_name = 3;
+            string octave = 4;
+            bool ligated = 5;
+
+            // Timing inf of the Note
+            int32 start_ticks = 6;
+            int32 end_ticks = 7;
+            float start_sec = 8;
+            float end_sec = 9;
+            string symbolic = 10;
+    
+            int32 velocity = 11;
+        }
+
+        message Bar {
+            int32 bpm = 1;
+            string time_sig = 2;
+            int32 resolution = 3;
+            bool absolute_timing = 4;
+
+            // Timing inf of the Bar
+            int32 note_density = 5;
+            int32 harmonic_density = 6;
+            int32 start_ticks = 7;
+            int32 end_ticks = 8;
+            float start_sec = 9;
+            float end_sec = 10;
+
+            repeated Note notes = 11;
+
+            message Note {
+                int32 pitch = 1;
+                string pitch_name = 2;
+                string note_name = 3;
+                string octave = 4;
+                bool ligated = 5;
+    
+                // Timing inf of the Note
+                int32 start_ticks = 6;
+                int32 end_ticks = 7;
+                float start_sec = 8;
+                float end_sec = 9;
+                string symbolic = 10;
+        
+                int32 velocity = 11;
+            }
+        }
+
+    }
+
+
+
+}

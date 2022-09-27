@@ -29,10 +29,22 @@ from .musa_json import (
 )
 
 from .pretty_midi_musa import (
-    pretty_midi_note_to_musanalysis
+    pretty_midi_note_to_musanalysis,
+    musa_to_prettymidi
 )
+
+from .musa_protobuf import (
+    musa_to_proto,
+    proto_to_musa
+)
+
+from . import protobuf
 
 __all__ = [
     "MusaJSON",
     "pretty_midi_note_to_musanalysis",
+    "musa_to_prettymidi",
+    "protobuf",
+    "musa_to_proto",
+    "proto_to_musa"
 ]

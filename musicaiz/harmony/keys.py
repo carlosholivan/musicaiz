@@ -1258,6 +1258,13 @@ class Tonality(Enum):
     )
 
     @property
+    def relative(self) -> Tonality:
+
+        for tonality in Tonality.__members__.values():
+            if self.value[1] == tonality.value[1] and self.value[2] == tonality.value[2] and self.value[3] != tonality.value[3]:
+                return tonality
+
+    @property
     def root_note(self) -> int:
         return self.value[0]
 
@@ -1348,7 +1355,31 @@ class Tonality(Enum):
 
     def scale_notes(self, scale: str) -> List[NoteClassBase]:
         """This method returns the notes of the scale corresponding to
-        a submode."""
+        a submode.
+        This is only used in the case of minor scales (harmonic or melodic) and greek scales.
+        The values that support the scales arg are: :func:`~musicaiz.harmony.Scales`.
+        
+        Examples
+        --------
+        Major tonalities:
+
+        >>> tonality = Tonality.D_MAJOR
+        >>> tonality.scale_notes("MAJOR")
+        >>> tonality.scale_notes("LYDIAN")
+        >>> tonality.scale_notes("LYDIAN")
+        >>> tonality.scale_notes("MIXOLYDIAN")
+        >>> tonality.scale_notes("IONIAN")
+
+        Minor tonalities:
+        
+        >>> tonality = Tonality.C_MINOR
+        >>> tonality.scale_notes("NATURAL")
+        >>> tonality.scale_notes("HARMONIC")
+        >>> tonality.scale_notes("DORIAN")
+        >>> tonality.scale_notes("PHRYGIAN")
+        >>> tonality.scale_notes("LOCRIAN")
+        >>> tonality.scale_notes("AEOLIAN")
+        """
         # Obtain altered notes depending on the scale (minor harmonic...)
         if isinstance(scale, str):
             scale_inst = self.scales(scale)  # initialize scale

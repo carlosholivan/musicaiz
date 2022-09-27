@@ -1,12 +1,13 @@
 pretty_midi==0.2.9
 pytest==6.2.4
-matplotlib==3.4.3
+matplotlib>=3.4.3
 seaborn
 coverage==6.2
 pre-commit
 tqdm
 plotly==5.8.0
 mypy==0.960
+protobuf==4.21.3
 
 # For models submodule
 networkx==2.8.3

@@ -8,14 +8,14 @@ from musicaiz.converters import pretty_midi_note_to_musanalysis
 
 
 def harmonic_shifting(
-    origin_notes: List[Note],
+    origin_notes: List[List[Note]],
     origin_progression: List[List[str]],
     origin_tonality: str,
     origin_scale: str,
     target_progression: List[List[str]],
     target_tonality: str,
     target_scale: str,
-) -> List[Note]:
+) -> List[List[Note]]:
 
     """
     This function maps the pitches of a midi to a new scale and chord progression.
@@ -182,6 +182,135 @@ def harmonic_shifting(
                 else:
                     note.pitch = new_pitch + 12
 
+    return origin_notes
+
+
+def scale_change(
+    origin_notes: List[Note],
+    origin_tonality: str,
+    origin_scale: str,
+    target_tonality: str,
+    target_scale: str,
+    correction: bool
+) -> List[Note]:
+
+    """
+    This function maps the pitches of a midi to a new scale.
+    To do that, the position of the note in the original scale is
+    extracted and then it is used to obtain the pitch in the target
+    scale.
+    The pitches are mapped to the same octave than the original ones.
+
+    Parameters
+    ----------
+    origin_notes: List[Note]
+        the original midi data.
+
+    origin_tonality: str
+        the origin tonality.
+
+    origin_scale: str
+        the origin scale.
+
+    target_tonality: str
+        the target scale.
+
+    target_scale: str
+        the target scale.
+    
+    correction: bool
+        if we want to correct the "wrong" input notes.
+        If True it corrects the non belonging notes by adding a semitone to the
+        input note that does not belong to the origin_scale.
+        If False the algorithm does not correct the input notes. The note that does
+        not belong to the input scale will be mapped by calculating the
+        difference in semitones between the note and the tonic of the scale, and
+        then the semitones are added to the tonic of the target scale to obtain the target note.
+
+    Returns
+    -------
+    origin_notes: List[Note]
+
+    Examples
+    --------
+    Example of 2 bars, 1st bar with 3 notes and 2nd bar with 1 note:
+
+    >>> origin_notes = [
+    >>>         Note(pitch=43, start=0, end=96, velocity=82), # G
+    >>>         Note(pitch=58, start=96, end=96*2, velocity=82), # A#
+    >>>         Note(pitch=60, start=96*2, end=96*3, velocity=82), # C
+    >>>         Note(pitch=72, start=96*4, end=96*5, velocity=44) # C
+    >>> ]
+    >>> origin_tonality = "G_MINOR"
+    >>> origin_scale = "NATURAL"
+    >>> target_tonality = "C_MINOR"
+    >>> target_scale = "NATURAL"
+    """
+
+    # Get the note position in the scale
+    orig_tonality = Tonality[origin_tonality]
+    orig_scale_notes = [note.name for note in orig_tonality.scale_notes(origin_scale)]
+
+    target_tonality = Tonality[target_tonality]
+    target_scale_notes = [note.name for note in target_tonality.scale_notes(target_scale)]
+
+    for note in origin_notes:
+        orig_note_name = pm.note_number_to_name(note.pitch)
+
+        # Extract octave
+        octave = int("".join(filter(str.isdigit, orig_note_name)))
+
+        # Get the note name without the octave
+        orig_note_name = orig_note_name.replace(str(octave), "")
+
+        if orig_note_name in orig_scale_notes:
+            note_position = orig_scale_notes.index(orig_note_name)
+        else:
+            if correction is True:
+                # Get note 1 semitone up than the original
+                orig_note_name = orig_note_name.replace("#", "_SHARP")
+                orig_note_name = orig_note_name.replace("b", "_FLAT")
+                orig_note_name = NoteClassBase[orig_note_name].add_sharp.name
+                note_position = orig_scale_notes.index(orig_note_name)
+            else:
+                orig_tonic = orig_scale_notes[0]
+                orig_tonic = orig_tonic.replace("_SHARP", "#")
+                orig_tonic = orig_tonic.replace("_FLAT", "b")
+                orig_tonic_pitch = pm.note_name_to_number(orig_tonic + str(octave))
+                diff_semitones = abs(note.pitch - orig_tonic_pitch)
+
+                target_tonic = target_scale_notes[0]
+                target_tonic = target_tonic.replace("_SHARP", "#")
+                target_tonic = target_tonic.replace("_FLAT", "b")
+                target_tonic_pitch = pm.note_name_to_number(target_tonic + str(octave))
+                target_pitch = diff_semitones + target_tonic_pitch
+                target_note_name = pm.note_number_to_name(target_pitch)
+
+                target_octave = int("".join(filter(str.isdigit, target_note_name)))
+                if target_octave < octave:
+                    target_pitch += 12
+                elif target_octave > octave:
+                    target_pitch -= 12
+                new_note_name = target_note_name.replace(str(octave), "")
+                new_note_name = new_note_name.replace("_SHARP", "#")
+                new_note_name = new_note_name.replace("_FLAT", "b")
+
+                note.pitch = target_pitch
+                note.note_name = new_note_name
+                note.pitch_name = target_note_name
+                continue
+
+        target_note_name = target_scale_notes[note_position]
+
+        target_note_name = target_note_name.replace("_SHARP", "#")
+        target_note_name = target_note_name.replace("_FLAT", "b")
+
+        new_note_name = target_note_name + str(octave)
+        new_pitch = pm.note_name_to_number(new_note_name)
+
+        note.pitch = new_pitch
+        note.note_name = target_note_name
+        note.pitch_name = new_note_name
     return origin_notes
 
 

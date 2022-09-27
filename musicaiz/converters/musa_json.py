@@ -4,9 +4,6 @@ import json
 from dataclasses import dataclass
 
 
-from musicaiz.loaders import Musa
-
-
 @dataclass
 class NoteJSON:
     start: int  # ticks
@@ -67,7 +64,7 @@ class MusaJSON:
 
     def __init__(
         self,
-        musa_obj: Musa,
+        musa_obj,  # An initialized Musa object
     ):
         self.midi = musa_obj
         self.json = self.to_json(musa_obj=self.midi)
@@ -167,23 +164,23 @@ class MusaJSON:
             raise ValueError(f"The input n_program {n_program} is not in the current json. The n_programs of the instruments in the current json are {progrs}.")
 
     def add_bar_field():
-        pass
+        raise NotImplementedError
 
     def delete_bar_field():
-        pass
+        raise NotImplementedError
 
     def add_note_field():
-        pass
+        raise NotImplementedError
 
     def delete_note_field():
-        pass
+        raise NotImplementedError
 
     def add_header_field():
-        pass
+        raise NotImplementedError
 
     def delete_header_field():
-        pass
+        raise NotImplementedError
 
 
 class JSONMusa:
-    pass
+    raise NotImplementedError

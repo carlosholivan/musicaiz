@@ -129,5 +129,5 @@ def advanced_quantizer(
                     input_notes[i].start_ticks = input_notes[i].start_ticks + abs(delta_tick_q)
                     input_notes[i].end_ticks = input_notes[i].end_ticks + abs(delta_tick_q)
 
-        input_notes[i].start_sec = input_notes[i].start_ticks * ms_per_tick(bpm)
-        input_notes[i].end_sec =input_notes[i].end_ticks * ms_per_tick(bpm)
+        input_notes[i].start_sec = input_notes[i].start_ticks * ms_per_tick(bpm) // 1000
+        input_notes[i].end_sec = input_notes[i].end_ticks * ms_per_tick(bpm) // 1000

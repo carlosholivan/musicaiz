@@ -138,6 +138,7 @@ class MMMTokenizer(EncodeBase):
         hop_length: int = 1,
         time_sig: bool = False,
         velocity: bool = False,
+        quantize: bool = False
     ) -> str:
 
         """
