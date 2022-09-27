@@ -10,7 +10,8 @@ def tokenize_path(
     dataset_path: str,
     dest_path: str,
     metadata: Optional[Dict],
-    output_file: str
+    output_file: str,
+    prev_tokens: str = ""
 ):
 
     text_file = open(Path(dest_path, output_file + ".txt"), "w")
@@ -37,7 +38,8 @@ def tokenize_path(
                         metadata,
                         el,
                         dataset_path,
-                        "MMM"
+                        "MMM",
+                        prev_tokens
                     )
                 ),
                 "file": el
@@ -64,7 +66,8 @@ def _processer(
     metadata: Optional[Dict],
     data_piece: Path,
     dataset_path: Path,
-    tokenizer: str = "MMM"
+    tokenizer: str = "MMM",
+    prev_tokens: str = "",
 ) -> List[str]:
 
     """
