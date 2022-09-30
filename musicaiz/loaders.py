@@ -346,6 +346,9 @@ class Musa:
                 elif note.start_ticks > next_start_bar_ticks:
                     break
 
+            # sort notes in the bar by their onset
+            bar.notes.sort(key=lambda x: x.start_ticks, reverse=False)
+
             # update bar attributes now that we know its notes
             bar.note_density = len(bar.notes)
             bar.harmonic_density = harmony.get_harmonic_density(bar.notes)
