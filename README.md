@@ -4,15 +4,72 @@
 
 A Python library for symbolic music generation, analysis and visualization.
 
-[![PyPI](https://img.shields.io/pypi/v/musicaiz.svg)](https://pypi.python.org/pypi/musicaiz)
-[![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
-[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/musicaiz)](https://pypi.org/project/musicaiz) [![Supported Platforms](https://img.shields.io/badge/platforms-macOS%20%7C%20Windows%20%7C%20Linux-green)](https://pypi.org/project/musanalysis) [![PyPI - Downloads](https://img.shields.io/pypi/dm/musicaiz)](https://pypistats.org/packages/musicaiz)
+<!-- SHIELDS -->
+<!-- markdownlint-disable -->
+<table>
+  <colgroup>
+    <col style="width: 10%;"/>
+    <col style="width: 90%;"/>
+  </colgroup>
+  <tbody>
+    <tr>
+      <th>CI</th>
+      <td>
+        <img alt="build" src="https://github.com/carlosholivan/musicaiz/actions/workflows/ci.yml/badge.svg"/>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <th>PyPI</th>
+      <td>
+        <a href="https://pypi.org/project/PyFLP">
+          <img alt="PyPI - Package Version" src="https://img.shields.io/pypi/v/musicaiz"/>
+        </a>
+        <a href="https://pypi.org/project/musicaiz">
+          <img alt="PyPI - Supported Python Versions" src="https://img.shields.io/pypi/pyversions/musicaiz?logo=python&amp;logoColor=white"/>
+        </a>
+        <a href="https://pypi.org/project/musicaiz">
+          <img alt="PyPI - Supported Implementations" src="https://img.shields.io/pypi/implementation/musicaiz"/>
+        </a>
+        <a href="https://pypi.org/project/PyFLP">
+          <img alt="PyPI - Wheel" src="https://img.shields.io/pypi/wheel/musicaiz"/>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <th>Activity</th>
+      <td>
+        <img alt="Maintenance" src="https://img.shields.io/maintenance/yes/2022"/>
+      </td>
+    </tr>
+    <tr>
+      <th>QA</th>
+      <td>
+        <a href="https://codecov.io/gh/carlosholivan/musicaiz">
+          <img alt="codecov" src="https://codecov.io/gh/carlosholivan/musicaiz/branch/main/graph/badge.svg?token=RGSRMMF8PF"/>
+        </a>
+        <a href="https://github.com/pre-commit/pre-commit">
+          <img alt="pre-commit" src="https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&amp;logoColor=white"/>
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <th>Code</th>
+      <td>
+        <a href="https://github.com/demberto/PyFLP/blob/master/LICENSE">
+          <img alt="License" src="https://img.shields.io/github/license/carlosholivan/musicaiz"/>
+        </a>
+        <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/carlosholivan/musicaiz"/>
+        <a href="https://github.com/psf/black">
+          <img alt="Code Style: Black" src="https://img.shields.io/badge/code%20style-black-black"/>
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-[![CI](https://github.com/carlosholivan/musicaiz/actions/workflows/ci.yml/badge.svg)](https://github.com/carlosholivan/musicaiz/actions/workflows/ci.yml)
-[![codecov](https://codecov.io/gh/carlosholivan/musicaiz/branch/main/graph/badge.svg?token=ULWnUHaIJC)](https://codecov.io/gh/carlosholivan/musicaiz)
 
-
-See the docs [here](https://carlosholivan.github.io/musicaiz)
+[See the docs](https://carlosholivan.github.io/musicaiz)
 
 The modules contained in this library are:
 
@@ -80,18 +137,13 @@ See docs.
 If you use this software for your research, please cite:
 
 ````
-@article{HernandezOlivan22,
-    author    = {
-      Carlos Hernandez-Olivan and Jose Ramon Beltran},
-    title = {musicaiz: A Python Library for Symbolic Music
-Generation, Analysis and Visualization},
-    journal   = {XX},
-    volume    = {x},
-    number    = {x},
-    pages     = {xx--xx},
-    year      = {2022},
-    url       = {XX},
-    doi       = {XX},
+@misc{hernandezolivan22musicaiz,
+  doi = {10.48550/ARXIV.2209.07974},
+  url = {https://arxiv.org/abs/2209.07974},
+  author = {Hernandez-Olivan, Carlos and Beltran, Jose R.},
+  title = {musicaiz: A Python Library for Symbolic Music Generation, Analysis and Visualization},
+  publisher = {arXiv},
+  year = {2022},
 }
 ````
 
