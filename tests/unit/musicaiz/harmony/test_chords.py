@@ -10,38 +10,38 @@ from musicaiz.harmony import (
 
 # ===============AllChords class Tests=================
 # =====================================================
-def test_AllChords_split_chord_name_a():
+def test_Chord_split_chord_name_a():
     # Test case: Valid chord
     chord_name = "C#mb5"
     expected_note = "C#"
     expected_quality = "mb5"
-    got_note, got_quality = AllChords.split_chord_name(chord_name)
+    got_note, got_quality = Chord.split_chord_name(chord_name)
     assert expected_note == got_note
     assert expected_quality == got_quality
 
 
-def test_AllChords_split_chord_name_b():
+def test_Chord_split_chord_name_b():
     # Test case: Valid chord, note with double sharps (not valid)
     chord_name = "C##mb5"
     with pytest.raises(ValueError):
-        AllChords.split_chord_name(chord_name)
+        Chord.split_chord_name(chord_name)
 
 
-def test_AllChords_split_chord_name_c():
+def test_Chords_split_chord_name_c():
     # Test case: Bad character
     chord_name = "---"
     with pytest.raises(ValueError):
-        AllChords.split_chord_name(chord_name)
+        Chord.split_chord_name(chord_name)
 
 
-def test_AllChords_split_chord_name_d():
+def test_Chords_split_chord_name_d():
     # Test case: Invalid chord quality (valid note)
     chord_name = "Cmb55"
     with pytest.raises(ValueError):
-        AllChords.split_chord_name(chord_name)
+        Chord.split_chord_name(chord_name)
 
 
-def test_AllChords_get_chord_from_name_a():
+def test_Chord_get_chord_from_name_a():
     # Test case: Invalid chord quality (valid note)
     chord_name = "Cmb5"
     expected = AllChords.DIMINISHED_SEVENTH

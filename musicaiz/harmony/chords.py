@@ -1,6 +1,6 @@
 from __future__ import annotations
 from enum import Enum
-from typing import List, Optional, Union, Tuple
+from typing import List, Optional, Union, Tuple, Dict
 import re
 import numpy as np
 from pathlib import Path
@@ -251,33 +251,19 @@ class AllChords(Enum):
             for n in note.value:
                 all_notes.append(n)
         return all_notes
-
+    
     # TODO: Finish this
     @classmethod
     def get_chord_from_name(cls, chord_name: str) -> AllChords:
         """Retrieves the Chord object given its name"""
         chord_obj = None
-        _, quality = cls.split_chord_name(chord_name)
+        _, quality = Chord.split_chord_name(chord_name)
         for chord in cls.__members__.values():
             if quality in chord.value[0].value:
                 chord_obj = chord
         if chord_obj is None:
             raise ValueError(f"Chord {chord_name} does not exist.")
         return chord_obj
-
-    @staticmethod
-    def split_chord_name(chord_name: str) -> Tuple[str, str]:
-        """Splits a chord name to its root note and the chord quality."""
-        chord_data = [i for i in re.split(r'([A-G#b]+)', chord_name) if i]
-        if len(chord_data) == 0:
-            raise ValueError("Invalid chord {chord_name}.")
-        root_note = chord_data[0]
-        quality = ''.join(i for i in chord_data[1:])
-        if not NoteClassNames.check_note_name_exists(root_note):
-            raise ValueError(f"Root note {root_note} does not exist.")
-        if not ChordQualities.check_quality_exists(quality):
-            raise ValueError(f"Chord quality {quality} does not exist.")
-        return root_note, quality
 
 
 class Chord:
@@ -308,7 +294,7 @@ class Chord:
         self.chord = None
         self.type = None
         if chord is not None:
-            self.root_note, self.quality = AllChords.split_chord_name(chord)
+            self.root_note, self.quality = self.split_chord_name(chord)
             self.chord = AllChords.get_chord_from_name(chord)
             self.quality_name = self.chord.value[0].value[1]
             self.type = self.chord.value[2]
@@ -352,41 +338,124 @@ class Chord:
         if self.type.value - 1 < inversion:
             raise ValueError(f"Chord quality {self.quality_name} does not have a {inversion} inversion.")
     
-    @staticmethod
-    def get_notes_from_chord(root_note: NoteClassBase, chord: AllChords):
-        notes = [root_note]
-        for interval in chord.value[1]:
+    @classmethod
+    def get_all_chords(cls) -> Dict[str, Tuple[NoteClassBase, AllChords]]:
+        """
+        Constructs a dictionaray with the chord name (key) and its constructor
+        (value). The constructor is a tuple with the chord's tonic and the quality.
+
+        Output Ex.:
+            {
+                'C-MAJOR_TRIAD': (<NoteClassBase.C>, <AllChords.MAJOR_TRIAD>),
+                ...
+            }
+
+        Returns:
+            Dict[str, Tuple[NoteClassBase, AllChords]]
+        """
+        notes = NoteClassBase.get_notes_chromatic_scale(alteration = "SHARP")
+        all_chords = {}
+        exclude = [] #["SEVENTH", "AUGMENTED", "DIMINISHED"]
+        for note in notes:
+            tonic = note  # to avoid enharmonic chors such as C maj with Bb maj
+            for chord in AllChords.__members__.values():
+                if not any(e in chord.name for e in exclude):
+                    all_chords.update({tonic.name + "-" + chord.name: (tonic, chord)})
+        return all_chords
+    
+    @classmethod
+    def get_notes_from_chord(
+        cls,
+        tonic: NoteClassBase,
+        quality: AllChords,
+    ) -> List[NoteClassBase]:
+        """
+        Generates the list of note objects that correspond to a chord.
+
+        Parameters
+        ----------
+    
+        tonic: NoteClassBase
+
+        quality: AllChords
+
+
+        Returns
+        -------
+        
+        List[NoteClassBase]
+        """
+        notes = [tonic]
+        for interval in quality.value[1]:
             interval_inst = Interval(interval)
             # Initialize note with name and octave
-            degree_root = root_note.value[0].contracted + "1"
+            degree_root = tonic.value[0].contracted + "1"
             note_obj = Interval._initialize_note(degree_root)
             note_dest_obj = interval_inst.transpose_note(note_obj)
             notes.append(note_dest_obj.note)
         return notes
+    
+    @classmethod
+    def get_pitches_from_chord(
+        cls,
+        tonic: NoteClassBase,
+        quality: AllChords,
+        octave: int,
+    ) -> List[int]:
+        """
+        Generates the list of pitches that correspond to a chord and an octave.
+        The octaves go from -1 (pitch = 0) to 11 (pitch = 127)
 
+        Parameters
+        ----------
 
-    # TODO
-    def play(
-        self,
-        octave: int = 2,
-        fs: int = 44100,
-        sf2_path: Optional[Union[str, Path]] = Path("soundfonts/Nice-Steinway-Lite-v3.0.sf2"),
-    ):
-        notes = self.get_notes()
+        tonic: NoteClassBase
 
-        # Create `Note` objects for every note
-        notes_obj = []
-        for note in notes:
-            pitch_name = note + octave
-            notes_obj.append(Note(pitch_name, 0.00, 2.00, 127))  # notes of 2 sec and 127 velocity
+        quality: AllChords
 
-        # Synthesize with fluidsynth
-        waveform = notes_obj.fluidsynth(fs=fs, sf2_path=sf2_path)
-        # Allocate output waveform, with #sample = max length of all waveforms
-        synthesized = np.zeros(np.max(waveform.shape[0]))
-        # Normalize
-        synthesized /= np.abs(synthesized).max()
-        return synthesized
+        octave: int
+
+        Returns
+        -------
+    
+        List[int]
+        """
+        notes = cls.get_notes_from_chord(tonic, quality)
+        return [pm.note_name_to_number(note.value[0].contracted + str(octave)) for note in notes]
+    
+
+    @classmethod
+    def chords_to_onehot(cls) -> Dict[str, List[int]]:
+        """
+        Converts the chords to a one hot representation.
+
+        Returns
+        -------
+
+        chord_pitches_dict: Dict[str, List[int]]
+        """
+        start_octave = -1
+        all_chords = cls.get_all_chords()
+        chord_pitches_dict = {}
+        for chord in all_chords.keys():
+            chord_pitches = cls.get_pitches_from_chord(all_chords[chord][0], all_chords[chord][1], start_octave)
+            chord_freqs = [1 if i in chord_pitches else 0 for i in range(0, 12)] #[pm.note_number_to_hz(pitch) for pitch in chord_pitches]
+            chord_pitches_dict.update({chord: chord_freqs})
+        return chord_pitches_dict
+
+    @staticmethod
+    def split_chord_name(chord_name: str) -> Tuple[str, str]:
+        """Splits a chord name to its root note and the chord quality."""
+        chord_data = [i for i in re.split(r'([A-G#b]+)', chord_name) if i]
+        if len(chord_data) == 0:
+            raise ValueError("Invalid chord {chord_name}.")
+        root_note = chord_data[0]
+        quality = ''.join(i for i in chord_data[1:])
+        if not NoteClassNames.check_note_name_exists(root_note):
+            raise ValueError(f"Root note {root_note} does not exist.")
+        if not ChordQualities.check_quality_exists(quality):
+            raise ValueError(f"Chord quality {quality} does not exist.")
+        return root_note, quality
 
     def __repr__(self):
         return "Chord(root_note={}, quality='{}', type={}, name='{}')".format(
