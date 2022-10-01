@@ -1462,6 +1462,7 @@ class Tonality(Enum):
             tonality = tonality.name
         # Get scale inside the tonality
         scale_mode = cls._get_scale(tonality, scale)
+        print(scale, scale_mode, tonality)
         if scale is None:
             notes = Tonality[tonality].notes
         else:
@@ -1501,7 +1502,7 @@ class Tonality(Enum):
             if "MAJOR" in tonality:
                 scale_mode = tonality_inst.scales("MAJOR")
             elif "MINOR" in tonality:
-                scale_mode = tonality_inst.scales("MINOR")
+                scale_mode = tonality_inst.scales("NATURAL")
         return scale_mode
 
     @classmethod
