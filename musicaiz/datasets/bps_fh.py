@@ -50,7 +50,6 @@ class BPSFH:
         quality: str,
     ) -> Tuple[NoteClassBase, AllChords]:
         tonality = cls.bpsfh_key_to_musicaiz(note)
-        deg = DegreesRoman.get_degree_from_index(degree)
-        q = cls.bpsfh_chord_quality_to_musicaiz(quality)
-        root = tonality.notes[deg-1]
-        return NoteClassBase[root], AllChords[q]
+        qt = cls.bpsfh_chord_quality_to_musicaiz(quality)
+        notes = tonality.notes
+        return notes[degree-1], qt

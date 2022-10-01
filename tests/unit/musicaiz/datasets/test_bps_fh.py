@@ -15,7 +15,7 @@ def test_bpsfh_key_to_musicaiz():
 def test_bpsfh_chord_quality_to_musicaiz():
 
     quality = "a"
-    expected = "AUGMENTED_TRIAD"
+    expected = AllChords.AUGMENTED_TRIAD
 
     got = BPSFH.bpsfh_chord_quality_to_musicaiz(quality)
     assert got == expected
