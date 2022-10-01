@@ -16,6 +16,13 @@ A Python library for symbolic music generation, analysis and visualization.
       <th>CI</th>
       <td>
         <img alt="build" src="https://github.com/carlosholivan/musicaiz/actions/workflows/ci.yml/badge.svg"/>
+      </td>
+    </tr>
+    <tr>
+      <th>Paper</th>
+      <td>
+        <a href="https://arxiv.org/abs/2209.07974">
+        <img alt= "arXiv" src="https://img.shields.io/badge/arXiv-1234.56789-00ff00.svg"/>
         </a>
       </td>
     </tr>
