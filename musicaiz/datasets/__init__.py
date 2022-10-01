@@ -120,10 +120,13 @@ from .configs import (
 from .jsbchorales import JSBChorales
 from .lmd import LakhMIDI
 from .maestro import MAESTRO
+from .bps_fh import BPSFH
+
 
 __all__ = [
     "MusicGenerationDataset",
     "JSBChorales",
     "LakhMIDI",
-    "MAESTRO"
+    "MAESTRO",
+    "BPSFH"
 ]
