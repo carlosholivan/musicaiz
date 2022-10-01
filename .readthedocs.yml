@@ -15,10 +15,6 @@ python:
   - requirements: requirements-docs.txt
   - requirements: requirements.txt
 
-# Build documentation in the docs/ directory with Sphinx
-sphinx:
-   configuration: docs/source/conf.py
-
 formats:
   - pdf
   - epub
