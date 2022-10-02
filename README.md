@@ -16,6 +16,9 @@ A Python library for symbolic music generation, analysis and visualization.
       <th>CI</th>
       <td>
         <img alt="build" src="https://github.com/carlosholivan/musicaiz/actions/workflows/ci.yml/badge.svg"/>
+        <a href="https://readthedocs.org/musicaiz/">
+        <img alt="docs" src="https://readthedocs.org/projects/musicaiz/badge/?version=latest"/>
+        </a>
       </td>
     </tr>
     <tr>
@@ -35,9 +38,6 @@ A Python library for symbolic music generation, analysis and visualization.
         <a href="https://pypi.org/project/musicaiz">
           <img alt="PyPI - Supported Python Versions" src="https://img.shields.io/pypi/pyversions/musicaiz?logo=python&amp;logoColor=white"/>
         </a>
-        <a href="https://pypi.org/project/musicaiz">
-          <img alt="PyPI - Supported Implementations" src="https://img.shields.io/pypi/implementation/musicaiz"/>
-        </a>
         <a href="https://pypi.org/project/PyFLP">
           <img alt="PyPI - Wheel" src="https://img.shields.io/pypi/wheel/musicaiz"/>
         </a>
@@ -55,6 +55,12 @@ A Python library for symbolic music generation, analysis and visualization.
         <a href="https://codecov.io/gh/carlosholivan/musicaiz">
           <img alt="codecov" src="https://codecov.io/gh/carlosholivan/musicaiz/branch/main/graph/badge.svg?token=RGSRMMF8PF"/>
         </a>
+        <a href="https://api.codiga.io/project/34718/status/svg">
+          <img alt="Code Quality" src="https://api.codiga.io/project/34718/status/svg"/>
+        </a>
+        <a href="https://api.codiga.io/project/34718/score/svg">
+          <img alt="Code Score" src="https://api.codiga.io/project/34718/score/svg"/>
+        </a>
         <a href="https://github.com/pre-commit/pre-commit">
           <img alt="pre-commit" src="https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&amp;logoColor=white"/>
         </a>
@@ -63,7 +69,7 @@ A Python library for symbolic music generation, analysis and visualization.
     <tr>
       <th>Code</th>
       <td>
-        <a href="https://github.com/demberto/PyFLP/blob/master/LICENSE">
+        <a href="https://github.com/carlosholivan/musicaiz/blob/master/LICENSE">
           <img alt="License" src="https://img.shields.io/github/license/carlosholivan/musicaiz"/>
         </a>
         <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/carlosholivan/musicaiz"/>
