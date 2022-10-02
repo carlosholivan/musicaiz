@@ -43,6 +43,7 @@ Music Perception: An Interdisciplinary Journal, 31(1), 59-67.
 .. autosummary::
     :toctree: generated/
 
+    KeyDetectionAlgorithms
     KrumhanslKessler
     Temperley
     AlbrechtShanahan
@@ -55,6 +56,7 @@ from .harmonic_shift import (
 )
 
 from .key_profiles import (
+    KeyDetectionAlgorithms,
     KrumhanslKessler,
     Temperley,
     AlbrechtShanahan,
@@ -72,6 +74,7 @@ from .key_profiles import (
 __all__ = [
     "harmonic_shifting",
     "scale_change",
+    "KeyDetectionAlgorithms",
     "KrumhanslKessler",
     "Temperley",
     "AlbrechtShanahan",
@@ -83,4 +86,9 @@ __all__ = [
     "signature_fifths_profiles",
     "_eights_per_pitch_class",
     "key_detection",
+    "get_chords",
+    "get_chords_candidates",
+    "compute_chord_notes_dist",
+    "_notes_to_onehot",
+    "_group_notes_in_beats",
 ]

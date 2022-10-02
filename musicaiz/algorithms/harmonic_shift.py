@@ -1,5 +1,5 @@
 import pretty_midi as pm
-from typing import List, Union, Dict
+from typing import List
 
 
 from musicaiz.harmony import Tonality

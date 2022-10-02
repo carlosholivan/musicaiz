@@ -1,7 +1,7 @@
 from typing import Tuple
 import pretty_midi as pm
 
-from musicaiz.loaders import Musa
+
 from musicaiz.structure import NoteClassBase
 
 
@@ -13,7 +13,7 @@ def pretty_midi_note_to_musanalysis(note: str) -> Tuple[str, int]:
     return musa_note_name.name, octave
 
 
-def musa_to_prettymidi(musa_obj: Musa):
+def musa_to_prettymidi(musa_obj):
     """
     Converts a Musa object into a PrettMIDI object.
 

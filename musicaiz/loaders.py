@@ -39,6 +39,10 @@ from musicaiz.rhythm import (
     TimeSignature,
 )
 from musicaiz.features import harmony
+from musicaiz.algorithms import (
+    key_detection,
+    KeyDetectionAlgorithms
+)
 
 
 class ValidFiles(Enum):
@@ -357,6 +361,54 @@ class Musa:
             if not absolute_timing:
                 bar.relative_notes_timing(bar_start=start_bar_ticks)
             start_bar_ticks = next_start_bar_ticks
+
+    def predict_key(self, method: str) -> str:
+        """
+        Predict the key with the key profiles algorithms.
+        Note that signature fifths algorithm requires to initialize
+        the Musa class with the argument `structure="bars"` instead
+        of "instruments". The other algorithms work for both initializations.
+
+        Parameters
+        ----------
+
+        method: str
+            The algorithm we want to use to predict the key. The list of
+            algorithms can be found here: :func:`~musicaiz.algorithms.KeyDetectionAlgorithms`.
+
+        Raises
+        ------
+
+        ValueError
+
+        ValueError
+
+        Returns
+        -------
+        key: str
+            The predicted key as a string separating tonic, alteration
+            (if proceeds) and mode with "_".
+        """
+        if method not in KeyDetectionAlgorithms.all_values():
+            raise ValueError("Not method found.")
+        elif method in KeyDetectionAlgorithms.SIGNATURE_FIFTHS.value:
+            if self.structure == "bars":
+                notes = []
+                for inst in self.instruments:
+                    for b, bar in enumerate(inst.bars):
+                        # Signature fifths only takes the 2 1st bars of the piece
+                        if b == 2:
+                            break
+                        notes.extend(bar.notes)
+                notes.sort(key=lambda x: x.start_ticks, reverse=False)
+                key = key_detection(notes, method)
+            elif self.structure == "instruments":
+                raise ValueError("Initialize the Musa with `structure=bars`")
+        elif method in KeyDetectionAlgorithms.KRUMHANSL_KESSLER.value or \
+            KeyDetectionAlgorithms.TEMPERLEY.value or \
+                KeyDetectionAlgorithms.ALBRETCH_SHANAHAN.value:
+            key = key_detection(self.notes, method)
+        return key
 
     @staticmethod
     def group_instrument_bar_notes(musa_object: Musa) -> List[Bar]:

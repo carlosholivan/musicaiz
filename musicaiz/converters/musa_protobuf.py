@@ -1,6 +1,6 @@
 from musicaiz.converters.protobuf import musicaiz_pb2
 from musicaiz.structure import Note, Instrument, Bar
-from musicaiz.loaders import Musa
+from musicaiz import loaders
 
 
 def musa_to_proto(musa_obj):
@@ -81,7 +81,7 @@ def musa_to_proto(musa_obj):
     return proto
 
 
-def proto_to_musa(protobuf) -> Musa:
+def proto_to_musa(protobuf): #-> loaders.Musa:
 
     """
     Converts a protobuf to a Musa object.
@@ -98,7 +98,7 @@ def proto_to_musa(protobuf) -> Musa:
         The output Musa object.
     """
     
-    midi = Musa()
+    midi = loaders.Musa()
 
     for i, instr in enumerate(protobuf.instruments):
         midi.instruments.append(

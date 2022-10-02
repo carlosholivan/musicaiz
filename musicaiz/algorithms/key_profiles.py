@@ -223,7 +223,16 @@ def _signature_fifths_keys(notes_axes) -> Tuple[str, float]:
     major_key_tonic_idx = ORDERED_CIRCLE_FIFTHS.index(major_key_tonic) + 1
     major_key_tonic = ORDERED_CIRCLE_FIFTHS[major_key_tonic_idx]
     # Find the minor key tonic as the tonality with the same number of # or b of the major key
-    minor_key = Tonality[major_key_tonic + "_MAJOR"].relative.name
+    if major_key_tonic + "_MAJOR" not in [n for n in Tonality.__members__]:
+        # look for enharmonic note to construct a correct tonality
+        chr = NoteClassBase[major_key_tonic].chromatic_scale_index
+        notes = NoteClassBase._get_note_from_chromatic_idx(chr)
+        notes = [n.name for n in notes]
+        tonic = set(notes).difference(set([major_key_tonic]))
+        (new_major_key_tonic,) = tonic
+        minor_key = Tonality[new_major_key_tonic + "_MAJOR"].relative.name
+    else:
+        minor_key = Tonality[major_key_tonic + "_MAJOR"].relative.name
     # We calculate the correlation coeficients "r" for both keys, the maximum will denote the key
 
     # Construct the profiles dict that is a reduction of the notes_Axes with only the possible tonalities
