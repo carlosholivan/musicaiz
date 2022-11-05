@@ -1,56 +1,81 @@
 from pathlib import Path
 from typing import List, Union
 
-from musicaiz.datasets.configs import MusicGenerationDataset
-from musicaiz.datasets.utils import tokenize_path
-from musicaiz.tokenizers import MMMTokenizer
+from musicaiz.datasets.configs import (
+    MusicGenerationDataset,
+    MusicGenerationDatasetNames
+)
+from musicaiz.tokenizers import (
+    MMMTokenizer,
+    MMMTokenizerArguments,
+)
 
 
 class JSBChorales(MusicGenerationDataset):
-    """The JSB Chorales dataset is organized in 3 directories:
-        - train
-        - valid
-        - test
     """
+    """
+    def __init__(self):
+        self.dataset = MusicGenerationDatasetNames.JSB_CHORALES.value
+    
+    def tokenize(self,
+        dataset_path: str,
+        output_path: str,
+        tokenize_split: str,
+        args: MMMTokenizerArguments,
+        output_file: str = "token-sequences",
+    ) -> None:
+        """
 
-    def __init__(self, dir: str):
-        self.dir = dir
+        Parameters
+        ----------
+        
+        dataset_path (str): _description_
 
-    @staticmethod
-    def tokenize(
-        dataset_path: Union[Path, str],
-        output_path: Union[Path, str],
-        tokenizer: str = "MMM",
-        output_filename: str = "token-sequences",
-    ):
-        if tokenizer == "MMM":
-            _tokenize_multiproc(
-                dataset_path=dataset_path,
-                output_file=output_filename,
-                output_path=output_path
-            )
-            _ = MMMTokenizer.get_vocabulary(
-                dataset_path=output_path
-            )
+        output_path (str): _description_
 
+        tokenize_split (str): _description_
 
-def _tokenize_multiproc(dataset_path: str, output_file: str, output_path: str):
-    # Midis are distributes as
-    data_train_path = Path(dataset_path, "train")
-    data_val_path = Path(dataset_path, "valid")
-    data_test_path = Path(dataset_path, "test")
+        args (Type[TokenizerArguments]): _description_
 
-    # make same dirs to store the token sequences separated in
-    # train, valid and test
-    dest_train_path = Path(output_path, "train")
-    dest_train_path.mkdir(parents=True, exist_ok=True)
+        output_file (str, optional): _description_. Defaults to "token-sequences".
+        
+        Examples
+        --------
 
-    dest_val_path = Path(output_path, "validation")
-    dest_val_path.mkdir(parents=True, exist_ok=True)
+        >>> # initialize tokenizer args
+        >>> args = MMMTokenizerArguments(
+        >>>    prev_tokens="",
+        >>>    windowing=True,
+        >>>    time_unit="HUNDRED_TWENTY_EIGHT",
+        >>>    num_programs=None,
+        >>>    shuffle_tracks=True,
+        >>>    track_density=False,
+        >>>    window_size=32,
+        >>>    hop_length=16,
+        >>>    time_sig=True,
+        >>>    velocity=True,
+        >>> )
+        >>> # initialize dataset
+        >>> dataset = JSBChorales()
+        >>> dataset.tokenize(
+        >>>     dataset_path="path/to/dataset",
+        >>>     output_path="output/path",
+        >>>     output_file="token-sequences",
+        >>>     args=args,
+        >>>     tokenize_split="test"
+        >>> )
+        >>> # get vocabulary and save it in `dataset_path`
+        >>> vocab = MMMTokenizer.get_vocabulary(
+        >>>     dataset_path="output/path"
+        >>> )
+        """
 
-    dest_test_path = Path(output_path, "test")
-    dest_test_path.mkdir(parents=True, exist_ok=True)
-
-    tokenize_path(data_train_path, dest_train_path, None, output_file)
-    tokenize_path(data_val_path, dest_val_path, None, output_file)
-    tokenize_path(data_test_path, dest_test_path, None, output_file)
+        self._prepare_tokenize(
+            dataset_path,
+            output_path,
+            output_file,
+            None,
+            tokenize_split,
+            args,
+            True
+        )

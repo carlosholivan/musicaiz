@@ -1,9 +1,16 @@
 from pathlib import Path
 import multiprocessing as mp
 from tqdm import tqdm
-from typing import List, Optional, Dict
+from typing import List, Optional, Dict, Type
+from rich.console import Console
 
-from musicaiz.tokenizers import MMMTokenizer
+
+from musicaiz.tokenizers import (
+    MMMTokenizer,
+    MMMTokenizerArguments,
+    TOKENIZER_ARGUMENTS,
+    TokenizerArguments,
+)
 
 
 def tokenize_path(
@@ -11,8 +18,8 @@ def tokenize_path(
     dest_path: str,
     metadata: Optional[Dict],
     output_file: str,
-    prev_tokens: str = ""
-):
+    args: Type[TokenizerArguments],
+) -> None:
 
     text_file = open(Path(dest_path, output_file + ".txt"), "w")
 
@@ -38,8 +45,7 @@ def tokenize_path(
                         metadata,
                         el,
                         dataset_path,
-                        "MMM",
-                        prev_tokens
+                        args
                     )
                 ),
                 "file": el
@@ -49,25 +55,25 @@ def tokenize_path(
     pbar = tqdm(
         results,
         total=total,
-        bar_format="{l_bar}{bar:10}{r_bar}"
+        bar_format="{l_bar}{bar:10}{r_bar}",
+        colour="GREEN"
     )
     for result in pbar:
-        pbar.set_postfix_str(f'Processing file {result["file"]}')
+        console = Console()
+        console.print(f'Processing file [bold orchid1]{result["file"]}[/bold orchid1]')
         res = result["result"].get()
         if res is not None:
-            text_file.write(result["result"].get())
+            text_file.write(res)
 
     pool.close()
     pool.join()
 
 
-# TODO: args here to be able pass this fn all the args of the MMMTokenizer.tokenize_file
 def _processer(
     metadata: Optional[Dict],
     data_piece: Path,
     dataset_path: Path,
-    tokenizer: str = "MMM",
-    prev_tokens: str = "",
+    args: Type[TokenizerArguments],
 ) -> List[str]:
 
     """
@@ -90,22 +96,23 @@ def _processer(
     """
     
     try:
+        prev_tokens = ""
         # Tokenize
         file = Path(dataset_path, data_piece)
-        if tokenizer == "MMM":
-            piece_tokens = MMMTokenizer.tokenize_file(
-                file=file,
-                prev_tokens="",
-                windowing=True,
-                time_unit="HUNDRED_TWENTY_EIGHT",
-                num_programs=None,
-                shuffle_tracks=True,
-                track_density=False,
-                window_size=4,
-                hop_length=1,
-                time_sig=True,
-                velocity=True
-            )
+        if metadata is not None:
+            if "composer" in metadata[data_piece].keys():
+                prev_tokens = f"COMPOSER={metadata[data_piece]['composer']} "
+            if "period" in metadata[data_piece].keys():
+                prev_tokens += f"PERIOD={metadata[data_piece]['period']} "
+            if "genre" in metadata[data_piece].keys():
+                prev_tokens += f"GENRE={metadata[data_piece]['genre']}"
+
+        if type(args) not in TOKENIZER_ARGUMENTS:
+            raise ValueError("Non valid tokenizer args object.")
+        if isinstance(args, MMMTokenizerArguments):
+            args.prev_tokens=prev_tokens
+            tokenizer = MMMTokenizer(file, args)
+            piece_tokens = tokenizer.tokenize_file()
         else:
             raise ValueError("Non valid tokenizer.")
         piece_tokens += "\n"

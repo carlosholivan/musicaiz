@@ -3,7 +3,7 @@ import pytest
 
 from musicaiz.loaders import Musa
 from musicaiz.structure import Instrument, Bar, Note
-from musicaiz.tokenizers import MMMTokenizer
+from musicaiz.tokenizers import MMMTokenizer, MMMTokenizerArguments
 
 
 @pytest.fixture
@@ -52,13 +52,19 @@ def musa_obj_abs(musa_obj_tokens):
         Note(pitch=64, start=1.5, end=2.0, velocity=127)
     ]
     musa_obj_tokens.instruments[0].bars[0].notes = notes_bar1
+    musa_obj_tokens.instruments[0].bars[0].start_ticks = 0
+    musa_obj_tokens.instruments[0].bars[0].end_ticks = 96 * 4
     # bar2 is empty
+    musa_obj_tokens.instruments[0].bars[1].start_ticks = 96 * 4
+    musa_obj_tokens.instruments[0].bars[1].end_ticks = 96 * 8
     notes_bar3 = [
         Note(pitch=72, start=4.0, end=4.5, velocity=127),
         Note(pitch=69, start=4.5, end=5.0, velocity=127),
         Note(pitch=67, start=5.5, end=5.75, velocity=127),
     ]
     musa_obj_tokens.instruments[0].bars[2].notes = notes_bar3
+    musa_obj_tokens.instruments[0].bars[2].start_ticks = 96 * 8
+    musa_obj_tokens.instruments[0].bars[2].end_ticks = 96 * 12
     return musa_obj_tokens
 
 
@@ -72,13 +78,19 @@ def musa_obj_rel(musa_obj_tokens):
         Note(pitch=64, start=1.5, end=2.0, velocity=127)
     ]
     musa_obj_tokens.instruments[0].bars[0].notes = notes_bar1
+    musa_obj_tokens.instruments[0].bars[0].start_ticks = 0
+    musa_obj_tokens.instruments[0].bars[0].end_ticks = 96 * 4
     # bar2 is empty
+    musa_obj_tokens.instruments[0].bars[1].start_ticks = 0
+    musa_obj_tokens.instruments[0].bars[1].end_ticks = 96 * 4
     notes_bar3 = [
         Note(pitch=72, start=0.0, end=0.5, velocity=127),
         Note(pitch=69, start=0.5, end=1.0, velocity=127),
         Note(pitch=67, start=1.5, end=1.75, velocity=127),
     ]
     musa_obj_tokens.instruments[0].bars[2].notes = notes_bar3
+    musa_obj_tokens.instruments[0].bars[2].start_ticks = 0
+    musa_obj_tokens.instruments[0].bars[2].end_ticks = 96 * 4
     return musa_obj_tokens
 
 
@@ -249,26 +261,29 @@ def test_MMMTokenizer_get_tokens_analytics(mmm_multiple_tokens):
     assert expected_total_instruments == got["total_instruments"]
 
 
-@pytest.mark.skip("Fix this when it's implemented")
-# TODO: When 2 notes are being played at the same time step
-# the, how to test their order? It is ok having one NOTE_ON before a NOTE_OFF
-# of other note if the event happen at the sime time
 def test_MMMTokenizer_tokenize_track_bars(musa_obj_abs, mmm_tokens):
+    # Notes that start at the same time are not ordered in a particular way,
+    # this may cause this test to fail if other data is tested.
+    # However, this is not a problem for the tokenization.
     start_bar = mmm_tokens.index("BAR_START")
     end_bar = mmm_tokens.index("TRACK_END")
     expected = mmm_tokens[start_bar:end_bar]
     bars = musa_obj_abs.instruments[0].bars
-    got = MMMTokenizer.tokenize_track_bars(bars)
+
+    args = MMMTokenizerArguments(time_unit="SIXTEENTH")
+    tokenizer = MMMTokenizer(args=args)
+    got = tokenizer.tokenize_track_bars(bars)
     assert got == expected
 
 
-
-@pytest.mark.skip("Fix this when it's implemented")
 def test_MMMTokenizer_tokenize_tracks(musa_obj_abs, mmm_tokens):
     start = mmm_tokens.index("TRACK_START")
     end = mmm_tokens.index("BAR_END")
     expected = mmm_tokens[start:end] + "BAR_END TRACK_END"
-    got = MMMTokenizer.tokenize_tracks(
+
+    args = MMMTokenizerArguments(time_unit="SIXTEENTH")
+    tokenizer = MMMTokenizer(args=args)
+    got = tokenizer.tokenize_tracks(
         instruments=musa_obj_abs.instruments,
         bar_start=0,
         bar_end=1
@@ -276,10 +291,8 @@ def test_MMMTokenizer_tokenize_tracks(musa_obj_abs, mmm_tokens):
     assert got == expected
 
 
-@pytest.mark.skip("Fix this when it's implemented")
-def test_MMMTokenizer_tokenize(midi_sample, mmm_tokens):
-    midi_obj = Musa(midi_sample, structure="bars")
-    tok = MMMTokenizer(midi_obj)
-    got = tok.tokenize()
-    expected = mmm_tokens
-    assert got == expected
+def test_MMMTokenizer_tokenize(midi_sample):
+    args = MMMTokenizerArguments(time_unit="SIXTEENTH")
+    tokenizer = MMMTokenizer(midi_sample, args)
+    got = tokenizer.tokenize_file()
+    assert got != ""

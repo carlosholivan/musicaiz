@@ -1,8 +1,6 @@
 from abc import ABCMeta, abstractmethod
-from typing import Optional, List
+from typing import List
 from enum import Enum
-import multiprocessing
-import glob
 from pathlib import Path
 
 
@@ -20,45 +18,11 @@ class Tokens(Enum):
     CHORDS = ["piece", "instrument", "bar", "time_step"]
 
 
-class EncodingParams(Enum):
-    WINDOW_SIZE = []
-    HOP_LENGTH = []
-    SHUFFLE_TRACKS = []
-    TIME_UNIT = ["ticks", "seconds", "beats"]
-
-
-class Encoder:
-
-    def __init__(
-        self,
-        dataset_dir
-    ):
-        pass
+class TokenizerArguments:
+    pass
 
 
 class EncodeBase(metaclass=ABCMeta):
-
-    def __init__(
-        self,
-        genre: Optional[str] = None,
-        subgenre: Optional[str] = None,
-        structure: str = "bar",
-        note_density: Optional[str] = None,
-        harmonic_density: Optional[str] = None,
-        shuffle_tracks: bool = True,
-        chords: bool = False,
-        key: bool = False,
-    ):
-
-        self.genre = genre
-        self.subgenre = subgenre
-        self.structure = structure
-        self.note_density = note_density
-        self.harmonic_density = harmonic_density
-        self.shuffle_tracks = shuffle_tracks
-        self.chords = chords
-        self.key = key
-    
 
     def get_vocabulary(
         dataset_path: str,

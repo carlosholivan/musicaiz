@@ -29,27 +29,64 @@ This submodule contains the implementation of the MMM encoding:
     Flexible generation with the multi-track music machine.
     In Proceedings of the 21st International Society for Music Information Retrieval Conference, ISMIR.
 
+    [2] 
+
 
 .. autosummary::
     :toctree: generated/
 
+    TokenizerArguments
+    MMMTokenizerArguments
     MMMTokenizer
 
 """
 
+from enum import Enum
 
 from .encoder import (
     EncodeBase,
+    TokenizerArguments,
 )
 from .mmm import (
     MMMTokenizer,
+    MMMTokenizerArguments,
 )
 from .one_hot import (
     OneHot,
 )
 
+
+TOKENIZER_ARGUMENTS = [
+    MMMTokenizerArguments,
+]
+
+
+class Tokenizers(Enum):
+    MULTI_TRACK_MUSIC_MACHINE = ("MMM", MMMTokenizerArguments)
+
+    @property
+    def name(self):
+        return self.value[0]
+    
+    @property
+    def arg(self):
+        return self.value[1]
+
+    @staticmethod
+    def names():
+        return [t.value[0] for t in Tokenizers.__members__.values()]
+
+    @staticmethod    
+    def args():
+        return [t.value[1] for t in Tokenizers.__members__.values()]
+
+
 __all__ = [
     "EncodeBase",
+    "TokenizerArguments",
+    "TOKENIZER_ARGUMENTS",
+    "Tokenizers",
+    "MMMTokenizerArguments",
     "MMMTokenizer",
     "OneHot"
 ]

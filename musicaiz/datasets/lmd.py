@@ -1,34 +1,93 @@
 from pathlib import Path
-from typing import Union, Dict
+from typing import Union, Dict, Type
 
-from musicaiz.datasets.configs import MusicGenerationDataset
-from musicaiz.datasets.utils import tokenize_path
-from musicaiz.tokenizers import MMMTokenizer
+from musicaiz.datasets.configs import (
+    MusicGenerationDataset,
+    MusicGenerationDatasetNames
+)
+from musicaiz.tokenizers import (
+    MMMTokenizer,
+    MMMTokenizerArguments,
+    TokenizerArguments
+)
 
 
 class LakhMIDI(MusicGenerationDataset):
     """
     """
 
-    def __init__(self, dir: str):
-        self.dir = dir
+    def __init__(self):
+        self.dataset = MusicGenerationDatasetNames.LAKH_MIDI.name.lower
 
-    @staticmethod
     def tokenize(
+        self,
         dataset_path: Union[Path, str],
         output_path: Union[Path, str],
-        tokenizer: str = "MMM",
-        output_filename: str = "token-sequences",
-    ):
-        if tokenizer == "MMM":
-            _tokenize_multiproc(
-                dataset_path=dataset_path,
-                output_file=output_filename,
-                output_path=output_path
-            )
-            _ = MMMTokenizer.get_vocabulary(
-                dataset_path=output_path
-            )
+        tokenize_split: str,
+        args: Type[TokenizerArguments],
+        output_file: str = "token-sequences",
+        train_split: float = 0.7,
+        test_split: float = 0.2
+    ) -> None:
+        """
+
+        Parameters
+        ----------
+        
+        dataset_path (str): _description_
+
+        output_path (str): _description_
+
+        tokenize_split (str): _description_
+
+        args (Type[TokenizerArguments]): _description_
+
+        output_file (str, optional): _description_. Defaults to "token-sequences".
+        
+        Examples
+        --------
+
+        >>> # initialize tokenizer args
+        >>> args = MMMTokenizerArguments(
+        >>>    prev_tokens="",
+        >>>    windowing=True,
+        >>>    time_unit="HUNDRED_TWENTY_EIGHT",
+        >>>    num_programs=None,
+        >>>    shuffle_tracks=True,
+        >>>    track_density=False,
+        >>>    window_size=32,
+        >>>    hop_length=16,
+        >>>    time_sig=True,
+        >>>    velocity=True,
+        >>> )
+        >>> # initialize dataset
+        >>> dataset = LakhMIDI()
+        >>> dataset.tokenize(
+        >>>     dataset_path="path/to/dataset",
+        >>>     output_path="output/path",
+        >>>     output_file="token-sequences",
+        >>>     args=args,
+        >>>     tokenize_split="all"
+        >>> )
+        >>> # get vocabulary and save it in `dataset_path`
+        >>> vocab = MMMTokenizer.get_vocabulary(
+        >>>     dataset_path="output/path"
+        >>> )
+        """
+        metadata = self.get_metadata(
+            dataset_path,
+            train_split,
+            test_split
+        )
+        self._prepare_tokenize(
+            dataset_path,
+            output_path,
+            output_file,
+            metadata,
+            tokenize_split,
+            args,
+            False
+        )
     
     @staticmethod
     def get_metadata(
@@ -60,7 +119,7 @@ class LakhMIDI(MusicGenerationDataset):
             composer = composer_path.stem
             # Some composers are written with 2 different composers separated by "/"
             # we'll only consider the 1st one
-            composer = composer.replace(" ", "-")
+            composer = composer.replace(" ", "_")
             composer = composer.upper()
 
             # iterate over songs of an artist
@@ -72,13 +131,20 @@ class LakhMIDI(MusicGenerationDataset):
 
             train_seqs = songs[:train_idxs]
             val_seqs = songs[train_idxs:val_idxs+train_idxs]
-            test_seqs = songs[val_idxs+train_idxs:]
 
 
             # split in train, validation and test
             # we do this here to ensure that every artist is  at least in
             # the training and test sets (if n_songs > 1)
             for song in songs:
+                #-----------------
+                period = ""
+
+                # 3. Process canonical genre
+                genre = ""
+
+                split = ""
+
                 if song in train_seqs:
                     split = "train"
                 elif song in val_seqs:
@@ -90,49 +156,10 @@ class LakhMIDI(MusicGenerationDataset):
                     {
                         composer_path.stem + "/" + song.name: {
                             "composer": composer,
+                            "period": period,
+                            "genre": genre,
                             "split": split
                         }
                     }
                 )
         return composers_json
-
-
-def _tokenize_multiproc(
-    dataset_path: str,
-    output_path: str,
-    output_file: str
-):
-
-    metadata = LakhMIDI.get_metadata(dataset_path)
-
-    # Split metadata in train, validation and test
-    train_metadata, val_metadata, test_metadata = {}, {}, {}
-    for key, val in metadata.items():
-        if val["split"] == "train":
-            train_metadata.update({key: val})
-        elif val["split"] == "validation":
-            val_metadata.update({key: val})
-        elif val["split"] == "test":
-            test_metadata.update({key: val})
-        else:
-            continue
-
-    # Midis are distributes as
-    data_path = Path(dataset_path)
-
-    # make same dirs to store the token sequences separated in
-    # train, valid and test
-    dest_train_path = Path(output_path, "train")
-    dest_train_path.mkdir(parents=True, exist_ok=True)
-
-    dest_val_path = Path(output_path, "validation")
-    dest_val_path.mkdir(parents=True, exist_ok=True)
-
-    dest_test_path = Path(output_path, "test")
-    dest_test_path.mkdir(parents=True, exist_ok=True)
-
-    tokenize_path(data_path, dest_train_path, train_metadata, output_file)
-    tokenize_path(data_path, dest_val_path, val_metadata, output_file)
-    tokenize_path(data_path, dest_test_path, test_metadata, output_file)
-
-
