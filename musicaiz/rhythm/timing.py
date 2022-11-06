@@ -2,6 +2,7 @@ from __future__ import annotations
 from enum import Enum
 from typing import Tuple, List, Dict, Union
 import numpy as np
+import math
 
 
 class TimingConsts(Enum):
@@ -80,6 +81,12 @@ class NoteLengths(Enum):
                     continue
             dict_notes.update({note_dur: cls[note_dur].ticks()})
         return dict_notes
+    
+    @classmethod
+    def get_note_with_fraction(cls, fraction: float) -> NoteLengths:
+        for note in cls.__members__:
+            if math.isclose(round(cls[note].value, 3), round(fraction, 3)):
+                return cls[note]
 
 
 class SymbolicNoteLengths(Enum):
@@ -182,7 +189,7 @@ class TimeSignature:
         return self._notes_per_bar("SIXTEENTH")
     
     def __repr__(self):
-        return "TimeSig(num={}, den='{}')".format(
+        return "TimeSig(num={}, den={})".format(
             self.num,
             self.denom,
         )

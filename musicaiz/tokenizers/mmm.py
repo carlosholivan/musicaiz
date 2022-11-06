@@ -83,6 +83,7 @@ class MMMTokenizerArguments(TokenizerArguments):
     time_sig: bool = False
     velocity: bool = False
     quantize: bool = False
+    tempo: bool = True
 
 
 class MMMTokenizer(EncodeBase):
@@ -142,10 +143,14 @@ class MMMTokenizer(EncodeBase):
                 time_sig_tok = f"TIME_SIG={self.midi_object.time_sig.time_sig} "
             else:
                 time_sig_tok = ""
+            if self.args.tempo:
+                tempo_tok = f"TEMPO={self.midi_object.bpm} "
+            else:
+                tempo_tok = ""
             tokens = self.tokenize_tracks(
                 instruments=tokenized_instruments,
                 bar_start=0,
-                tokens="PIECE_START " + self.args.prev_tokens + " " + time_sig_tok,
+                tokens="PIECE_START " + self.args.prev_tokens + " " + time_sig_tok + tempo_tok,
             )
             tokens += "\n"
         else:

@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Type, Dict
+from typing import Type, Dict, Union
 import pandas as pd
 from enum import Enum
 
@@ -96,11 +96,11 @@ class Maestro(MusicGenerationDataset):
     arXiv preprint arXiv:1810.12247.*
     """
     def __init__(self):
-        self.dataset = MusicGenerationDatasetNames.MAESTRO.name.lower
+        self.name = MusicGenerationDatasetNames.MAESTRO.name.lower()
     
     def tokenize(
         self,
-        dataset_path: str,
+        dataset_path: Union[str, Path],
         output_path: str,
         tokenize_split: str,
         args: Type[TokenizerArguments],
@@ -152,8 +152,7 @@ class Maestro(MusicGenerationDataset):
         >>> )
         """
         dataset_path = str(Path(dataset_path, "maestro-v2.0.0"))
-        table = pd.read_csv(str(Path(dataset_path, "maestro-v2.0.0.csv")))
-        metadata = self.get_metadata(table)
+        metadata = self.get_metadata(dataset_path)
         self._prepare_tokenize(
             dataset_path,
             output_path,
@@ -165,8 +164,9 @@ class Maestro(MusicGenerationDataset):
         )
 
     @staticmethod
-    def get_metadata(table: pd.DataFrame) -> Dict[str, str]:
+    def get_metadata(dataset_path: Union[str, Path]) -> Dict[str, str]:
         """Prepares the metadata json from the Maestro csv."""
+        table = pd.read_csv(str(Path(dataset_path, "maestro-v2.0.0.csv")))
         composers_json = {}
         for index, row in table.iterrows():
         # 1. Process composer
@@ -177,8 +177,6 @@ class Maestro(MusicGenerationDataset):
             composer = composer.replace(" ", "_")
             composer = composer.upper()
             if composer not in ComposerPeriods.__members__.keys():
-                continue
-            if "ALBAN" not in composer:
                 continue
 
             # 2. Process period

@@ -25,7 +25,7 @@ def sort_notes(note_seq: List[Note]) -> List[Note]:
     return note_seq
 
 
-def group_notes_in_subdivisions_bars(musa_obj: Musa) -> List[List[List[Note]]]:
+def group_notes_in_subdivisions_bars(musa_obj: Musa, subdiv: str) -> List[List[List[Note]]]:
     """This function groups notes in the selected subdivision.
     The result is a list which elements are lists that represent the bars,
     and inside them, lists that represent the notes in each subdivision.
@@ -51,7 +51,7 @@ def group_notes_in_subdivisions_bars(musa_obj: Musa) -> List[List[List[Note]]]:
     # Retain the highest note at a time frame (1 16th note)
     grid = get_subdivisions(
         total_bars=len(sorted_bars),
-        subdivision="eight",
+        subdivision=subdiv,
         time_sig=musa_obj.time_sig.time_sig,
         bpm=musa_obj.bpm,
         resolution=musa_obj.resolution,

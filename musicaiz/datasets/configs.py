@@ -1,6 +1,6 @@
 from pathlib import Path
 from enum import Enum
-from typing import List, Dict
+from typing import List, Dict, Type
 from abc import ABCMeta
 
 from musicaiz.tokenizers import TokenizerArguments
@@ -38,7 +38,7 @@ class MusicGenerationDataset(metaclass=ABCMeta):
         output_file: str,
         metadata: Dict[str, str],
         tokenize_split: str,
-        args: TokenizerArguments,
+        args: Type[TokenizerArguments],
         dirs_splitted: bool,
     ) -> None:
 

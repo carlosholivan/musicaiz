@@ -15,7 +15,7 @@ class JSBChorales(MusicGenerationDataset):
     """
     """
     def __init__(self):
-        self.dataset = MusicGenerationDatasetNames.JSB_CHORALES.value
+        self.name = MusicGenerationDatasetNames.JSB_CHORALES.name.lower()
     
     def tokenize(self,
         dataset_path: str,

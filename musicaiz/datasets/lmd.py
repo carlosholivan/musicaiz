@@ -17,7 +17,7 @@ class LakhMIDI(MusicGenerationDataset):
     """
 
     def __init__(self):
-        self.dataset = MusicGenerationDatasetNames.LAKH_MIDI.name.lower
+        self.name = MusicGenerationDatasetNames.LAKH_MIDI.name.lower()
 
     def tokenize(
         self,
