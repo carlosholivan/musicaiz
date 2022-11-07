@@ -32,6 +32,7 @@ def tokenize_path(
         total = len(list(metadata.keys()))
     else:
         elements = dataset_path.rglob("*.mid")
+        elements = [f.name for f in dataset_path.rglob("*.mid")]
         total = len(list(dataset_path.glob("*.mid")))
 
     for el in elements:
@@ -83,7 +84,7 @@ def _processer(
 
     data_piece: pathlib.Path
         The path to the midi file.
-    
+
     data_piece: pathlib.Path
         The parent path where the midi file is.
 
@@ -94,7 +95,7 @@ def _processer(
     Returns:
         _type_: _description_
     """
-    
+
     try:
         prev_tokens = ""
         # Tokenize

@@ -30,7 +30,7 @@ class MusicGenerationDatasetNames(Enum):
 
 
 class MusicGenerationDataset(metaclass=ABCMeta):
-    
+
     def _prepare_tokenize(
         self,
         dataset_path: str,
@@ -73,7 +73,7 @@ class MusicGenerationDataset(metaclass=ABCMeta):
                     continue
         else:
             train_metadata, val_metadata, test_metadata = None, None, None
-        
+
         if dirs_splitted:
             data_train_path = Path(dataset_path, "train")
             data_val_path = Path(dataset_path, "valid")
@@ -91,4 +91,3 @@ class MusicGenerationDataset(metaclass=ABCMeta):
             tokenize_path(data_val_path, dest_val_path, val_metadata, output_file, args)
         if tokenize_split == "test" or tokenize_split == "all":
             tokenize_path(data_test_path, dest_test_path, test_metadata, output_file, args)
-    

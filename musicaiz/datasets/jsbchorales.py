@@ -16,8 +16,9 @@ class JSBChorales(MusicGenerationDataset):
     """
     def __init__(self):
         self.name = MusicGenerationDatasetNames.JSB_CHORALES.name.lower()
-    
-    def tokenize(self,
+
+    def tokenize(
+        self,
         dataset_path: str,
         output_path: str,
         tokenize_split: str,
@@ -28,7 +29,7 @@ class JSBChorales(MusicGenerationDataset):
 
         Parameters
         ----------
-        
+
         dataset_path (str): _description_
 
         output_path (str): _description_
@@ -38,7 +39,7 @@ class JSBChorales(MusicGenerationDataset):
         args (Type[TokenizerArguments]): _description_
 
         output_file (str, optional): _description_. Defaults to "token-sequences".
-        
+
         Examples
         --------
 
