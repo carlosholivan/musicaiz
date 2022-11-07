@@ -45,11 +45,6 @@ jobs:
                       python-version: "3.10"
                       channel-priority: "strict"
                       envfile: "environment.yml"
-                    
-                    - os: ubuntu-latest
-                      python-version: "3.11"
-                      channel-priority: "strict"
-                      envfile: "environment.yml"
 
         steps:
         - uses: actions/checkout@v2
