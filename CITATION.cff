@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as shown below."
+title: musicaiz
+authors:
+  - family-names: Hernandez-Olivan
+    given-names: Carlos
+preferred-citation:
+  type: article
+  authors:
+  - family-names: Hernandez-Olivan
+    given-names: Carlos
+    orcid: "https://orcid.org/0000-0002-0235-2267"
+  - family-names: Beltran
+    given-names: Jose R.
+    orcid: "https://orcid.org/0000-0002-7500-4650"
+  title: "musicaiz: A Python Library for Symbolic Music Generation, Analysis and Visualization"
+  journal: arXiv
+  year: 2022
+license: AGPL-3.0
+date-released: 2022-09-15
+url: "https://carlosholivan.github.io/musicaiz/"
+repository-code: "https://github.com/carlosholivan/musicaiz"
