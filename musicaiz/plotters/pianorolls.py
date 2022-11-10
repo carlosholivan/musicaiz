@@ -11,7 +11,7 @@ from musicaiz.rhythm import (
     get_subdivisions,
     TimingConsts
 )
-from musicaiz.structure import Note
+from musicaiz.structure import Note, Instrument
 
 
 COLOR_EDGES = [
@@ -131,13 +131,12 @@ class Pianoroll:
             "ticks": subdivisions[-1]["ticks"] + range_ticks,
         })
 
-    def _notes_loop(self, notes: List[Note], show_pitch_labels: bool = True):
+    def _notes_loop(self, notes: List[Note]):
         plt.ylabel("Pitch")
         #highest_pitch = get_highest_pitch(track.instrument)
         #lowest_pitch = get_lowest_pitch(track.instrument)
         #  plt.ylim((0, (highest_pitch - lowest_pitch) - 1))
 
-        pitches = []
         for note in notes:
             plt.vlines(x=note.start_ticks,
                        ymin=note.pitch,
@@ -226,14 +225,14 @@ class PianorollHTML:
                 x0=note.start_ticks,
                 y0=note.pitch,
                 x1=note.end_ticks,
-                y1=note.pitch+1,
+                y1=note.pitch + 1,
                 line=dict(
                     color=COLOR_EDGES[0],
                     width=2,
                 ),
                 fillcolor=COLOR[0],
             )
-            
+
             # this is to add a hover information on each note
             self.fig.add_trace(
                 go.Scatter(
@@ -246,23 +245,22 @@ class PianorollHTML:
                     ],
                     y=[
                         note.pitch,
-                        note.pitch+1,
-                        note.pitch+1,
+                        note.pitch + 1,
+                        note.pitch + 1,
                         note.pitch,
                         note.pitch
-                    ], 
+                    ],
                     fill="toself",
                     mode="lines",
-                    name=f"pitch={note.pitch}<br>\n"\
-                         f"velocity={note.velocity}<br>\n"\
-                         f"start_ticks={note.start_ticks}<br>\n"\
+                    name=f"pitch={note.pitch}<br>\n"
+                         f"velocity={note.velocity}<br>\n"
+                         f"start_ticks={note.start_ticks}<br>\n"
                          f"end_ticks={note.end_ticks}<br>",
                     opacity=0,
                     showlegend=False,
                 )
             )
 
-    
     def plot_grid(self, subdivisions):
         # all the pitch values to be written in the axis
         #self.fig.update_xaxes(range[0, len(subdivisions) - 1])
@@ -296,10 +294,9 @@ class PianorollHTML:
                 self.fig.add_vline(x=s["ticks"], line_width=0.2, line_color="blue")
             prev_bar, prev_beat = s["bar"], s["bar_beat"]
 
-    
     def plot_instrument(
         self,
-        track,
+        track: Instrument,
         bar_start: int,
         bar_end: int,
         subdivision: str,
@@ -309,7 +306,6 @@ class PianorollHTML:
         time_sig: str = TimingConsts.DEFAULT_TIME_SIGNATURE.value,
         bpm: int = TimingConsts.DEFAULT_BPM.value,
         resolution: int = TimingConsts.RESOLUTION.value,
-        print_measure_data: bool = True,
         show: bool = True
     ):
 
@@ -333,11 +329,11 @@ class PianorollHTML:
             total_bars = bar_end - bar_start
             subdivisions = get_subdivisions(total_bars, subdivision, time_sig, bpm, resolution)
             self.plot_grid(subdivisions)
-        
+
         # this is to add the yaxis labels# horizontal line for pitch grid
         labels = [i for i in range(min(pitches) - 1, max(pitches) + 2)]
         for pitch in labels:
-            self.fig.add_hline(y=pitch+1, line_width=0.1, line_color="white")
+            self.fig.add_hline(y=pitch + 1, line_width=0.1, line_color="white")
         # if we do have too many pitches, we won't label all of them in the yaxis
         if max(pitches) - min(pitches) > 24:
             cleaned_labels = [label for label in labels if label % 2 == 0]
@@ -357,7 +353,9 @@ class PianorollHTML:
             ),
         )
 
-        self.fig.update_layout(legend={"xanchor":"center", "yanchor":"top"})
+        self.fig.update_layout(legend={
+            "xanchor": "center", "yanchor": "top"
+        })
 
         if save_plot:
             self.fig.write_html(Path(path, filename + ".html"))
