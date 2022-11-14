@@ -106,7 +106,7 @@ def get_all_dataset_measures(path: Union[str, Path]) -> List[Dict[str, Any]]:
 def get_average_dataset_measures(path: Union[str, Path]):
     """Returns the measures of each midi file in the directory or
     subdirectoy `dataset_path`.
-    
+
     Returns
     -------
     avgs: Dict[str, Union[int, np.array]]
@@ -142,6 +142,7 @@ def _eval_file(file: Union[str, Path]):
     midi = loaders.Musa(file)
     midi_measure = get_eval_measures(midi.notes)
     return midi_measure
+
 
 def get_eval_measures(
     notes: List[Note],
@@ -236,6 +237,10 @@ def euclidean_distance(
     # if no measures2 is passed, we'd measure the intra-set distances
     if measures2 is None:
         measures2 = measures1
+    if len(measures1) <= 1:
+        raise Exception("There is only one file in the dataset 1. There must be more than 1 file to measure the distances.")
+    if len(measures2) <= 1:
+        raise Exception("There is only one file in the dataset 1. There must be more than 1 file to measure the distances.")
     # initialize dataframe
     count = 0
     all_dist = {}
@@ -273,7 +278,12 @@ def _get_measures_to_plot(
         measures = [measure]
     return measures
 
-def get_distribution(*args, measure="all"):
+
+def get_distribution(
+    *args,
+    measure: str = "all",
+    show: bool = True
+):
     """
     Plots the measure histogram of the input distances
     datasets (args).
@@ -306,7 +316,8 @@ def get_distribution(*args, measure="all"):
         elif measure in RhythmMeasures._member_names_:
             ax.set_title(RhythmMeasures[measure].value)
         plt.legend(labels)
-        plt.show()
+        if show:
+            plt.show()
 
 
 def _append_zeros_array(vec1, vec2):
@@ -391,7 +402,8 @@ def plot_measures(
     measures_dist1: Dict[str, Dict[str, float]],
     measures_dist2: Dict[str, Dict[str, float]],
     label1: str = "1",
-    label2: str = "2"
+    label2: str = "2",
+    show: bool = True
 ):
     measures_dict = compute_oa_kld(
         measures_dist1,
@@ -453,7 +465,8 @@ def plot_measures(
     ax.legend(custom_lines, k1s)
     plt.ylabel("OA")
     plt.xlabel("KLD")
-    plt.show()
+    if show:
+        plt.show()
 
 
 def model_features_violinplot(
@@ -462,6 +475,7 @@ def model_features_violinplot(
     label1: str = "1",
     label2: str = "2",
     measure: str = "all",
+    show: bool = True
 ):
     """Plots the distances distributions of the input
     features as a violin plot as the Fig. 4 of the paper
@@ -522,7 +536,8 @@ def model_features_violinplot(
     plt.legend(frameon=False)
     ax.set_ylabel("Distance")
     ax.set_xlabel("Feature")
-    plt.show()
+    if show:
+        plt.show()
 
 
 def _get_array_from_dict(eucl_dist_dict, measure):
