@@ -86,10 +86,64 @@ A Python library for symbolic music generation, analysis and visualization.
 
 The modules contained in this library are:
 
+- [Loaders](musicaiz/loaders.py)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;contains the basic initialization to import files.
+
+````python
+from musicaiz.loaders import Musa
+
+    midi = Musa(
+      file="my_midifile.mid",
+      structure="bars"
+    )
+````
+
 - [Structure](musicaiz/structure/)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;contains the structure elements in music (instruments, bars and notes).
+
+````python
+# Define a Note object
+from musicaiz.structure import Note
+
+    note = Note(
+      pitch=12,
+      start=0.0,
+      end=1.0,
+      velocity=75,
+      bpm=120,
+      resolution=96
+    )
+````
+
 - [Harmony](musicaiz/harmony/)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;contains the harmonic elements in music (intervals, chords and keys).
+
+````python
+from musicaiz.structure import Chords, Tonality
+
+    # Initialize a chord by its notation
+    chord_name = "Cm7b5"
+    chord = Chord(chord_name)
+    # get the notes in the chord
+    chord.get_notes(inversion=0)
+
+    # Initialize Tonality
+    tonality = Tonality.E_MINOR
+    # get different scales
+    tonality.natural
+    tonality.harmonic
+    tonality.melodic
+    # get the notes in a scale
+    tonality.scale_notes("NATURAL")
+    # get a chord from a scale degree
+    Tonality.get_chord_from_degree(
+      tonality="E_MINOR",
+      degree="V",
+      scale="NATURAL",
+      chord_type="triad",
+    )
+````
+
 - [Rhythm](musicaiz/rhythm/)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;contains rhythmic or timing elements in music (quantization).
 - [Features](musicaiz/features/)<br/>
@@ -98,12 +152,129 @@ The modules contained in this library are:
 &nbsp;&nbsp;&nbsp;&nbsp;contains algorithms for chord prediction, key prediction, harmonic transposition...
 - [Plotters](musicaiz/plotters/)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;contains different ways of plotting music (pinorolls or scores).
+
+````python
+from musicaiz.plotters import Pianoroll, PianorollHTML
+
+    # Matplotlib
+    plot = Pianoroll()
+    musa_obj = Musa(midi_sample, structure="bars")
+    plot.plot_instrument(
+        track=musa_obj.instruments[0].notes,
+        total_bars=2,
+        subdivision="quarter",
+        time_sig=musa_obj.time_sig.time_sig,
+        print_measure_data=False,
+        show_bar_labels=False
+    )
+
+    # Pyplot HTML
+    plot = PianorollHTML()
+    musa_obj = Musa(midi_sample, structure="bars")
+    plot.plot_instrument(
+        track=musa_obj.instruments[0],
+        bar_start=1,
+        bar_end=2,
+        subdivision="quarter",
+        time_sig=musa_obj.time_sig.time_sig,
+        show=False
+    )
+````
+
 - [Tokenizers](musicaiz/tokenizers/)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;contains different encodings to prepare symbolic music data to train a sequence model.
-- [Converters](musicaiz/harmony/)<br/>
+
+````python
+from musicaiz.tokenizers import MMMTokenizer, MMMTokenizerArguments
+
+    # Tokenize file
+    midi = "my_midifile.mid"
+    args = MMMTokenizerArguments(
+      windowing=True,
+      time_unit="SIXTEENTH",
+      num_programs=None,
+      shuffle_tracks=True,
+      track_density=False,
+      window_size=4,
+      hop_length=1,
+      time_sig=False,
+      velocity=False,
+      quantize=False,
+      tempo=True,
+    )
+    tokenizer = MMMTokenizer(midi, args)
+    got = tokenizer.tokenize_file()
+
+    # get tokens analysis
+    my_tokens = "PIECE_START TRACK_START ..."
+    MMMTokenizer.get_tokens_analytics(my_tokens)
+
+    # Convert tokens to Musa objects
+    MMMTokenizer.tokens_to_musa(
+      tokens=my_tokens,
+      absolute_timing=True,
+      time_unit="SIXTEENTH",
+      time_sig="4/4",
+      resolution=96
+    )
+
+    # get vocabulary
+    MMMTokenizer.get_vocabulary(
+      dataset_path="apth/to/dataset/tokens",
+    )
+````
+
+- [Converters](musicaiz/converters/)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;contains converters to other formats (JSON,...).
+
+````python
+from musicaiz.loaders import Musa
+from musicaiz.loaders import musa_to_proto, proto_to_musa
+
+  # Convert a musicaiz objects in protobufs
+  midi = Musa(midi_sample, structure="bars")
+  protobuf = musa_to_proto(midi)
+
+  # Convert a protobuf to musicaiz objects
+  musa = proto_to_musa(protobuf)
+    
+````
+
 - [Datasets](musicaiz/datasets/)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;contains helper methods to work with MIR open-source datasets.
+
+````python
+from musicaiz.tokenizers import MMMTokenizer, MMMTokenizerArguments
+from musicaiz.datasets import JSBChorales
+
+    # Tokenize a dataset in musicaiz
+    output_path = "path/to/store/tokens"
+
+    args = MMMTokenizerArguments(
+        prev_tokens="",
+        windowing=True,
+        time_unit="HUNDRED_TWENTY_EIGHT",
+        num_programs=None,
+        shuffle_tracks=True,
+        track_density=False,
+        window_size=32,
+        hop_length=16,
+        time_sig=True,
+        velocity=True,
+    )
+    dataset = JSBChorales()
+    dataset.tokenize(
+        dataset_path="path/to/JSB Chorales/midifiles",
+        output_path=output_path,
+        output_file="token-sequences",
+        args=args,
+        tokenize_split="all"
+    )
+    vocab = MMMTokenizer.get_vocabulary(
+        dataset_path=output_path
+    )
+````
+
 - [Models](musicaiz/models/)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;contains ML models to generate symbolic music.
 
