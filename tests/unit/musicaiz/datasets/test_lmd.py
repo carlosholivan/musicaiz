@@ -20,7 +20,7 @@ def test_LakhMIDI_get_metadata(dataset_path):
             "split": "train",
         }
     }
-    
+
     dataset = LakhMIDI()
     got = dataset.get_metadata(dataset_path)
 

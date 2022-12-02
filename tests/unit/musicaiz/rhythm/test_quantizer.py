@@ -101,7 +101,7 @@ def test_basic_quantizer_2(grid_8):
 def test_advanced_quantizer_1(grid_16):
     strength = 1
     delta_Qr = 12
-    type_q= "positive"
+    type_q = "positive"
 
     notes_bar1 = [
         Note(pitch=69, start=1, end=24, velocity=127),
@@ -152,7 +152,7 @@ def test_advanced_quantizer_2(grid_16):
 
 
 def test_advanced_quantizer_3(grid_16):
-    
+
     strength = 1
     delta_Qr = 12
     type_q = None

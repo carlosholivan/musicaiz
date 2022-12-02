@@ -251,7 +251,7 @@ class AllChords(Enum):
             for n in note.value:
                 all_notes.append(n)
         return all_notes
-    
+
     # TODO: Finish this
     @classmethod
     def get_chord_from_name(cls, chord_name: str) -> AllChords:
@@ -337,7 +337,7 @@ class Chord:
         - Only higher than 13th chords do have a 6th inversion"""
         if self.type.value - 1 < inversion:
             raise ValueError(f"Chord quality {self.quality_name} does not have a {inversion} inversion.")
-    
+
     @classmethod
     def get_all_chords(cls) -> Dict[str, Tuple[NoteClassBase, AllChords]]:
         """
@@ -362,7 +362,7 @@ class Chord:
                 if not any(e in chord.name for e in exclude):
                     all_chords.update({tonic.name + "-" + chord.name: (tonic, chord)})
         return all_chords
-    
+
     @classmethod
     def get_notes_from_chord(
         cls,
@@ -374,7 +374,7 @@ class Chord:
 
         Parameters
         ----------
-    
+
         tonic: NoteClassBase
 
         quality: AllChords
@@ -382,7 +382,7 @@ class Chord:
 
         Returns
         -------
-        
+
         List[NoteClassBase]
         """
         notes = [tonic]
@@ -394,7 +394,7 @@ class Chord:
             note_dest_obj = interval_inst.transpose_note(note_obj)
             notes.append(note_dest_obj.note)
         return notes
-    
+
     @classmethod
     def get_pitches_from_chord(
         cls,
@@ -417,7 +417,7 @@ class Chord:
 
         Returns
         -------
-    
+
         List[int]
         """
         notes = cls.get_notes_from_chord(tonic, quality)

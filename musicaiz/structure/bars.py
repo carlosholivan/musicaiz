@@ -1,4 +1,4 @@
-from typing import List, Union
+from typing import List, Union, Optional
 import numpy as np
 
 
@@ -6,6 +6,7 @@ from musicaiz.rhythm import (
     TimingConsts,
     ms_per_bar,
     ms_per_tick,
+    Timing,
 )
 from musicaiz.structure import Note
 
@@ -38,10 +39,12 @@ class Bar:
 
     def __init__(
         self,
+        start: Optional[Union[int, float]] = None,
+        end: Optional[Union[int, float]] = None,
         time_sig: str = TimingConsts.DEFAULT_TIME_SIGNATURE.value,
         bpm: int = TimingConsts.DEFAULT_BPM.value,
         resolution: int = TimingConsts.RESOLUTION.value,
-        absolute_timing: bool = True
+        absolute_timing: bool = True,
     ):
         self.bpm = bpm
         self.time_sig = time_sig
@@ -50,13 +53,23 @@ class Bar:
 
         # The following attributes are set when loading a MIDI file
         # with Musa class
-        self.notes = []
         self.note_density = None
         self.harmonic_density = None
-        self.start_ticks = None
-        self.end_ticks = None
-        self.start_sec = None
-        self.end_sec = None
+
+        self.ms_tick = ms_per_tick(bpm, resolution)
+
+        if start is not None and end is not None:
+            timings = Timing._initialize_timing_attributes(start, end, self.ms_tick)
+
+            self.start_ticks = timings["start_ticks"]
+            self.end_ticks = timings["end_ticks"]
+            self.start_sec = timings["start_sec"]
+            self.end_sec = timings["end_sec"]
+        else:
+            self.start_ticks = None
+            self.end_ticks = None
+            self.start_sec = None
+            self.end_sec = None
 
     def relative_notes_timing(self, bar_start: float):
         """The bar start is the value in ticks where the bar starts"""
@@ -118,12 +131,14 @@ class Bar:
         else:
             end_sec = self.end_sec
 
-        return "Bar(note_density={}, " \
+        return "Bar(time_signature={}, " \
+                "note_density={}, " \
                 "harmonic_density={} " \
                 "start_ticks={} " \
                 "end_ticks={} " \
                 "start_sec={} " \
                 "end_sec={})".format(
+                    self.time_sig,
                     self.note_density,
                     self.harmonic_density,
                     self.start_ticks,

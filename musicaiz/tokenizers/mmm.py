@@ -24,7 +24,7 @@ VALID_TIME_UNITS = ["SIXTEENTH", "THIRTY_SECOND", "SIXTY_FOUR", "HUNDRED_TWENTY_
 
 
 logger = logging.getLogger("mmm-tokenizer")
-logging.basicConfig(level = logging.INFO)
+logging.basicConfig(level=logging.INFO)
 
 
 @dataclass
@@ -36,38 +36,38 @@ class MMMTokenizerArguments(TokenizerArguments):
 
     windowing: bool
         if True, the method tokenizes each file by applying bars windowing.
-    
+
     time_unit: str
         the note length in `VALID_TIME_UNITS` that one `TIME_DELTA` unit will be equal to.
         This allows to tokenize in a wide variety of note lengths for diverse purposes.
         Be careful when choosing this value because if there are notes which duration is
         lower than the chosen time_unit value, they won't be tokenized.
-        
+
     num_programs: List[int]
         the number of programs to tokenize. If None, the method tokenizes all the tracks.
-    
+
     shuffle_tracks: bool
         shuffles the order of tracks in each window (PIECE).
-    
+
     track_density: bool
         if True a token DENSITY is added at the beggining of each track.
-    
+
     window_size: int
         the number of bars per track to tokenize.
-    
+
     hop_length: int
         the number of bars to slice when tokenizing.
         If a MIDI file contains 5 bars and the window size is 4 and the hop length is 1,
         it'll be splitted in 2 PIECE tokens, one from bar 1 to 4 and the other on from
         bar 2 to 5 (somehow like audio FFT).
-    
+
     time_sig: bool
         if we want to include the time signature in the samples. Note that the time signature
         will be added to the piece-level, that is, before the first track starts.
-    
+
     velocity: bool
         if we want to add the velocity token. Velocities ranges between 1 and 128 (ints).
-    
+
     quantize: bool
         if we want to quantize the symbolic music data for tokenizing.
     """
@@ -102,19 +102,20 @@ class MMMTokenizer(EncodeBase):
     ):
 
         if args is None:
-            raise ValueError(f"No `MMMTokenizerArguments` passed.")
+            raise ValueError("No `MMMTokenizerArguments` passed.")
         self.args = args
 
         # Convert file into a Musa object to be processed
         if file is not None:
             self.midi_object = Musa(
                 file=file,
-                structure="bars",
                 absolute_timing=False,
                 quantize=self.args.quantize,
                 cut_notes=False
             )
-    
+        else:
+            self.midi_object = Musa(file=None)
+
     def tokenize_file(
         self,
     ) -> str:
@@ -140,7 +141,8 @@ class MMMTokenizer(EncodeBase):
 
         if not self.args.windowing:
             if self.args.time_sig:
-                time_sig_tok = f"TIME_SIG={self.midi_object.time_sig.time_sig} "
+                time_sig = self.midi_object.time_signature_changes[0]['time_sig'].time_sig
+                time_sig_tok = f"TIME_SIG={time_sig} "
             else:
                 time_sig_tok = ""
             if self.args.tempo:
@@ -150,7 +152,7 @@ class MMMTokenizer(EncodeBase):
             tokens = self.tokenize_tracks(
                 instruments=tokenized_instruments,
                 bar_start=0,
-                tokens="PIECE_START " + self.args.prev_tokens + " " + time_sig_tok + tempo_tok,
+                tokens="PIECE_START " + self.args.prev_tokens + time_sig_tok + tempo_tok,
             )
             tokens += "\n"
         else:
@@ -162,14 +164,15 @@ class MMMTokenizer(EncodeBase):
                 if i + self.args.window_size == self.midi_object.total_bars:
                     break
                 if self.args.time_sig:
-                    time_sig_tok = f"TIME_SIG={self.midi_object.time_sig.time_sig} "
+                    time_sig = self.midi_object.time_signature_changes[0]['time_sig'].time_sig
+                    time_sig_tok = f"TIME_SIG={time_sig} "
                 else:
                     time_sig_tok = ""
                 tokens += self.tokenize_tracks(
                     tokenized_instruments,
                     bar_start=i,
-                    bar_end=i+self.args.window_size,
-                    tokens="PIECE_START " + self.args.prev_tokens + " " + time_sig_tok,
+                    bar_end=i + self.args.window_size,
+                    tokens="PIECE_START " + self.args.prev_tokens + time_sig_tok,
                 )
                 tokens += "\n"
         return tokens
@@ -190,12 +193,6 @@ class MMMTokenizer(EncodeBase):
         instruments: List[Instrument]
             the list of instruments to tokenize.
 
-        track_density: bool
-            if True a token DENSITY is added at the beggining of each track.
-            The token DENSITY is the total notes of the track or instrument.
-        
-        velocity: bool = False
-
         Returns
         -------
 
@@ -214,9 +211,9 @@ class MMMTokenizer(EncodeBase):
             # loop in bars
             if bar_end is None:
                 bar_end = len(inst.bars)
-            bars = inst.bars[bar_start:bar_end]
+            bars = self.midi_object.bars[bar_start:bar_end]
             tokens = self.tokenize_track_bars(
-                bars, tokens
+                bars, inst.program, tokens
             )
             if inst_idx + 1 == len(instruments):
                 tokens += "TRACK_END"
@@ -227,6 +224,7 @@ class MMMTokenizer(EncodeBase):
     def tokenize_track_bars(
         self,
         bars: List[Bar],
+        program: int,
         tokens: Optional[str] = None,
     ) -> str:
         """
@@ -253,16 +251,14 @@ class MMMTokenizer(EncodeBase):
         if self.args.time_unit not in VALID_TIME_UNITS:
             raise ValueError(f"Invalid time unit: {self.args.time_unit}")
 
-        for bar in bars:
+        for b, bar in enumerate(bars):
             bar_start = bar.start_ticks
             bar_end = bar.end_ticks
             # sort notes by start_ticks
-            bar.notes = sort_notes(bar.notes)            
-            all_note_starts = [note.start_ticks for note in bar.notes]
-            all_note_ends = [note.end_ticks for note in bar.notes]
+            notes = self.midi_object.get_notes_in_bar(b, program)
 
             tokens += "BAR_START "
-            if len(bar.notes) == 0:
+            if len(notes) == 0:
                 delta_symb = get_symbolic_duration(
                     bar_end - bar_start, True
                 )
@@ -274,16 +270,18 @@ class MMMTokenizer(EncodeBase):
                 tokens += "BAR_END "
                 continue
             else:
-                if bar.notes[0].start_ticks - bar_start != 0:
+                all_note_starts = [note.start_ticks for note in notes]
+                all_note_ends = [note.end_ticks for note in notes]
+                if notes[0].start_ticks - bar_start != 0:
                     delta_symb = get_symbolic_duration(
-                        bar.notes[0].start_ticks, True
+                        notes[0].start_ticks, True
                     )
                     delta_val = int(
                         NoteLengths[delta_symb].value / NoteLengths[self.args.time_unit].value
                     )
-                    #tokens += f"TIME_DELTA={delta_val - bar_start} " if delta_val - bar_start != 0 else "TIME_DELTA=1 "
-                    if delta_val - bar_start != 0: tokens += f"TIME_DELTA={delta_val - bar_start} "
-            
+                    if delta_val - bar_start != 0:
+                        tokens += f"TIME_DELTA={delta_val - bar_start} "
+
             all_time_events = all_note_starts + all_note_ends
             num_notes = len(all_note_starts)
             i = 0
@@ -293,12 +291,12 @@ class MMMTokenizer(EncodeBase):
                 # The 1st note event will always be the 1st note on
                 note_idx = event_idx % num_notes
                 if event_idx < num_notes:
-                    tokens += f"NOTE_ON={bar.notes[note_idx].pitch} "
+                    tokens += f"NOTE_ON={notes[note_idx].pitch} "
                     if self.args.velocity:
-                        tokens += f"VELOCITY={bar.notes[note_idx].velocity} "
+                        tokens += f"VELOCITY={notes[note_idx].velocity} "
                 else:
-                    tokens += f"NOTE_OFF={bar.notes[note_idx].pitch} "
-                
+                    tokens += f"NOTE_OFF={notes[note_idx].pitch} "
+
                 if len(event_idxs) == len(all_time_events):
                     break
 
@@ -314,11 +312,11 @@ class MMMTokenizer(EncodeBase):
                     delta_val = int(
                         NoteLengths[delta_symb].value / NoteLengths[self.args.time_unit].value
                     )
-                    #tokens += f"TIME_DELTA={delta_val} " if delta_val != 0 else "TIME_DELTA=1 "
-                    if delta_val != 0: tokens += f"TIME_DELTA={delta_val} "
+                    if delta_val != 0:
+                        tokens += f"TIME_DELTA={delta_val} "
 
                 list_indexes = [i for i, diff in enumerate(diffs) if diff == time_delta and i not in event_idxs]
-                
+
                 els_on = [el for el in list_indexes if el < num_notes]
                 els_off = [el for el in list_indexes if el >= num_notes]
                 if len(els_on) != 0 and len(els_off) != 0:
@@ -329,15 +327,15 @@ class MMMTokenizer(EncodeBase):
                     event_idx = min(els_on)
                 i += 1
                 event_idxs.append(event_idx)
-            if bar.notes[-1].end_ticks < bar_end:
+            if notes[-1].end_ticks < bar_end:
                 delta_symb = get_symbolic_duration(
-                        bar_end - bar.notes[-1].end_ticks, True
+                    bar_end - notes[-1].end_ticks, True
                 )
                 delta_val = int(
                     NoteLengths[delta_symb].value / NoteLengths[self.args.time_unit].value
                 )
-                #tokens += f"TIME_DELTA={delta_val} " if delta_val != 0 else "TIME_DELTA=1 "
-                if delta_val != 0: tokens += f"TIME_DELTA={delta_val} "
+                if delta_val != 0:
+                    tokens += f"TIME_DELTA={delta_val} "
             tokens += "BAR_END "
         return tokens
 
@@ -390,10 +388,15 @@ class MMMTokenizer(EncodeBase):
 
         """Converts a str valid tokens sequence in Musa objects."""
         # Initialize midi file to write
-        midi = Musa()
-        midi.time_sig = TimeSignature(time_sig)
-
-        instruments_tokens = cls.split_tokens_by_track(tokens)
+        midi = Musa(file=None)
+        midi.time_signature_changes = [
+            {
+                "time_sig": TimeSignature(time_sig),
+                "ms": 0.0
+            }
+        ]
+        tokens_list = tokens.split(" ")
+        instruments_tokens = cls.split_tokens_by_track(tokens_list)
         for inst_idx, instr_tokens in enumerate(instruments_tokens):
             # First index in instr_tokens is the instr program
             # We just want the INST token in this loop
@@ -407,7 +410,7 @@ class MMMTokenizer(EncodeBase):
             global_time_delta = 0
             for bar_idx, bar in enumerate(bar_tokens):
                 bar_obj = Bar()
-                midi.instruments[inst_idx].bars.append(bar_obj)
+                midi.bars.append(bar_obj)
                 if absolute_timing:
                     global_time_delta_ticks = bar_idx * ticks_bar
                 else:
@@ -445,104 +448,19 @@ class MMMTokenizer(EncodeBase):
                                     start=start_time,
                                     end=end_time,
                                     velocity=int(vel),
+                                    instrument_prog=midi.instruments[inst_idx].program,
+                                    bar_idx=idx
                                 )
-                                midi.instruments[inst_idx].bars[bar_idx].notes.append(note)
+                                midi.notes.append(note)
                                 break
                             else:
                                 continue
         return midi
 
-    @staticmethod
-    def _get_pieces_tokens(tokens: str) -> List[List[str]]:
-        """Converts the tokens str that can contain one or more
-        pieces into a list of pieces that are also lists which contain
-        one item per token.
-
-        Example
-        -------
-        >>> tokens = "PIECE_START INST=0 ... PIECE_START ..."
-        >>> dataset_tokens = _get_pieces_tokens(tokens)
-        >>> [
-                ["PIECE_START INST=0 ...],
-                ["PIECE_START ...],
-            ]
-        """
-        tokens = tokens.split("PIECE_START")
-        tokens.remove("")
-        dataset_tokens = []
-        for piece in tokens:
-            piece_tokens = piece.split(" ")
-            piece_tokens.remove("")
-            dataset_tokens.append(piece_tokens)
-        return dataset_tokens
+    @classmethod
+    def get_pieces_tokens(cls, tokens: str):
+        return cls._get_pieces_tokens(tokens, "PIECE_START")
 
     @classmethod
     def get_tokens_analytics(cls, tokens: str) -> Dict[str, int]:
-        """
-        Extracts features to aanlyze the given token sequence.
-
-        Parameters
-        ----------
-
-        tokens: str
-            A token sequence.
-
-        Returns
-        -------
-
-        analytics: Dict[str, int]
-            The ``analytics`` dict keys are:
-                - ``total_tokens``
-                - ``unique_tokens``
-                - ``total_notes``
-                - ``unique_notes``
-                - ``total_bars``
-                - ``total_instruments``
-                - ``unique_instruments``
-        """
-        # Convert str in list of pieces that contain tokens
-        dataset_tokens = cls._get_pieces_tokens(tokens)
-        # Start the analysis
-        note_counts, bar_counts, instr_counts = 0, 0, 0  # total notes and bars (also repeated note values)
-        total_toks = 0
-        unique_tokens, unique_notes, unique_instr = [], [], []  # total non-repeated tokens
-        unique_genres, unique_composers, unique_periods = [], [], []
-        for piece, toks in enumerate(dataset_tokens):
-            for tok in toks:
-                total_toks += 1
-                if tok not in unique_tokens:
-                    unique_tokens.append(tok)
-                if "NOTE_ON" in tok:
-                    note_counts += 1
-                if "BAR_START" in tok:
-                    bar_counts += 1
-                if "INST" in tok:
-                    instr_counts += 1
-                if "NOTE_ON" in tok and tok not in unique_notes:
-                    unique_notes.append(tok)
-                if "INST" in tok and tok not in unique_instr:
-                    unique_instr.append(tok)
-                if "GENRE" in tok and tok not in unique_genres:
-                    unique_genres.append(tok)
-                if "PERIOD" in tok and tok not in unique_periods:
-                    unique_periods.append(tok)
-                if "COMPOSER" in tok and tok not in unique_composers:
-                    unique_composers.append(tok)
-
-        analytics = {
-            "total_pieces": piece + 1,
-            "total_tokens": total_toks,
-            "unique_tokens": len(unique_tokens),
-            "total_notes": note_counts,
-            "unique_notes": len(unique_notes),
-            "total_bars": bar_counts,
-            "total_instruments": instr_counts,
-        }
-        if len(unique_genres) != 0:
-            analytics.update({"unique_genres": len(unique_genres)})
-        if len(unique_periods) != 0:
-            analytics.update({"unique_periods": len(unique_periods)})
-        if len(unique_composers) != 0:
-            analytics.update({"unique_composers": len(unique_composers)})
-
-        return analytics
+        return cls._get_tokens_analytics(tokens, "NOTE_ON", "PIECE_START")

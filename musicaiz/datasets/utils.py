@@ -8,6 +8,8 @@ from rich.console import Console
 from musicaiz.tokenizers import (
     MMMTokenizer,
     MMMTokenizerArguments,
+    REMITokenizer,
+    REMITokenizerArguments,
     TOKENIZER_ARGUMENTS,
     TokenizerArguments,
 )
@@ -33,7 +35,7 @@ def tokenize_path(
     else:
         elements = dataset_path.rglob("*.mid")
         elements = [f.name for f in dataset_path.rglob("*.mid")]
-        total = len(list(dataset_path.glob("*.mid")))
+        total = len(elements)
 
     for el in elements:
         # Some files in LMD hace errors (OSError: data byte must be in range 0..127),
@@ -111,8 +113,12 @@ def _processer(
         if type(args) not in TOKENIZER_ARGUMENTS:
             raise ValueError("Non valid tokenizer args object.")
         if isinstance(args, MMMTokenizerArguments):
-            args.prev_tokens=prev_tokens
+            args.prev_tokens = prev_tokens
             tokenizer = MMMTokenizer(file, args)
+            piece_tokens = tokenizer.tokenize_file()
+        elif isinstance(args, REMITokenizerArguments):
+            args.prev_tokens = prev_tokens
+            tokenizer = REMITokenizer(file, args)
             piece_tokens = tokenizer.tokenize_file()
         else:
             raise ValueError("Non valid tokenizer.")

@@ -73,7 +73,7 @@ class ComposerPeriods(Enum):
     LEOS_JANACEK = "ROMANTICISM"
     LUDWIG_VAN_BEETHOVEN = "CLASSICISM"
     MIKHAIL_GLINKA = "ROMANTICISM"
-    MILY_BALARIKEV = "ROMANTICISM"
+    MILY_BALARIKEV = "ROMANTICISM"  # TODO: MILY_BALAKIREV
     MODEST_MUSSORGSKY = "ROMANTICISM"
     MUZIO_CLEMENTI = "CLASSICISM"
     NICCOLO_PAGANINI = "CLASSICISM"
@@ -199,3 +199,31 @@ class Maestro(MusicGenerationDataset):
                 }
             )
         return composers_json
+
+
+# TODO: args parsing here
+if __name__ == "__main__":
+    args = MMMTokenizerArguments(
+        prev_tokens="",
+        windowing=True,
+        time_unit="HUNDRED_TWENTY_EIGHT",
+        num_programs=None,
+        shuffle_tracks=True,
+        track_density=False,
+        window_size=32,
+        hop_length=16,
+        time_sig=True,
+        velocity=True,
+        tempo=True,
+    )
+    dataset = Maestro()
+    dataset.tokenize(
+        dataset_path="H:/INVESTIGACION/Datasets/MAESTRO/",
+        output_path="H:/GitHub/musanalysis-datasets/maestro/mmm/32_bars_16",
+        output_file="token-sequences",
+        args=args,
+        tokenize_split="all"
+    )
+    vocab = MMMTokenizer.get_vocabulary(
+        dataset_path="H:/GitHub/musanalysis-datasets/maestro/mmm/32_bars_16"
+    )

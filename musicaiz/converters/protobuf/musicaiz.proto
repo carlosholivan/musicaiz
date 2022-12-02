@@ -7,23 +7,36 @@ package musicaiz;
 
 message Musa {
 
-    repeated TimeSignature time_signatures = 5;
-    repeated Instrument instruments = 6;
+    repeated TimeSignatureChanges time_signature_changes = 5;
+    repeated SubdivisionNote subdivision_note = 6;
+    repeated File file = 7;
+    repeated TotalBars total_bars = 8;
+    repeated Tonality tonality = 9;
+    repeated Resolution resolution = 10;
+    repeated IsQuantized is_quantized = 11;
+    repeated QuantizeNote quantize_note = 12;
+    repeated AbsoluteTiming absolute_timing = 13;
+    repeated CutNotes cut_notes = 14;
+    repeated TempoChanges tempo_changes = 15;
+    repeated InstrumentsProgs instruments_progs = 16;
+    repeated Instrument instruments = 17;
+    repeated Bar bars = 18;
+    repeated Note notes = 19;
+    repeated Beat beats = 20;
+    repeated Subbeat subbeats = 21;
 
-    message Note {
-
-    }
-
-    // time attributes: musicaiz.rhythm
-    message TimeSignature {
-        int32 num = 2;
-        int32 denom = 3;
-    }
-
-    // harmony attributes: musicaiz.harmony
-    message Tonality {
-
-    }
+    message TimeSignatureChanges {}
+    message SubdivisionNote {}
+    message File {}
+    message TotalBars {}
+    message Tonality {}
+    message Resolution {}
+    message IsQuantized {}
+    message QuantizeNote {}
+    message AbsoluteTiming {}
+    message CutNotes {}
+    message TempoChanges {}
+    message InstrumentsProgs {}
 
     message Instrument {
         // Instrument index.
@@ -34,63 +47,80 @@ message Musa {
         string name = 3;
         // The instrument's family.
         string family = 4;
-        bool is_drum = 5;
-        repeated Bar bars = 6;
-        repeated Note notes = 7;
-
-        message Note {
-            int32 pitch = 1;
-            string pitch_name = 2;
-            string note_name = 3;
-            string octave = 4;
-            bool ligated = 5;
-
-            // Timing inf of the Note
-            int32 start_ticks = 6;
-            int32 end_ticks = 7;
-            float start_sec = 8;
-            float end_sec = 9;
-            string symbolic = 10;
-    
-            int32 velocity = 11;
-        }
-
-        message Bar {
-            int32 bpm = 1;
-            string time_sig = 2;
-            int32 resolution = 3;
-            bool absolute_timing = 4;
-
-            // Timing inf of the Bar
-            int32 note_density = 5;
-            int32 harmonic_density = 6;
-            int32 start_ticks = 7;
-            int32 end_ticks = 8;
-            float start_sec = 9;
-            float end_sec = 10;
-
-            repeated Note notes = 11;
-
-            message Note {
-                int32 pitch = 1;
-                string pitch_name = 2;
-                string note_name = 3;
-                string octave = 4;
-                bool ligated = 5;
-    
-                // Timing inf of the Note
-                int32 start_ticks = 6;
-                int32 end_ticks = 7;
-                float start_sec = 8;
-                float end_sec = 9;
-                string symbolic = 10;
-        
-                int32 velocity = 11;
-            }
-        }
-
+        bool is_drum = 5;      
     }
 
+    message Note {
+        int32 pitch = 1;
+        string pitch_name = 2;
+        string note_name = 3;
+        string octave = 4;
+        bool ligated = 5;
 
+        // Timing inf of the Note
+        int32 start_ticks = 6;
+        int32 end_ticks = 7;
+        float start_sec = 8;
+        float end_sec = 9;
+        string symbolic = 10;
 
+        int32 velocity = 11;
+
+        int32 bar_idx = 12;
+        int32 beat_idx = 13;
+        int32 subbeat_idx = 14;
+
+        int32 instrument_idx = 15;
+        int32 instrument_prog = 16;
+    }
+
+    message Bar {
+        float bpm = 1;
+        string time_sig = 2;
+        int32 resolution = 3;
+        bool absolute_timing = 4;
+
+        // Timing inf of the Bar
+        int32 note_density = 5;
+        int32 harmonic_density = 6;
+        int32 start_ticks = 7;
+        int32 end_ticks = 8;
+        float start_sec = 9;
+        float end_sec = 10;
+    }
+
+    message Beat {
+        float bpm = 1;
+        string time_sig = 2;
+        int32 resolution = 3;
+        bool absolute_timing = 4;
+
+        // Timing
+        int32 start_ticks = 7;
+        int32 end_ticks = 8;
+        float start_sec = 9;
+        float end_sec = 10;
+
+        int32 global_idx = 11;
+        int32 bar_idx = 12;
+    }
+
+    message Subbeat {
+        float bpm = 1;
+        string time_sig = 2;
+        int32 resolution = 3;
+        bool absolute_timing = 4;
+
+        // Timing inf of the Bar
+        int32 note_density = 5;
+        int32 harmonic_density = 6;
+        int32 start_ticks = 7;
+        int32 end_ticks = 8;
+        float start_sec = 9;
+        float end_sec = 10;
+
+        int32 global_idx = 11;
+        int32 bar_idx = 12;
+        int32 beat_idx = 13;
+    }
 }

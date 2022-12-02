@@ -2,8 +2,7 @@ from typing import List, Dict, Union, Optional
 import numpy as np
 from enum import Enum
 
-from musicaiz.structure import notes
-from musicaiz.rhythm.timing import TimingConsts, ms_per_tick
+from musicaiz.rhythm import TimingConsts, ms_per_tick
 
 
 class QuantizerConfig(Enum):
@@ -33,7 +32,7 @@ def get_ticks_from_subdivision(
 
 
 def basic_quantizer(
-    input_notes: notes,
+    input_notes,
     grid: List[int],
     bpm: int = TimingConsts.DEFAULT_BPM.value
 ):
@@ -53,11 +52,11 @@ def basic_quantizer(
             input_notes[i].end_ticks = end_tick + abs(delta_tick)
 
         input_notes[i].start_sec = input_notes[i].start_ticks * ms_per_tick(bpm)
-        input_notes[i].end_sec =input_notes[i].end_ticks * ms_per_tick(bpm)
+        input_notes[i].end_sec = input_notes[i].end_ticks * ms_per_tick(bpm)
 
 
 def advanced_quantizer(
-    input_notes: notes,
+    input_notes,
     grid: List[int],
     strength: float = QuantizerConfig.STRENGTH.value,
     delta_Qr: int = QuantizerConfig.DELTA_QR.value,
@@ -129,5 +128,5 @@ def advanced_quantizer(
                     input_notes[i].start_ticks = input_notes[i].start_ticks + abs(delta_tick_q)
                     input_notes[i].end_ticks = input_notes[i].end_ticks + abs(delta_tick_q)
 
-        input_notes[i].start_sec = input_notes[i].start_ticks * ms_per_tick(bpm) // 1000
-        input_notes[i].end_sec = input_notes[i].end_ticks * ms_per_tick(bpm) // 1000
+        input_notes[i].start_sec = input_notes[i].start_ticks * ms_per_tick(bpm) / 1000
+        input_notes[i].end_sec = input_notes[i].end_ticks * ms_per_tick(bpm) / 1000

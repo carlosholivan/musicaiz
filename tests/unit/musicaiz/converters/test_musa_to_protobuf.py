@@ -41,74 +41,46 @@ def _assert_valid_note_obj(note):
     assert note.end_sec >= 0.0
 
 
-def test_musa_to_proto_instruments(midi_sample, midi_data):
-    midi = Musa(
-        midi_sample,
-        structure="instruments",
-    )
-    got = musa_to_proto(midi)
-
-    _assert_midi_valid_instr_obj(midi_data, got.instruments)
-
-    # check notes
-    assert len(got.instruments[0].notes) != 0
-    assert len(got.instruments[1].notes) != 0
-    # check every note attributes are not empty
-    for instr in got.instruments:
-        for note in instr.notes:
-            _assert_valid_note_obj(note)
-
-
-def test_musa_to_proto_bars(midi_sample, midi_data):
-    midi = Musa(
-        midi_sample,
-        structure="bars",
-    )
+def test_musa_to_proto(midi_sample, midi_data):
+    midi = Musa(midi_sample)
     got = musa_to_proto(midi)
 
     _assert_midi_valid_instr_obj(midi_data, got.instruments)
 
     # check bars
-    assert len(got.instruments[0].bars) != 0
-    assert len(got.instruments[1].bars) != 0
+    assert len(got.instruments) != 0
+    assert len(got.bars) != 0
 
     # check every bar attributes are not empty
-    for instr in got.instruments:
-        for i, bar in enumerate(instr.bars):
-            # check only the first 5 bars since the midi file is large
-            if i < 5:
-                assert bar.start_ticks >= 0
-                assert bar.end_ticks >= 0
-                assert bar.start_sec >= 0.0
-                assert bar.end_sec >= 0.0
-                # check every note for each bar
-                for note in bar.notes:
-                    _assert_valid_note_obj(note)
+    for i, bar in enumerate(got.bars):
+        # check only the first 5 bars since the midi file is large
+        if i < 5:
+            assert bar.start_ticks >= 0
+            assert bar.end_ticks >= 0
+            assert bar.start_sec >= 0.0
+            assert bar.end_sec >= 0.0
+    for note in got.notes:
+        _assert_valid_note_obj(note)
 
 
 def test_proto_to_musa(midi_sample, midi_data):
-    midi = Musa(
-        midi_sample,
-        structure="bars",
-    )
+    midi = Musa(midi_sample)
     proto = musa_to_proto(midi)
     got = proto_to_musa(proto)
 
     _assert_midi_valid_instr_obj(midi_data, got.instruments)
 
     # check bars
-    assert len(got.instruments[0].bars) != 0
+    assert len(got.instruments) != 0
 
     # check every bar attributes are not empty
-    for instr in got.instruments:
-        for i, bar in enumerate(instr.bars):
-            # check only the first 5 bars since the midi file is large
-            if i < 5:
-                assert bar.start_ticks >= 0
-                assert bar.end_ticks >= 0
-                assert bar.start_sec >= 0.0
-                assert bar.end_sec >= 0.0
-                # check every note for each bar
-                for note in bar.notes:
-                    _assert_valid_note_obj(note)
-
+    for i, bar in enumerate(got.bars):
+        # check only the first 5 bars since the midi file is large
+        if i < 5:
+            assert bar.start_ticks >= 0
+            assert bar.end_ticks >= 0
+            assert bar.start_sec >= 0.0
+            assert bar.end_sec >= 0.0
+    # check every note
+    for note in got.notes:
+        _assert_valid_note_obj(note)

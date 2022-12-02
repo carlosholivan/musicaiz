@@ -1,6 +1,7 @@
 from __future__ import annotations
+from abc import ABCMeta
 from enum import Enum
-from typing import Tuple, List, Dict, Union
+from typing import Tuple, List, Dict, Union, Optional
 import numpy as np
 import math
 
@@ -70,18 +71,22 @@ class NoteLengths(Enum):
         resolution: int = TimingConsts.RESOLUTION.value,
     ) -> float:
         return ms_per_tick(bpm, resolution) * self.ticks(resolution)
-    
+
     @classmethod
-    def get_note_ticks_mapping(cls, triplets: bool = False) -> Dict[str, int]:
+    def get_note_ticks_mapping(
+        cls,
+        triplets: bool = False,
+        resolution: int = TimingConsts.RESOLUTION.value,
+    ) -> Dict[str, int]:
         dict_notes = {}
         for note_dur in list(cls.__members__.keys()):
             if not triplets:
             # remove triplet durations (optional)
                 if "TRIPLET" in note_dur:
                     continue
-            dict_notes.update({note_dur: cls[note_dur].ticks()})
+            dict_notes.update({note_dur: cls[note_dur].ticks(resolution)})
         return dict_notes
-    
+
     @classmethod
     def get_note_with_fraction(cls, fraction: float) -> NoteLengths:
         for note in cls.__members__:
@@ -167,27 +172,27 @@ class TimeSignature:
     @property
     def beats_per_bar(self) -> int:
         return self.num
-    
+
     @property
     def beat_type(self) -> str:
         return TimeSigDenominators.get_note_length(self.denom).name
-    
+
     def _notes_per_bar(self, note_name: str) -> int:
         return (1 / NoteLengths[note_name].value) * self.num * (1 / self.denom)
-    
+
     @property
     def quarters(self) -> int:
         # Get the name of the denominator note: NoteLengths(1 / self.denom).name
         return self._notes_per_bar("QUARTER")
-    
+
     @property
     def eights(self) -> int:
         return self._notes_per_bar("EIGHT")
-    
+
     @property
     def sixteenths(self) -> int:
         return self._notes_per_bar("SIXTEENTH")
-    
+
     def __repr__(self):
         return "TimeSig(num={}, den={})".format(
             self.num,
@@ -195,9 +200,150 @@ class TimeSignature:
         )
 
 
+class Timing(metaclass=ABCMeta):
 
-# TODO: Refactor all these functions to a class with bpm and resolution as attributes?
-# We are repeating so many times the bpm and resolution input args
+    def __init__(
+        self,
+        bpm: float,
+        resolution: int,
+        start: Union[int, float],
+        end: Union[int, float],
+    ):
+        self.ms_tick = ms_per_tick(bpm, resolution)
+
+        timings = self._initialize_timing_attributes(
+            start, end, self.ms_tick
+        )
+
+        self.start_ticks = timings["start_ticks"]
+        self.end_ticks = timings["end_ticks"]
+        self.start_sec = timings["start_sec"]
+        self.end_sec = timings["end_sec"]
+        self.bpm = bpm
+        self.resolution = resolution
+
+    @staticmethod
+    def _initialize_timing_attributes(
+        start: Union[int, float],
+        end: Union[int, float],
+        ms_tick: Union[int, float],
+    ) -> Dict[str, Union[int, float]]:
+        # inital checks
+        if start < 0 or end <= 0:
+            raise ValueError("Start and end must be positive.")
+        elif start >= end:
+            raise ValueError("Start time must be lower than the end time.")
+
+        # ticks must be int, secs must be float
+        if isinstance(start, int) and isinstance(end, int):
+            start_ticks = start
+            end_ticks = end
+            start_sec = start_ticks * ms_tick / 1000
+            end_sec = end_ticks * ms_tick / 1000
+        elif isinstance(start, float) and isinstance(end, float):
+            start_sec = start
+            end_sec = end
+            start_ticks = int(start_sec * (1 / (ms_tick / 1000)))
+            end_ticks = int(end_sec * (1 / (ms_tick / 1000)))
+
+        timings = {
+            "start_ticks": start_ticks,
+            "end_ticks": end_ticks,
+            "start_sec": start_sec,
+            "end_sec": end_sec,
+        }
+        return timings
+
+
+class Beat(Timing):
+
+    def __init__(
+        self,
+        bpm: float,
+        resolution: int,
+        start: Union[int, float],
+        end: Union[int, float],
+        time_sig: Optional[TimeSignature] = None,
+        global_idx: Optional[int] = None,
+        bar_idx: Optional[int] = None,
+    ):
+
+        super().__init__(bpm, resolution, start, end)
+
+        self.time_sig = time_sig
+        self.global_idx = global_idx
+        self.bar_idx = bar_idx
+        self.symbolic = TimeSigDenominators.get_note_length(
+            time_sig.denom
+        ).name.lower()
+
+    def __repr__(self):
+
+        return "Beat(time_signature={}, " \
+                "bpm={}, " \
+                "start_ticks={} " \
+                "end_ticks={} " \
+                "start_sec={} " \
+                "end_sec={} " \
+                "global_idx={} " \
+                "bar_idx={} " \
+                "symbolic={})".format(
+                    self.time_sig,
+                    self.bpm,
+                    self.start_ticks,
+                    self.end_ticks,
+                    self.start_sec,
+                    self.end_sec,
+                    self.global_idx,
+                    self.bar_idx,
+                    self.symbolic,
+                )
+
+
+class Subdivision(Timing):
+
+    def __init__(
+        self,
+        bpm: float,
+        resolution: int,
+        start: Union[int, float],
+        end: Union[int, float],
+        time_sig: Optional[TimeSignature] = None,
+        global_idx: Optional[int] = None,
+        bar_idx: Optional[int] = None,
+        beat_idx: Optional[int] = None,
+    ):
+
+        super().__init__(bpm, resolution, start, end)
+
+        self.time_sig = time_sig
+        self.global_idx = global_idx
+        self.bar_idx = bar_idx
+        self.beat_idx = beat_idx
+
+    def __repr__(self):
+
+        return "Subdivision(time_signature={}, " \
+                "bpm={}, " \
+                "start_ticks={} " \
+                "end_ticks={} " \
+                "start_sec={} " \
+                "end_sec={} " \
+                "global_idx={} " \
+                "bar_idx={} " \
+                "beat_idx={})".format(
+                    self.time_sig,
+                    self.bpm,
+                    self.start_ticks,
+                    self.end_ticks,
+                    self.start_sec,
+                    self.end_sec,
+                    self.global_idx,
+                    self.bar_idx,
+                    self.beat_idx,
+                )
+
+
 def ms_per_tick(
     bpm: int = TimingConsts.DEFAULT_BPM.value,
     resolution: int = TimingConsts.RESOLUTION.value,
@@ -363,7 +509,7 @@ def get_subdivisions(
 
     resolution: int
         the pulses o ticks per quarter note (PPQ or TPQN).
-    
+
     absolute_timing: bool
         default is True. This allows to initialize note time arguments in absolute (True) or
         relative time units (False). Relative units means that each bar will start at 0 seconds
@@ -466,10 +612,14 @@ def get_subdivisions(
     return beat_subdivs
 
 
-def get_symbolic_duration(duration: int, triplets: bool = False) -> str:
+def get_symbolic_duration(
+    duration: int,
+    triplets: bool = False,
+    resolution: int = TimingConsts.RESOLUTION.value,
+) -> str:
     """Given a note duration in ticks it calculates its symbolic
     duration: half, quarter, dotted_half...
-    
+
     Parameters
     -----------
 
@@ -478,7 +628,7 @@ def get_symbolic_duration(duration: int, triplets: bool = False) -> str:
         triplets durations.
     """
 
-    all_notes_ticks = NoteLengths.get_note_ticks_mapping(triplets)
+    all_notes_ticks = NoteLengths.get_note_ticks_mapping(triplets, resolution)
     notes_ticks = all_notes_ticks
 
     # look for the closest note in the notes ticks dict

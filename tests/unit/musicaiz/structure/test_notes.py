@@ -291,7 +291,7 @@ def test_Note_a():
     note_off = 1.0
     ligated = True
 
-    got_note = Note(pitch, note_on, note_off, velocity, ligated, bpm, resolution)
+    got_note = Note(pitch, note_on, note_off, velocity, ligated, bpm, resolution=resolution)
 
     assert got_note.start_ticks == 0
     assert got_note.end_ticks == 1920
@@ -311,7 +311,7 @@ def test_Note_b():
     note_off = 20.0
     ligated = True
 
-    got_note = Note(pitch_name, note_on, note_off, velocity, ligated, bpm, resolution)
+    got_note = Note(pitch_name, note_on, note_off, velocity, ligated, bpm, resolution=resolution)
 
     assert got_note.start_ticks == 19200
     assert got_note.end_ticks == 38400
@@ -330,7 +330,7 @@ def test_Note_c():
     end_ticks = 20
     ligated = True
 
-    got_note = Note(pitch_name, start_ticks, end_ticks, velocity, ligated, bpm, resolution)
+    got_note = Note(pitch_name, start_ticks, end_ticks, velocity, ligated, bpm, resolution=resolution)
 
     assert math.isclose(round(got_note.start_sec, 3), 0.005)
     assert math.isclose(round(got_note.end_sec, 3), 0.01)

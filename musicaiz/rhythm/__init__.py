@@ -61,7 +61,10 @@ from .timing import (
     ms_per_note,
     ms_per_bar,
     get_subdivisions,
-    get_symbolic_duration,    
+    get_symbolic_duration,
+    Timing,
+    Beat,
+    Subdivision,
 )
 
 from .quantizer import (
@@ -87,4 +90,7 @@ __all__ = [
     "SymbolicNoteLengths",
     "get_symbolic_duration",
     "TimeSignature",
+    "Timing",
+    "Beat",
+    "Subdivision",
 ]
