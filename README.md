@@ -157,26 +157,26 @@ from musicaiz.structure import Chords, Tonality
 from musicaiz.plotters import Pianoroll, PianorollHTML
 
     # Matplotlib
-    plot = Pianoroll()
-    musa_obj = Musa(midi_sample, structure="bars")
-    plot.plot_instrument(
-        track=musa_obj.instruments[0].notes,
-        total_bars=2,
-        subdivision="quarter",
-        time_sig=musa_obj.time_sig.time_sig,
-        print_measure_data=False,
-        show_bar_labels=False
+    musa_obj = Musa(midi_sample)
+    plot = Pianoroll(musa_obj)
+    plot.plot_instruments(
+        program=[48, 45],
+        bar_start=0,
+        bar_end=4,
+        print_measure_data=True,
+        show_bar_labels=False,
+        show_grid=False,
+        show=True,
     )
 
     # Pyplot HTML
-    plot = PianorollHTML()
-    musa_obj = Musa(midi_sample, structure="bars")
-    plot.plot_instrument(
-        track=musa_obj.instruments[0],
-        bar_start=1,
-        bar_end=2,
-        subdivision="quarter",
-        time_sig=musa_obj.time_sig.time_sig,
+    musa_obj = Musa(midi_sample)
+    plot = PianorollHTML(musa_obj)
+    plot.plot_instruments(
+        program=[48, 45],
+        bar_start=0,
+        bar_end=4,
+        show_grid=False,
         show=False
     )
 ````
