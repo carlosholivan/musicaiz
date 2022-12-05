@@ -80,3 +80,30 @@ class JSBChorales(MusicGenerationDataset):
             args,
             True
         )
+
+
+# TODO: args parsing here
+if __name__ == "__main__":
+    args = MMMTokenizerArguments(
+        prev_tokens="",
+        windowing=True,
+        time_unit="HUNDRED_TWENTY_EIGHT",
+        num_programs=None,
+        shuffle_tracks=True,
+        track_density=False,
+        window_size=32,
+        hop_length=16,
+        time_sig=True,
+        velocity=True,
+    )
+    dataset = JSBChorales()
+    dataset.tokenize(
+        dataset_path="H:/INVESTIGACION/Datasets/JSB Chorales/",
+        output_path="H:/GitHub/musanalysis-datasets/jsbchorales/mmm/32_bars_166",
+        output_file="token-sequences",
+        args=args,
+        tokenize_split="validation"
+    )
+    vocab = MMMTokenizer.get_vocabulary(
+        dataset_path="H:/GitHub/musanalysis-datasets/jsbchorales/mmm/32_bars_166"
+    )

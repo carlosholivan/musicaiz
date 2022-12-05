@@ -29,7 +29,7 @@ def group_notes_in_subdivisions_bars(musa_obj: Musa, subdiv: str) -> List[List[L
     """This function groups notes in the selected subdivision.
     The result is a list which elements are lists that represent the bars,
     and inside them, lists that represent the notes in each subdivision.
-    
+
     Parameters
     ----------
     musa_obj: Musa
@@ -82,13 +82,12 @@ def get_highest_subdivision_bars_notes(
     all_subdiv_notes: List[List[List[Note]]]
 ) -> List[List[Note]]:
     """Extracts the highest note in each subdivision.
-    
+
     Parameters
     ----------
     all_subdiv_notes: List[List[List[Note]]]
         A list of bars in which each element is a subdivision which is a List of notes that
         are in the subdivision.
-    
 
     Returns
     -------

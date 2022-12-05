@@ -1,6 +1,6 @@
 from __future__ import annotations
 import pretty_midi as pm
-from typing import List, Tuple, Union
+from typing import List, Tuple, Union, Optional, Dict
 import re
 from enum import Enum
 
@@ -9,7 +9,8 @@ from musicaiz.rhythm import (
     TimingConsts,
     ms_per_tick,
     get_symbolic_duration,
-    SymbolicNoteLengths
+    SymbolicNoteLengths,
+    Timing
 )
 
 
@@ -216,7 +217,7 @@ class NoteClassBase(Enum):
             if cls[str(note)].natural_scale_index is not None:
                 notes.append(cls[str(note)])
         return notes
-    
+
     @classmethod
     def get_all_chromatic_scale_notes(cls) -> List[NoteClassBase]:
         """Returns all the notes in chromatic scale (flats AND sharps)."""
@@ -393,27 +394,17 @@ class NoteTiming(NoteValue):
 
         self.ms_tick = ms_per_tick(bpm, resolution)
 
-        # inital checks
-        if start < 0 or end <= 0:
-            raise ValueError("Start and end must be positive.")
-        elif start >= end:
-            raise ValueError("Start time must be lower than the end time.")
+        timings = Timing._initialize_timing_attributes(start, end, self.ms_tick)
 
-        # ticks must be int, secs must be float
-        if isinstance(start, int) and isinstance(end, int):
-            self.start_ticks = start
-            self.end_ticks = end
-            self.start_sec = self.start_ticks * self.ms_tick / 1000
-            self.end_sec = self.end_ticks * self.ms_tick / 1000
-        elif isinstance(start, float) and isinstance(end, float):
-            self.start_sec = start
-            self.end_sec = end
-            self.start_ticks = int(self.start_sec * (1 / (self.ms_tick / 1000)))
-            self.end_ticks = int(self.end_sec * (1 / (self.ms_tick / 1000)))
+        self.start_ticks = timings["start_ticks"]
+        self.end_ticks = timings["end_ticks"]
+        self.start_sec = timings["start_sec"]
+        self.end_sec = timings["end_sec"]
 
         self.symbolic = get_symbolic_duration(
             self.end_ticks - self.start_ticks,
-            True
+            True,
+            resolution
         )
 
     def __repr__(self):
@@ -477,7 +468,11 @@ class Note(NoteTiming):
         "velocity",
         "bpm",
         "resolution",
-        "ligated"
+        "ligated",
+        "instrument_prog",
+        "bar_idx",
+        "instrument_idx",
+        "is_drum"
     ]
 
     def __init__(
@@ -486,17 +481,36 @@ class Note(NoteTiming):
         start: Union[int, float],
         end: Union[int, float],
         velocity: int,
+        instrument_prog: Optional[int] = None,
+        instrument_idx: Optional[int] = None,
+        bar_idx: Optional[int] = None,
+        beat_idx: Optional[int] = None,
+        subbeat_idx: Optional[int] = None,
         ligated: bool = False,
         bpm: int = TimingConsts.DEFAULT_BPM.value,
         resolution: int = TimingConsts.RESOLUTION.value,
+        is_drum: bool = False
     ):
 
         super().__init__(pitch, start, end, bpm, resolution)
 
         self.velocity = velocity
+        self.instrument_prog = instrument_prog
+        self.bar_idx = bar_idx
+        self.beat_idx = beat_idx
+        self.subbeat_idx = subbeat_idx
+
+        # We can have 2 instruments (or tracks) with the same program number,
+        # so this will store the index of the instrument to distinguish equal
+        # program number instruments in MIDI files
+        self.instrument_idx = instrument_idx
 
         # if a note belongs to 2 bars and we split the tracks by bars
         self.ligated = ligated
+
+        self.resolution = resolution
+        self.bpm = bpm
+        self.is_drum = is_drum
 
     def __repr__(self):
         return "Note(pitch={}, " \
@@ -507,7 +521,11 @@ class Note(NoteTiming):
                "end_ticks={}, " \
                "symbolic={}, " \
                "velocity={}, " \
-               "ligated={})".format(
+               "ligated={}, " \
+               "instrument_prog={}, " \
+               "bar_idx={}, " \
+               "beat_idx={}, " \
+               "subbeat_idx={})".format(
                    self.pitch,
                    self.note_name,
                    self.start_sec,
@@ -516,5 +534,9 @@ class Note(NoteTiming):
                    self.end_ticks,
                    SymbolicNoteLengths[self.symbolic].value,
                    self.velocity,
-                   self.ligated
+                   self.ligated,
+                   self.instrument_prog,
+                   self.bar_idx,
+                   self.beat_idx,
+                   self.subbeat_idx,
                 )

@@ -1358,7 +1358,7 @@ class Tonality(Enum):
         a submode.
         This is only used in the case of minor scales (harmonic or melodic) and greek scales.
         The values that support the scales arg are: :func:`~musicaiz.harmony.Scales`.
-        
+
         Examples
         --------
         Major tonalities:
@@ -1371,7 +1371,7 @@ class Tonality(Enum):
         >>> tonality.scale_notes("IONIAN")
 
         Minor tonalities:
-        
+
         >>> tonality = Tonality.C_MINOR
         >>> tonality.scale_notes("NATURAL")
         >>> tonality.scale_notes("HARMONIC")

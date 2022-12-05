@@ -163,3 +163,30 @@ class LakhMIDI(MusicGenerationDataset):
                     }
                 )
         return composers_json
+
+
+# TODO: args parsing here
+if __name__ == "__main__":
+    args = MMMTokenizerArguments(
+        prev_tokens="",
+        windowing=True,
+        time_unit="HUNDRED_TWENTY_EIGHT",
+        num_programs=None,
+        shuffle_tracks=True,
+        track_density=False,
+        window_size=32,
+        hop_length=16,
+        time_sig=True,
+        velocity=True,
+    )
+    dataset = LakhMIDI()
+    dataset.tokenize(
+        dataset_path="H:/INVESTIGACION/Datasets/LMD/clean_midi",
+        output_path="H:/GitHub/musanalysis-datasets/lmd/mmm/32_bars_166",
+        output_file="token-sequences",
+        args=args,
+        tokenize_split="validation"
+    )
+    vocab = MMMTokenizer.get_vocabulary(
+        dataset_path="H:/GitHub/musanalysis-datasets/lmd/mmm/32_bars_166"
+    )

@@ -4,6 +4,7 @@ import numpy as np
 from musicaiz import rhythm
 from musicaiz.structure import Note
 from musicaiz.rhythm.quantizer import (
+    QuantizerConfig,
     basic_quantizer,
     get_ticks_from_subdivision,
     advanced_quantizer,
@@ -99,9 +100,12 @@ def test_basic_quantizer_2(grid_8):
 
 
 def test_advanced_quantizer_1(grid_16):
-    strength = 1
-    delta_Qr = 12
-    type_q= "positive"
+
+    config = QuantizerConfig(
+        strength=1,
+        delta_qr=12,
+        type_q="positive",
+    )
 
     notes_bar1 = [
         Note(pitch=69, start=1, end=24, velocity=127),
@@ -110,7 +114,7 @@ def test_advanced_quantizer_1(grid_16):
         Note(pitch=64, start=13, end=18, velocity=127),
     ]
 
-    advanced_quantizer(notes_bar1, grid_16, strength, delta_Qr, type_q)
+    advanced_quantizer(notes_bar1, grid_16, config, 120, 96)
 
     expected = [
         Note(pitch=69, start=0, end=23, velocity=127),
@@ -126,9 +130,11 @@ def test_advanced_quantizer_1(grid_16):
 
 def test_advanced_quantizer_2(grid_16):
 
-    strength = 1
-    delta_Qr = 12
-    type_q = None
+    config = QuantizerConfig(
+        strength=1,
+        delta_qr=12,
+        type_q=None,
+    )
 
     notes_bar1 = [
         Note(pitch=69, start=1, end=24, velocity=127),
@@ -137,7 +143,7 @@ def test_advanced_quantizer_2(grid_16):
         Note(pitch=64, start=13, end=18, velocity=127),
     ]
 
-    advanced_quantizer(notes_bar1, grid_16, strength, delta_Qr, type_q)
+    advanced_quantizer(notes_bar1, grid_16, config, 120, 96)
 
     expected = [
         Note(pitch=69, start=0, end=23, velocity=127),
@@ -152,10 +158,12 @@ def test_advanced_quantizer_2(grid_16):
 
 
 def test_advanced_quantizer_3(grid_16):
-    
-    strength = 1
-    delta_Qr = 12
-    type_q = None
+
+    config = QuantizerConfig(
+        strength=1,
+        delta_qr=12,
+        type_q=None,
+    )
 
     notes_bar1 = [  # i dont know why but it changes when asing to a object
         Note(pitch=69, start=1, end=24, velocity=127),
@@ -164,7 +172,7 @@ def test_advanced_quantizer_3(grid_16):
         Note(pitch=64, start=13, end=18, velocity=127),
     ]
 
-    advanced_quantizer(notes_bar1, grid_16, strength, delta_Qr, type_q)
+    advanced_quantizer(notes_bar1, grid_16, config, 120, 96)
 
     expected = [
         Note(pitch=69, start=0, end=23, velocity=127),
@@ -178,11 +186,13 @@ def test_advanced_quantizer_3(grid_16):
         assert notes_bar1[i].end_ticks == expected[i].end_ticks
 
 
-def test_advanced_quantizer_3(grid_16):
+def test_advanced_quantizer_4(grid_16):
 
-    strength = 0.75
-    delta_Qr = 12
-    type_q= None
+    config = QuantizerConfig(
+        strength=0.75,
+        delta_qr=12,
+        type_q=None,
+    )
 
     notes_bar1 = [
         Note(pitch=69, start=1, end=24, velocity=127),
@@ -191,7 +201,7 @@ def test_advanced_quantizer_3(grid_16):
         Note(pitch=64, start=30, end=50, velocity=127),
     ]
 
-    advanced_quantizer(notes_bar1, grid_16, strength, delta_Qr, type_q)
+    advanced_quantizer(notes_bar1, grid_16, config, 120, 96)
 
     expected = [
         Note(pitch=69, start=1, end=24, velocity=127),

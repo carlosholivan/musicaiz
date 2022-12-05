@@ -12,6 +12,7 @@ try:
 except ImportError:
     _HAS_FLUIDSYNTH = False
 
+
 class InstrumentMidiPrograms(Enum):
     # Value 1: List of Midi instrument program number
     ACOUSTIC_GRAND_PIANO = 0
@@ -442,7 +443,7 @@ class Instrument:
         else:
             if program is not None:
                 self.program = program
-                if name is None:
+                if name is None or name == "":
                     name_obj = InstrumentMidiPrograms.get_name_from_program(program)
                 else:
                     if general_midi:
@@ -479,119 +480,6 @@ class Instrument:
 
         # List of bars in the instrument
         self.bars = []
-
-    # TODO
-    def concatenate_instruments(
-        instrument_1: Instrument,
-        instrument_2: Instrument,
-        new_program: int = None,
-        new_name: str = None,
-    ):
-        """Creates a new instrument by concatenating the notes
-        of 2 instruments and setting a new name and program.
-        If no name nor program is provided, they will be set
-        as the `instrument_1`."""
-        pass
-
-    def fluidsynth(
-        self,
-        fs=44100,
-        sf2_path=None
-    ):
-        """Synthesize using fluidsynth.
-        Parameters
-        ----------
-        fs : int
-            Sampling rate to synthesize.
-        sf2_path : str
-            Path to a .sf2 file.
-            Default ``None``, which uses the TimGM6mb.sf2 file included with
-            ``pretty_midi``.
-        Returns
-        -------
-        synthesized : np.ndarray
-            Waveform of the MIDI data, synthesized at ``fs``.
-        """
-        # If sf2_path is None, use the included TimGM6mb.sf2 path
-        if sf2_path is None:
-            raise ValueError(f"No sf2_path provided.")
-
-        if not _HAS_FLUIDSYNTH:
-            raise ImportError("fluidsynth() was called but pyfluidsynth "
-                              "is not installed.")
-
-        if not Path.exists(sf2_path):
-            raise ValueError("No soundfont file found at the supplied path "
-                             "{}".format(sf2_path))
-
-        # If the instrument has no notes, return an empty array
-        if len(self.notes) == 0:
-            return np.array([])
-
-        # Create fluidsynth instance
-        fl = fluidsynth.Synth(samplerate=fs)
-        # Load in the soundfont
-        sfid = fl.sfload(sf2_path)
-        # If this is a drum instrument, use channel 9 and bank 128
-        if self.is_drum:
-            channel = 9
-            # Try to use the supplied program number
-            res = fl.program_select(channel, sfid, 128, self.program)
-            # If the result is -1, there's no preset with this program number
-            if res == -1:
-                # So use preset 0
-                fl.program_select(channel, sfid, 128, 0)
-        # Otherwise just use channel 0
-        else:
-            channel = 0
-            fl.program_select(channel, sfid, 0, self.program)
-        # Collect all notes in one list
-        event_list = []
-        for note in self.notes:
-            event_list += [[note.start, 'note on', note.pitch, note.velocity]]
-            event_list += [[note.end, 'note off', note.pitch]]
-        for bend in self.pitch_bends:
-            event_list += [[bend.time, 'pitch bend', bend.pitch]]
-        for control_change in self.control_changes:
-            event_list += [[control_change.time, 'control change',
-                            control_change.number, control_change.value]]
-        # Sort the event list by time, and secondarily by whether the event
-        # is a note off
-        event_list.sort(key=lambda x: (x[0], x[1] != 'note off'))
-        # Add some silence at the beginning according to the time of the first
-        # event
-        current_time = event_list[0][0]
-        # Convert absolute seconds to relative samples
-        next_event_times = [e[0] for e in event_list[1:]]
-        for event, end in zip(event_list[:-1], next_event_times):
-            event[0] = end - event[0]
-        # Include 1 second of silence at the end
-        event_list[-1][0] = 1.
-        # Pre-allocate output array
-        total_time = current_time + np.sum([e[0] for e in event_list])
-        synthesized = np.zeros(int(np.ceil(fs*total_time)))
-        # Iterate over all events
-        for event in event_list:
-            # Process events based on type
-            if event[1] == 'note on':
-                fl.noteon(channel, event[2], event[3])
-            elif event[1] == 'note off':
-                fl.noteoff(channel, event[2])
-            elif event[1] == 'pitch bend':
-                fl.pitch_bend(channel, event[2])
-            elif event[1] == 'control change':
-                fl.cc(channel, event[2], event[3])
-            # Add in these samples
-            current_sample = int(fs*current_time)
-            end = int(fs*(current_time + event[0]))
-            samples = fl.get_samples(end - current_sample)[::2]
-            synthesized[current_sample:end] += samples
-            # Increment the current sample
-            current_time += event[0]
-        # Close fluidsynth
-        fl.delete()
-
-        return synthesized
 
     def __repr__(self):
         if self.family is None:

@@ -8,7 +8,6 @@ from musicaiz.features import (
     predict_progression,
     _all_note_seq_permutations,
     _delete_repeated_note_names,
-    _extract_note_positions,
     _order_note_seq_by_chromatic_idx,
     get_harmonic_density,
 )
@@ -21,7 +20,6 @@ from musicaiz.harmony import (
     AllChords,
     IntervalSemitones,
     DegreesRoman,
-    Scales,
     Tonality,
     ModeConstructors,
 )

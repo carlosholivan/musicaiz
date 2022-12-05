@@ -18,7 +18,6 @@ from musicaiz.structure import (
     Note,
     NoteClassBase,
 )
-from musicaiz import loaders
 
 
 def _extract_note_positions(note_seq: List[Note]) -> List[int]:
@@ -324,15 +323,15 @@ def get_harmonic_density(note_seq: List[Note]) -> int:
     if len(note_seq) == 0:
         return 0
     # Go tick per tick
-    latest_note = loaders.Musa._last_note(note_seq)
+    latest_note = note_seq[-1]
     counts = []
-    step_ticks = 1
+    step_ticks = 10
     # We'll compute by steps of 10 ticks which is a low value
     for i in range(0, latest_note.end_ticks, step_ticks):
         count = 0
         for note_idx, note in enumerate(note_seq):
             # if note ends aftre the next step start, count it
-            if note.start_ticks < step_ticks * i and note.end_ticks >= step_ticks * i:
+            if note.start_ticks < i and note.end_ticks >= i:
                 count += 1
         counts.append(count)
     return max(counts)

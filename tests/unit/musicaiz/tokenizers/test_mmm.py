@@ -30,7 +30,7 @@ def midi_sample(fixture_dir):
 @pytest.fixture
 def musa_obj_tokens():
     # Initialize Musa obj fot the mmm_tokens.txt sequence
-    musa_obj = Musa()
+    musa_obj = Musa(file=None)
     musa_obj.instruments.append(
         Instrument(
             program=30,
@@ -38,7 +38,7 @@ def musa_obj_tokens():
         )
     )
     for _ in range(0, 3, 1):
-        musa_obj.instruments[0].bars.append(Bar())
+        musa_obj.bars.append(Bar())
     return musa_obj
 
 
@@ -46,25 +46,25 @@ def musa_obj_tokens():
 def musa_obj_abs(musa_obj_tokens):
     # Add notes to the Musa obj with absolute timings
     notes_bar1 = [
-        Note(pitch=69, start=0.5, end=1.0, velocity=127),
-        Note(pitch=64, start=0.5, end=1.5, velocity=127),
-        Note(pitch=67, start=1.0, end=1.5, velocity=127),
-        Note(pitch=64, start=1.5, end=2.0, velocity=127)
+        Note(pitch=69, start=0.5, end=1.0, velocity=127, bar_idx=0, instrument_prog=30),
+        Note(pitch=64, start=0.5, end=1.5, velocity=127, bar_idx=0, instrument_prog=30),
+        Note(pitch=67, start=1.0, end=1.5, velocity=127, bar_idx=0, instrument_prog=30),
+        Note(pitch=64, start=1.5, end=2.0, velocity=127, bar_idx=0, instrument_prog=30)
     ]
-    musa_obj_tokens.instruments[0].bars[0].notes = notes_bar1
-    musa_obj_tokens.instruments[0].bars[0].start_ticks = 0
-    musa_obj_tokens.instruments[0].bars[0].end_ticks = 96 * 4
+    musa_obj_tokens.notes.extend(notes_bar1)
+    musa_obj_tokens.bars[0].start_ticks = 0
+    musa_obj_tokens.bars[0].end_ticks = 96 * 4
     # bar2 is empty
-    musa_obj_tokens.instruments[0].bars[1].start_ticks = 96 * 4
-    musa_obj_tokens.instruments[0].bars[1].end_ticks = 96 * 8
+    musa_obj_tokens.bars[1].start_ticks = 96 * 4
+    musa_obj_tokens.bars[1].end_ticks = 96 * 8
     notes_bar3 = [
-        Note(pitch=72, start=4.0, end=4.5, velocity=127),
-        Note(pitch=69, start=4.5, end=5.0, velocity=127),
-        Note(pitch=67, start=5.5, end=5.75, velocity=127),
+        Note(pitch=72, start=4.0, end=4.5, velocity=127, bar_idx=2, instrument_prog=30),
+        Note(pitch=69, start=4.5, end=5.0, velocity=127, bar_idx=2, instrument_prog=30),
+        Note(pitch=67, start=5.5, end=5.75, velocity=127, bar_idx=2, instrument_prog=30),
     ]
-    musa_obj_tokens.instruments[0].bars[2].notes = notes_bar3
-    musa_obj_tokens.instruments[0].bars[2].start_ticks = 96 * 8
-    musa_obj_tokens.instruments[0].bars[2].end_ticks = 96 * 12
+    musa_obj_tokens.notes.extend(notes_bar3)
+    musa_obj_tokens.bars[2].start_ticks = 96 * 8
+    musa_obj_tokens.bars[2].end_ticks = 96 * 12
     return musa_obj_tokens
 
 
@@ -72,40 +72,39 @@ def musa_obj_abs(musa_obj_tokens):
 def musa_obj_rel(musa_obj_tokens):
     # Add notes to the Musa obj with relative timings
     notes_bar1 = [
-        Note(pitch=69, start=0.5, end=1.0, velocity=127),
-        Note(pitch=64, start=0.5, end=1.5, velocity=127),
-        Note(pitch=67, start=1.0, end=1.5, velocity=127),
-        Note(pitch=64, start=1.5, end=2.0, velocity=127)
+        Note(pitch=69, start=0.5, end=1.0, velocity=127, bar_idx=0, instrument_prog=30),
+        Note(pitch=64, start=0.5, end=1.5, velocity=127, bar_idx=0, instrument_prog=30),
+        Note(pitch=67, start=1.0, end=1.5, velocity=127, bar_idx=0, instrument_prog=30),
+        Note(pitch=64, start=1.5, end=2.0, velocity=127, bar_idx=0, instrument_prog=30)
     ]
-    musa_obj_tokens.instruments[0].bars[0].notes = notes_bar1
-    musa_obj_tokens.instruments[0].bars[0].start_ticks = 0
-    musa_obj_tokens.instruments[0].bars[0].end_ticks = 96 * 4
+    musa_obj_tokens.notes.extend(notes_bar1)
+    musa_obj_tokens.bars[0].start_ticks = 0
+    musa_obj_tokens.bars[0].end_ticks = 96 * 4
     # bar2 is empty
-    musa_obj_tokens.instruments[0].bars[1].start_ticks = 0
-    musa_obj_tokens.instruments[0].bars[1].end_ticks = 96 * 4
+    musa_obj_tokens.bars[1].start_ticks = 0
+    musa_obj_tokens.bars[1].end_ticks = 96 * 4
     notes_bar3 = [
-        Note(pitch=72, start=0.0, end=0.5, velocity=127),
-        Note(pitch=69, start=0.5, end=1.0, velocity=127),
-        Note(pitch=67, start=1.5, end=1.75, velocity=127),
+        Note(pitch=72, start=0.0, end=0.5, velocity=127, bar_idx=2, instrument_prog=30),
+        Note(pitch=69, start=0.5, end=1.0, velocity=127, bar_idx=2, instrument_prog=30),
+        Note(pitch=67, start=1.5, end=1.75, velocity=127, bar_idx=2, instrument_prog=30),
     ]
-    musa_obj_tokens.instruments[0].bars[2].notes = notes_bar3
-    musa_obj_tokens.instruments[0].bars[2].start_ticks = 0
-    musa_obj_tokens.instruments[0].bars[2].end_ticks = 96 * 4
+    musa_obj_tokens.notes.extend(notes_bar3)
+    musa_obj_tokens.bars[2].start_ticks = 0
+    musa_obj_tokens.bars[2].end_ticks = 96 * 4
     return musa_obj_tokens
 
 
 def _assert_valid_musa_obj(got_musa_obj, expected_musa_obj):
     assert len(got_musa_obj.instruments) == len(expected_musa_obj.instruments)
     assert got_musa_obj.instruments[0].program == expected_musa_obj.instruments[0].program
-    assert len(got_musa_obj.instruments[0].bars) == len(expected_musa_obj.instruments[0].bars)
-    for b in range(len(expected_musa_obj.instruments[0].bars)):
-        for n in range(len(expected_musa_obj.instruments[0].bars[b].notes)):
-            got_note = got_musa_obj.instruments[0].bars[b].notes[n]
-            expected_note = expected_musa_obj.instruments[0].bars[b].notes[n]
-            assert expected_note.pitch == got_note.pitch
-            assert expected_note.start_ticks == got_note.start_ticks
-            assert expected_note.end_ticks == got_note.end_ticks
-            assert expected_note.velocity == got_note.velocity
+    assert len(got_musa_obj.bars) == len(expected_musa_obj.bars)
+    for n in range(len(expected_musa_obj.notes)):
+        got_note = got_musa_obj.notes[n]
+        expected_note = expected_musa_obj.notes[n]
+        assert expected_note.pitch == got_note.pitch
+        assert expected_note.start_ticks == got_note.start_ticks
+        assert expected_note.end_ticks == got_note.end_ticks
+        assert expected_note.velocity == got_note.velocity
 
 
 def test_MMMTokenizer_split_tokens_by_track():
@@ -216,39 +215,42 @@ def test_MMMTokenizer_split_tokens_by_bar():
         assert set(expected[i]) == set(got[i])
 
 
-@pytest.mark.skip("Fix this when it's implemented")
 def test_MMMTokenizer_tokens_to_musa_a(musa_obj_abs, mmm_tokens):
     # Test case: 1 polyphonic instrument, absolute timings
-    absolute_timing = True
-    got = MMMTokenizer.tokens_to_musa(mmm_tokens, absolute_timing)
+    got = MMMTokenizer.tokens_to_musa(
+        tokens=mmm_tokens,
+        absolute_timing=True,
+        time_unit="SIXTEENTH"
+    )
     expected = musa_obj_abs
-
     _assert_valid_musa_obj(got, expected)
 
 
-@pytest.mark.skip("Fix this when it's implemented")
 def test_MMMTokenizer_tokens_to_musa_b(musa_obj_rel, mmm_tokens):
     # Test case: 1 polyphonic instrument, relative timings
-    absolute_timing = False
-    got = MMMTokenizer.tokens_to_musa(mmm_tokens, absolute_timing)
+    got = MMMTokenizer.tokens_to_musa(
+        tokens=mmm_tokens,
+        absolute_timing=False,
+        time_unit="SIXTEENTH"
+    )
     expected = musa_obj_rel
 
     _assert_valid_musa_obj(got, expected)
 
 
 def test_MMMTokenizer_get_pieces_tokens(mmm_multiple_tokens):
-    got = MMMTokenizer._get_pieces_tokens(mmm_multiple_tokens)
+    got = MMMTokenizer.get_pieces_tokens(mmm_multiple_tokens)
     expected_len = 4
     assert expected_len == len(got)
 
 
 def test_MMMTokenizer_get_tokens_analytics(mmm_multiple_tokens):
     got = MMMTokenizer.get_tokens_analytics(mmm_multiple_tokens)
-    expected_total_tokens = 724
+    expected_total_tokens = 725
     expected_unique_tokens = 59
     expected_total_notes = 188
     expected_unique_notes = 23
-    expected_total_bars = 56
+    expected_total_bars = 112
     expected_total_instruments = 16
     expected_total_pieces = 4
 
@@ -268,11 +270,17 @@ def test_MMMTokenizer_tokenize_track_bars(musa_obj_abs, mmm_tokens):
     start_bar = mmm_tokens.index("BAR_START")
     end_bar = mmm_tokens.index("TRACK_END")
     expected = mmm_tokens[start_bar:end_bar]
-    bars = musa_obj_abs.instruments[0].bars
 
     args = MMMTokenizerArguments(time_unit="SIXTEENTH")
     tokenizer = MMMTokenizer(args=args)
-    got = tokenizer.tokenize_track_bars(bars)
+
+    tokenizer.midi_object.notes = musa_obj_abs.notes
+    tokenizer.midi_object.bars = musa_obj_abs.bars
+    tokenizer.midi_object.instruments_progs = [musa_obj_abs.instruments[0].program]
+    got = tokenizer.tokenize_track_bars(
+        bars=tokenizer.midi_object.bars,
+        program=30
+    )
     assert got == expected
 
 
@@ -283,6 +291,14 @@ def test_MMMTokenizer_tokenize_tracks(musa_obj_abs, mmm_tokens):
 
     args = MMMTokenizerArguments(time_unit="SIXTEENTH")
     tokenizer = MMMTokenizer(args=args)
+
+    # since we don't pass the file as an argument, we need to
+    # create the Musa attributes with the musa_obj_abs
+    # When a file is provided this is done automatically
+    tokenizer.midi_object.notes = musa_obj_abs.notes
+    tokenizer.midi_object.bars = musa_obj_abs.bars
+    tokenizer.midi_object.instruments_progs = [musa_obj_abs.instruments[0].program]
+
     got = tokenizer.tokenize_tracks(
         instruments=musa_obj_abs.instruments,
         bar_start=0,

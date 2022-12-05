@@ -38,6 +38,8 @@ This submodule contains the implementation of the MMM encoding:
     TokenizerArguments
     MMMTokenizerArguments
     MMMTokenizer
+    REMITokenizerArguments
+    REMITokenizer
 
 """
 
@@ -51,6 +53,10 @@ from .mmm import (
     MMMTokenizer,
     MMMTokenizerArguments,
 )
+from .remi import (
+    REMITokenizer,
+    REMITokenizerArguments,
+)
 from .one_hot import (
     OneHot,
 )
@@ -58,11 +64,13 @@ from .one_hot import (
 
 TOKENIZER_ARGUMENTS = [
     MMMTokenizerArguments,
+    REMITokenizerArguments,
 ]
 
 
 class Tokenizers(Enum):
     MULTI_TRACK_MUSIC_MACHINE = ("MMM", MMMTokenizerArguments)
+    REMI = ("REMI", REMITokenizerArguments)
 
     @property
     def name(self):
@@ -88,5 +96,7 @@ __all__ = [
     "Tokenizers",
     "MMMTokenizerArguments",
     "MMMTokenizer",
+    "REMITokenizerArguments",
+    "REMITokenizer",
     "OneHot"
 ]

@@ -20,17 +20,22 @@ Pretty MIDI
 .. autosummary::
     :toctree: generated/
 
-    pretty_midi_note_to_musanalysis
+    prettymidi_note_to_musicaiz
+    musicaiz_note_to_prettymidi
 
 """
 
 from .musa_json import (
-    MusaJSON
+    MusaJSON,
+    BarJSON,
+    InstrumentJSON,
+    NoteJSON,
 )
 
 from .pretty_midi_musa import (
-    pretty_midi_note_to_musanalysis,
-    musa_to_prettymidi
+    prettymidi_note_to_musicaiz,
+    musicaiz_note_to_prettymidi,
+    musa_to_prettymidi,
 )
 
 from .musa_protobuf import (
@@ -42,7 +47,11 @@ from . import protobuf
 
 __all__ = [
     "MusaJSON",
-    "pretty_midi_note_to_musanalysis",
+    "BarJSON",
+    "InstrumentJSON",
+    "NoteJSON",
+    "prettymidi_note_to_musicaiz",
+    "musicaiz_note_to_prettymidi",
     "musa_to_prettymidi",
     "protobuf",
     "musa_to_proto",

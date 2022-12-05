@@ -1,7 +1,8 @@
+from re import sub
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MultipleLocator
 import plotly.graph_objects as go
-from typing import List, Union
+from typing import List, Union, Optional
 from pathlib import Path
 import warnings
 
@@ -12,10 +13,10 @@ from musicaiz.rhythm import (
     TimingConsts
 )
 from musicaiz.structure import Note, Instrument
+from musicaiz.loaders import Musa
 
-
+# TODO: Add more colors. This only handles 10 instruments per plot
 COLOR_EDGES = [
-    '#C232FF',
     '#C232FF',
     '#89FFAE',
     '#FFFF8B',
@@ -25,11 +26,20 @@ COLOR_EDGES = [
     '#FDB0F8',
     '#FFDC9C',
     '#F3A3C4',
-    '#E7E7E7'
+    '#E7E7E7',
+    "#AA7DBB",
+    "#7DBB90",
+    "#83C0B9",
+    "#83AFC0",
+    "#8AA7C3",
+    "#8A94C3",
+    "#C793CB",
+    "#CB93B9",
+    "#CA97A0",
+    "#CAB697",
 ]
 
 COLOR = [
-    '#D676FF',
     '#D676FF',
     '#0AFE57',
     '#FEFF00',
@@ -39,15 +49,22 @@ COLOR = [
     '#FF4CF4',
     '#FFB225',
     '#C25581',
-    '#737D73'
+    '#737D73',
+    "#E3A4FB",
+    "#A7F6BF",
+    "#A7F6ED",
+    "#ADE4F9",
+    "#ADD4F9",
+    "#B5C1F9",
+    "#F5B5F9",
+    "#FEBDE9",
+    "#FEBDC9",
+    "#F3DFC0",
 ]
 
 
 # TODO: subdivisions in plotly
-# TODO: Plot all instruments in one plot plt and plotly
 # TODO: Hide note by clicking pitch in legend plotly
-# TODO: plot bars plotly
-# TODO: rethink bar plotting in plt
 # TODO: method to save plot in png or html
 
 
@@ -75,7 +92,11 @@ class Pianoroll:
         )
     """
 
-    def __init__(self, dark: bool = False):
+    def __init__(
+        self,
+        musa: Optional[Musa] = None,
+        dark: bool = False,
+    ):
 
         if dark:
             background_color = "#282828"
@@ -86,7 +107,9 @@ class Pianoroll:
         self.ax.yaxis.set_major_locator(MultipleLocator(12))
 
         self.ax.set_facecolor(background_color)
-        plt.xlabel("Time (bar.beat.subdivision)")
+        plt.xlabel("Time (bar)")
+
+        self.musa = musa
 
     def plot_grid(self, subdivisions):
         # TODO: If we have lots of subdivisions (subdivision arg is small), then
@@ -95,43 +118,31 @@ class Pianoroll:
         # TODO: The same happens with pitch (y ticks). We should make smth to avoid
         # all the pitch values to be written in the axis
         plt.xlim((0, len(subdivisions) - 1))
-        # Add 1st subdivision of new bar after last bar for better plotting the last bar
-        self._add_new_bar_subdiv(subdivisions)
         # Each subdivision has a vertical lines (grid)
-        self.ax.set_xticks([s["ticks"] for s in subdivisions])
-        ##labels = [str(s["ticks"]) for s in subdivisions]
-        labels = [str(s["bar"]) + "." + str(s["bar_beat"]) + "." + str(s["bar_subdivision"]) for s in subdivisions]
+        prev_bar_idx = 0
+        labels = []
+        for s in subdivisions:
+            if s.bar_idx != prev_bar_idx:
+                labels.append(str(s.bar_idx))
+            else:
+                labels.append("")
+            prev_bar_idx = s.bar_idx
+        self.ax.set_xticks([s.start_ticks for s in subdivisions])
         self.ax.set_xticklabels(labels)
         self.ax.xaxis.grid(which="major", linewidth=0.1, color="gray")
         # Get labels for bar and beats
         prev_bar, prev_beat = 0, 0
         bars_labels, beats_labels = [], []
         for s in subdivisions:
-            if s["bar"] != prev_bar and not prev_bar == 0:
+            if s.bar_idx != prev_bar and not prev_bar == 0:
                 bars_labels.append(s)
-                self.ax.axvline(x=s["ticks"], linestyle="--", linewidth=0.4, color="red")
-            if s["bar_beat"] != prev_beat and not prev_beat == 0:
+                self.ax.axvline(x=s.start_ticks, linestyle="-", linewidth=0.6, color="grey")
+            if s.beat_idx != prev_beat and not prev_beat == 0:
                 beats_labels.append(s)
-                self.ax.axvline(x=s["ticks"], linestyle="--", linewidth=0.2, color="blue")
-            prev_bar, prev_beat = s["bar"], s["bar_beat"]
+                self.ax.axvline(x=s.start_ticks, linestyle="-", linewidth=0.2, color="grey")
+            prev_bar, prev_beat = s.bar_idx, s.beat_idx
 
-    @staticmethod
-    def _add_new_bar_subdiv(subdivisions):
-        """In `rhythm.get_subdivisions` method, we get all the subdivisions (starting times).
-        We can add the 1st subdivision of a new bar after the subdivisions dict for plotting."""
-        range_sec = subdivisions[-1]["sec"] - subdivisions[-2]["sec"]
-        range_ticks = subdivisions[-1]["ticks"] - subdivisions[-2]["ticks"]
-        subdivisions.append({
-            "bar": subdivisions[-1]["bar"] + 1,
-            "piece_beat": 1,
-            "piece_subdivision": 1,
-            "bar_beat": 1,
-            "bar_subdivision": 1,
-            "sec": subdivisions[-1]["sec"] + range_sec,
-            "ticks": subdivisions[-1]["ticks"] + range_ticks,
-        })
-
-    def _notes_loop(self, notes: List[Note]):
+    def _notes_loop(self, notes: List[Note], idx: int):
         plt.ylabel("Pitch")
         #highest_pitch = get_highest_pitch(track.instrument)
         #lowest_pitch = get_lowest_pitch(track.instrument)
@@ -141,7 +152,7 @@ class Pianoroll:
             plt.vlines(x=note.start_ticks,
                        ymin=note.pitch,
                        ymax=note.pitch + 1,
-                       color=COLOR_EDGES[0],
+                       color=COLOR_EDGES[idx],
                        linewidth=0.01)
 
             self.ax.add_patch(
@@ -149,76 +160,86 @@ class Pianoroll:
                               width=note.end_ticks - note.start_ticks,
                               height=1,
                               alpha=note.velocity / 127,
-                              edgecolor=COLOR_EDGES[0],
-                              facecolor=COLOR[0]))
+                              edgecolor=COLOR_EDGES[idx],
+                              facecolor=COLOR[idx]))
 
-    def plot_instrument(
+    def plot_instruments(
         self,
-        track,
-        total_bars: int,
-        subdivision: str,
-        time_sig: str = TimingConsts.DEFAULT_TIME_SIGNATURE.value,
-        bpm: int = TimingConsts.DEFAULT_BPM.value,
-        resolution: int = TimingConsts.RESOLUTION.value,
-        quantized: bool = False,
+        program: Union[int, List[int]],
+        bar_start: int,
+        bar_end: int,
         print_measure_data: bool = True,
-        show_bar_labels: bool = True
+        show_bar_labels: bool = True,
+        show_grid: bool = True,
+        show: bool = False,
     ):
 
         if print_measure_data:
             plt.text(
-                x=0, y=1.3, s=f"Measure: {time_sig}", transform=self.ax.transAxes,
+                x=0, y=1.3, s=f"Measure: {self.musa.time_signature_changes[0]}", transform=self.ax.transAxes,
                 horizontalalignment='left', verticalalignment='top', fontsize=12)
 
             plt.text(
-                0, 1.2, f"Displayed bars: {total_bars}", transform=self.ax.transAxes,
+                0, 1.2, f"Displayed bars: {self.musa.total_bars}", transform=self.ax.transAxes,
                 horizontalalignment='left', verticalalignment='top', fontsize=12)
 
             plt.text(
-                0, 1.1, f"Quantized: {quantized}", transform=self.ax.transAxes,
+                0, 1.1, f"Quantized: {self.musa.is_quantized}", transform=self.ax.transAxes,
                 horizontalalignment='left', verticalalignment='top', fontsize=12)
 
             plt.text(
-                1, 1.3, f"Tempo: {bpm}bpm", transform=self.ax.transAxes,
+                1, 1.3, f"Tempo: {self.musa.tempo_changes[0]}bpm", transform=self.ax.transAxes,
                 horizontalalignment='right', verticalalignment='top', fontsize=12)
 
             plt.text(
-                1, 1.2, f"Subdivision: {subdivision}", transform=self.ax.transAxes,
+                1, 1.2, f"Subdivision: {self.musa.subdivision_note}", transform=self.ax.transAxes,
                 horizontalalignment='right', verticalalignment='top', fontsize=12)
 
-            #plt.text(
-                #1, 1.1, f"Instrument: {track.name}", transform=self.ax.transAxes,
-                #horizontalalignment='right', verticalalignment='top', fontsize=12)
-
-        subdivisions = get_subdivisions(total_bars, subdivision, time_sig, bpm, resolution)
-        self.plot_grid(subdivisions)
-        self._notes_loop(track)
+        subdivisions = self.musa.get_subbeats_in_bars(bar_start, bar_end)
+        if show_grid:
+            self.plot_grid(subdivisions)
+        notes = self.musa.get_notes_in_bars(bar_start, bar_end, program)
+        if isinstance(program, list):
+            for i, p in enumerate(program):
+                notes_i = self.musa._filter_by_instruments(p, None, notes)
+                if notes_i is not None:
+                    self._notes_loop(notes_i, i)
+        else:
+            self._notes_loop(notes, 0)
         if not show_bar_labels:
             self.ax.get_yaxis().set_visible(False)
             self.ax.get_xaxis().set_visible(False)
+        if show:
+            plt.show()
 
 
 class PianorollHTML:
 
-    """The Musa object need to be initialized with the argument
-    structure = `bars` for a good visualization of the pianoroll."""
+    def __init__(
+        self,
+        musa: Optional[Musa] = None,
+    ):
 
-    #ax.yaxis.set_major_locator(MultipleLocator(1))
-    #ax.grid(linewidth=0.25)
-    #ax.set_facecolor('#282828')
-    fig = go.Figure(
-        data=go.Scatter(),
-        layout=go.Layout(
-            {
-                "title": "",
-                #"template": "plotly_dark",
-                "xaxis": {'title': "subdivisions (bar.beat.subdivision)"}, 
-                "yaxis": {'title': 'pitch'},
-            }
+        """The Musa object need to be initialized with the argument
+        structure = `bars` for a good visualization of the pianoroll."""
+
+        self.musa = musa
+        #ax.yaxis.set_major_locator(MultipleLocator(1))
+        #ax.grid(linewidth=0.25)
+        #ax.set_facecolor('#282828')
+        self.fig = go.Figure(
+            data=go.Scatter(),
+            layout=go.Layout(
+                {
+                    "title": "",
+                    #"template": "plotly_dark",
+                    "xaxis": {'title': "subdivisions (bar)"}, 
+                    "yaxis": {'title': 'pitch'},
+                }
+            )
         )
-    )
 
-    def _notes_loop(self, notes: List[Note]):
+    def _notes_loop(self, notes: List[Note], idx: int):
         for note in notes:
             self.fig.add_shape(
                 type="rect",
@@ -227,10 +248,10 @@ class PianorollHTML:
                 x1=note.end_ticks,
                 y1=note.pitch + 1,
                 line=dict(
-                    color=COLOR_EDGES[0],
+                    color=COLOR_EDGES[idx],
                     width=2,
                 ),
-                fillcolor=COLOR[0],
+                fillcolor=COLOR[idx],
             )
 
             # this is to add a hover information on each note
@@ -265,16 +286,21 @@ class PianorollHTML:
         # all the pitch values to be written in the axis
         #self.fig.update_xaxes(range[0, len(subdivisions) - 1])
         #plt.xlim((0, len(subdivisions) - 1))
-        # Add 1st subdivision of new bar after last bar for better plotting the last bar
-        Pianoroll._add_new_bar_subdiv(subdivisions)
         # Each subdivision has a vertical lines (grid)
         #self.fig.set_xticks([s["ticks"] for s in subdivisions])
         ##labels = [str(s["ticks"]) for s in subdivisions]
-        labels = [str(s["bar"]) + "." + str(s["bar_beat"]) + "." + str(s["bar_subdivision"]) for s in subdivisions]
+        prev_bar_idx = 0
+        labels = []
+        for s in subdivisions:
+            if s.bar_idx != prev_bar_idx:
+                labels.append(str(s.bar_idx))
+            else:
+                labels.append("")
+            prev_bar_idx = s.bar_idx
         self.fig.update_layout(
             xaxis=dict(
                 tickmode="array",
-                tickvals=[s["ticks"] for s in subdivisions],
+                tickvals=[s.start_ticks for s in subdivisions],
                 ticktext=labels,
                 tickfont=dict(
                     size=10,
@@ -286,49 +312,39 @@ class PianorollHTML:
         prev_bar, prev_beat = 0, 0
         bars_labels, beats_labels = [], []
         for s in subdivisions:
-            if s["bar"] != prev_bar and not prev_bar == 0:
+            if s.bar_idx != prev_bar and not prev_bar == 0:
                 bars_labels.append(s)
-                self.fig.add_vline(x=s["ticks"], line_width=0.4, line_color="red")
-            if s["bar_beat"] != prev_beat and not prev_beat == 0:
+                self.fig.add_vline(x=s.start_ticks, line_width=0.6, line_color="grey")
+            if s.beat_idx != prev_beat and not prev_beat == 0:
                 beats_labels.append(s)
-                self.fig.add_vline(x=s["ticks"], line_width=0.2, line_color="blue")
-            prev_bar, prev_beat = s["bar"], s["bar_beat"]
+                self.fig.add_vline(x=s.start_ticks, line_width=0.2, line_color="grey")
+            prev_bar, prev_beat = s.bar_idx, s.beat_idx
 
-    def plot_instrument(
+    def plot_instruments(
         self,
-        track: Instrument,
+        program: Union[int, List[int]],
         bar_start: int,
         bar_end: int,
-        subdivision: str,
         path: Union[Path, str] = Path("."),
         filename: str = "title",
         save_plot: bool = True,
-        time_sig: str = TimingConsts.DEFAULT_TIME_SIGNATURE.value,
-        bpm: int = TimingConsts.DEFAULT_BPM.value,
-        resolution: int = TimingConsts.RESOLUTION.value,
+        show_grid: bool = True,
         show: bool = True
     ):
 
-        pitches = []
-        if track.bars is None:
-            warnings.warn("Track has no bars. You probably initialized the Musa object with structure=`instruments`. \n \
-                          You can use `structure=`bars` to get the track bars. \n \
-                          The plotter is going to ignore the bars and it'll plot all the notes in the track.")
-            self._notes_loop(track.notes)
-            for note in track.notes:
-                if note.pitch not in pitches:
-                    pitches.append(note.pitch)
-        else:
-            # TODO
-            for bar in track.bars[bar_start:bar_end]:
-                self._notes_loop(bar.notes)
-                for note in bar.notes:
-                    if note.pitch not in pitches:
-                        pitches.append(note.pitch)
-
-            total_bars = bar_end - bar_start
-            subdivisions = get_subdivisions(total_bars, subdivision, time_sig, bpm, resolution)
+        subdivisions = self.musa.get_subbeats_in_bars(bar_start, bar_end)
+        if show_grid:
             self.plot_grid(subdivisions)
+        notes = self.musa.get_notes_in_bars(bar_start, bar_end, program)
+        if isinstance(program, list):
+            for i, p in enumerate(program):
+                notes_i = self.musa._filter_by_instruments(p, None, notes)
+                if notes_i is not None:
+                    self._notes_loop(notes_i, i)
+        else:
+            self._notes_loop(notes, 0)
+
+        pitches = [note.pitch for note in notes]
 
         # this is to add the yaxis labels# horizontal line for pitch grid
         labels = [i for i in range(min(pitches) - 1, max(pitches) + 2)]
@@ -341,12 +357,12 @@ class PianorollHTML:
             cleaned_labels = labels
 
         # Adjust y labels (pitch)
-        # TODO: label in the middle of the pitch
+        # TODO: label between pitches
         self.fig.update_layout(
             yaxis=dict(
                 tickmode="array",
-                tickvals=labels,
-                ticktext=labels,
+                tickvals=cleaned_labels,
+                ticktext=cleaned_labels,
                 tickfont=dict(
                     size=12,
                 ),

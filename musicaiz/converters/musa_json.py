@@ -10,14 +10,19 @@ class NoteJSON:
     end: int  # ticks
     pitch: int
     velocity: int
+    bar_idx: int
+    beat_idx: int
+    subbeat_idx: int
+    instrument_idx: int
+    instrument_prog: int
 
 
 @dataclass
 class BarJSON:
     time_sig: str
+    bpm: int
     start: int  # ticks
     end: int  # ticks
-    notes: List[NoteJSON]
 
 
 @dataclass
@@ -25,15 +30,12 @@ class InstrumentJSON:
     is_drum: bool
     name: str
     n_prog: int
-    bars: List[BarJSON]
 
 
-    
 @dataclass
 class JSON:
     tonality: str
     time_sig: str
-    instruments: List[InstrumentJSON]
 
 
 class MusaJSON:
@@ -41,7 +43,11 @@ class MusaJSON:
     """
     This class converst a `musicaiz` :func:`~musicaiz.loaders.Musa` object
     into a JSON format.
-    
+    Note that this conversion is different that the .json method of Musa class,
+    since that is intended for encoding musicaiz objects and this class here
+    can be encoded and decoded with other softwares since it does not encode
+    musicaiz objects.
+
     Examples
     --------
 
@@ -56,7 +62,7 @@ class MusaJSON:
             field="hello",
             value=2
         )
-    
+
     Save the json to disk:
 
     >>> musa_json.save("filename")
@@ -68,23 +74,25 @@ class MusaJSON:
     ):
         self.midi = musa_obj
         self.json = self.to_json(musa_obj=self.midi)
-    
+
     def save(self, filename: str, path: Union[str, Path] = ""):
         """Saves the JSON into disk."""
         with open(Path(path, filename + ".json"), "w") as write_file:
             json.dump(self.json, write_file)
-    
+
     @staticmethod
     def to_json(musa_obj):
         composition = {}
 
         # headers
         composition["tonality"] = musa_obj.tonality
-        composition["time_sig"] = musa_obj.time_sig.time_sig
-        composition["instruments"] = [{}] * len(musa_obj.instruments)
+        composition["resolution"] = musa_obj.resolution
+        composition["instruments"] = []
+        composition["bars"] = []
+        composition["notes"] = []
 
         composition["instruments"] = []
-        for i, instr in enumerate(musa_obj.instruments):
+        for _, instr in enumerate(musa_obj.instruments):
             composition["instruments"].append(
                 {
                     "is_drum": instr.is_drum,
@@ -92,31 +100,30 @@ class MusaJSON:
                     "n_prog": int(instr.program),
                 }
             )
-            if instr.bars is None:
-                continue
-            if len(instr.bars) == 0:
-                continue
-            composition["instruments"][i]["bars"] = []
-            for b, bar in enumerate(instr.bars):
-                composition["instruments"][i]["bars"].append(
-                    {
-                        "time_sig": bar.time_sig,
-                        "start": bar.start_ticks,
-                        "end": bar.end_ticks
-                    }
-                )
-                composition["instruments"][i]["bars"][b]["notes"] = []
-                if len(bar.notes) == 0:
-                    continue
-                for n, note in enumerate(bar.notes):
-                    composition["instruments"][i]["bars"][b]["notes"].append(
-                        {
-                            "start": note.start_ticks,
-                            "end": note.end_ticks,
-                            "pitch": note.pitch,
-                            "velocity": note.velocity,
-                        }
-                    )
+        for _, bar in enumerate(musa_obj.bars):
+            composition["bars"].append(
+                {
+                    "time_sig": bar.time_sig.time_sig,
+                    "start": bar.start_ticks,
+                    "end": bar.end_ticks,
+                    "bpm": bar.bpm,
+                }
+            )
+        for _, note in enumerate(musa_obj.notes):
+            composition["notes"].append(
+                {
+                    "start": note.start_ticks,
+                    "end": note.end_ticks,
+                    "pitch": note.pitch,
+                    "velocity": note.velocity,
+                    "bar_idx": note.bar_idx,
+                    "beat_idx": note.beat_idx,
+                    "subbeat_idx": note.subbeat_idx,
+                    "instrument_idx": note.instrument_idx,
+                    "instrument_prog": note.instrument_prog,
+
+                }
+            )
         return composition
 
     def add_instrument_field(self, n_program: int, field: str, value: Union[str, int, float]):

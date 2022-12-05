@@ -4,7 +4,7 @@ from typing import List
 
 from musicaiz.harmony import Tonality
 from musicaiz.structure import NoteClassBase, Note
-from musicaiz.converters import pretty_midi_note_to_musanalysis
+from musicaiz.converters import prettymidi_note_to_musicaiz
 
 
 def harmonic_shifting(
@@ -347,7 +347,7 @@ def _map_passing_note(
     # Check if target pitch corresponds to a note in the scale, if not,
     # convert the note to the closest note in the scale
     target_name = pm.note_number_to_name(target_pitch)
-    target_name, target_octave = pretty_midi_note_to_musanalysis(target_name)
+    target_name, target_octave = prettymidi_note_to_musicaiz(target_name)
 
     # Get the notes in the scale
     all_degs = ["I", "II", "III", "IV", "V", "VI", "VII"]

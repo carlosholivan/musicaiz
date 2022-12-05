@@ -70,6 +70,15 @@ from .key_profiles import (
     key_detection
 )
 
+from .chord_prediction import (
+    predict_chords,
+    get_chords,
+    get_chords_candidates,
+    compute_chord_notes_dist,
+    _notes_to_onehot,
+    _group_notes_in_beats,
+)
+
 
 __all__ = [
     "harmonic_shifting",
@@ -86,4 +95,10 @@ __all__ = [
     "signature_fifths_profiles",
     "_eights_per_pitch_class",
     "key_detection",
+    "predict_chords",
+    "get_chords",
+    "get_chords_candidates",
+    "compute_chord_notes_dist",
+    "_notes_to_onehot",
+    "_group_notes_in_beats",
 ]

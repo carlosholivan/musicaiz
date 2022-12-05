@@ -20,7 +20,7 @@ def test_Maestro_get_metadata(dataset_path):
             "split": "train",
         }
     }
-    
+
     dataset = Maestro()
     got = dataset.get_metadata(dataset_path)
 

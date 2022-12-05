@@ -43,6 +43,7 @@ described in:
 .. autosummary::
     :toctree: generated/
 
+    QuantizerConfig
     basic_quantizer
     advanced_quantizer
     get_ticks_from_subdivision
@@ -61,10 +62,14 @@ from .timing import (
     ms_per_note,
     ms_per_bar,
     get_subdivisions,
-    get_symbolic_duration,    
+    get_symbolic_duration,
+    Timing,
+    Beat,
+    Subdivision,
 )
 
 from .quantizer import (
+    QuantizerConfig,
     basic_quantizer,
     advanced_quantizer,
     get_ticks_from_subdivision,
@@ -80,6 +85,7 @@ __all__ = [
     "ms_per_note",
     "ms_per_bar",
     "get_subdivisions",
+    "QuantizerConfig",
     "basic_quantizer",
     "advanced_quantizer",
     "get_ticks_from_subdivision",
@@ -87,4 +93,7 @@ __all__ = [
     "SymbolicNoteLengths",
     "get_symbolic_duration",
     "TimeSignature",
+    "Timing",
+    "Beat",
+    "Subdivision",
 ]
