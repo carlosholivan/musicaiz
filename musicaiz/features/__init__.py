@@ -152,9 +152,7 @@ from .harmony import (
     _order_note_seq_by_chromatic_idx,
 )
 from .predict_midi import (
-    predict_midi_chords,
     predic_time_sig_numerator,
-    predict_midi_all_keys_degrees,
 )
 from .rhythm import (
     get_start_sec,
@@ -212,9 +210,7 @@ __all__ = [
     "_extract_note_positions",
     "_order_note_seq_by_chromatic_idx",
     "get_harmonic_density",
-    "predict_midi_chords",
     "predic_time_sig_numerator",
-    "predict_midi_all_keys_degrees",
     "get_start_sec",
     "get_ioi",
     "_delete_duplicates",
