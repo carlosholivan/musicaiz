@@ -1,13 +1,38 @@
 from typing import List, Dict, Union, Optional
 import numpy as np
-from enum import Enum
+from dataclasses import dataclass
 
 from musicaiz.rhythm import TimingConsts, ms_per_tick
 
 
-class QuantizerConfig(Enum):
-    DELTA_QR = 12
-    STRENGTH = 1  # 100%
+@dataclass
+class QuantizerConfig:
+    """
+    Basic quantizer arguments.
+
+    Parameters
+    ----------
+
+    note: str
+        The note length of the grid.
+
+    strength: parameter between 0 and 1.
+        Example GRID = [0 24 48], STAR_TICKS = [3 ,21, 40] and Aq
+        START_NEW_TICS = [(3-0)*strength, (21-24)*strength, (40-48)*strength]
+        END_NEW_TICKS = []
+
+    delta_qr: Q_range in ticks
+
+    type_q: type of quantization
+        if negative: only differences between start_tick and grid > Q_r is
+        taking into account for the quantization. If positive only differences
+        between start_tick and grid < Q_r is taking into accounto for the quantization.
+        If none all start_tick is quantized based on the strength (it works similar to basic
+        quantization but adding the strength parameter)
+    """
+    delta_qr: int = 12
+    strength: int = 1  # 100%
+    type_q: Optional[str] = None
 
 
 def _find_nearest(
@@ -58,10 +83,9 @@ def basic_quantizer(
 def advanced_quantizer(
     input_notes,
     grid: List[int],
-    strength: float = QuantizerConfig.STRENGTH.value,
-    delta_Qr: int = QuantizerConfig.DELTA_QR.value,
-    type_q: Optional[str] = None,
-    bpm: int = TimingConsts.DEFAULT_BPM.value
+    config: QuantizerConfig,
+    bpm: int = TimingConsts.DEFAULT_BPM.value,
+    resolution: int = TimingConsts.RESOLUTION.value,
 ):
     """
     This function quantizes a musa object given a grid.
@@ -72,26 +96,9 @@ def advanced_quantizer(
     file: musa object
 
     grid: array of ints in ticks
-
-    strength: parameter between 0 and 1.
-        Example GRID = [0 24 48], STAR_TICKS = [3 ,21, 40] and Aq
-        START_NEW_TICS = [(3-0)*strength, (21-24)*strength, (40-48)*strength]
-        END_NEW_TICKS = []
-
-    delta_Qr: Q_range in ticks
-
-    type_q: type of quantization
-        if negative: only differences between start_tick and grid > Q_r is
-        taking into account for the quantization. If positive only differences
-        between start_tick and grid < Q_r is taking into accounto for the quantization.
-        If none all start_tick is quantized based on the strength (it works similar to basic
-        quantization but adding the strength parameter)
-
-    Returns
-    -------
     """
 
-    Aq = strength
+    Aq = config.strength
 
     for i in range(len(input_notes)):
 
@@ -101,7 +108,7 @@ def advanced_quantizer(
         delta_tick = start_tick - start_tick_quantized
         delta_tick_q = int(delta_tick * Aq)
 
-        if type_q == "negative" and (abs(delta_tick) > delta_Qr):
+        if config.type_q == "negative" and (abs(delta_tick) > config.delta_qr):
             if delta_tick > 0:
                 input_notes[i].start_ticks = start_tick - delta_tick_q
                 input_notes[i].end_ticks = end_tick - delta_tick_q
@@ -110,7 +117,7 @@ def advanced_quantizer(
                     input_notes[i].start_ticks = start_tick + abs(delta_tick_q)
                     input_notes[i].end_ticks = end_tick + abs(delta_tick_q)
 
-        elif type_q == "positive" and (abs(delta_tick) < delta_Qr):
+        elif config.type_q == "positive" and (abs(delta_tick) < config.delta_qr):
             if delta_tick > 0:
                 input_notes[i].start_ticks = input_notes[i].start_ticks - delta_tick_q
                 input_notes[i].end_ticks = input_notes[i].end_ticks - delta_tick_q
@@ -119,7 +126,7 @@ def advanced_quantizer(
                     input_notes[i].start_ticks = input_notes[i].start_ticks + abs(delta_tick_q)
                     input_notes[i].end_ticks = input_notes[i].end_ticks + abs(delta_tick_q)
 
-        elif type_q is None:
+        elif config.type_q is None:
             if delta_tick > 0:
                 input_notes[i].start_ticks = input_notes[i].start_ticks - delta_tick_q
                 input_notes[i].end_ticks = input_notes[i].end_ticks - delta_tick_q
@@ -128,5 +135,5 @@ def advanced_quantizer(
                     input_notes[i].start_ticks = input_notes[i].start_ticks + abs(delta_tick_q)
                     input_notes[i].end_ticks = input_notes[i].end_ticks + abs(delta_tick_q)
 
-        input_notes[i].start_sec = input_notes[i].start_ticks * ms_per_tick(bpm) / 1000
-        input_notes[i].end_sec = input_notes[i].end_ticks * ms_per_tick(bpm) / 1000
+        input_notes[i].start_sec = input_notes[i].start_ticks * ms_per_tick(bpm, resolution) / 1000
+        input_notes[i].end_sec = input_notes[i].end_ticks * ms_per_tick(bpm, resolution) / 1000

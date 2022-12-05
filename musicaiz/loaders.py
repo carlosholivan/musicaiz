@@ -13,7 +13,7 @@ input params.
 """
 
 from __future__ import annotations
-from typing import TextIO, Union, List, Optional
+from typing import TextIO, Union, List, Optional, Type
 import pretty_midi as pm
 from pathlib import Path
 from enum import Enum
@@ -27,6 +27,8 @@ from musicaiz.rhythm import (
     TimeSignature,
     Beat,
     Subdivision,
+    advanced_quantizer,
+    QuantizerConfig,
 )
 from musicaiz.converters import musa_to_prettymidi
 from musicaiz.features import get_harmonic_density
@@ -62,11 +64,11 @@ class Musa:
         "bars",
         "tempo_changes",
         "instruments_progs",
-        "quantize_note",
         "general_midi",
         "subdivision_note",
         "subbeats",
         "beats",
+        "quantizer_args",
     ]
 
     # subdivision_note and quantize_note
@@ -83,13 +85,13 @@ class Musa:
         self,
         file: Optional[Union[str, TextIO, Path]],
         quantize: bool = False,
-        quantize_note: Optional[str] = "sixteenth",
         cut_notes: bool = False,
         tonality: Optional[str] = None,
         resolution: Optional[int] = None,
         absolute_timing: bool = True,
         general_midi: bool = False,
-        subdivision_note: str = "sixteenth"
+        subdivision_note: str = "sixteenth",
+        quantizer_args: Type[QuantizerConfig] = QuantizerConfig,
     ):
 
         """
@@ -116,7 +118,6 @@ class Musa:
         self.general_midi = general_midi
         self.absolute_timing = absolute_timing
         self.is_quantized = quantize
-        self.quantize_note = quantize_note
         self.subdivision_note = subdivision_note
         self.subbeats = []
         self.beats = []
@@ -124,6 +125,7 @@ class Musa:
         self.time_signature_changes = []
         self.bars = []
         self.tempo_changes = []
+        self.quantizer_args = quantizer_args
 
         if subdivision_note not in self.VALID_SUBDIVISIONS:
             raise ValueError(
@@ -256,20 +258,45 @@ class Musa:
 
         assert len([sub for sub in self.subbeats if sub.bar_idx is None]) == 0
         assert len([sub for sub in self.subbeats if sub.beat_idx is None]) == 0
-        """
-        # if quantize
-        if quantize:
-            grid = get_subdivisions(
-                total_bars=self.total_bars,
-                subdivision=quantize_note,
-                time_sig=self.time_sig.time_sig,
-                bpm=self.bpm,
-                resolution=self.resolution,
-                absolute_timing=self.absolute_timing,
+
+        # Add subbeats to last bar if it's incomplete
+        if self.subbeats[-1].end_ticks < self.bars[-1].end_ticks:
+            subbeats_last_bar = self.get_subbeats_in_bar(len(self.bars) - 1)
+            # subbeats in a complete bar
+            subbeats_total = int(
+                self.bars[-1].time_sig._notes_per_bar(self.subdivision_note.upper())
             )
-            v_grid = get_ticks_from_subdivision(grid)
-            advanced_quantizer(self.notes, v_grid)
-        """
+            if len(subbeats_last_bar) < subbeats_total:
+                for _ in range(subbeats_total - len(subbeats_last_bar)):
+                    dur = subbeats_last_bar[0].end_sec - subbeats_last_bar[0].start_sec
+                    subbeat = Subdivision(
+                        time_sig=subbeats_last_bar[0].time_sig,
+                        start=self.subbeats[-1].end_sec,
+                        end=self.subbeats[-1].end_sec + dur,
+                        bpm=subbeats_last_bar[0].bpm,
+                        resolution=self.subbeats[-1].resolution,
+                    )
+                    subbeat.global_idx = len(self.subbeats)
+                    subbeat.bar_idx = len(self.bars) - 1
+                    # TODO: Group last subbeats in the correct beats
+                    # (this is not that important since these beats do not contain notes)
+                    subbeat.beat_idx = len(self.beats) - 1
+                    subbeat.bar_idx = len(self.bars) - 1
+                    self.subbeats.append(subbeat)
+
+        # if quantize
+        if self.is_quantized:
+            quantized_notes = []
+            for i, bar in enumerate(self.bars):
+                v_grid = [sb.start_ticks for sb in self.get_subbeats_in_bar(i)]
+                # TODO: Recalcualte subbeat_idx, beat_idx and bar_idx of the notes
+                notes = self.get_notes_in_bar(i)
+                advanced_quantizer(
+                    notes, v_grid, config=self.quantizer_args,
+                    bpm=bar.bpm, resolution=self.resolution
+                )
+                quantized_notes.extend(notes)
+            self.notes = quantized_notes
 
     @classmethod
     def is_valid(cls, file: Union[str, Path]):
@@ -874,13 +901,14 @@ class Musa:
             self.bars.append(bar)
             # Now add as musch beats as needed to complete the last bar
             if len(beats_last_bar) < bar.time_sig.num:
+                beats = self.get_beats_in_bar(len(self.bars) - 1)
                 for _ in range(bar.time_sig.num - len(beats_last_bar)):
-                    dur = self.beats[-1].end_sec - self.beats[-1].start_sec
+                    dur = beats[0].end_sec - beats[0].start_sec
                     beat = Beat(
-                        time_sig=self.beats[-1].time_sig,
+                        time_sig=beats[0].time_sig,
                         start=self.beats[-1].end_sec,
                         end=self.beats[-1].end_sec + dur,
-                        bpm=self.beats[-1].bpm,
+                        bpm=beats[0].bpm,
                         resolution=self.beats[-1].resolution,
                     )
                     beat.global_idx = len(self.beats)

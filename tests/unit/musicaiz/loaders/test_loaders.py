@@ -17,8 +17,7 @@ def midi_sample_2(fixture_dir):
 def test_Musa(midi_sample):
 
     # args
-    quantize = False
-    quantize_note = "sixteenth"
+    quantize = True
     cut_notes = False
     absolute_timing = False
     general_midi = True
@@ -26,7 +25,6 @@ def test_Musa(midi_sample):
     midi = Musa(
         file=midi_sample,
         quantize=quantize,
-        quantize_note=quantize_note,
         cut_notes=cut_notes,
         absolute_timing=absolute_timing,
         general_midi=general_midi,
@@ -42,7 +40,6 @@ def test_Musa(midi_sample):
     assert midi.resolution != 0
     assert len(midi.instruments) != 0
     assert midi.is_quantized == quantize
-    assert midi.quantize_note == quantize_note
     assert midi.absolute_timing == absolute_timing
     assert midi.cut_notes == cut_notes
     assert len(midi.notes) != 0

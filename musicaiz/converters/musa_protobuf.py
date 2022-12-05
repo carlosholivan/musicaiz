@@ -49,8 +49,8 @@ def musa_to_proto(musa_obj):
     proto_is_quantized = proto.is_quantized.add()
     proto_is_quantized = musa_obj.is_quantized
 
-    proto_quantize_note = proto.quantize_note.add()
-    proto_quantize_note = musa_obj.quantize_note
+    proto_quantizer_args = proto.quantizer_args.add()
+    proto_quantizer_args = musa_obj.quantizer_args
 
     proto_absolute_timing = proto.absolute_timing.add()
     proto_absolute_timing = musa_obj.absolute_timing

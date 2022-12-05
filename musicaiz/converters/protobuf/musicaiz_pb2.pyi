@@ -6,7 +6,7 @@ from typing import ClassVar as _ClassVar, Iterable as _Iterable, Mapping as _Map
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class Musa(_message.Message):
-    __slots__ = ["absolute_timing", "bars", "beats", "cut_notes", "file", "instruments", "instruments_progs", "is_quantized", "notes", "quantize_note", "resolution", "subbeats", "subdivision_note", "tempo_changes", "time_signature_changes", "tonality", "total_bars"]
+    __slots__ = ["absolute_timing", "bars", "beats", "cut_notes", "file", "instruments", "instruments_progs", "is_quantized", "notes", "quantizer_args", "resolution", "subbeats", "subdivision_note", "tempo_changes", "time_signature_changes", "tonality", "total_bars"]
     class AbsoluteTiming(_message.Message):
         __slots__ = []
         def __init__(self) -> None: ...
@@ -116,7 +116,7 @@ class Musa(_message.Message):
         symbolic: str
         velocity: int
         def __init__(self, pitch: _Optional[int] = ..., pitch_name: _Optional[str] = ..., note_name: _Optional[str] = ..., octave: _Optional[str] = ..., ligated: bool = ..., start_ticks: _Optional[int] = ..., end_ticks: _Optional[int] = ..., start_sec: _Optional[float] = ..., end_sec: _Optional[float] = ..., symbolic: _Optional[str] = ..., velocity: _Optional[int] = ..., bar_idx: _Optional[int] = ..., beat_idx: _Optional[int] = ..., subbeat_idx: _Optional[int] = ..., instrument_idx: _Optional[int] = ..., instrument_prog: _Optional[int] = ...) -> None: ...
-    class QuantizeNote(_message.Message):
+    class QuantizerArgs(_message.Message):
         __slots__ = []
         def __init__(self) -> None: ...
     class Resolution(_message.Message):
@@ -175,7 +175,7 @@ class Musa(_message.Message):
     INSTRUMENTS_PROGS_FIELD_NUMBER: _ClassVar[int]
     IS_QUANTIZED_FIELD_NUMBER: _ClassVar[int]
     NOTES_FIELD_NUMBER: _ClassVar[int]
-    QUANTIZE_NOTE_FIELD_NUMBER: _ClassVar[int]
+    QUANTIZER_ARGS_FIELD_NUMBER: _ClassVar[int]
     RESOLUTION_FIELD_NUMBER: _ClassVar[int]
     SUBBEATS_FIELD_NUMBER: _ClassVar[int]
     SUBDIVISION_NOTE_FIELD_NUMBER: _ClassVar[int]
@@ -192,7 +192,7 @@ class Musa(_message.Message):
     instruments_progs: _containers.RepeatedCompositeFieldContainer[Musa.InstrumentsProgs]
     is_quantized: _containers.RepeatedCompositeFieldContainer[Musa.IsQuantized]
     notes: _containers.RepeatedCompositeFieldContainer[Musa.Note]
-    quantize_note: _containers.RepeatedCompositeFieldContainer[Musa.QuantizeNote]
+    quantizer_args: _containers.RepeatedCompositeFieldContainer[Musa.QuantizerArgs]
     resolution: _containers.RepeatedCompositeFieldContainer[Musa.Resolution]
     subbeats: _containers.RepeatedCompositeFieldContainer[Musa.Subbeat]
     subdivision_note: _containers.RepeatedCompositeFieldContainer[Musa.SubdivisionNote]
@@ -200,4 +200,4 @@ class Musa(_message.Message):
     time_signature_changes: _containers.RepeatedCompositeFieldContainer[Musa.TimeSignatureChanges]
     tonality: _containers.RepeatedCompositeFieldContainer[Musa.Tonality]
     total_bars: _containers.RepeatedCompositeFieldContainer[Musa.TotalBars]
-    def __init__(self, time_signature_changes: _Optional[_Iterable[_Union[Musa.TimeSignatureChanges, _Mapping]]] = ..., subdivision_note: _Optional[_Iterable[_Union[Musa.SubdivisionNote, _Mapping]]] = ..., file: _Optional[_Iterable[_Union[Musa.File, _Mapping]]] = ..., total_bars: _Optional[_Iterable[_Union[Musa.TotalBars, _Mapping]]] = ..., tonality: _Optional[_Iterable[_Union[Musa.Tonality, _Mapping]]] = ..., resolution: _Optional[_Iterable[_Union[Musa.Resolution, _Mapping]]] = ..., is_quantized: _Optional[_Iterable[_Union[Musa.IsQuantized, _Mapping]]] = ..., quantize_note: _Optional[_Iterable[_Union[Musa.QuantizeNote, _Mapping]]] = ..., absolute_timing: _Optional[_Iterable[_Union[Musa.AbsoluteTiming, _Mapping]]] = ..., cut_notes: _Optional[_Iterable[_Union[Musa.CutNotes, _Mapping]]] = ..., tempo_changes: _Optional[_Iterable[_Union[Musa.TempoChanges, _Mapping]]] = ..., instruments_progs: _Optional[_Iterable[_Union[Musa.InstrumentsProgs, _Mapping]]] = ..., instruments: _Optional[_Iterable[_Union[Musa.Instrument, _Mapping]]] = ..., bars: _Optional[_Iterable[_Union[Musa.Bar, _Mapping]]] = ..., notes: _Optional[_Iterable[_Union[Musa.Note, _Mapping]]] = ..., beats: _Optional[_Iterable[_Union[Musa.Beat, _Mapping]]] = ..., subbeats: _Optional[_Iterable[_Union[Musa.Subbeat, _Mapping]]] = ...) -> None: ...
+    def __init__(self, time_signature_changes: _Optional[_Iterable[_Union[Musa.TimeSignatureChanges, _Mapping]]] = ..., subdivision_note: _Optional[_Iterable[_Union[Musa.SubdivisionNote, _Mapping]]] = ..., file: _Optional[_Iterable[_Union[Musa.File, _Mapping]]] = ..., total_bars: _Optional[_Iterable[_Union[Musa.TotalBars, _Mapping]]] = ..., tonality: _Optional[_Iterable[_Union[Musa.Tonality, _Mapping]]] = ..., resolution: _Optional[_Iterable[_Union[Musa.Resolution, _Mapping]]] = ..., is_quantized: _Optional[_Iterable[_Union[Musa.IsQuantized, _Mapping]]] = ..., quantizer_args: _Optional[_Iterable[_Union[Musa.QuantizerArgs, _Mapping]]] = ..., absolute_timing: _Optional[_Iterable[_Union[Musa.AbsoluteTiming, _Mapping]]] = ..., cut_notes: _Optional[_Iterable[_Union[Musa.CutNotes, _Mapping]]] = ..., tempo_changes: _Optional[_Iterable[_Union[Musa.TempoChanges, _Mapping]]] = ..., instruments_progs: _Optional[_Iterable[_Union[Musa.InstrumentsProgs, _Mapping]]] = ..., instruments: _Optional[_Iterable[_Union[Musa.Instrument, _Mapping]]] = ..., bars: _Optional[_Iterable[_Union[Musa.Bar, _Mapping]]] = ..., notes: _Optional[_Iterable[_Union[Musa.Note, _Mapping]]] = ..., beats: _Optional[_Iterable[_Union[Musa.Beat, _Mapping]]] = ..., subbeats: _Optional[_Iterable[_Union[Musa.Subbeat, _Mapping]]] = ...) -> None: ...

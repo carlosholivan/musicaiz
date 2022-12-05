@@ -1,10 +1,8 @@
 
 from typing import Optional, List, Dict, Union, TextIO
 from pathlib import Path
-import argparse
 import logging
 from dataclasses import dataclass
-
 
 from musicaiz.loaders import Musa
 from musicaiz.structure import Note, Instrument, Bar

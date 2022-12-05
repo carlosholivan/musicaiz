@@ -17,6 +17,7 @@ def midi_data():
         "expected_instrument_name_2": "Piano left",
     }
 
+
 def _assert_midi_valid_instr_obj(midi_data, instruments):
     # check instrs
     assert midi_data["expected_instruments"] == len(instruments)

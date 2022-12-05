@@ -14,7 +14,7 @@ message Musa {
     repeated Tonality tonality = 9;
     repeated Resolution resolution = 10;
     repeated IsQuantized is_quantized = 11;
-    repeated QuantizeNote quantize_note = 12;
+    repeated QuantizerArgs quantizer_args = 12;
     repeated AbsoluteTiming absolute_timing = 13;
     repeated CutNotes cut_notes = 14;
     repeated TempoChanges tempo_changes = 15;
@@ -32,7 +32,7 @@ message Musa {
     message Tonality {}
     message Resolution {}
     message IsQuantized {}
-    message QuantizeNote {}
+    message QuantizerArgs {}
     message AbsoluteTiming {}
     message CutNotes {}
     message TempoChanges {}
