@@ -122,7 +122,29 @@ The process to obtain the SSM with this method is:
     get_segment_boundaries
     plot_novelty_from_ssm
 
+
+Graphs
+------
+
+This submodule presents different implementations of self-similarity matrices.
+
+The papers that are implemented in this sumbodule are the following:
+
+.. panels::
+
+    [1] Jeong, D., Kwon, T., Kim, Y., & Nam, J. (2019)
+    Graph neural network for music score data and modeling expressive piano performance.
+    In International Conference on Machine Learning, 3060-3070
+    https://proceedings.mlr.press/v97/jeong19a.html
+
+
+.. autosummary::
+    :toctree: generated/
+
+    musa_to_graph
+    plot_graph
 """
+
 
 from .pitch import (
     get_highest_lowest_pitches,
@@ -168,7 +190,6 @@ from .rhythm import (
     note_length_transition_matrix,
     plot_note_length_transition_matrix,
 )
-
 from .self_similarity import (
     compute_ssm,
     self_similarity_louie,
@@ -181,6 +202,10 @@ from .self_similarity import (
     get_novelty_func,
     get_segment_boundaries,
     plot_novelty_from_ssm,
+)
+from .graphs import (
+    musa_to_graph,
+    plot_graph,
 )
 
 __all__ = [
@@ -230,4 +255,6 @@ __all__ = [
     "get_novelty_func",
     "get_segment_boundaries",
     "plot_novelty_from_ssm",
+    "musa_to_graph",
+    "plot_graph",
 ]
