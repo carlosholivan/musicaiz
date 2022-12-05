@@ -114,8 +114,8 @@ def self_similarity_louie(file: Union[Musa, str, TextIO, Path]) -> np.ndarray:
     s: np.ndarray [shape=(n_bars, n_bars)]
         The SSM computed from the ``feature_vector``.
     """
-    musa_obj = __initialization(file) 
-    all_subdiv_notes = group_notes_in_subdivisions_bars(musa_obj)
+    musa_obj = __initialization(file)
+    all_subdiv_notes = musa_obj.get_notes_in_beats(0, len(musa_obj.beats) - 1)
     bar_highest_subdiv_notes = get_highest_subdivision_bars_notes(all_subdiv_notes)
     m = feature_vector(bar_highest_subdiv_notes)
     s = _self_similarity(m)
@@ -128,7 +128,7 @@ def self_similarity_single_measure(
 ) -> np.ndarray:
     """
     Computes the SSM with the selected measure for all the bars.
-    
+
     Parameters
     ----------
 
@@ -137,17 +137,17 @@ def self_similarity_single_measure(
 
     measure: str
         The measure or feature used to compute the SSM.
-    
+
     Returns
     -------
 
     s: np.ndarray [shape=(n_bars, n_bars)]
         The SSM computed from the selected measure.
     """
-    musa_obj = __initialization(file) 
-    bars = loaders.Musa.group_instrument_bar_notes(musa_obj)
+    musa_obj = __initialization(file)
     bar_measures = []
-    for bar in bars:
+    for b in musa_obj.bars:
+        bar = musa_obj.get_notes_in_bar(b)
         bar_measures.append(get_eval_measures(bar, measures=[measure]))
     s = np.zeros((len(bar_measures), len(bar_measures)))
     for i in range(len(bar_measures)):
@@ -161,12 +161,12 @@ def self_similarity_single_measure(
                 m_j = bar_measures[j][measure].flatten()
             else:
                 m_j = bar_measures[j][measure]
-            
+
             # Append zeros to any vector if shapes do not match
             if isinstance(m_i, np.ndarray) or isinstance(m_j, np.ndarray):
-                 m_i, m_j = _append_zeros_array(m_i, m_j)
+                m_i, m_j = _append_zeros_array(m_i, m_j)
 
-            s[i,j] = spatial.distance.cosine(m_i, m_j)
+            s[i, j] = spatial.distance.cosine(m_i, m_j)
     return s
 
 
@@ -175,7 +175,7 @@ def self_similarity_measures(
     measures: List[str]
 ) -> np.ndarray:
     """Computes the SSM with the selected measure for all the bars.
-    
+
     Parameters
     ----------
 
@@ -185,14 +185,14 @@ def self_similarity_measures(
     measure: str
         The list of measures used to compute the SSM. It also accepts ``all`` as a value if
         we want to compute the SSM with all the available measures.
-    
+
     Returns
     -------
 
     s: np.ndarray [shape=(n_bars, n_bars)]
         The SSM computed from the selected measures.
     """
-    musa_obj = __initialization(file) 
+    musa_obj = __initialization(file)
 
     if isinstance(measures, str) and not measures == "all":
         raise ValueError("For input arg `measures` you must provide a list of valid measures or `all`.")
@@ -201,9 +201,10 @@ def self_similarity_measures(
     elif not isinstance(measures, list) and not all(m in _DEFAULT_MEASURES for m in measures):
         raise ValueError(f"Measures arg must be a list of valid measures {_DEFAULT_MEASURES}.")
 
-    bars = loaders.Musa.group_instrument_bar_notes(musa_obj)
+    musa_obj = __initialization(file)
     bar_measures = []
-    for bar in bars:
+    for b in musa_obj.bars:
+        bar = musa_obj.get_notes_in_bar(b)
         bar_measures.append(get_eval_measures(bar, measures=measures))
     s = np.zeros((len(bar_measures), len(bar_measures)))
     for i in range(len(bar_measures)):
@@ -219,7 +220,7 @@ def self_similarity_measures(
                     m_j = bar_measures[j][measure].flatten()
                 else:
                     m_j = bar_measures[j][measure]
-                
+
                 # Append zeros to any vector if shapes do not match
                 if isinstance(m_i, np.ndarray) or isinstance(m_j, np.ndarray):
                     m_i, m_j = _append_zeros_array(m_i, m_j)
@@ -251,11 +252,11 @@ def plot_ssm(
 
     ssm: np.ndarray [shape=(n_bars, n_bars)]
         The SSM.
-    
+
     segments: bool
         Plot the sections boundaries over the SSM by computing the
         novelty function. Default is False.
-    
+
     threshold: float
         The threshold for peak picking in the novelty curve if ``segments=True``.
         Default is 0.5.
@@ -263,7 +264,7 @@ def plot_ssm(
     window: float
         The window for peak picking in the novelty curve if ``segments=True``.
         Default is 2.
-    
+
     save: Optional[bool]
         True if we want to save the output plot in disk. Defaults to True.
 
@@ -282,7 +283,7 @@ def plot_ssm(
 
     dpi: int
         dpi of the plot. Defaults to ``300``.
-    
+
     Examples
     --------
 
@@ -302,7 +303,7 @@ def plot_ssm(
         plt.savefig(filename + ".png")
     if colorbar:
         plt.colorbar()
-    if segments:    
+    if segments:
         segment_boundaries = get_segment_boundaries(ssm, threshold, window)
         for i in range(len(segment_boundaries)):
             plt.axvline(segment_boundaries[i], color='w', linestyle='--', alpha=.5)
@@ -314,14 +315,14 @@ def plot_ssm(
 def _self_similarity(feature_vector: List[List[Note]]) -> np.ndarray:
     """Converts a feature vector with the highest notes per subdivision and bar
     in a Self-Similarity Matrix with the  cosine distance.
-    
+
     Parameters
     ----------
 
     feature_vector: List[List[Note]]
         A vector with all bars and subdivisions in which each element represents
         the note with the highest pitch.
-    
+
     Returns
     -------
 
@@ -334,7 +335,7 @@ def _self_similarity(feature_vector: List[List[Note]]) -> np.ndarray:
             # Flatten lists to convert them in 1D vectors
             m_i = list(sum(feature_vector[i] ,()))
             m_j = list(sum(feature_vector[j] ,()))
-            s[i,j] = spatial.distance.cosine(m_i, m_j)
+            s[i, j] = spatial.distance.cosine(m_i, m_j)
     return s
 
 
@@ -348,7 +349,7 @@ def binarize_self_similarity_matrix(
             if i == j:
                 bin_s[i, j] = 1
                 continue
-            if ssm[i,j] >= threshold:
+            if ssm[i, j] >= threshold:
                 bin_s[i, j] = 1
             else:
                 bin_s[i, j] == 0
@@ -380,9 +381,9 @@ def feature_vector(bar_highest_subdiv_notes: List[List[Note]]) -> List[List[Note
         for i, note in enumerate(bar):
             if i + 1 >= len(bar):
                 break
-            y = bar[i].pitch - bar[i+1].pitch
+            y = bar[i].pitch - bar[i + 1].pitch
             if bar[i].start_ticks != 0:
-                x = (bar[i+1].end_ticks - bar[i+1].start_ticks) / (bar[i].end_ticks - bar[i].start_ticks)
+                x = (bar[i + 1].end_ticks - bar[i + 1].start_ticks) / (bar[i].end_ticks - bar[i].start_ticks)
             else:
                 x = 0
             bar_m.append((y, x))
@@ -402,7 +403,7 @@ def get_novelty_func(
 
     ssm: np.ndarray [shape=(n_bars, n_bars)]
         The SSM.
-    
+
     is_normalized: bool
         Normalizes the Novelty curve. Defaults is True.
 
@@ -413,10 +414,10 @@ def get_novelty_func(
         The normalized novelty function as a 1D array.
     """
 
-    c = np.linalg.norm(ssm[:,1:] - ssm[:,0:-1], axis=0)
+    c = np.linalg.norm(ssm[:, 1:] - ssm[:, 0:-1], axis=0)
 
     if is_normalized:
-        c_norm = (c - c.min()) / (c.max() - c.min()) #  normalization of c
+        c_norm = (c - c.min()) / (c.max() - c.min())  # normalization of c
         return c_norm
     else:
         return c
@@ -454,28 +455,28 @@ def get_segment_boundaries(
     # where boundaries are (this is simple to compute with the rhythm submodule.)
     novelty = get_novelty_func(ssm=ssm, is_normalized=True)
 
-    #Peaks detection - sliding window
-    lamda = round(window) #window length
+    # Peaks detection - sliding window
+    lamda = round(window)  # window length
     peaks_position = signal.find_peaks(
         novelty,
         height=threshold,
         distance=lamda,
         width=round(threshold)
-    )[0] #array of peaks
+    )[0]  # array of peaks
     peaks_values = signal.find_peaks(
         novelty,
         height=threshold,
         distance=lamda,
         width=round(threshold)
-    )[1]['peak_heights'] #array of peaks
+    )[1]['peak_heights']  #array of peaks
     b = peaks_position
 
-    #Adding elements 1 and N' to the begining and end of the array
+    # Adding elements 1 and N' to the begining and end of the array
     if b[0] != 0:
-        b = np.concatenate([[0], b]) #  b: segment boundaries
+        b = np.concatenate([[0], b])  # b: segment boundaries
     if b[-1] != ssm.shape[0] - 1:
-        b = np.concatenate([b, [ssm.shape[0]-1]])
-    
+        b = np.concatenate([b, [ssm.shape[0] - 1]])
+
     return b
 
 
@@ -491,7 +492,7 @@ def plot_novelty_from_ssm(
 ):
     """
     Plots the novelty curve from a SSM.
-    
+
     Parameters
     ----------
 
@@ -509,7 +510,7 @@ def plot_novelty_from_ssm(
     window: float
         The window for peak picking in the novelty curve if ``segments=True``.
         Default is 2.
-    
+
     save: Optional[bool]
         True if we want to save the output plot in disk. Defaults to True.
 
@@ -522,19 +523,19 @@ def plot_novelty_from_ssm(
     dpi: int
         dpi of the plot. Defaults to ``300``.
     """
-    #Plot novelty function with boundaries
+    # Plot novelty function with boundaries
     plt.figure(figsize=(50, 10), dpi=dpi)
     if title is not None:
         plt.title(title)
     if save:
         plt.savefig(filename + ".png")
     plt.title(title)
-    
+
     novelty = get_novelty_func(ssm)
     frames = range(len(novelty))
-    if segments:    
+    if segments:
         segment_boundaries = get_segment_boundaries(ssm, threshold, window)
         for i in range(len(segment_boundaries)):
-            plt.axvline(segment_boundaries[i], color='r', linestyle='--') 
+            plt.axvline(segment_boundaries[i], color='r', linestyle='--')
     plt.plot(frames, novelty)
     plt.show()
