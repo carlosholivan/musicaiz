@@ -93,8 +93,7 @@ The modules contained in this library are:
 from musicaiz.loaders import Musa
 
     midi = Musa(
-      file="my_midifile.mid",
-      structure="bars"
+      file="my_midifile.mid"
     )
 ````
 
