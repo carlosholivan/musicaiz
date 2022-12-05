@@ -11,7 +11,7 @@ protobuf==4.21.3
 rich==12.6.0
 
 # For models submodule
-networkx==2.8.3
+networkx==2.8.6
 sklearn==0.0
 gradio==3.0.15
 torchsummary==1.5.1

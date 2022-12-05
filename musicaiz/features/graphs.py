@@ -29,7 +29,7 @@ def musa_to_graph(musa_object) -> nx.graph:
     for i, node in enumerate(nodes):
         for j, next_node in enumerate(nodes):
             # if note has already finished it's not in the current subdivision
-            # TODO: Check this conditions
+            # TODO: Check these conditions
             if i >= j:
                 continue
             if node[1]["start"] >= next_node[1]["start"] and next_node[1]["end"] <= node[1]["end"]:
