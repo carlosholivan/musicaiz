@@ -16,6 +16,8 @@ def _assert_tokenize(dataset_path, dataset, args):
             args=args,
             tokenize_split="all"
         )
+        # save configs
+        assert Path(output_path, "configs.json").is_file()
 
         # check that train, validation and test paths exist and contain a txt
         assert Path(output_path, "train", output_file + ".txt").is_file()

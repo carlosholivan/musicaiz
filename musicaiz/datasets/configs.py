@@ -91,3 +91,6 @@ class MusicGenerationDataset(metaclass=ABCMeta):
             tokenize_path(data_val_path, dest_val_path, val_metadata, output_file, args)
         if tokenize_split == "test" or tokenize_split == "all":
             tokenize_path(data_test_path, dest_test_path, test_metadata, output_file, args)
+
+        # save configs json
+        TokenizerArguments.save(args, output_path)

@@ -14,7 +14,6 @@ from musicaiz.rhythm import (
     NoteLengths,
     TimeSignature,
 )
-from musicaiz.utils import sort_notes
 
 
 # time units available to tokenize

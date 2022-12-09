@@ -201,6 +201,8 @@ from musicaiz.tokenizers import MMMTokenizer, MMMTokenizerArguments
       quantize=False,
       tempo=True,
     )
+    # save configs
+    MMMTokenizerArguments.save(args, "./")
     tokenizer = MMMTokenizer(midi, args)
     got = tokenizer.tokenize_file()
 

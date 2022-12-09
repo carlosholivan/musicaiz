@@ -1,11 +1,28 @@
+from __future__ import annotations
 from abc import ABCMeta
-from typing import List, Dict
-from enum import Enum
+from typing import List, Dict, Type, Union
 from pathlib import Path
+from datetime import datetime
+import dataclasses
+import json
 
 
-class TokenizerArguments:
-    pass
+class TokenizerArguments(metaclass=ABCMeta):
+
+    @staticmethod
+    def save(
+        args: Type[TokenizerArguments],
+        out_dir: Union[str, Path],
+        file: str = "configs.json",
+    ):
+        """
+        Saves the configs as a json file.
+        """
+        d = dataclasses.asdict(args)
+        # add datetime to json
+        d["datetime"] = str(datetime.now())
+        with open(Path(out_dir, file), 'w') as fp:
+            json.dump(d, fp)
 
 
 class EncodeBase(metaclass=ABCMeta):
