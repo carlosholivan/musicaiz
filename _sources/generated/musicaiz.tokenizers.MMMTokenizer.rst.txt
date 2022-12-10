@@ -15,14 +15,13 @@
    
       ~MMMTokenizer.__init__
       ~MMMTokenizer.add_token_to_vocabulary
+      ~MMMTokenizer.get_pieces_tokens
       ~MMMTokenizer.get_tokens_analytics
       ~MMMTokenizer.get_vocabulary
       ~MMMTokenizer.split_tokens_by_bar
       ~MMMTokenizer.split_tokens_by_track
       ~MMMTokenizer.to_txt
       ~MMMTokenizer.tokenize_file
-      ~MMMTokenizer.tokenize_musa_obj
-      ~MMMTokenizer.tokenize_path
       ~MMMTokenizer.tokenize_track_bars
       ~MMMTokenizer.tokenize_tracks
       ~MMMTokenizer.tokens_to_musa

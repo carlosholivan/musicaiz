@@ -15,7 +15,7 @@
    
       ~Pianoroll.__init__
       ~Pianoroll.plot_grid
-      ~Pianoroll.plot_instrument
+      ~Pianoroll.plot_instruments
    
    
 

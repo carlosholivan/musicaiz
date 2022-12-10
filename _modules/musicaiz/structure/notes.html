@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>musicaiz.structure.notes &mdash; Musicaiz 0.0.2 documentation</title>
+  <title>musicaiz.structure.notes &mdash; Musicaiz 0.1.0 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/plot_directive.css" type="text/css" />
@@ -40,7 +40,7 @@
             <img src="../../../_static/logo_square_dark.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.0.2
+                0.1.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -72,7 +72,6 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/2-write_midi.html">Writing a MIDI file from scratch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../notebooks/3-plot.html">Plotting</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">References:</span></p>
@@ -109,7 +108,7 @@
   <h1>Source code for musicaiz.structure.notes</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 <span class="kn">import</span> <span class="nn">pretty_midi</span> <span class="k">as</span> <span class="nn">pm</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Dict</span>
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
 
@@ -118,7 +117,8 @@
     <span class="n">TimingConsts</span><span class="p">,</span>
     <span class="n">ms_per_tick</span><span class="p">,</span>
     <span class="n">get_symbolic_duration</span><span class="p">,</span>
-    <span class="n">SymbolicNoteLengths</span>
+    <span class="n">SymbolicNoteLengths</span><span class="p">,</span>
+    <span class="n">Timing</span>
 <span class="p">)</span>
 
 
@@ -325,7 +325,7 @@
             <span class="k">if</span> <span class="bp">cls</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">note</span><span class="p">)]</span><span class="o">.</span><span class="n">natural_scale_index</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">cls</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">note</span><span class="p">)])</span>
         <span class="k">return</span> <span class="n">notes</span>
-    
+
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">get_all_chromatic_scale_notes</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">NoteClassBase</span><span class="p">]:</span>
         <span class="sd">&quot;&quot;&quot;Returns all the notes in chromatic scale (flats AND sharps).&quot;&quot;&quot;</span>
@@ -502,27 +502,17 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">ms_tick</span> <span class="o">=</span> <span class="n">ms_per_tick</span><span class="p">(</span><span class="n">bpm</span><span class="p">,</span> <span class="n">resolution</span><span class="p">)</span>
 
-        <span class="c1"># inital checks</span>
-        <span class="k">if</span> <span class="n">start</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">end</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Start and end must be positive.&quot;</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">start</span> <span class="o">&gt;=</span> <span class="n">end</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Start time must be lower than the end time.&quot;</span><span class="p">)</span>
+        <span class="n">timings</span> <span class="o">=</span> <span class="n">Timing</span><span class="o">.</span><span class="n">_initialize_timing_attributes</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ms_tick</span><span class="p">)</span>
 
-        <span class="c1"># ticks must be int, secs must be float</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">end</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">start_ticks</span> <span class="o">=</span> <span class="n">start</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">end_ticks</span> <span class="o">=</span> <span class="n">end</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">start_sec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_ticks</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">ms_tick</span> <span class="o">/</span> <span class="mi">1000</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">end_sec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">end_ticks</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">ms_tick</span> <span class="o">/</span> <span class="mi">1000</span>
-        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">end</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">start_sec</span> <span class="o">=</span> <span class="n">start</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">end_sec</span> <span class="o">=</span> <span class="n">end</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">start_ticks</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">start_sec</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ms_tick</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">)))</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">end_ticks</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">end_sec</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ms_tick</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">)))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start_ticks</span> <span class="o">=</span> <span class="n">timings</span><span class="p">[</span><span class="s2">&quot;start_ticks&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">end_ticks</span> <span class="o">=</span> <span class="n">timings</span><span class="p">[</span><span class="s2">&quot;end_ticks&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start_sec</span> <span class="o">=</span> <span class="n">timings</span><span class="p">[</span><span class="s2">&quot;start_sec&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">end_sec</span> <span class="o">=</span> <span class="n">timings</span><span class="p">[</span><span class="s2">&quot;end_sec&quot;</span><span class="p">]</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">symbolic</span> <span class="o">=</span> <span class="n">get_symbolic_duration</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">end_ticks</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_ticks</span><span class="p">,</span>
-            <span class="kc">True</span>
+            <span class="kc">True</span><span class="p">,</span>
+            <span class="n">resolution</span>
         <span class="p">)</span></div>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -586,7 +576,11 @@
         <span class="s2">&quot;velocity&quot;</span><span class="p">,</span>
         <span class="s2">&quot;bpm&quot;</span><span class="p">,</span>
         <span class="s2">&quot;resolution&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;ligated&quot;</span>
+        <span class="s2">&quot;ligated&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;instrument_prog&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;bar_idx&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;instrument_idx&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;is_drum&quot;</span>
     <span class="p">]</span>
 
 <div class="viewcode-block" id="Note.__init__"><a class="viewcode-back" href="../../../generated/musicaiz.structure.Note.html#musicaiz.structure.Note.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
@@ -595,17 +589,36 @@
         <span class="n">start</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
         <span class="n">end</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
         <span class="n">velocity</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">instrument_prog</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">instrument_idx</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">bar_idx</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">beat_idx</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">subbeat_idx</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">ligated</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
         <span class="n">bpm</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">TimingConsts</span><span class="o">.</span><span class="n">DEFAULT_BPM</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
         <span class="n">resolution</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">TimingConsts</span><span class="o">.</span><span class="n">RESOLUTION</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+        <span class="n">is_drum</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="p">):</span>
 
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">pitch</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">bpm</span><span class="p">,</span> <span class="n">resolution</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">velocity</span> <span class="o">=</span> <span class="n">velocity</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">instrument_prog</span> <span class="o">=</span> <span class="n">instrument_prog</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bar_idx</span> <span class="o">=</span> <span class="n">bar_idx</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">beat_idx</span> <span class="o">=</span> <span class="n">beat_idx</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">subbeat_idx</span> <span class="o">=</span> <span class="n">subbeat_idx</span>
+
+        <span class="c1"># We can have 2 instruments (or tracks) with the same program number,</span>
+        <span class="c1"># so this will store the index of the instrument to distinguish equal</span>
+        <span class="c1"># program number instruments in MIDI files</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">instrument_idx</span> <span class="o">=</span> <span class="n">instrument_idx</span>
 
         <span class="c1"># if a note belongs to 2 bars and we split the tracks by bars</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">ligated</span> <span class="o">=</span> <span class="n">ligated</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ligated</span> <span class="o">=</span> <span class="n">ligated</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">resolution</span> <span class="o">=</span> <span class="n">resolution</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bpm</span> <span class="o">=</span> <span class="n">bpm</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_drum</span> <span class="o">=</span> <span class="n">is_drum</span></div>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="s2">&quot;Note(pitch=</span><span class="si">{}</span><span class="s2">, &quot;</span> \
@@ -616,7 +629,11 @@
                <span class="s2">&quot;end_ticks=</span><span class="si">{}</span><span class="s2">, &quot;</span> \
                <span class="s2">&quot;symbolic=</span><span class="si">{}</span><span class="s2">, &quot;</span> \
                <span class="s2">&quot;velocity=</span><span class="si">{}</span><span class="s2">, &quot;</span> \
-               <span class="s2">&quot;ligated=</span><span class="si">{}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+               <span class="s2">&quot;ligated=</span><span class="si">{}</span><span class="s2">, &quot;</span> \
+               <span class="s2">&quot;instrument_prog=</span><span class="si">{}</span><span class="s2">, &quot;</span> \
+               <span class="s2">&quot;bar_idx=</span><span class="si">{}</span><span class="s2">, &quot;</span> \
+               <span class="s2">&quot;beat_idx=</span><span class="si">{}</span><span class="s2">, &quot;</span> \
+               <span class="s2">&quot;subbeat_idx=</span><span class="si">{}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                    <span class="bp">self</span><span class="o">.</span><span class="n">pitch</span><span class="p">,</span>
                    <span class="bp">self</span><span class="o">.</span><span class="n">note_name</span><span class="p">,</span>
                    <span class="bp">self</span><span class="o">.</span><span class="n">start_sec</span><span class="p">,</span>
@@ -625,7 +642,11 @@
                    <span class="bp">self</span><span class="o">.</span><span class="n">end_ticks</span><span class="p">,</span>
                    <span class="n">SymbolicNoteLengths</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">symbolic</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
                    <span class="bp">self</span><span class="o">.</span><span class="n">velocity</span><span class="p">,</span>
-                   <span class="bp">self</span><span class="o">.</span><span class="n">ligated</span>
+                   <span class="bp">self</span><span class="o">.</span><span class="n">ligated</span><span class="p">,</span>
+                   <span class="bp">self</span><span class="o">.</span><span class="n">instrument_prog</span><span class="p">,</span>
+                   <span class="bp">self</span><span class="o">.</span><span class="n">bar_idx</span><span class="p">,</span>
+                   <span class="bp">self</span><span class="o">.</span><span class="n">beat_idx</span><span class="p">,</span>
+                   <span class="bp">self</span><span class="o">.</span><span class="n">subbeat_idx</span><span class="p">,</span>
                 <span class="p">)</span></div>
 </pre></div>
 

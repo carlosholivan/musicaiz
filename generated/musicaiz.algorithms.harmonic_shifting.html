@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>musicaiz.algorithms.harmonic_shifting &mdash; Musicaiz 0.0.2 documentation</title>
+  <title>musicaiz.algorithms.harmonic_shifting &mdash; Musicaiz 0.1.0 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
@@ -30,7 +30,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Tokenizers" href="../tokenizers.html" />
+    <link rel="next" title="musicaiz.algorithms.KeyDetectionAlgorithms" href="musicaiz.algorithms.KeyDetectionAlgorithms.html" />
     <link rel="prev" title="Algorithms" href="../algorithms.html" /> 
 </head>
 
@@ -43,7 +43,7 @@
             <img src="../_static/logo_square_dark.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.0.2
+                0.1.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -70,6 +70,7 @@
 <li class="toctree-l3 current"><a class="current reference internal" href="#">musicaiz.algorithms.harmonic_shifting</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../algorithms.html#key-profiles">Key-Profiles</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../tokenizers.html">Tokenizers</a></li>
@@ -81,7 +82,6 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../notebooks/2-write_midi.html">Writing a MIDI file from scratch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notebooks/3-plot.html">Plotting</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">References:</span></p>
@@ -144,7 +144,7 @@
 <h1>musicaiz.algorithms.harmonic_shifting<a class="headerlink" href="#musicaiz-algorithms-harmonic-shifting" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="musicaiz.algorithms.harmonic_shifting">
-<span class="sig-prename descclassname"><span class="pre">musicaiz.algorithms.</span></span><span class="sig-name descname"><span class="pre">harmonic_shifting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">origin_notes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="musicaiz.structure.Note.html#musicaiz.structure.Note" title="musicaiz.structure.notes.Note"><span class="pre">musicaiz.structure.notes.Note</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">origin_progression</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">origin_tonality</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">origin_scale</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_progression</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_tonality</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_scale</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="musicaiz.structure.Note.html#musicaiz.structure.Note" title="musicaiz.structure.notes.Note"><span class="pre">musicaiz.structure.notes.Note</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/musicaiz/algorithms/harmonic_shift.html#harmonic_shifting"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#musicaiz.algorithms.harmonic_shifting" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">musicaiz.algorithms.</span></span><span class="sig-name descname"><span class="pre">harmonic_shifting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">origin_notes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="musicaiz.structure.Note.html#musicaiz.structure.Note" title="musicaiz.structure.notes.Note"><span class="pre">musicaiz.structure.notes.Note</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">origin_progression</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">origin_tonality</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">origin_scale</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_progression</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_tonality</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_scale</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="musicaiz.structure.Note.html#musicaiz.structure.Note" title="musicaiz.structure.notes.Note"><span class="pre">musicaiz.structure.notes.Note</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/musicaiz/algorithms/harmonic_shift.html#harmonic_shifting"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#musicaiz.algorithms.harmonic_shifting" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function maps the pitches of a midi to a new scale and chord progression.
 To do that, given the progression of the input midi and the target scale and
 progression, we analyze the note position in the chord built from a degree and
@@ -206,7 +206,7 @@ from a degree to another inside the bar.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../algorithms.html" class="btn btn-neutral float-left" title="Algorithms" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../tokenizers.html" class="btn btn-neutral float-right" title="Tokenizers" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="musicaiz.algorithms.KeyDetectionAlgorithms.html" class="btn btn-neutral float-right" title="musicaiz.algorithms.KeyDetectionAlgorithms" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

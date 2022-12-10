@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Algorithms &mdash; Musicaiz 0.0.2 documentation</title>
+  <title>Algorithms &mdash; Musicaiz 0.1.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/plot_directive.css" type="text/css" />
@@ -31,7 +31,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="musicaiz.algorithms.harmonic_shifting" href="generated/musicaiz.algorithms.harmonic_shifting.html" />
-    <link rel="prev" title="musicaiz.features.plot_novelty_from_ssm" href="generated/musicaiz.features.plot_novelty_from_ssm.html" /> 
+    <link rel="prev" title="musicaiz.features.get_structure_boundaries_beats" href="generated/musicaiz.features.get_structure_boundaries_beats.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -43,7 +43,7 @@
             <img src="_static/logo_square_dark.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.0.2
+                0.1.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -70,6 +70,14 @@
 <li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.algorithms.harmonic_shifting.html">musicaiz.algorithms.harmonic_shifting</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#key-profiles">Key-Profiles</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.algorithms.KeyDetectionAlgorithms.html">musicaiz.algorithms.KeyDetectionAlgorithms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.algorithms.KrumhanslKessler.html">musicaiz.algorithms.KrumhanslKessler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.algorithms.Temperley.html">musicaiz.algorithms.Temperley</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.algorithms.AlbrechtShanahan.html">musicaiz.algorithms.AlbrechtShanahan</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.algorithms.key_detection.html">musicaiz.algorithms.key_detection</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="tokenizers.html">Tokenizers</a></li>
@@ -81,7 +89,6 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/2-write_midi.html">Writing a MIDI file from scratch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/3-plot.html">Plotting</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">References:</span></p>
@@ -156,13 +163,62 @@
 </tbody>
 </table>
 </section>
+<section id="key-profiles">
+<h2>Key-Profiles<a class="headerlink" href="#key-profiles" title="Permalink to this headline">¶</a></h2>
+<p>State of the Art algorithms for key finding in symbolic music.
+The key-profiles weights in the library are the following:</p>
+<ul class="simple">
+<li><p>KRUMHANSL_KESSLER</p></li>
+</ul>
+<p>[1] Krumhansl, C. L., &amp; Kessler, E. J. (1982).
+Tracing the dynamic changes in perceived tonal organization in a spatial representation of musical keys.
+Psychological review, 89(4), 334.</p>
+<ul class="simple">
+<li><p>TEMPERLEY</p></li>
+</ul>
+<p>[2] Temperley, D. (1999).
+What’s key for key? The Krumhansl-Schmuckler key-finding algorithm reconsidered.
+Music Perception, 17(1), 65-100.</p>
+<ul class="simple">
+<li><p>ALBRETCH_SHANAHAN</p></li>
+</ul>
+<p>[3] Albrecht, J., &amp; Shanahan, D. (2013).
+The use of large corpora to train a new type of key-finding algorithm: An improved treatment of the minor mode.
+Music Perception: An Interdisciplinary Journal, 31(1), 59-67.</p>
+<ul class="simple">
+<li><p>SIGNATURE_FIFTHS</p></li>
+</ul>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/musicaiz.algorithms.KeyDetectionAlgorithms.html#musicaiz.algorithms.KeyDetectionAlgorithms" title="musicaiz.algorithms.KeyDetectionAlgorithms"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KeyDetectionAlgorithms</span></code></a>(value)</p></td>
+<td><p>An enumeration.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/musicaiz.algorithms.KrumhanslKessler.html#musicaiz.algorithms.KrumhanslKessler" title="musicaiz.algorithms.KrumhanslKessler"><code class="xref py py-obj docutils literal notranslate"><span class="pre">KrumhanslKessler</span></code></a>()</p></td>
+<td><p>Krumhansl-Schmuckler/Kessler weights for Krumhansl-Schmuckler key-profiles algorithm.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/musicaiz.algorithms.Temperley.html#musicaiz.algorithms.Temperley" title="musicaiz.algorithms.Temperley"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Temperley</span></code></a>()</p></td>
+<td><p>Temperley/Kostka/Payne weights for key-profiles algorithm.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/musicaiz.algorithms.AlbrechtShanahan.html#musicaiz.algorithms.AlbrechtShanahan" title="musicaiz.algorithms.AlbrechtShanahan"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AlbrechtShanahan</span></code></a>()</p></td>
+<td><p>Albrecht/Shanahan weights for key-profiles algorithm.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/musicaiz.algorithms.key_detection.html#musicaiz.algorithms.key_detection" title="musicaiz.algorithms.key_detection"><code class="xref py py-obj docutils literal notranslate"><span class="pre">key_detection</span></code></a>(notes[, method])</p></td>
+<td><p>Algorithm description:</p></td>
+</tr>
+</tbody>
+</table>
+</section>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="generated/musicaiz.features.plot_novelty_from_ssm.html" class="btn btn-neutral float-left" title="musicaiz.features.plot_novelty_from_ssm" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="generated/musicaiz.features.get_structure_boundaries_beats.html" class="btn btn-neutral float-left" title="musicaiz.features.get_structure_boundaries_beats" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="generated/musicaiz.algorithms.harmonic_shifting.html" class="btn btn-neutral float-right" title="musicaiz.algorithms.harmonic_shifting" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

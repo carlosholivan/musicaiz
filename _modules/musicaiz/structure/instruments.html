@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>musicaiz.structure.instruments &mdash; Musicaiz 0.0.2 documentation</title>
+  <title>musicaiz.structure.instruments &mdash; Musicaiz 0.1.0 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/plot_directive.css" type="text/css" />
@@ -40,7 +40,7 @@
             <img src="../../../_static/logo_square_dark.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.0.2
+                0.1.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -72,7 +72,6 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/2-write_midi.html">Writing a MIDI file from scratch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../notebooks/3-plot.html">Plotting</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">References:</span></p>
@@ -120,6 +119,7 @@
     <span class="n">_HAS_FLUIDSYNTH</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
     <span class="n">_HAS_FLUIDSYNTH</span> <span class="o">=</span> <span class="kc">False</span>
+
 
 <div class="viewcode-block" id="InstrumentMidiPrograms"><a class="viewcode-back" href="../../../generated/musicaiz.structure.InstrumentMidiPrograms.html#musicaiz.structure.InstrumentMidiPrograms">[docs]</a><span class="k">class</span> <span class="nc">InstrumentMidiPrograms</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
     <span class="c1"># Value 1: List of Midi instrument program number</span>
@@ -551,7 +551,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">program</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">program</span> <span class="o">=</span> <span class="n">program</span>
-                <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
                     <span class="n">name_obj</span> <span class="o">=</span> <span class="n">InstrumentMidiPrograms</span><span class="o">.</span><span class="n">get_name_from_program</span><span class="p">(</span><span class="n">program</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="k">if</span> <span class="n">general_midi</span><span class="p">:</span>
@@ -588,119 +588,6 @@
 
         <span class="c1"># List of bars in the instrument</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">bars</span> <span class="o">=</span> <span class="p">[]</span></div>
-
-    <span class="c1"># TODO</span>
-    <span class="k">def</span> <span class="nf">concatenate_instruments</span><span class="p">(</span>
-        <span class="n">instrument_1</span><span class="p">:</span> <span class="n">Instrument</span><span class="p">,</span>
-        <span class="n">instrument_2</span><span class="p">:</span> <span class="n">Instrument</span><span class="p">,</span>
-        <span class="n">new_program</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">new_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Creates a new instrument by concatenating the notes</span>
-<span class="sd">        of 2 instruments and setting a new name and program.</span>
-<span class="sd">        If no name nor program is provided, they will be set</span>
-<span class="sd">        as the `instrument_1`.&quot;&quot;&quot;</span>
-        <span class="k">pass</span>
-
-    <span class="k">def</span> <span class="nf">fluidsynth</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">fs</span><span class="o">=</span><span class="mi">44100</span><span class="p">,</span>
-        <span class="n">sf2_path</span><span class="o">=</span><span class="kc">None</span>
-    <span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Synthesize using fluidsynth.</span>
-<span class="sd">        Parameters</span>
-<span class="sd">        ----------</span>
-<span class="sd">        fs : int</span>
-<span class="sd">            Sampling rate to synthesize.</span>
-<span class="sd">        sf2_path : str</span>
-<span class="sd">            Path to a .sf2 file.</span>
-<span class="sd">            Default ``None``, which uses the TimGM6mb.sf2 file included with</span>
-<span class="sd">            ``pretty_midi``.</span>
-<span class="sd">        Returns</span>
-<span class="sd">        -------</span>
-<span class="sd">        synthesized : np.ndarray</span>
-<span class="sd">            Waveform of the MIDI data, synthesized at ``fs``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># If sf2_path is None, use the included TimGM6mb.sf2 path</span>
-        <span class="k">if</span> <span class="n">sf2_path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No sf2_path provided.&quot;</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">_HAS_FLUIDSYNTH</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s2">&quot;fluidsynth() was called but pyfluidsynth &quot;</span>
-                              <span class="s2">&quot;is not installed.&quot;</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">Path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">sf2_path</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No soundfont file found at the supplied path &quot;</span>
-                             <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sf2_path</span><span class="p">))</span>
-
-        <span class="c1"># If the instrument has no notes, return an empty array</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
-
-        <span class="c1"># Create fluidsynth instance</span>
-        <span class="n">fl</span> <span class="o">=</span> <span class="n">fluidsynth</span><span class="o">.</span><span class="n">Synth</span><span class="p">(</span><span class="n">samplerate</span><span class="o">=</span><span class="n">fs</span><span class="p">)</span>
-        <span class="c1"># Load in the soundfont</span>
-        <span class="n">sfid</span> <span class="o">=</span> <span class="n">fl</span><span class="o">.</span><span class="n">sfload</span><span class="p">(</span><span class="n">sf2_path</span><span class="p">)</span>
-        <span class="c1"># If this is a drum instrument, use channel 9 and bank 128</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_drum</span><span class="p">:</span>
-            <span class="n">channel</span> <span class="o">=</span> <span class="mi">9</span>
-            <span class="c1"># Try to use the supplied program number</span>
-            <span class="n">res</span> <span class="o">=</span> <span class="n">fl</span><span class="o">.</span><span class="n">program_select</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">sfid</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">program</span><span class="p">)</span>
-            <span class="c1"># If the result is -1, there&#39;s no preset with this program number</span>
-            <span class="k">if</span> <span class="n">res</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-                <span class="c1"># So use preset 0</span>
-                <span class="n">fl</span><span class="o">.</span><span class="n">program_select</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">sfid</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="c1"># Otherwise just use channel 0</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">channel</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="n">fl</span><span class="o">.</span><span class="n">program_select</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">sfid</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">program</span><span class="p">)</span>
-        <span class="c1"># Collect all notes in one list</span>
-        <span class="n">event_list</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">:</span>
-            <span class="n">event_list</span> <span class="o">+=</span> <span class="p">[[</span><span class="n">note</span><span class="o">.</span><span class="n">start</span><span class="p">,</span> <span class="s1">&#39;note on&#39;</span><span class="p">,</span> <span class="n">note</span><span class="o">.</span><span class="n">pitch</span><span class="p">,</span> <span class="n">note</span><span class="o">.</span><span class="n">velocity</span><span class="p">]]</span>
-            <span class="n">event_list</span> <span class="o">+=</span> <span class="p">[[</span><span class="n">note</span><span class="o">.</span><span class="n">end</span><span class="p">,</span> <span class="s1">&#39;note off&#39;</span><span class="p">,</span> <span class="n">note</span><span class="o">.</span><span class="n">pitch</span><span class="p">]]</span>
-        <span class="k">for</span> <span class="n">bend</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">pitch_bends</span><span class="p">:</span>
-            <span class="n">event_list</span> <span class="o">+=</span> <span class="p">[[</span><span class="n">bend</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="s1">&#39;pitch bend&#39;</span><span class="p">,</span> <span class="n">bend</span><span class="o">.</span><span class="n">pitch</span><span class="p">]]</span>
-        <span class="k">for</span> <span class="n">control_change</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">control_changes</span><span class="p">:</span>
-            <span class="n">event_list</span> <span class="o">+=</span> <span class="p">[[</span><span class="n">control_change</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="s1">&#39;control change&#39;</span><span class="p">,</span>
-                            <span class="n">control_change</span><span class="o">.</span><span class="n">number</span><span class="p">,</span> <span class="n">control_change</span><span class="o">.</span><span class="n">value</span><span class="p">]]</span>
-        <span class="c1"># Sort the event list by time, and secondarily by whether the event</span>
-        <span class="c1"># is a note off</span>
-        <span class="n">event_list</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;note off&#39;</span><span class="p">))</span>
-        <span class="c1"># Add some silence at the beginning according to the time of the first</span>
-        <span class="c1"># event</span>
-        <span class="n">current_time</span> <span class="o">=</span> <span class="n">event_list</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
-        <span class="c1"># Convert absolute seconds to relative samples</span>
-        <span class="n">next_event_times</span> <span class="o">=</span> <span class="p">[</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">event_list</span><span class="p">[</span><span class="mi">1</span><span class="p">:]]</span>
-        <span class="k">for</span> <span class="n">event</span><span class="p">,</span> <span class="n">end</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">event_list</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">next_event_times</span><span class="p">):</span>
-            <span class="n">event</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">end</span> <span class="o">-</span> <span class="n">event</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="c1"># Include 1 second of silence at the end</span>
-        <span class="n">event_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.</span>
-        <span class="c1"># Pre-allocate output array</span>
-        <span class="n">total_time</span> <span class="o">=</span> <span class="n">current_time</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">event_list</span><span class="p">])</span>
-        <span class="n">synthesized</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">fs</span><span class="o">*</span><span class="n">total_time</span><span class="p">)))</span>
-        <span class="c1"># Iterate over all events</span>
-        <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">event_list</span><span class="p">:</span>
-            <span class="c1"># Process events based on type</span>
-            <span class="k">if</span> <span class="n">event</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;note on&#39;</span><span class="p">:</span>
-                <span class="n">fl</span><span class="o">.</span><span class="n">noteon</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">event</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">event</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
-            <span class="k">elif</span> <span class="n">event</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;note off&#39;</span><span class="p">:</span>
-                <span class="n">fl</span><span class="o">.</span><span class="n">noteoff</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">event</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
-            <span class="k">elif</span> <span class="n">event</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;pitch bend&#39;</span><span class="p">:</span>
-                <span class="n">fl</span><span class="o">.</span><span class="n">pitch_bend</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">event</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
-            <span class="k">elif</span> <span class="n">event</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;control change&#39;</span><span class="p">:</span>
-                <span class="n">fl</span><span class="o">.</span><span class="n">cc</span><span class="p">(</span><span class="n">channel</span><span class="p">,</span> <span class="n">event</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">event</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
-            <span class="c1"># Add in these samples</span>
-            <span class="n">current_sample</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">fs</span><span class="o">*</span><span class="n">current_time</span><span class="p">)</span>
-            <span class="n">end</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">fs</span><span class="o">*</span><span class="p">(</span><span class="n">current_time</span> <span class="o">+</span> <span class="n">event</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
-            <span class="n">samples</span> <span class="o">=</span> <span class="n">fl</span><span class="o">.</span><span class="n">get_samples</span><span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">current_sample</span><span class="p">)[::</span><span class="mi">2</span><span class="p">]</span>
-            <span class="n">synthesized</span><span class="p">[</span><span class="n">current_sample</span><span class="p">:</span><span class="n">end</span><span class="p">]</span> <span class="o">+=</span> <span class="n">samples</span>
-            <span class="c1"># Increment the current sample</span>
-            <span class="n">current_time</span> <span class="o">+=</span> <span class="n">event</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="c1"># Close fluidsynth</span>
-        <span class="n">fl</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
-
-        <span class="k">return</span> <span class="n">synthesized</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">family</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>

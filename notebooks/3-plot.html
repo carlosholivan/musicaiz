@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Plotting &mdash; Musicaiz 0.0.2 documentation</title>
+  <title>Plotting &mdash; Musicaiz 0.1.0 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
@@ -33,7 +33,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Implementation Details" href="../implementations.html" />
-    <link rel="prev" title="Writing a MIDI file from scratch" href="2-write_midi.html" /> 
+    <link rel="prev" title="musicaiz.models.transformer_composers.sample_sequence" href="../generated/generated/musicaiz.models.transformer_composers.sample_sequence.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -45,7 +45,7 @@
             <img src="../_static/logo_square_dark.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.0.2
+                0.1.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -77,7 +77,6 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="2-write_midi.html">Writing a MIDI file from scratch</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Plotting</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">References:</span></p>
@@ -384,7 +383,7 @@ div.rendered_html tbody tr:hover {
 <section id="Plotting">
 <h1>Plotting<a class="headerlink" href="#Plotting" title="Permalink to this headline">¶</a></h1>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
@@ -400,10 +399,7 @@ div.rendered_html tbody tr:hover {
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">file</span> <span class="o">=</span> <span class="s2">&quot;H:</span><span class="se">\\</span><span class="s2">INVESTIGACION</span><span class="se">\\</span><span class="s2">Datasets</span><span class="se">\\</span><span class="s2">JSB Chorales</span><span class="se">\\</span><span class="s2">train</span><span class="se">\\</span><span class="s2">2.mid&quot;</span>
 <span class="n">midi</span> <span class="o">=</span> <span class="n">loaders</span><span class="o">.</span><span class="n">Musa</span><span class="p">(</span>
     <span class="n">file</span><span class="p">,</span>
-    <span class="n">structure</span><span class="o">=</span><span class="s2">&quot;bars&quot;</span><span class="p">,</span>
-    <span class="n">absolute_timing</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="n">quantize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">quantize_note</span><span class="o">=</span><span class="s2">&quot;sixteenth&quot;</span><span class="p">,</span>
+    <span class="n">subdivision_note</span><span class="o">=</span><span class="s2">&quot;sixteenth&quot;</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -412,11 +408,12 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span> <span class="o">=</span> <span class="n">plotters</span><span class="o">.</span><span class="n">Pianoroll</span><span class="p">()</span>
-<span class="n">plot</span><span class="o">.</span><span class="n">plot_instrument</span><span class="p">(</span>
-    <span class="n">midi</span><span class="o">.</span><span class="n">instruments</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">notes</span><span class="p">,</span>
-    <span class="mi">8</span><span class="p">,</span>
-    <span class="s2">&quot;eight&quot;</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span> <span class="o">=</span> <span class="n">plotters</span><span class="o">.</span><span class="n">Pianoroll</span><span class="p">(</span><span class="n">midi</span><span class="p">)</span>
+<span class="n">plot</span><span class="o">.</span><span class="n">plot_instruments</span><span class="p">(</span>
+    <span class="n">program</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">bar_start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">bar_end</span><span class="o">=</span><span class="n">midi</span><span class="o">.</span><span class="n">total_bars</span><span class="p">,</span>
+    <span class="n">show</span><span class="o">=</span><span class="kc">True</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -428,51 +425,13 @@ div.rendered_html tbody tr:hover {
 <img alt="../_images/notebooks_3-plot_3_0.png" src="../_images/notebooks_3-plot_3_0.png" />
 </div>
 </div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">file</span> <span class="o">=</span> <span class="s2">&quot;../JSB Chorales/train/2.mid&quot;</span>
-<span class="n">midi</span> <span class="o">=</span> <span class="n">loaders</span><span class="o">.</span><span class="n">Musa</span><span class="p">(</span>
-    <span class="n">file</span><span class="p">,</span>
-    <span class="n">structure</span><span class="o">=</span><span class="s2">&quot;bars&quot;</span><span class="p">,</span>
-    <span class="n">absolute_timing</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-    <span class="n">quantize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">quantize_note</span><span class="o">=</span><span class="s2">&quot;sixteenth&quot;</span><span class="p">,</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span> <span class="o">=</span> <span class="n">plotters</span><span class="o">.</span><span class="n">PianorollHTML</span><span class="p">()</span>
-<span class="n">plot</span><span class="o">.</span><span class="n">plot_instrument</span><span class="p">(</span>
-    <span class="n">midi</span><span class="o">.</span><span class="n">instruments</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-    <span class="n">bar_start</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
-    <span class="n">bar_end</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span>
-    <span class="n">subdivision</span><span class="o">=</span><span class="s2">&quot;eight&quot;</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="admonition warning">
-<p>Data type cannot be displayed: application/vnd.plotly.v1+json</p>
-</div>
-</div>
-</div>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="2-write_midi.html" class="btn btn-neutral float-left" title="Writing a MIDI file from scratch" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../generated/generated/musicaiz.models.transformer_composers.sample_sequence.html" class="btn btn-neutral float-left" title="musicaiz.models.transformer_composers.sample_sequence" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="../implementations.html" class="btn btn-neutral float-right" title="Implementation Details" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

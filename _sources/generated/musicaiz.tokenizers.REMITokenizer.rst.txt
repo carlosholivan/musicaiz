@@ -1,0 +1,31 @@
+﻿musicaiz.tokenizers.REMITokenizer
+=================================
+
+.. currentmodule:: musicaiz.tokenizers
+
+.. autoclass:: REMITokenizer
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~REMITokenizer.__init__
+      ~REMITokenizer.add_token_to_vocabulary
+      ~REMITokenizer.get_tokens_analytics
+      ~REMITokenizer.get_vocabulary
+      ~REMITokenizer.split_tokens_by_bar
+      ~REMITokenizer.split_tokens_by_subbeat
+      ~REMITokenizer.to_txt
+      ~REMITokenizer.tokenize_bars
+      ~REMITokenizer.tokenize_file
+      ~REMITokenizer.tokens_to_musa
+   
+   
+
+   
+   
+   

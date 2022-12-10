@@ -1,0 +1,33 @@
+﻿musicaiz.tokenizers.REMITokenizerArguments
+==========================================
+
+.. currentmodule:: musicaiz.tokenizers
+
+.. autoclass:: REMITokenizerArguments
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~REMITokenizerArguments.__init__
+      ~REMITokenizerArguments.save
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~REMITokenizerArguments.num_programs
+      ~REMITokenizerArguments.prev_tokens
+      ~REMITokenizerArguments.quantize
+      ~REMITokenizerArguments.sub_beat
+      ~REMITokenizerArguments.velocity
+   
+   

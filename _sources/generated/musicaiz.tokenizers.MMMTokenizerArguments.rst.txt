@@ -1,0 +1,40 @@
+﻿musicaiz.tokenizers.MMMTokenizerArguments
+=========================================
+
+.. currentmodule:: musicaiz.tokenizers
+
+.. autoclass:: MMMTokenizerArguments
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~MMMTokenizerArguments.__init__
+      ~MMMTokenizerArguments.save
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~MMMTokenizerArguments.hop_length
+      ~MMMTokenizerArguments.num_programs
+      ~MMMTokenizerArguments.prev_tokens
+      ~MMMTokenizerArguments.quantize
+      ~MMMTokenizerArguments.shuffle_tracks
+      ~MMMTokenizerArguments.tempo
+      ~MMMTokenizerArguments.time_sig
+      ~MMMTokenizerArguments.time_unit
+      ~MMMTokenizerArguments.track_density
+      ~MMMTokenizerArguments.velocity
+      ~MMMTokenizerArguments.window_size
+      ~MMMTokenizerArguments.windowing
+   
+   

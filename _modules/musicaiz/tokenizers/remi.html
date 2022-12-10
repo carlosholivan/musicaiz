@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>musicaiz.tokenizers.remi &mdash; Musicaiz 0.1.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/plot_directive.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery-binder.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery-dataframe.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery-rendered-html.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/design-tabs.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #222222ff" >
+            <a href="../../../index.html">
+            <img src="../../../_static/logo_square_dark.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Musicaiz Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../loaders.html">Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../structure.html">Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../harmony.html">Harmony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rhythm.html">Rhythm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../algorithms.html">Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tokenizers.html">Tokenizers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../evaluation.html">Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../plotters.html">Plotters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../converters.html">Converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../datasets.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../models.html">Models</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/3-plot.html">Plotting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">References:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../implementations.html">Implementation Details</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../genindex.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #222222ff" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Musicaiz</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>musicaiz.tokenizers.remi</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for musicaiz.tokenizers.remi</h1><div class="highlight"><pre>
+<span></span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">TextIO</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+
+
+<span class="kn">from</span> <span class="nn">musicaiz.loaders</span> <span class="kn">import</span> <span class="n">Musa</span>
+<span class="kn">from</span> <span class="nn">musicaiz.rhythm.timing</span> <span class="kn">import</span> <span class="n">Subdivision</span><span class="p">,</span> <span class="n">TimeSignature</span>
+<span class="kn">from</span> <span class="nn">musicaiz.structure</span> <span class="kn">import</span> <span class="n">Note</span><span class="p">,</span> <span class="n">Instrument</span><span class="p">,</span> <span class="n">Bar</span>
+<span class="kn">from</span> <span class="nn">musicaiz.tokenizers</span> <span class="kn">import</span> <span class="n">EncodeBase</span><span class="p">,</span> <span class="n">TokenizerArguments</span>
+<span class="kn">from</span> <span class="nn">musicaiz.rhythm</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">TimingConsts</span><span class="p">,</span>
+    <span class="n">NoteLengths</span><span class="p">,</span>
+    <span class="n">ms_per_note</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="c1"># time units available to tokenize</span>
+<span class="n">VALID_TIME_UNITS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;SIXTEENTH&quot;</span><span class="p">,</span> <span class="s2">&quot;THIRTY_SECOND&quot;</span><span class="p">,</span> <span class="s2">&quot;SIXTY_FOUR&quot;</span><span class="p">,</span> <span class="s2">&quot;HUNDRED_TWENTY_EIGHT&quot;</span><span class="p">]</span>
+
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;remi-tokenizer&quot;</span><span class="p">)</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="REMITokenizerArguments"><a class="viewcode-back" href="../../../generated/musicaiz.tokenizers.REMITokenizerArguments.html#musicaiz.tokenizers.REMITokenizerArguments">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">REMITokenizerArguments</span><span class="p">(</span><span class="n">TokenizerArguments</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This is the REMI arguments class.</span>
+<span class="sd">    The default parameters are selected by following the original REMI representation.</span>
+
+<span class="sd">    prev_tokens: str</span>
+<span class="sd">        if we want to add tokens after the `PIECE_START` token and before</span>
+<span class="sd">        the 1st TRACK_START token (for conditioning...).</span>
+
+<span class="sd">    sub_beat: str</span>
+<span class="sd">        the note length in `VALID_TIME_UNITS` that one bar is divided in. Note that</span>
+<span class="sd">        this refers to the subdivisions of a 4/4 bar, so if we have different time</span>
+<span class="sd">        signatures, the ratio of `sub_beat / bar.denominator` will be maintained</span>
+<span class="sd">        to prevent wrong subdivisions when using bars with different denominators.</span>
+
+<span class="sd">    velocity: bool</span>
+<span class="sd">        if we want to add the velocity token. Velocities ranges between 1 and 128 (ints).</span>
+
+<span class="sd">    quantize: bool</span>
+<span class="sd">        if we want to quantize the symbolic music data for tokenizing.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">prev_tokens</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">sub_beat</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;SIXTEENTH&quot;</span>  <span class="c1"># 16 in a 4/4 bar</span>
+    <span class="n">num_programs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">velocity</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">quantize</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span></div>
+
+
+<div class="viewcode-block" id="REMITokenizer"><a class="viewcode-back" href="../../../generated/musicaiz.tokenizers.REMITokenizer.html#musicaiz.tokenizers.REMITokenizer">[docs]</a><span class="k">class</span> <span class="nc">REMITokenizer</span><span class="p">(</span><span class="n">EncodeBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class presents methods to compute the REMI Encoding.</span>
+<span class="sd">    The REMI encoding for piano pieces (mono-track) was introduced in:</span>
+<span class="sd">    *Huang, Y. S., &amp; Yang, Y. H. (2020, October).</span>
+<span class="sd">    Pop music transformer: Beat-based modeling and generation of expressive pop piano compositions.</span>
+<span class="sd">    In Proceedings of the 28th ACM International Conference on Multimedia (pp. 1180-1188).*</span>
+
+<span class="sd">    For multi-track pieces, the REMI encoding was adapted by:</span>
+<span class="sd">    *Zeng, M., Tan, X., Wang, R., Ju, Z., Qin, T., &amp; Liu, T. Y. (2021).</span>
+<span class="sd">    Musicbert: Symbolic music understanding with large-scale pre-training.</span>
+<span class="sd">    arXiv preprint arXiv:2106.05630.*</span>
+
+<span class="sd">    In this implementation, both mono-track and multi-track are handled.</span>
+
+<span class="sd">    This encoding works divides a X/4 bar in 16 sub-beats which means that</span>
+<span class="sd">    each quarter or crotchet is divided in 4 sub-beats (16th notes). In spite</span>
+<span class="sd">    of that and for allowing developers having more control over the beats</span>
+<span class="sd">    division, we can change that value to other divisions as a function of the</span>
+<span class="sd">    selected note length.</span>
+<span class="sd">    The music is quantized but, as happens with the sub-beats tokens, we can</span>
+<span class="sd">    specify if we want to quantize or not with the `quantize` argument.</span>
+<span class="sd">    The note&#39;s duration are ex`ressed in its symbolic length, e.g., a duration</span>
+<span class="sd">    equal to 1 is a whole note and a duration of 16 is a 16th note.</span>
+
+<span class="sd">    This hiherarchical tokenization is organized as follows:</span>
+<span class="sd">        - Bar -&gt; [BAR] Position from 1/16 to 16/16</span>
+<span class="sd">        - Position -&gt; [POS=1/16] [TEMPO=X] [INST=X] [PITCH=X] [DUR=1] [VEL=X] ...</span>
+
+<span class="sd">    Note that if a position or sub-beat does not contain notes, it&#39;ll not be present</span>
+<span class="sd">    in the tokenization. This allows preventing having usueful  or &quot;empty&quot; tokens.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    file: Optional[Union[str, TextIO, Path]] = None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="REMITokenizer.__init__"><a class="viewcode-back" href="../../../generated/musicaiz.tokenizers.REMITokenizer.html#musicaiz.tokenizers.REMITokenizer.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">file</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">TextIO</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span>
+        <span class="n">args</span><span class="p">:</span> <span class="n">REMITokenizerArguments</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">):</span>
+
+        <span class="k">if</span> <span class="n">args</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No `REMITokenizerArguments` passed.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="n">args</span>
+
+        <span class="c1"># Convert file into a Musa object to be processed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">midi_object</span> <span class="o">=</span> <span class="n">Musa</span><span class="p">(</span>
+            <span class="n">file</span><span class="o">=</span><span class="n">file</span><span class="p">,</span>
+            <span class="n">absolute_timing</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">quantize</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">quantize</span><span class="p">,</span>
+            <span class="n">cut_notes</span><span class="o">=</span><span class="kc">False</span>
+        <span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">tokenize_file</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method tokenizes a Musa (MIDI) object.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+
+<span class="sd">        all_tokens: List[str]</span>
+<span class="sd">            the list of tokens corresponding to all the windows.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Do not tokenize the tracks that are not in num_programs</span>
+        <span class="c1"># but if num_programs is None then tokenize all instruments</span>
+
+        <span class="n">tokenized_instruments</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">num_programs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">inst</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">midi_object</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">inst</span><span class="o">.</span><span class="n">program</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">num_programs</span><span class="p">:</span>
+                    <span class="n">tokenized_instruments</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">inst</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">tokenized_instruments</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">midi_object</span><span class="o">.</span><span class="n">instruments</span>
+
+        <span class="n">tokens</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tokenize_bars</span><span class="p">(</span>
+            <span class="n">tokens</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">prev_tokens</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">tokens</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="k">return</span> <span class="n">tokens</span>
+
+    <span class="k">def</span> <span class="nf">tokenize_bars</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">tokens</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method tokenizes a given list of musicaiz bar objects.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">        bars: List[Bar]</span>
+
+<span class="sd">        tokens: str</span>
+<span class="sd">            the number of bars per track to tokenize.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+
+<span class="sd">        tokens: str</span>
+<span class="sd">            the tokens corresponding to the bars.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">tokens</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">tokens</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+        <span class="c1"># check valid time unit</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">sub_beat</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">VALID_TIME_UNITS</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid time unit: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">sub_beat</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">prev_bpm</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">b_idx</span><span class="p">,</span> <span class="n">bar</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">midi_object</span><span class="o">.</span><span class="n">bars</span><span class="p">):</span>
+            <span class="n">all_notes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">midi_object</span><span class="o">.</span><span class="n">get_notes_in_bar</span><span class="p">(</span><span class="n">b_idx</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_notes</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">tokens</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;BAR=</span><span class="si">{</span><span class="n">b_idx</span><span class="si">}</span><span class="s2"> &quot;</span>
+            <span class="n">tokens</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;TIME_SIG=</span><span class="si">{</span><span class="n">bar</span><span class="o">.</span><span class="n">time_sig</span><span class="o">.</span><span class="n">time_sig</span><span class="si">}</span><span class="s2"> &quot;</span>
+            <span class="c1"># Get subdivisions in bar with bar index</span>
+            <span class="n">subdivs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">midi_object</span><span class="o">.</span><span class="n">get_subbeats_in_bar</span><span class="p">(</span><span class="n">bar_idx</span><span class="o">=</span><span class="n">b_idx</span><span class="p">)</span>
+            <span class="n">subdivs_idxs</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">subdivs</span><span class="p">))]</span>
+            <span class="k">for</span> <span class="n">sub</span> <span class="ow">in</span> <span class="n">subdivs_idxs</span><span class="p">:</span>
+                <span class="n">notes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">midi_object</span><span class="o">.</span><span class="n">get_notes_in_subbeat_bar</span><span class="p">(</span>
+                    <span class="n">sub</span><span class="p">,</span> <span class="n">b_idx</span>
+                <span class="p">)</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="n">bpm</span> <span class="o">=</span> <span class="n">subdivs</span><span class="p">[</span><span class="n">sub</span><span class="p">]</span><span class="o">.</span><span class="n">bpm</span>
+                <span class="n">tokens</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;SUB_BEAT=</span><span class="si">{</span><span class="n">sub</span><span class="si">}</span><span class="s2"> &quot;</span>
+                <span class="k">if</span> <span class="n">bpm</span> <span class="o">!=</span> <span class="n">prev_bpm</span><span class="p">:</span>
+                    <span class="n">tokens</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;TEMPO=</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">bpm</span><span class="p">)</span><span class="si">}</span><span class="s2"> &quot;</span>
+                <span class="n">prev_bpm</span> <span class="o">=</span> <span class="n">bpm</span>
+                <span class="c1"># Get notes in subdivision with subdivision min and max indexes</span>
+                <span class="n">prev_prog</span> <span class="o">=</span> <span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">instrument_prog</span>
+                <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">notes</span><span class="p">:</span>
+                    <span class="n">prog</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">instrument_prog</span>
+                    <span class="k">if</span> <span class="n">prog</span> <span class="o">!=</span> <span class="n">prev_prog</span> <span class="ow">or</span> <span class="s2">&quot;PITCH&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">:</span>
+                        <span class="n">tokens</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;INST=</span><span class="si">{</span><span class="n">note</span><span class="o">.</span><span class="n">instrument_prog</span><span class="si">}</span><span class="s2"> &quot;</span>
+                    <span class="n">tokens</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;PITCH=</span><span class="si">{</span><span class="n">note</span><span class="o">.</span><span class="n">pitch</span><span class="si">}</span><span class="s2"> &quot;</span>
+                    <span class="n">note_dur</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span>
+                        <span class="n">NoteLengths</span><span class="p">[</span><span class="n">note</span><span class="o">.</span><span class="n">symbolic</span><span class="p">]</span><span class="o">.</span><span class="n">value</span> <span class="o">/</span> <span class="n">NoteLengths</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">sub_beat</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+                    <span class="p">)</span>
+                    <span class="n">tokens</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;DUR=</span><span class="si">{</span><span class="n">note_dur</span><span class="si">}</span><span class="s2"> &quot;</span>
+                    <span class="n">tokens</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;VELOCITY=</span><span class="si">{</span><span class="n">note</span><span class="o">.</span><span class="n">velocity</span><span class="si">}</span><span class="s2"> &quot;</span>
+                    <span class="n">prev_prog</span> <span class="o">=</span> <span class="n">prog</span>
+                <span class="n">prev_bpm</span> <span class="o">=</span> <span class="n">bpm</span>
+        <span class="k">return</span> <span class="n">tokens</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_split_tokens</span><span class="p">(</span>
+        <span class="n">piece_tokens</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="n">token</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;Split tokens list by token&quot;&quot;&quot;</span>
+        <span class="n">indices</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">piece_tokens</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">token</span><span class="p">]</span>
+        <span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="n">piece_tokens</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span> <span class="k">for</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="o">*</span><span class="n">indices</span><span class="p">],</span> <span class="p">[</span><span class="o">*</span><span class="n">indices</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">piece_tokens</span><span class="p">)])]</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">el</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">lst</span> <span class="k">if</span> <span class="n">el</span> <span class="o">!=</span> <span class="p">[]]</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">split_tokens_by_bar</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span>
+        <span class="n">piece_tokens</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;Split tokens list by bar&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_split_tokens</span><span class="p">(</span><span class="n">piece_tokens</span><span class="p">,</span> <span class="s2">&quot;BAR&quot;</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">split_tokens_by_subbeat</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span>
+        <span class="n">piece_tokens</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;Split tokens list by subbeat&quot;&quot;&quot;</span>
+        <span class="n">bars</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">split_tokens_by_bar</span><span class="p">(</span><span class="n">piece_tokens</span><span class="p">)</span>
+        <span class="n">subbeats</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">bar</span> <span class="ow">in</span> <span class="n">bars</span><span class="p">:</span>
+            <span class="n">subbeats</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">_split_tokens</span><span class="p">(</span><span class="n">bar</span><span class="p">,</span> <span class="s2">&quot;SUB_BEAT&quot;</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">subbeats</span>
+
+    <span class="c1"># TODO</span>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">tokens_to_musa</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span>
+        <span class="n">tokens</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
+        <span class="n">sub_beat</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;SIXTY_FOUR&quot;</span><span class="p">,</span> 
+        <span class="n">resolution</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">TimingConsts</span><span class="o">.</span><span class="n">RESOLUTION</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Musa</span><span class="p">:</span>
+
+        <span class="sd">&quot;&quot;&quot;Converts a str valid tokens sequence in Musa objects.</span>
+
+<span class="sd">        This representation does not store beats in the Musa object, but</span>
+<span class="sd">        it stores bars, notes, instruments and subbeats.&quot;&quot;&quot;</span>
+        <span class="c1"># Initialize midi file to write</span>
+        <span class="n">midi</span> <span class="o">=</span> <span class="n">Musa</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="n">resolution</span><span class="p">)</span>
+        <span class="n">midi</span><span class="o">.</span><span class="n">resolution</span> <span class="o">=</span> <span class="n">resolution</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">tokens</span> <span class="o">=</span> <span class="n">tokens</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+
+        <span class="n">midi</span><span class="o">.</span><span class="n">subbeats</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">midi</span><span class="o">.</span><span class="n">bars</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">midi</span><span class="o">.</span><span class="n">instruments_progs</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="n">sb_tokens</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">split_tokens_by_subbeat</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+        <span class="n">global_subbeats</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">total_subbeats</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+        <span class="n">prev_pos</span><span class="p">,</span> <span class="n">prev_bar_pos</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">sb_tokens</span> <span class="ow">in</span> <span class="n">sb_tokens</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">&quot;BAR&quot;</span> <span class="ow">in</span> <span class="n">sb_tokens</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                <span class="n">time_sig</span> <span class="o">=</span> <span class="n">sb_tokens</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">bar_pos</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sb_tokens</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+                <span class="c1"># if bar has incomplete subbeats, we fill them</span>
+                <span class="n">prev_bar_subbeats</span> <span class="o">=</span> <span class="nb">len</span><span class="p">([</span><span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">midi</span><span class="o">.</span><span class="n">subbeats</span> <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">bar_idx</span> <span class="o">==</span> <span class="n">prev_bar_pos</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">prev_bar_subbeats</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">prev_bar_subbeats</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">TimeSignature</span><span class="p">(</span><span class="n">time_sig</span><span class="p">)</span><span class="o">.</span><span class="n">_notes_per_bar</span><span class="p">(</span><span class="n">sub_beat</span><span class="p">))):</span>
+                        <span class="n">midi</span><span class="o">.</span><span class="n">subbeats</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                            <span class="n">Subdivision</span><span class="p">(</span>
+                                <span class="n">bpm</span><span class="o">=</span><span class="n">tempo_token</span><span class="p">,</span>
+                                <span class="n">resolution</span><span class="o">=</span><span class="n">midi</span><span class="o">.</span><span class="n">resolution</span><span class="p">,</span>
+                                <span class="n">start</span><span class="o">=</span><span class="p">(</span><span class="n">midi</span><span class="o">.</span><span class="n">subbeats</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">global_idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">sec_subbeat</span><span class="p">,</span>
+                                <span class="n">end</span><span class="o">=</span><span class="p">((</span><span class="n">midi</span><span class="o">.</span><span class="n">subbeats</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">global_idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">sec_subbeat</span><span class="p">,</span>
+                                <span class="n">time_sig</span><span class="o">=</span><span class="n">TimeSignature</span><span class="p">(</span><span class="n">time_sig</span><span class="o">=</span><span class="n">time_sig</span><span class="p">),</span>
+                                <span class="n">global_idx</span><span class="o">=</span><span class="n">global_subbeats</span> <span class="o">+</span> <span class="n">ii</span><span class="p">,</span>
+                                <span class="n">bar_idx</span><span class="o">=</span><span class="n">prev_bar_pos</span><span class="p">,</span>
+                                <span class="n">beat_idx</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                            <span class="p">)</span>
+                        <span class="p">)</span>
+                <span class="c1"># empty bars</span>
+                <span class="k">if</span> <span class="n">bar_pos</span> <span class="o">!=</span> <span class="n">prev_bar_pos</span> <span class="o">+</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">bar_pos</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="c1"># Generate all subdivisions of the empty bar</span>
+                    <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">prev_bar_pos</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">bar_pos</span><span class="p">):</span>
+                        <span class="n">total_subbeats</span> <span class="o">+=</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">prev_bar_pos</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="nb">int</span><span class="p">(</span><span class="n">TimeSignature</span><span class="p">(</span><span class="n">time_sig</span><span class="p">)</span><span class="o">.</span><span class="n">_notes_per_bar</span><span class="p">(</span><span class="n">sub_beat</span><span class="p">))</span>
+                        <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">TimeSignature</span><span class="p">(</span><span class="n">time_sig</span><span class="p">)</span><span class="o">.</span><span class="n">_notes_per_bar</span><span class="p">(</span><span class="n">sub_beat</span><span class="p">))):</span>
+                            <span class="n">midi</span><span class="o">.</span><span class="n">subbeats</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                                <span class="n">Subdivision</span><span class="p">(</span>
+                                    <span class="n">bpm</span><span class="o">=</span><span class="n">tempo_token</span><span class="p">,</span>
+                                    <span class="n">resolution</span><span class="o">=</span><span class="n">midi</span><span class="o">.</span><span class="n">resolution</span><span class="p">,</span>
+                                    <span class="n">start</span><span class="o">=</span><span class="p">(</span><span class="n">total_subbeats</span> <span class="o">+</span> <span class="n">ii</span><span class="p">)</span> <span class="o">*</span> <span class="n">sec_subbeat</span><span class="p">,</span>
+                                    <span class="n">end</span><span class="o">=</span><span class="p">((</span><span class="n">total_subbeats</span> <span class="o">+</span> <span class="n">ii</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">sec_subbeat</span><span class="p">,</span>
+                                    <span class="n">time_sig</span><span class="o">=</span><span class="n">TimeSignature</span><span class="p">(</span><span class="n">time_sig</span><span class="o">=</span><span class="n">time_sig</span><span class="p">),</span>
+                                    <span class="n">global_idx</span><span class="o">=</span><span class="n">total_subbeats</span> <span class="o">+</span> <span class="n">ii</span><span class="p">,</span>
+                                    <span class="n">bar_idx</span><span class="o">=</span><span class="n">b</span><span class="p">,</span>
+                                    <span class="n">beat_idx</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                <span class="p">)</span>
+                            <span class="p">)</span>
+                        <span class="n">total_subbeats</span> <span class="o">+=</span> <span class="nb">int</span><span class="p">(</span><span class="n">TimeSignature</span><span class="p">(</span><span class="n">time_sig</span><span class="p">)</span><span class="o">.</span><span class="n">_notes_per_bar</span><span class="p">(</span><span class="n">sub_beat</span><span class="p">))</span>
+                <span class="n">global_subbeats</span> <span class="o">=</span> <span class="n">total_subbeats</span>
+                <span class="n">total_subbeats</span> <span class="o">+=</span> <span class="nb">int</span><span class="p">(</span><span class="n">TimeSignature</span><span class="p">(</span><span class="n">time_sig</span><span class="p">)</span><span class="o">.</span><span class="n">_notes_per_bar</span><span class="p">(</span><span class="n">sub_beat</span><span class="p">))</span>
+                <span class="n">prev_bar_pos</span> <span class="o">=</span> <span class="n">bar_pos</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="s2">&quot;SUB_BEAT&quot;</span> <span class="ow">in</span> <span class="n">sb_tokens</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">sb_tokens</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;TEMPO&quot;</span><span class="p">:</span>
+                    <span class="n">tempo_token</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sb_tokens</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">sb_tokens</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;INST&quot;</span><span class="p">:</span>
+                    <span class="n">inst_token</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sb_tokens</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+                    <span class="k">if</span> <span class="n">inst_token</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">midi</span><span class="o">.</span><span class="n">instruments_progs</span><span class="p">:</span>
+                        <span class="n">midi</span><span class="o">.</span><span class="n">instruments_progs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">inst_token</span><span class="p">)</span>
+                        <span class="n">midi</span><span class="o">.</span><span class="n">instruments</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                            <span class="n">Instrument</span><span class="p">(</span>
+                                <span class="n">program</span><span class="o">=</span><span class="n">inst_token</span>
+                            <span class="p">)</span>
+                        <span class="p">)</span>
+                <span class="n">pos</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sb_tokens</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+                <span class="c1"># Last subbeat</span>
+                <span class="n">sec_subbeat</span> <span class="o">=</span> <span class="n">ms_per_note</span><span class="p">(</span>
+                    <span class="n">sub_beat</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span>
+                    <span class="n">tempo_token</span><span class="p">,</span>
+                    <span class="n">midi</span><span class="o">.</span><span class="n">resolution</span>
+                <span class="p">)</span> <span class="o">/</span> <span class="mi">1000</span>
+                <span class="c1"># Generate beats that have no notes</span>
+                <span class="n">empty_subbeats</span> <span class="o">=</span> <span class="n">pos</span> <span class="o">-</span> <span class="n">prev_pos</span> <span class="o">-</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">empty_subbeats</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">prev_pos</span><span class="p">,</span> <span class="n">pos</span><span class="p">):</span>
+                        <span class="n">midi</span><span class="o">.</span><span class="n">subbeats</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                            <span class="n">Subdivision</span><span class="p">(</span>
+                                <span class="n">bpm</span><span class="o">=</span><span class="n">tempo_token</span><span class="p">,</span>
+                                <span class="n">resolution</span><span class="o">=</span><span class="n">midi</span><span class="o">.</span><span class="n">resolution</span><span class="p">,</span>
+                                <span class="n">start</span><span class="o">=</span><span class="p">(</span><span class="n">global_subbeats</span> <span class="o">+</span> <span class="n">ii</span><span class="p">)</span> <span class="o">*</span> <span class="n">sec_subbeat</span><span class="p">,</span>
+                                <span class="n">end</span><span class="o">=</span><span class="p">((</span><span class="n">global_subbeats</span> <span class="o">+</span> <span class="n">ii</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">sec_subbeat</span><span class="p">,</span>
+                                <span class="n">time_sig</span><span class="o">=</span><span class="n">TimeSignature</span><span class="p">(</span><span class="n">time_sig</span><span class="o">=</span><span class="n">time_sig</span><span class="p">),</span>
+                                <span class="n">global_idx</span><span class="o">=</span><span class="n">global_subbeats</span> <span class="o">+</span> <span class="n">ii</span><span class="p">,</span>
+                                <span class="n">bar_idx</span><span class="o">=</span><span class="n">bar_pos</span><span class="p">,</span>
+                                <span class="n">beat_idx</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                            <span class="p">)</span>
+                        <span class="p">)</span>
+                <span class="n">sb</span> <span class="o">=</span> <span class="n">Subdivision</span><span class="p">(</span>
+                    <span class="n">bpm</span><span class="o">=</span><span class="n">tempo_token</span><span class="p">,</span>
+                    <span class="n">resolution</span><span class="o">=</span><span class="n">midi</span><span class="o">.</span><span class="n">resolution</span><span class="p">,</span>
+                    <span class="n">start</span><span class="o">=</span><span class="p">(</span><span class="n">midi</span><span class="o">.</span><span class="n">subbeats</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">global_idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">sec_subbeat</span><span class="p">,</span>
+                    <span class="n">end</span><span class="o">=</span><span class="p">((</span><span class="n">midi</span><span class="o">.</span><span class="n">subbeats</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">global_idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">sec_subbeat</span><span class="p">,</span>
+                    <span class="n">time_sig</span><span class="o">=</span><span class="n">TimeSignature</span><span class="p">(</span><span class="n">time_sig</span><span class="o">=</span><span class="n">time_sig</span><span class="p">),</span>
+                    <span class="n">global_idx</span><span class="o">=</span><span class="n">midi</span><span class="o">.</span><span class="n">subbeats</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">global_idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                    <span class="n">bar_idx</span><span class="o">=</span><span class="n">bar_pos</span><span class="p">,</span>
+                    <span class="n">beat_idx</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="n">midi</span><span class="o">.</span><span class="n">subbeats</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sb</span><span class="p">)</span>
+                <span class="n">prev_pos</span> <span class="o">=</span> <span class="n">pos</span> <span class="o">+</span> <span class="mi">1</span>
+
+                <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">tok</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sb_tokens</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">tok</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;PITCH&quot;</span><span class="p">:</span>
+                        <span class="n">pitch</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">tok</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+                        <span class="n">dur</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sb_tokens</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+                        <span class="n">vel</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sb_tokens</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+                        <span class="n">note</span> <span class="o">=</span> <span class="n">Note</span><span class="p">(</span>
+                            <span class="n">start</span><span class="o">=</span><span class="n">sb</span><span class="o">.</span><span class="n">start_sec</span><span class="p">,</span>
+                            <span class="n">end</span><span class="o">=</span><span class="n">sb</span><span class="o">.</span><span class="n">start_sec</span> <span class="o">+</span> <span class="n">dur</span> <span class="o">*</span> <span class="n">sec_subbeat</span><span class="p">,</span>
+                            <span class="n">instrument_prog</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">inst_token</span><span class="p">),</span>
+                            <span class="n">pitch</span><span class="o">=</span><span class="n">pitch</span><span class="p">,</span>
+                            <span class="n">velocity</span><span class="o">=</span><span class="n">vel</span><span class="p">,</span>
+                            <span class="n">subbeat_idx</span><span class="o">=</span><span class="n">sb</span><span class="o">.</span><span class="n">global_idx</span><span class="p">,</span>
+                        <span class="p">)</span>
+                        <span class="n">midi</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
+        <span class="c1"># complete subbeats last bar if they&#39;re incomplete</span>
+        <span class="n">prev_bar_subbeats</span> <span class="o">=</span> <span class="nb">len</span><span class="p">([</span><span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">midi</span><span class="o">.</span><span class="n">subbeats</span> <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">bar_idx</span> <span class="o">==</span> <span class="n">bar_pos</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">prev_bar_subbeats</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">prev_bar_subbeats</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">TimeSignature</span><span class="p">(</span><span class="n">time_sig</span><span class="p">)</span><span class="o">.</span><span class="n">_notes_per_bar</span><span class="p">(</span><span class="n">sub_beat</span><span class="p">))):</span>
+                <span class="n">midi</span><span class="o">.</span><span class="n">subbeats</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="n">Subdivision</span><span class="p">(</span>
+                        <span class="n">bpm</span><span class="o">=</span><span class="n">tempo_token</span><span class="p">,</span>
+                        <span class="n">resolution</span><span class="o">=</span><span class="n">midi</span><span class="o">.</span><span class="n">resolution</span><span class="p">,</span>
+                        <span class="n">start</span><span class="o">=</span><span class="p">(</span><span class="n">midi</span><span class="o">.</span><span class="n">subbeats</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">global_idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">sec_subbeat</span><span class="p">,</span>
+                        <span class="n">end</span><span class="o">=</span><span class="p">((</span><span class="n">midi</span><span class="o">.</span><span class="n">subbeats</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">global_idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">sec_subbeat</span><span class="p">,</span>
+                        <span class="n">time_sig</span><span class="o">=</span><span class="n">TimeSignature</span><span class="p">(</span><span class="n">time_sig</span><span class="o">=</span><span class="n">time_sig</span><span class="p">),</span>
+                        <span class="n">global_idx</span><span class="o">=</span><span class="n">midi</span><span class="o">.</span><span class="n">subbeats</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">global_idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                        <span class="n">bar_idx</span><span class="o">=</span><span class="n">bar_pos</span><span class="p">,</span>
+                        <span class="n">beat_idx</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                    <span class="p">)</span>
+                <span class="p">)</span>
+        <span class="c1"># Generate Bars</span>
+        <span class="n">bar_pos</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">last_bar</span> <span class="o">=</span> <span class="n">midi</span><span class="o">.</span><span class="n">subbeats</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">bar_idx</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">last_bar</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">sub</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">midi</span><span class="o">.</span><span class="n">subbeats</span> <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">bar_idx</span> <span class="o">==</span> <span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">end_sec</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">end_sec</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">midi</span><span class="o">.</span><span class="n">subbeats</span> <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">bar_idx</span> <span class="o">==</span> <span class="n">i</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">midi</span><span class="o">.</span><span class="n">bars</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">Bar</span><span class="p">(</span>
+                    <span class="n">start</span><span class="o">=</span><span class="n">sub</span><span class="o">.</span><span class="n">start_sec</span><span class="p">,</span>
+                    <span class="n">end</span><span class="o">=</span><span class="n">end_sec</span><span class="p">,</span>
+                    <span class="n">time_sig</span><span class="o">=</span><span class="n">sub</span><span class="o">.</span><span class="n">time_sig</span><span class="p">,</span>
+                    <span class="n">resolution</span><span class="o">=</span><span class="n">resolution</span><span class="p">,</span>
+                    <span class="n">bpm</span><span class="o">=</span><span class="n">sub</span><span class="o">.</span><span class="n">bpm</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">midi</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_tokens_analytics</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">tokens</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_get_tokens_analytics</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="s2">&quot;PITCH&quot;</span><span class="p">,</span> <span class="s2">&quot;BAR=0&quot;</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Carlos Hernandez-Olivan.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

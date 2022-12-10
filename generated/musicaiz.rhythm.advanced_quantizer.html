@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>musicaiz.rhythm.advanced_quantizer &mdash; Musicaiz 0.0.2 documentation</title>
+  <title>musicaiz.rhythm.advanced_quantizer &mdash; Musicaiz 0.1.0 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
@@ -43,7 +43,7 @@
             <img src="../_static/logo_square_dark.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.0.2
+                0.1.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -66,6 +66,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../rhythm.html">Rhythm</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../rhythm.html#timing">Timing</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../rhythm.html#quantizer">Quantizer</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="musicaiz.rhythm.QuantizerConfig.html">musicaiz.rhythm.QuantizerConfig</a></li>
 <li class="toctree-l3"><a class="reference internal" href="musicaiz.rhythm.basic_quantizer.html">musicaiz.rhythm.basic_quantizer</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">musicaiz.rhythm.advanced_quantizer</a></li>
 <li class="toctree-l3"><a class="reference internal" href="musicaiz.rhythm.get_ticks_from_subdivision.html">musicaiz.rhythm.get_ticks_from_subdivision</a></li>
@@ -85,7 +86,6 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../notebooks/2-write_midi.html">Writing a MIDI file from scratch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notebooks/3-plot.html">Plotting</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">References:</span></p>
@@ -148,24 +148,13 @@
 <h1>musicaiz.rhythm.advanced_quantizer<a class="headerlink" href="#musicaiz-rhythm-advanced-quantizer" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="musicaiz.rhythm.advanced_quantizer">
-<span class="sig-prename descclassname"><span class="pre">musicaiz.rhythm.</span></span><span class="sig-name descname"><span class="pre">advanced_quantizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">input_notes:</span> <span class="pre">&lt;module</span> <span class="pre">'musicaiz.structure.notes'</span> <span class="pre">from</span> <span class="pre">'H:\\GitHub\\musicaiz\\musicaiz\\structure\\notes.py'&gt;,</span> <span class="pre">grid:</span> <span class="pre">List[int],</span> <span class="pre">strength:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">1,</span> <span class="pre">delta_Qr:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">12,</span> <span class="pre">type_q:</span> <span class="pre">Optional[str]</span> <span class="pre">=</span> <span class="pre">None,</span> <span class="pre">bpm:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">120</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/musicaiz/rhythm/quantizer.html#advanced_quantizer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#musicaiz.rhythm.advanced_quantizer" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">musicaiz.rhythm.</span></span><span class="sig-name descname"><span class="pre">advanced_quantizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_notes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="musicaiz.rhythm.QuantizerConfig.html#musicaiz.rhythm.QuantizerConfig" title="musicaiz.rhythm.quantizer.QuantizerConfig"><span class="pre">musicaiz.rhythm.quantizer.QuantizerConfig</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">bpm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">120</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">96</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/musicaiz/rhythm/quantizer.html#advanced_quantizer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#musicaiz.rhythm.advanced_quantizer" title="Permalink to this definition">¶</a></dt>
 <dd><p>This function quantizes a musa object given a grid.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>file: musa object</strong></dt><dd></dd>
 <dt><strong>grid: array of ints in ticks</strong></dt><dd></dd>
-<dt><strong>strength: parameter between 0 and 1.</strong></dt><dd><p>Example GRID = [0 24 48], STAR_TICKS = [3 ,21, 40] and Aq
-START_NEW_TICS = [(3-0)*strength, (21-24)*strength, (40-48)*strength]
-END_NEW_TICKS = []</p>
-</dd>
-<dt><strong>delta_Qr: Q_range in ticks</strong></dt><dd></dd>
-<dt><strong>type_q: type of quantization</strong></dt><dd><p>if negative: only differences between start_tick and grid &gt; Q_r is
-taking into account for the quantization. If positive only differences
-between start_tick and grid &lt; Q_r is taking into accounto for the quantization.
-If none all start_tick is quantized based on the strength (it works similar to basic
-quantization but adding the strength parameter)</p>
-</dd>
 </dl>
 </dd>
 </dl>

@@ -14,14 +14,31 @@
    .. autosummary::
    
       ~Musa.__init__
-      ~Musa.fluidsynth
+      ~Musa.bar_beats_subdivs_analysis
+      ~Musa.get_beat_in_bar
+      ~Musa.get_beats_in_bar
+      ~Musa.get_beats_in_bars
       ~Musa.get_file_extension
-      ~Musa.get_total_bars
-      ~Musa.group_instrument_bar_notes
+      ~Musa.get_notes_in_bar
+      ~Musa.get_notes_in_bars
+      ~Musa.get_notes_in_beat
+      ~Musa.get_notes_in_beat_bar
+      ~Musa.get_notes_in_beats
+      ~Musa.get_notes_in_subbeat
+      ~Musa.get_notes_in_subbeat_bar
+      ~Musa.get_notes_in_subbeats
+      ~Musa.get_subbeat_in_bar
+      ~Musa.get_subbeat_in_beat
+      ~Musa.get_subbeats_in_bar
+      ~Musa.get_subbeats_in_bars
+      ~Musa.get_subbeats_in_beat
+      ~Musa.get_subbeats_in_beats
       ~Musa.is_midi
       ~Musa.is_musicxml
       ~Musa.is_valid
-      ~Musa.write_midi
+      ~Musa.json
+      ~Musa.predict_key
+      ~Musa.writemidi
    
    
 
@@ -32,18 +49,23 @@
    .. autosummary::
    
       ~Musa.file
-      ~Musa.structure
       ~Musa.tonality
-      ~Musa.time_sig
-      ~Musa.bpm
+      ~Musa.time_signature_changes
       ~Musa.resolution
-      ~Musa.data
       ~Musa.instruments
-      ~Musa.bars
       ~Musa.is_quantized
-      ~Musa.notes
       ~Musa.total_bars
       ~Musa.absolute_timing
       ~Musa.cut_notes
+      ~Musa.notes
+      ~Musa.bars
+      ~Musa.tempo_changes
+      ~Musa.instruments_progs
+      ~Musa.general_midi
+      ~Musa.subdivision_note
+      ~Musa.subbeats
+      ~Musa.beats
+      ~Musa.quantizer_args
+      ~Musa.VALID_SUBDIVISIONS
    
    

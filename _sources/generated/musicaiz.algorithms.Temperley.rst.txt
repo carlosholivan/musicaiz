@@ -1,0 +1,29 @@
+﻿musicaiz.algorithms.Temperley
+=============================
+
+.. currentmodule:: musicaiz.algorithms
+
+.. autoclass:: Temperley
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Temperley.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~Temperley.major
+      ~Temperley.minor
+   
+   

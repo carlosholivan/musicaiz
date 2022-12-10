@@ -1,0 +1,6 @@
+﻿musicaiz.algorithms.key\_detection
+==================================
+
+.. currentmodule:: musicaiz.algorithms
+
+.. autofunction:: key_detection

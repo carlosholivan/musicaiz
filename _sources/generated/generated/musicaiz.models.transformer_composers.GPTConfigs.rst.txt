@@ -1,4 +1,4 @@
-﻿musicaiz.models.transformer\_composers.GPTConfigs
+musicaiz.models.transformer\_composers.GPTConfigs
 =================================================
 
 .. currentmodule:: musicaiz.models.transformer_composers

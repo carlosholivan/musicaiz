@@ -16,6 +16,7 @@
       ~NoteLengths.ticks
       ~NoteLengths.ms
       ~NoteLengths.get_note_ticks_mapping
+      ~NoteLengths.get_note_with_fraction
    
    
 

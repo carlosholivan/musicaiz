@@ -15,16 +15,10 @@
    
       ~PianorollHTML.__init__
       ~PianorollHTML.plot_grid
-      ~PianorollHTML.plot_instrument
+      ~PianorollHTML.plot_instruments
    
    
 
    
-   
-   .. rubric:: Attributes
-
-   .. autosummary::
-   
-      ~PianorollHTML.fig
    
    

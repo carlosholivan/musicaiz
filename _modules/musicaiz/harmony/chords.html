@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>musicaiz.harmony.chords &mdash; Musicaiz 0.0.2 documentation</title>
+  <title>musicaiz.harmony.chords &mdash; Musicaiz 0.1.0 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/plot_directive.css" type="text/css" />
@@ -40,7 +40,7 @@
             <img src="../../../_static/logo_square_dark.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.0.2
+                0.1.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -72,7 +72,6 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/2-write_midi.html">Writing a MIDI file from scratch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../notebooks/3-plot.html">Plotting</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">References:</span></p>
@@ -109,7 +108,7 @@
   <h1>Source code for musicaiz.harmony.chords</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 <span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Tuple</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Dict</span>
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -366,27 +365,13 @@
     <span class="k">def</span> <span class="nf">get_chord_from_name</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">chord_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AllChords</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Retrieves the Chord object given its name&quot;&quot;&quot;</span>
         <span class="n">chord_obj</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="n">_</span><span class="p">,</span> <span class="n">quality</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">split_chord_name</span><span class="p">(</span><span class="n">chord_name</span><span class="p">)</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">quality</span> <span class="o">=</span> <span class="n">Chord</span><span class="o">.</span><span class="n">split_chord_name</span><span class="p">(</span><span class="n">chord_name</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">chord</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__members__</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">quality</span> <span class="ow">in</span> <span class="n">chord</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
                 <span class="n">chord_obj</span> <span class="o">=</span> <span class="n">chord</span>
         <span class="k">if</span> <span class="n">chord_obj</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Chord </span><span class="si">{</span><span class="n">chord_name</span><span class="si">}</span><span class="s2"> does not exist.&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">chord_obj</span>
-
-    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">split_chord_name</span><span class="p">(</span><span class="n">chord_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
-        <span class="sd">&quot;&quot;&quot;Splits a chord name to its root note and the chord quality.&quot;&quot;&quot;</span>
-        <span class="n">chord_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;([A-G#b]+)&#39;</span><span class="p">,</span> <span class="n">chord_name</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span><span class="p">]</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">chord_data</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid chord </span><span class="si">{chord_name}</span><span class="s2">.&quot;</span><span class="p">)</span>
-        <span class="n">root_note</span> <span class="o">=</span> <span class="n">chord_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">quality</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">chord_data</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">NoteClassNames</span><span class="o">.</span><span class="n">check_note_name_exists</span><span class="p">(</span><span class="n">root_note</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Root note </span><span class="si">{</span><span class="n">root_note</span><span class="si">}</span><span class="s2"> does not exist.&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">ChordQualities</span><span class="o">.</span><span class="n">check_quality_exists</span><span class="p">(</span><span class="n">quality</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Chord quality </span><span class="si">{</span><span class="n">quality</span><span class="si">}</span><span class="s2"> does not exist.&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">root_note</span><span class="p">,</span> <span class="n">quality</span></div>
+        <span class="k">return</span> <span class="n">chord_obj</span></div>
 
 
 <div class="viewcode-block" id="Chord"><a class="viewcode-back" href="../../../generated/musicaiz.harmony.Chord.html#musicaiz.harmony.Chord">[docs]</a><span class="k">class</span> <span class="nc">Chord</span><span class="p">:</span>
@@ -417,7 +402,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">chord</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">if</span> <span class="n">chord</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">root_note</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">quality</span> <span class="o">=</span> <span class="n">AllChords</span><span class="o">.</span><span class="n">split_chord_name</span><span class="p">(</span><span class="n">chord</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">root_note</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">quality</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">split_chord_name</span><span class="p">(</span><span class="n">chord</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">chord</span> <span class="o">=</span> <span class="n">AllChords</span><span class="o">.</span><span class="n">get_chord_from_name</span><span class="p">(</span><span class="n">chord</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">quality_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">chord</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">chord</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span></div>
@@ -460,42 +445,125 @@
 <span class="sd">        - Only higher than 13th chords do have a 6th inversion&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">value</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="n">inversion</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Chord quality </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">quality_name</span><span class="si">}</span><span class="s2"> does not have a </span><span class="si">{</span><span class="n">inversion</span><span class="si">}</span><span class="s2"> inversion.&quot;</span><span class="p">)</span>
-    
-    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">get_notes_from_chord</span><span class="p">(</span><span class="n">root_note</span><span class="p">:</span> <span class="n">NoteClassBase</span><span class="p">,</span> <span class="n">chord</span><span class="p">:</span> <span class="n">AllChords</span><span class="p">):</span>
-        <span class="n">notes</span> <span class="o">=</span> <span class="p">[</span><span class="n">root_note</span><span class="p">]</span>
-        <span class="k">for</span> <span class="n">interval</span> <span class="ow">in</span> <span class="n">chord</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_all_chords</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">NoteClassBase</span><span class="p">,</span> <span class="n">AllChords</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructs a dictionaray with the chord name (key) and its constructor</span>
+<span class="sd">        (value). The constructor is a tuple with the chord&#39;s tonic and the quality.</span>
+
+<span class="sd">        Output Ex.:</span>
+<span class="sd">            {</span>
+<span class="sd">                &#39;C-MAJOR_TRIAD&#39;: (&lt;NoteClassBase.C&gt;, &lt;AllChords.MAJOR_TRIAD&gt;),</span>
+<span class="sd">                ...</span>
+<span class="sd">            }</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Dict[str, Tuple[NoteClassBase, AllChords]]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">notes</span> <span class="o">=</span> <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">get_notes_chromatic_scale</span><span class="p">(</span><span class="n">alteration</span> <span class="o">=</span> <span class="s2">&quot;SHARP&quot;</span><span class="p">)</span>
+        <span class="n">all_chords</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">exclude</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1">#[&quot;SEVENTH&quot;, &quot;AUGMENTED&quot;, &quot;DIMINISHED&quot;]</span>
+        <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">notes</span><span class="p">:</span>
+            <span class="n">tonic</span> <span class="o">=</span> <span class="n">note</span>  <span class="c1"># to avoid enharmonic chors such as C maj with Bb maj</span>
+            <span class="k">for</span> <span class="n">chord</span> <span class="ow">in</span> <span class="n">AllChords</span><span class="o">.</span><span class="n">__members__</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">(</span><span class="n">e</span> <span class="ow">in</span> <span class="n">chord</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">exclude</span><span class="p">):</span>
+                    <span class="n">all_chords</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">tonic</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span> <span class="o">+</span> <span class="n">chord</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="p">(</span><span class="n">tonic</span><span class="p">,</span> <span class="n">chord</span><span class="p">)})</span>
+        <span class="k">return</span> <span class="n">all_chords</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_notes_from_chord</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span>
+        <span class="n">tonic</span><span class="p">:</span> <span class="n">NoteClassBase</span><span class="p">,</span>
+        <span class="n">quality</span><span class="p">:</span> <span class="n">AllChords</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">NoteClassBase</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generates the list of note objects that correspond to a chord.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">        tonic: NoteClassBase</span>
+
+<span class="sd">        quality: AllChords</span>
+
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+
+<span class="sd">        List[NoteClassBase]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">notes</span> <span class="o">=</span> <span class="p">[</span><span class="n">tonic</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">interval</span> <span class="ow">in</span> <span class="n">quality</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
             <span class="n">interval_inst</span> <span class="o">=</span> <span class="n">Interval</span><span class="p">(</span><span class="n">interval</span><span class="p">)</span>
             <span class="c1"># Initialize note with name and octave</span>
-            <span class="n">degree_root</span> <span class="o">=</span> <span class="n">root_note</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">contracted</span> <span class="o">+</span> <span class="s2">&quot;1&quot;</span>
+            <span class="n">degree_root</span> <span class="o">=</span> <span class="n">tonic</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">contracted</span> <span class="o">+</span> <span class="s2">&quot;1&quot;</span>
             <span class="n">note_obj</span> <span class="o">=</span> <span class="n">Interval</span><span class="o">.</span><span class="n">_initialize_note</span><span class="p">(</span><span class="n">degree_root</span><span class="p">)</span>
             <span class="n">note_dest_obj</span> <span class="o">=</span> <span class="n">interval_inst</span><span class="o">.</span><span class="n">transpose_note</span><span class="p">(</span><span class="n">note_obj</span><span class="p">)</span>
             <span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note_dest_obj</span><span class="o">.</span><span class="n">note</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">notes</span>
 
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_pitches_from_chord</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span>
+        <span class="n">tonic</span><span class="p">:</span> <span class="n">NoteClassBase</span><span class="p">,</span>
+        <span class="n">quality</span><span class="p">:</span> <span class="n">AllChords</span><span class="p">,</span>
+        <span class="n">octave</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generates the list of pitches that correspond to a chord and an octave.</span>
+<span class="sd">        The octaves go from -1 (pitch = 0) to 11 (pitch = 127)</span>
 
-    <span class="c1"># TODO</span>
-    <span class="k">def</span> <span class="nf">play</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">octave</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
-        <span class="n">fs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">44100</span><span class="p">,</span>
-        <span class="n">sf2_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;soundfonts/Nice-Steinway-Lite-v3.0.sf2&quot;</span><span class="p">),</span>
-    <span class="p">):</span>
-        <span class="n">notes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_notes</span><span class="p">()</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
 
-        <span class="c1"># Create `Note` objects for every note</span>
-        <span class="n">notes_obj</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">notes</span><span class="p">:</span>
-            <span class="n">pitch_name</span> <span class="o">=</span> <span class="n">note</span> <span class="o">+</span> <span class="n">octave</span>
-            <span class="n">notes_obj</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Note</span><span class="p">(</span><span class="n">pitch_name</span><span class="p">,</span> <span class="mf">0.00</span><span class="p">,</span> <span class="mf">2.00</span><span class="p">,</span> <span class="mi">127</span><span class="p">))</span>  <span class="c1"># notes of 2 sec and 127 velocity</span>
+<span class="sd">        tonic: NoteClassBase</span>
 
-        <span class="c1"># Synthesize with fluidsynth</span>
-        <span class="n">waveform</span> <span class="o">=</span> <span class="n">notes_obj</span><span class="o">.</span><span class="n">fluidsynth</span><span class="p">(</span><span class="n">fs</span><span class="o">=</span><span class="n">fs</span><span class="p">,</span> <span class="n">sf2_path</span><span class="o">=</span><span class="n">sf2_path</span><span class="p">)</span>
-        <span class="c1"># Allocate output waveform, with #sample = max length of all waveforms</span>
-        <span class="n">synthesized</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">waveform</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
-        <span class="c1"># Normalize</span>
-        <span class="n">synthesized</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">synthesized</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">synthesized</span>
+<span class="sd">        quality: AllChords</span>
+
+<span class="sd">        octave: int</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+
+<span class="sd">        List[int]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">notes</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">get_notes_from_chord</span><span class="p">(</span><span class="n">tonic</span><span class="p">,</span> <span class="n">quality</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">pm</span><span class="o">.</span><span class="n">note_name_to_number</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">contracted</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">octave</span><span class="p">))</span> <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">notes</span><span class="p">]</span>
+    
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">chords_to_onehot</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Converts the chords to a one hot representation.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+
+<span class="sd">        chord_pitches_dict: Dict[str, List[int]]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">start_octave</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="n">all_chords</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">get_all_chords</span><span class="p">()</span>
+        <span class="n">chord_pitches_dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">chord</span> <span class="ow">in</span> <span class="n">all_chords</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">chord_pitches</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">get_pitches_from_chord</span><span class="p">(</span><span class="n">all_chords</span><span class="p">[</span><span class="n">chord</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">all_chords</span><span class="p">[</span><span class="n">chord</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">start_octave</span><span class="p">)</span>
+            <span class="n">chord_freqs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">chord_pitches</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">12</span><span class="p">)]</span> <span class="c1">#[pm.note_number_to_hz(pitch) for pitch in chord_pitches]</span>
+            <span class="n">chord_pitches_dict</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">chord</span><span class="p">:</span> <span class="n">chord_freqs</span><span class="p">})</span>
+        <span class="k">return</span> <span class="n">chord_pitches_dict</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">split_chord_name</span><span class="p">(</span><span class="n">chord_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Splits a chord name to its root note and the chord quality.&quot;&quot;&quot;</span>
+        <span class="n">chord_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;([A-G#b]+)&#39;</span><span class="p">,</span> <span class="n">chord_name</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">chord_data</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid chord </span><span class="si">{chord_name}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="n">root_note</span> <span class="o">=</span> <span class="n">chord_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">quality</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">chord_data</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">NoteClassNames</span><span class="o">.</span><span class="n">check_note_name_exists</span><span class="p">(</span><span class="n">root_note</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Root note </span><span class="si">{</span><span class="n">root_note</span><span class="si">}</span><span class="s2"> does not exist.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">ChordQualities</span><span class="o">.</span><span class="n">check_quality_exists</span><span class="p">(</span><span class="n">quality</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Chord quality </span><span class="si">{</span><span class="n">quality</span><span class="si">}</span><span class="s2"> does not exist.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">root_note</span><span class="p">,</span> <span class="n">quality</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="s2">&quot;Chord(root_note=</span><span class="si">{}</span><span class="s2">, quality=&#39;</span><span class="si">{}</span><span class="s2">&#39;, type=</span><span class="si">{}</span><span class="s2">, name=&#39;</span><span class="si">{}</span><span class="s2">&#39;)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>musicaiz.eval &mdash; Musicaiz 0.0.2 documentation</title>
+  <title>musicaiz.eval &mdash; Musicaiz 0.1.0 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
@@ -40,7 +40,7 @@
             <img src="../../_static/logo_square_dark.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.0.2
+                0.1.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -72,7 +72,6 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../notebooks/2-write_midi.html">Writing a MIDI file from scratch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../notebooks/3-plot.html">Plotting</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">References:</span></p>
@@ -215,7 +214,7 @@
 <span class="k">def</span> <span class="nf">get_average_dataset_measures</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]):</span>
     <span class="sd">&quot;&quot;&quot;Returns the measures of each midi file in the directory or</span>
 <span class="sd">    subdirectoy `dataset_path`.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    avgs: Dict[str, Union[int, np.array]]</span>
@@ -251,6 +250,7 @@
     <span class="n">midi</span> <span class="o">=</span> <span class="n">loaders</span><span class="o">.</span><span class="n">Musa</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
     <span class="n">midi_measure</span> <span class="o">=</span> <span class="n">get_eval_measures</span><span class="p">(</span><span class="n">midi</span><span class="o">.</span><span class="n">notes</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">midi_measure</span>
+
 
 <div class="viewcode-block" id="get_eval_measures"><a class="viewcode-back" href="../../generated/musicaiz.eval.get_eval_measures.html#musicaiz.eval.get_eval_measures">[docs]</a><span class="k">def</span> <span class="nf">get_eval_measures</span><span class="p">(</span>
     <span class="n">notes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Note</span><span class="p">],</span>
@@ -345,6 +345,10 @@
     <span class="c1"># if no measures2 is passed, we&#39;d measure the intra-set distances</span>
     <span class="k">if</span> <span class="n">measures2</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">measures2</span> <span class="o">=</span> <span class="n">measures1</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">measures1</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;There is only one file in the dataset 1. There must be more than 1 file to measure the distances.&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">measures2</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;There is only one file in the dataset 1. There must be more than 1 file to measure the distances.&quot;</span><span class="p">)</span>
     <span class="c1"># initialize dataframe</span>
     <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">all_dist</span> <span class="o">=</span> <span class="p">{}</span>
@@ -382,7 +386,12 @@
         <span class="n">measures</span> <span class="o">=</span> <span class="p">[</span><span class="n">measure</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">measures</span>
 
-<div class="viewcode-block" id="get_distribution"><a class="viewcode-back" href="../../generated/musicaiz.eval.get_distribution.html#musicaiz.eval.get_distribution">[docs]</a><span class="k">def</span> <span class="nf">get_distribution</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">measure</span><span class="o">=</span><span class="s2">&quot;all&quot;</span><span class="p">):</span>
+
+<div class="viewcode-block" id="get_distribution"><a class="viewcode-back" href="../../generated/musicaiz.eval.get_distribution.html#musicaiz.eval.get_distribution">[docs]</a><span class="k">def</span> <span class="nf">get_distribution</span><span class="p">(</span>
+    <span class="o">*</span><span class="n">args</span><span class="p">,</span>
+    <span class="n">measure</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;all&quot;</span><span class="p">,</span>
+    <span class="n">show</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Plots the measure histogram of the input distances</span>
 <span class="sd">    datasets (args).</span>
@@ -415,7 +424,8 @@
         <span class="k">elif</span> <span class="n">measure</span> <span class="ow">in</span> <span class="n">RhythmMeasures</span><span class="o">.</span><span class="n">_member_names_</span><span class="p">:</span>
             <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">RhythmMeasures</span><span class="p">[</span><span class="n">measure</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+        <span class="k">if</span> <span class="n">show</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
 
 
 <span class="k">def</span> <span class="nf">_append_zeros_array</span><span class="p">(</span><span class="n">vec1</span><span class="p">,</span> <span class="n">vec2</span><span class="p">):</span>
@@ -500,7 +510,8 @@
     <span class="n">measures_dist1</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]],</span>
     <span class="n">measures_dist2</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]],</span>
     <span class="n">label1</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
-    <span class="n">label2</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;2&quot;</span>
+    <span class="n">label2</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
+    <span class="n">show</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="p">):</span>
     <span class="n">measures_dict</span> <span class="o">=</span> <span class="n">compute_oa_kld</span><span class="p">(</span>
         <span class="n">measures_dist1</span><span class="p">,</span>
@@ -562,7 +573,8 @@
     <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">custom_lines</span><span class="p">,</span> <span class="n">k1s</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;OA&quot;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;KLD&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+    <span class="k">if</span> <span class="n">show</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="model_features_violinplot"><a class="viewcode-back" href="../../generated/musicaiz.eval.model_features_violinplot.html#musicaiz.eval.model_features_violinplot">[docs]</a><span class="k">def</span> <span class="nf">model_features_violinplot</span><span class="p">(</span>
@@ -571,6 +583,7 @@
     <span class="n">label1</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
     <span class="n">label2</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
     <span class="n">measure</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;all&quot;</span><span class="p">,</span>
+    <span class="n">show</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Plots the distances distributions of the input</span>
 <span class="sd">    features as a violin plot as the Fig. 4 of the paper</span>
@@ -631,7 +644,8 @@
     <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Distance&quot;</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Feature&quot;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+    <span class="k">if</span> <span class="n">show</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
 
 
 <span class="k">def</span> <span class="nf">_get_array_from_dict</span><span class="p">(</span><span class="n">eucl_dist_dict</span><span class="p">,</span> <span class="n">measure</span><span class="p">):</span>

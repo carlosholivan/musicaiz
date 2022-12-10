@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>musicaiz.features.harmony &mdash; Musicaiz 0.0.2 documentation</title>
+  <title>musicaiz.features.harmony &mdash; Musicaiz 0.1.0 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/plot_directive.css" type="text/css" />
@@ -40,7 +40,7 @@
             <img src="../../../_static/logo_square_dark.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.0.2
+                0.1.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -72,7 +72,6 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/2-write_midi.html">Writing a MIDI file from scratch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../notebooks/3-plot.html">Plotting</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">References:</span></p>
@@ -127,7 +126,6 @@
     <span class="n">Note</span><span class="p">,</span>
     <span class="n">NoteClassBase</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">musicaiz.loaders</span> <span class="kn">import</span> <span class="n">Musa</span>
 
 
 <div class="viewcode-block" id="_extract_note_positions"><a class="viewcode-back" href="../../../generated/musicaiz.features._extract_note_positions.html#musicaiz.features._extract_note_positions">[docs]</a><span class="k">def</span> <span class="nf">_extract_note_positions</span><span class="p">(</span><span class="n">note_seq</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Note</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
@@ -433,15 +431,15 @@
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">note_seq</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="mi">0</span>
     <span class="c1"># Go tick per tick</span>
-    <span class="n">latest_note</span> <span class="o">=</span> <span class="n">Musa</span><span class="o">.</span><span class="n">_last_note</span><span class="p">(</span><span class="n">note_seq</span><span class="p">)</span>
+    <span class="n">latest_note</span> <span class="o">=</span> <span class="n">note_seq</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">counts</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">step_ticks</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">step_ticks</span> <span class="o">=</span> <span class="mi">10</span>
     <span class="c1"># We&#39;ll compute by steps of 10 ticks which is a low value</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">latest_note</span><span class="o">.</span><span class="n">end_ticks</span><span class="p">,</span> <span class="n">step_ticks</span><span class="p">):</span>
         <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">for</span> <span class="n">note_idx</span><span class="p">,</span> <span class="n">note</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">note_seq</span><span class="p">):</span>
             <span class="c1"># if note ends aftre the next step start, count it</span>
-            <span class="k">if</span> <span class="n">note</span><span class="o">.</span><span class="n">start_ticks</span> <span class="o">&lt;</span> <span class="n">step_ticks</span> <span class="o">*</span> <span class="n">i</span> <span class="ow">and</span> <span class="n">note</span><span class="o">.</span><span class="n">end_ticks</span> <span class="o">&gt;=</span> <span class="n">step_ticks</span> <span class="o">*</span> <span class="n">i</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">note</span><span class="o">.</span><span class="n">start_ticks</span> <span class="o">&lt;</span> <span class="n">i</span> <span class="ow">and</span> <span class="n">note</span><span class="o">.</span><span class="n">end_ticks</span> <span class="o">&gt;=</span> <span class="n">i</span><span class="p">:</span>
                 <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="n">counts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
     <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span></div>

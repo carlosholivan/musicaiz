@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>musicaiz.harmony.keys &mdash; Musicaiz 0.0.2 documentation</title>
+  <title>musicaiz.harmony.keys &mdash; Musicaiz 0.1.0 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/plot_directive.css" type="text/css" />
@@ -40,7 +40,7 @@
             <img src="../../../_static/logo_square_dark.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.0.2
+                0.1.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -72,7 +72,6 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/2-write_midi.html">Writing a MIDI file from scratch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../notebooks/3-plot.html">Plotting</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">References:</span></p>
@@ -1367,6 +1366,13 @@
     <span class="p">)</span>
 
     <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">relative</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tonality</span><span class="p">:</span>
+
+        <span class="k">for</span> <span class="n">tonality</span> <span class="ow">in</span> <span class="n">Tonality</span><span class="o">.</span><span class="n">__members__</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">tonality</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">tonality</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">!=</span> <span class="n">tonality</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span>
+                <span class="k">return</span> <span class="n">tonality</span>
+
+    <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">root_note</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
@@ -1457,7 +1463,31 @@
 
     <span class="k">def</span> <span class="nf">scale_notes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scale</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">NoteClassBase</span><span class="p">]:</span>
         <span class="sd">&quot;&quot;&quot;This method returns the notes of the scale corresponding to</span>
-<span class="sd">        a submode.&quot;&quot;&quot;</span>
+<span class="sd">        a submode.</span>
+<span class="sd">        This is only used in the case of minor scales (harmonic or melodic) and greek scales.</span>
+<span class="sd">        The values that support the scales arg are: :func:`~musicaiz.harmony.Scales`.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        Major tonalities:</span>
+
+<span class="sd">        &gt;&gt;&gt; tonality = Tonality.D_MAJOR</span>
+<span class="sd">        &gt;&gt;&gt; tonality.scale_notes(&quot;MAJOR&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; tonality.scale_notes(&quot;LYDIAN&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; tonality.scale_notes(&quot;LYDIAN&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; tonality.scale_notes(&quot;MIXOLYDIAN&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; tonality.scale_notes(&quot;IONIAN&quot;)</span>
+
+<span class="sd">        Minor tonalities:</span>
+
+<span class="sd">        &gt;&gt;&gt; tonality = Tonality.C_MINOR</span>
+<span class="sd">        &gt;&gt;&gt; tonality.scale_notes(&quot;NATURAL&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; tonality.scale_notes(&quot;HARMONIC&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; tonality.scale_notes(&quot;DORIAN&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; tonality.scale_notes(&quot;PHRYGIAN&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; tonality.scale_notes(&quot;LOCRIAN&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; tonality.scale_notes(&quot;AEOLIAN&quot;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Obtain altered notes depending on the scale (minor harmonic...)</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">scale</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="n">scale_inst</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">scales</span><span class="p">(</span><span class="n">scale</span><span class="p">)</span>  <span class="c1"># initialize scale</span>
@@ -1540,6 +1570,7 @@
             <span class="n">tonality</span> <span class="o">=</span> <span class="n">tonality</span><span class="o">.</span><span class="n">name</span>
         <span class="c1"># Get scale inside the tonality</span>
         <span class="n">scale_mode</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_get_scale</span><span class="p">(</span><span class="n">tonality</span><span class="p">,</span> <span class="n">scale</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">scale</span><span class="p">,</span> <span class="n">scale_mode</span><span class="p">,</span> <span class="n">tonality</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">scale</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">notes</span> <span class="o">=</span> <span class="n">Tonality</span><span class="p">[</span><span class="n">tonality</span><span class="p">]</span><span class="o">.</span><span class="n">notes</span>
         <span class="k">else</span><span class="p">:</span>
@@ -1579,7 +1610,7 @@
             <span class="k">if</span> <span class="s2">&quot;MAJOR&quot;</span> <span class="ow">in</span> <span class="n">tonality</span><span class="p">:</span>
                 <span class="n">scale_mode</span> <span class="o">=</span> <span class="n">tonality_inst</span><span class="o">.</span><span class="n">scales</span><span class="p">(</span><span class="s2">&quot;MAJOR&quot;</span><span class="p">)</span>
             <span class="k">elif</span> <span class="s2">&quot;MINOR&quot;</span> <span class="ow">in</span> <span class="n">tonality</span><span class="p">:</span>
-                <span class="n">scale_mode</span> <span class="o">=</span> <span class="n">tonality_inst</span><span class="o">.</span><span class="n">scales</span><span class="p">(</span><span class="s2">&quot;MINOR&quot;</span><span class="p">)</span>
+                <span class="n">scale_mode</span> <span class="o">=</span> <span class="n">tonality_inst</span><span class="o">.</span><span class="n">scales</span><span class="p">(</span><span class="s2">&quot;NATURAL&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">scale_mode</span>
 
     <span class="nd">@classmethod</span>

@@ -14,9 +14,12 @@
    .. autosummary::
    
       ~Chord.__init__
+      ~Chord.chords_to_onehot
+      ~Chord.get_all_chords
       ~Chord.get_notes
       ~Chord.get_notes_from_chord
-      ~Chord.play
+      ~Chord.get_pitches_from_chord
+      ~Chord.split_chord_name
    
    
 

@@ -15,7 +15,6 @@
    
       ~AllChords.get_all_qualities
       ~AllChords.get_chord_from_name
-      ~AllChords.split_chord_name
    
    
 

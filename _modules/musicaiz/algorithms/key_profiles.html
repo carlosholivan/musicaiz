@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>musicaiz.algorithms.key_profiles &mdash; Musicaiz 0.1.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/plot_directive.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery-binder.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery-dataframe.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/sg_gallery-rendered-html.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/panels-bootstrap.5fd3999ee7762ccc51105388f4a9d115.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/design-tabs.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #222222ff" >
+            <a href="../../../index.html">
+            <img src="../../../_static/logo_square_dark.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../introduction.html">Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Musicaiz Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../loaders.html">Loaders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../structure.html">Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../harmony.html">Harmony</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../rhythm.html">Rhythm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../features.html">Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../algorithms.html">Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tokenizers.html">Tokenizers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../evaluation.html">Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../plotters.html">Plotters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../converters.html">Converters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../datasets.html">Datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../models.html">Models</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/3-plot.html">Plotting</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">References:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../implementations.html">Implementation Details</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../genindex.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #222222ff" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Musicaiz</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>musicaiz.algorithms.key_profiles</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for musicaiz.algorithms.key_profiles</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">operator</span>
+<span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
+
+<span class="kn">from</span> <span class="nn">musicaiz.features</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">pitch_class_histogram</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">musicaiz.structure</span> <span class="kn">import</span> <span class="n">Note</span><span class="p">,</span> <span class="n">NoteClassBase</span>
+<span class="kn">from</span> <span class="nn">musicaiz.harmony</span> <span class="kn">import</span> <span class="n">Tonality</span>
+<span class="kn">from</span> <span class="nn">musicaiz.rhythm</span> <span class="kn">import</span> <span class="n">NoteLengths</span>
+
+
+<span class="n">ORDERED_CIRCLE_FIFTHS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;G&quot;</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;F_SHARP&quot;</span><span class="p">,</span> <span class="s2">&quot;C_SHARP&quot;</span><span class="p">,</span> <span class="s2">&quot;G_SHARP&quot;</span><span class="p">,</span> <span class="s2">&quot;D_SHARP&quot;</span><span class="p">,</span> <span class="s2">&quot;A_SHARP&quot;</span><span class="p">,</span> <span class="s2">&quot;F&quot;</span>
+<span class="p">]</span>
+
+<span class="n">CIRCLE_FIFTHS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="s2">&quot;G&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;F&quot;</span><span class="p">,</span> <span class="s2">&quot;A_SHARP&quot;</span><span class="p">,</span> <span class="s2">&quot;D_SHARP&quot;</span><span class="p">,</span> <span class="s2">&quot;G_SHARP&quot;</span><span class="p">,</span> <span class="s2">&quot;C_SHARP&quot;</span><span class="p">,</span> <span class="s2">&quot;F_SHARP&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span>
+<span class="p">]</span>
+
+<span class="n">TONICS_MAPPING</span> <span class="o">=</span> <span class="p">{</span>
+   <span class="s2">&quot;C&quot;</span><span class="p">:</span> <span class="s2">&quot;F_SHARP&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;F&quot;</span><span class="p">:</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;A_SHARP&quot;</span><span class="p">:</span> <span class="s2">&quot;E&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;D_SHARP&quot;</span><span class="p">:</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;G_SHARP&quot;</span><span class="p">:</span> <span class="s2">&quot;D&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;C_SHARP&quot;</span><span class="p">:</span> <span class="s2">&quot;G&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;F_SHARP&quot;</span><span class="p">:</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;B&quot;</span><span class="p">:</span> <span class="s2">&quot;F&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;E&quot;</span><span class="p">:</span> <span class="s2">&quot;A_SHARP&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;A&quot;</span><span class="p">:</span> <span class="s2">&quot;D_SHARP&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;D&quot;</span><span class="p">:</span> <span class="s2">&quot;G_SHARP&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;G&quot;</span><span class="p">:</span> <span class="s2">&quot;C_SHARP&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+
+<div class="viewcode-block" id="KeyDetectionAlgorithms"><a class="viewcode-back" href="../../../generated/musicaiz.algorithms.KeyDetectionAlgorithms.html#musicaiz.algorithms.KeyDetectionAlgorithms">[docs]</a><span class="k">class</span> <span class="nc">KeyDetectionAlgorithms</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">KRUMHANSL_KESSLER</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;k-k&quot;</span><span class="p">,</span> <span class="s2">&quot;krumhansl-kessler&quot;</span><span class="p">]</span>
+    <span class="n">TEMPERLEY</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;t&quot;</span><span class="p">,</span> <span class="s2">&quot;temperley&quot;</span><span class="p">]</span>
+    <span class="n">SIGNATURE_FIFTHS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;5ths&quot;</span><span class="p">,</span> <span class="s2">&quot;fifths&quot;</span><span class="p">]</span>
+    <span class="n">ALBRETCH_SHANAHAN</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;a-s&quot;</span><span class="p">,</span> <span class="s2">&quot;albrecht-shanahan&quot;</span><span class="p">]</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">all_values</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="nb">all</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__members__</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">n</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
+                <span class="nb">all</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">all</span></div>
+
+
+<div class="viewcode-block" id="KrumhanslKessler"><a class="viewcode-back" href="../../../generated/musicaiz.algorithms.KrumhanslKessler.html#musicaiz.algorithms.KrumhanslKessler">[docs]</a><span class="k">class</span> <span class="nc">KrumhanslKessler</span><span class="p">:</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Krumhansl-Schmuckler/Kessler weights for</span>
+<span class="sd">    Krumhansl-Schmuckler key-profiles algorithm.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">major</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;C&quot;</span><span class="p">:</span> <span class="mf">6.35</span><span class="p">,</span>
+            <span class="s2">&quot;C_SHARP&quot;</span><span class="p">:</span> <span class="mf">2.23</span><span class="p">,</span>
+            <span class="s2">&quot;D&quot;</span><span class="p">:</span> <span class="mf">3.48</span><span class="p">,</span>
+            <span class="s2">&quot;D_SHARP&quot;</span><span class="p">:</span> <span class="mf">2.33</span><span class="p">,</span>
+            <span class="s2">&quot;E&quot;</span><span class="p">:</span> <span class="mf">4.38</span><span class="p">,</span>
+            <span class="s2">&quot;F&quot;</span><span class="p">:</span> <span class="mf">4.09</span><span class="p">,</span>
+            <span class="s2">&quot;F_SHARP&quot;</span><span class="p">:</span> <span class="mf">2.52</span><span class="p">,</span>
+            <span class="s2">&quot;G&quot;</span><span class="p">:</span> <span class="mf">5.19</span><span class="p">,</span>
+            <span class="s2">&quot;G_SHARP&quot;</span><span class="p">:</span> <span class="mf">2.39</span><span class="p">,</span>
+            <span class="s2">&quot;A&quot;</span><span class="p">:</span> <span class="mf">3.66</span><span class="p">,</span>
+            <span class="s2">&quot;A_SHARP&quot;</span><span class="p">:</span> <span class="mf">2.29</span><span class="p">,</span>
+            <span class="s2">&quot;B&quot;</span><span class="p">:</span> <span class="mf">2.88</span><span class="p">,</span>
+        <span class="p">}</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">minor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;C&quot;</span><span class="p">:</span> <span class="mf">6.33</span><span class="p">,</span>
+            <span class="s2">&quot;C_SHARP&quot;</span><span class="p">:</span> <span class="mf">2.68</span><span class="p">,</span>
+            <span class="s2">&quot;D&quot;</span><span class="p">:</span> <span class="mf">3.52</span><span class="p">,</span>
+            <span class="s2">&quot;D_SHARP&quot;</span><span class="p">:</span> <span class="mf">5.38</span><span class="p">,</span>
+            <span class="s2">&quot;E&quot;</span><span class="p">:</span> <span class="mf">2.60</span><span class="p">,</span>
+            <span class="s2">&quot;F&quot;</span><span class="p">:</span> <span class="mf">3.53</span><span class="p">,</span>
+            <span class="s2">&quot;F_SHARP&quot;</span><span class="p">:</span> <span class="mf">2.54</span><span class="p">,</span>
+            <span class="s2">&quot;G&quot;</span><span class="p">:</span> <span class="mf">4.75</span><span class="p">,</span>
+            <span class="s2">&quot;G_SHARP&quot;</span><span class="p">:</span> <span class="mf">3.98</span><span class="p">,</span>
+            <span class="s2">&quot;A&quot;</span><span class="p">:</span> <span class="mf">2.69</span><span class="p">,</span>
+            <span class="s2">&quot;A_SHARP&quot;</span><span class="p">:</span> <span class="mf">3.34</span><span class="p">,</span>
+            <span class="s2">&quot;B&quot;</span><span class="p">:</span> <span class="mf">3.17</span>
+        <span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="Temperley"><a class="viewcode-back" href="../../../generated/musicaiz.algorithms.Temperley.html#musicaiz.algorithms.Temperley">[docs]</a><span class="k">class</span> <span class="nc">Temperley</span><span class="p">:</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Temperley/Kostka/Payne weights for</span>
+<span class="sd">    key-profiles algorithm.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">major</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;C&quot;</span><span class="p">:</span> <span class="mf">0.748</span><span class="p">,</span>
+            <span class="s2">&quot;C_SHARP&quot;</span><span class="p">:</span> <span class="mf">0.060</span><span class="p">,</span>
+            <span class="s2">&quot;D&quot;</span><span class="p">:</span> <span class="mf">0.488</span><span class="p">,</span>
+            <span class="s2">&quot;D_SHARP&quot;</span><span class="p">:</span> <span class="mf">0.082</span><span class="p">,</span>
+            <span class="s2">&quot;E&quot;</span><span class="p">:</span> <span class="mf">0.67</span><span class="p">,</span>
+            <span class="s2">&quot;F&quot;</span><span class="p">:</span> <span class="mf">0.460</span><span class="p">,</span>
+            <span class="s2">&quot;F_SHARP&quot;</span><span class="p">:</span> <span class="mf">0.096</span><span class="p">,</span>
+            <span class="s2">&quot;G&quot;</span><span class="p">:</span> <span class="mf">0.715</span><span class="p">,</span>
+            <span class="s2">&quot;G_SHARP&quot;</span><span class="p">:</span> <span class="mf">0.104</span><span class="p">,</span>
+            <span class="s2">&quot;A&quot;</span><span class="p">:</span> <span class="mf">0.366</span><span class="p">,</span>
+            <span class="s2">&quot;A_SHARP&quot;</span><span class="p">:</span> <span class="mf">0.057</span><span class="p">,</span>
+            <span class="s2">&quot;B&quot;</span><span class="p">:</span> <span class="mf">0.400</span><span class="p">,</span>
+        <span class="p">}</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">minor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;C&quot;</span><span class="p">:</span> <span class="mf">0.712</span><span class="p">,</span>
+            <span class="s2">&quot;C_SHARP&quot;</span><span class="p">:</span> <span class="mf">0.084</span><span class="p">,</span>
+            <span class="s2">&quot;D&quot;</span><span class="p">:</span> <span class="mf">0.474</span><span class="p">,</span>
+            <span class="s2">&quot;D_SHARP&quot;</span><span class="p">:</span> <span class="mf">0.618</span><span class="p">,</span>
+            <span class="s2">&quot;E&quot;</span><span class="p">:</span> <span class="mf">0.049</span><span class="p">,</span>
+            <span class="s2">&quot;F&quot;</span><span class="p">:</span> <span class="mf">0.460</span><span class="p">,</span>
+            <span class="s2">&quot;F_SHARP&quot;</span><span class="p">:</span> <span class="mf">0.105</span><span class="p">,</span>
+            <span class="s2">&quot;G&quot;</span><span class="p">:</span> <span class="mf">0.747</span><span class="p">,</span>
+            <span class="s2">&quot;G_SHARP&quot;</span><span class="p">:</span> <span class="mf">0.404</span><span class="p">,</span>
+            <span class="s2">&quot;A&quot;</span><span class="p">:</span> <span class="mf">0.067</span><span class="p">,</span>
+            <span class="s2">&quot;A_SHARP&quot;</span><span class="p">:</span> <span class="mf">0.133</span><span class="p">,</span>
+            <span class="s2">&quot;B&quot;</span><span class="p">:</span> <span class="mf">0.330</span>
+        <span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="AlbrechtShanahan"><a class="viewcode-back" href="../../../generated/musicaiz.algorithms.AlbrechtShanahan.html#musicaiz.algorithms.AlbrechtShanahan">[docs]</a><span class="k">class</span> <span class="nc">AlbrechtShanahan</span><span class="p">:</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Albrecht/Shanahan weights for</span>
+<span class="sd">    key-profiles algorithm.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">major</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;C&quot;</span><span class="p">:</span> <span class="mf">0.238</span><span class="p">,</span>
+            <span class="s2">&quot;C_SHARP&quot;</span><span class="p">:</span> <span class="mf">0.006</span><span class="p">,</span>
+            <span class="s2">&quot;D&quot;</span><span class="p">:</span> <span class="mf">0.111</span><span class="p">,</span>
+            <span class="s2">&quot;D_SHARP&quot;</span><span class="p">:</span> <span class="mf">0.006</span><span class="p">,</span>
+            <span class="s2">&quot;E&quot;</span><span class="p">:</span> <span class="mf">0.137</span><span class="p">,</span>
+            <span class="s2">&quot;F&quot;</span><span class="p">:</span> <span class="mf">0.094</span><span class="p">,</span>
+            <span class="s2">&quot;F_SHARP&quot;</span><span class="p">:</span> <span class="mf">0.016</span><span class="p">,</span>
+            <span class="s2">&quot;G&quot;</span><span class="p">:</span> <span class="mf">0.214</span><span class="p">,</span>
+            <span class="s2">&quot;G_SHARP&quot;</span><span class="p">:</span> <span class="mf">0.009</span><span class="p">,</span>
+            <span class="s2">&quot;A&quot;</span><span class="p">:</span> <span class="mf">0.080</span><span class="p">,</span>
+            <span class="s2">&quot;A_SHARP&quot;</span><span class="p">:</span> <span class="mf">0.008</span><span class="p">,</span>
+            <span class="s2">&quot;B&quot;</span><span class="p">:</span> <span class="mf">0.081</span><span class="p">,</span>
+        <span class="p">}</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">minor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;C&quot;</span><span class="p">:</span> <span class="mf">0.220</span><span class="p">,</span>
+            <span class="s2">&quot;C_SHARP&quot;</span><span class="p">:</span> <span class="mf">0.006</span><span class="p">,</span>
+            <span class="s2">&quot;D&quot;</span><span class="p">:</span> <span class="mf">0.104</span><span class="p">,</span>
+            <span class="s2">&quot;D_SHARP&quot;</span><span class="p">:</span> <span class="mf">0.123</span><span class="p">,</span>
+            <span class="s2">&quot;E&quot;</span><span class="p">:</span> <span class="mf">0.019</span><span class="p">,</span>
+            <span class="s2">&quot;F&quot;</span><span class="p">:</span> <span class="mf">0.103</span><span class="p">,</span>
+            <span class="s2">&quot;F_SHARP&quot;</span><span class="p">:</span> <span class="mf">0.012</span><span class="p">,</span>
+            <span class="s2">&quot;G&quot;</span><span class="p">:</span> <span class="mf">0.214</span><span class="p">,</span>
+            <span class="s2">&quot;G_SHARP&quot;</span><span class="p">:</span> <span class="mf">0.062</span><span class="p">,</span>
+            <span class="s2">&quot;A&quot;</span><span class="p">:</span> <span class="mf">0.022</span><span class="p">,</span>
+            <span class="s2">&quot;A_SHARP&quot;</span><span class="p">:</span> <span class="mf">0.061</span><span class="p">,</span>
+            <span class="s2">&quot;B&quot;</span><span class="p">:</span> <span class="mf">0.052</span>
+        <span class="p">}</span></div>
+
+
+<span class="k">def</span> <span class="nf">signature_fifths</span><span class="p">(</span><span class="n">notes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Note</span><span class="p">]):</span>
+    <span class="c1"># 1. Get the Pitch Class Histogram</span>
+    <span class="n">pc</span> <span class="o">=</span> <span class="n">pitch_class_histogram</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+    <span class="n">notes_scale</span> <span class="o">=</span> <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">get_notes_chromatic_scale</span><span class="p">()</span>
+    <span class="c1"># convert the notes to the circle of 5ths notation</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">note</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">notes_scale</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">note</span><span class="o">.</span><span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">CIRCLE_FIFTHS</span><span class="p">:</span>
+            <span class="n">enharmonics</span> <span class="o">=</span> <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">_get_note_from_chromatic_idx</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">chromatic_scale_index</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">enharmonics</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="n">CIRCLE_FIFTHS</span><span class="p">:</span>
+                <span class="n">notes_scale</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">enharmonics</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">notes_scale</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">enharmonics</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1"># 2. Get pitch multiplicity (k = x_i / max(x))</span>
+    <span class="n">hist</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">note</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">notes_scale</span><span class="p">):</span>
+        <span class="n">hist</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">note</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">pc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="nb">max</span><span class="p">(</span><span class="n">pc</span><span class="p">)})</span>
+
+    <span class="n">notes_axes</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">hist</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">r</span><span class="p">,</span> <span class="n">l</span> <span class="o">=</span> <span class="n">_right_left_notes</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
+        <span class="n">k_r</span> <span class="o">=</span> <span class="p">[</span><span class="n">hist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">r</span><span class="p">]</span>
+        <span class="n">k_l</span> <span class="o">=</span> <span class="p">[</span><span class="n">hist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">l</span><span class="p">]</span>
+        <span class="c1"># this is different from the paper to correct the sign due to this implementation</span>
+        <span class="n">axis</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">k_l</span><span class="p">)</span> <span class="o">-</span> <span class="nb">sum</span><span class="p">(</span><span class="n">k_r</span><span class="p">)</span>
+        <span class="n">notes_axes</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">note</span><span class="p">:</span> <span class="n">axis</span><span class="p">})</span>
+    <span class="k">return</span> <span class="n">notes_axes</span>
+
+
+<span class="k">def</span> <span class="nf">_signature_fifths_keys</span><span class="p">(</span><span class="n">notes_axes</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+    <span class="c1"># 3. The right note in the ORDERED_CIRCLE_FIFTHS of the maximum directed axes</span>
+    <span class="c1"># will be the possible major key and its relative minor key will be the other possible key</span>
+
+    <span class="c1"># Order notes following the ORDERED_CIRCLE_FIFTHS</span>
+    <span class="n">notes_axes</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">notes_axes</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">ORDERED_CIRCLE_FIFTHS</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+    <span class="n">notes_axes</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">notes_axes</span><span class="p">)</span>
+
+    <span class="c1"># What happens when we have equal maximum values?</span>
+    <span class="c1"># We take the 1st one starting by the ORDERED_CIRCLE_FIFTHS</span>
+    <span class="k">for</span> <span class="n">note</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">notes_axes</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">v</span> <span class="o">==</span> <span class="nb">max</span><span class="p">(</span><span class="n">notes_axes</span><span class="o">.</span><span class="n">values</span><span class="p">()):</span>
+            <span class="n">major_key_tonic</span> <span class="o">=</span> <span class="n">note</span>
+            <span class="k">break</span>
+
+    <span class="n">major_key_tonic_idx</span> <span class="o">=</span> <span class="n">ORDERED_CIRCLE_FIFTHS</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">major_key_tonic</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">major_key_tonic</span> <span class="o">=</span> <span class="n">ORDERED_CIRCLE_FIFTHS</span><span class="p">[</span><span class="n">major_key_tonic_idx</span><span class="p">]</span>
+    <span class="c1"># Find the minor key tonic as the tonality with the same number of # or b of the major key</span>
+    <span class="k">if</span> <span class="n">major_key_tonic</span> <span class="o">+</span> <span class="s2">&quot;_MAJOR&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">Tonality</span><span class="o">.</span><span class="n">__members__</span><span class="p">]:</span>
+        <span class="c1"># look for enharmonic note to construct a correct tonality</span>
+        <span class="nb">chr</span> <span class="o">=</span> <span class="n">NoteClassBase</span><span class="p">[</span><span class="n">major_key_tonic</span><span class="p">]</span><span class="o">.</span><span class="n">chromatic_scale_index</span>
+        <span class="n">notes</span> <span class="o">=</span> <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">_get_note_from_chromatic_idx</span><span class="p">(</span><span class="nb">chr</span><span class="p">)</span>
+        <span class="n">notes</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">notes</span><span class="p">]</span>
+        <span class="n">tonic</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="n">major_key_tonic</span><span class="p">]))</span>
+        <span class="p">(</span><span class="n">new_major_key_tonic</span><span class="p">,)</span> <span class="o">=</span> <span class="n">tonic</span>
+        <span class="n">minor_key</span> <span class="o">=</span> <span class="n">Tonality</span><span class="p">[</span><span class="n">new_major_key_tonic</span> <span class="o">+</span> <span class="s2">&quot;_MAJOR&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">relative</span><span class="o">.</span><span class="n">name</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">minor_key</span> <span class="o">=</span> <span class="n">Tonality</span><span class="p">[</span><span class="n">major_key_tonic</span> <span class="o">+</span> <span class="s2">&quot;_MAJOR&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">relative</span><span class="o">.</span><span class="n">name</span>
+    <span class="c1"># We calculate the correlation coeficients &quot;r&quot; for both keys, the maximum will denote the key</span>
+
+    <span class="c1"># Construct the profiles dict that is a reduction of the notes_Axes with only the possible tonalities</span>
+    <span class="n">major</span> <span class="o">=</span> <span class="p">(</span><span class="n">major_key_tonic</span> <span class="o">+</span> <span class="s2">&quot;_MAJOR&quot;</span><span class="p">,</span> <span class="n">notes_axes</span><span class="p">[</span><span class="n">major_key_tonic</span><span class="p">])</span>
+    <span class="n">minor</span> <span class="o">=</span> <span class="p">(</span><span class="n">minor_key</span><span class="p">,</span> <span class="n">notes_axes</span><span class="p">[</span><span class="n">minor_key</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_MINOR&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]])</span>
+    <span class="k">return</span> <span class="n">major</span><span class="p">,</span> <span class="n">minor</span>
+
+<span class="c1"># Given a note, compute right and left multiplicity differences</span>
+<span class="k">def</span> <span class="nf">_right_left_notes</span><span class="p">(</span><span class="n">note</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+    <span class="n">tonic_idx</span> <span class="o">=</span> <span class="n">CIRCLE_FIFTHS</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
+    <span class="n">double_circle_fifths</span> <span class="o">=</span> <span class="p">[</span><span class="o">*</span><span class="n">CIRCLE_FIFTHS</span><span class="p">,</span> <span class="o">*</span><span class="n">CIRCLE_FIFTHS</span><span class="p">]</span>
+    <span class="n">right</span> <span class="o">=</span> <span class="n">double_circle_fifths</span><span class="p">[</span><span class="n">tonic_idx</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">tonic_idx</span><span class="o">+</span><span class="mi">6</span><span class="p">]</span>
+    <span class="n">left</span> <span class="o">=</span> <span class="n">double_circle_fifths</span><span class="p">[</span><span class="n">tonic_idx</span><span class="o">+</span><span class="mi">7</span><span class="p">:</span><span class="n">tonic_idx</span><span class="o">+</span><span class="mi">7</span><span class="o">+</span><span class="mi">5</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">right</span><span class="p">,</span> <span class="n">left</span>
+
+
+<span class="k">def</span> <span class="nf">_correlation</span><span class="p">(</span>
+    <span class="n">keys</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+    <span class="n">corr_keys</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">keys</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">x_y</span><span class="p">,</span> <span class="n">x_2</span><span class="p">,</span> <span class="n">y_2</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+        <span class="n">pitch</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">val</span><span class="o">.</span><span class="n">values</span><span class="p">()]</span>
+        <span class="n">dur</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">val</span><span class="o">.</span><span class="n">values</span><span class="p">()]</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">val</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="n">x_diff</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">pitch</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">pitch</span><span class="p">))</span>
+            <span class="n">y_diff</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">dur</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">dur</span><span class="p">))</span>
+            <span class="n">x_y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x_diff</span> <span class="o">*</span> <span class="n">y_diff</span><span class="p">)</span>
+            <span class="n">x_2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x_diff</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">y_2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y_diff</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">corr_keys</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">key</span><span class="p">:</span> <span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">x_y</span><span class="p">)</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">x_2</span><span class="p">)</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">(</span><span class="n">y_2</span><span class="p">)))})</span>
+    <span class="k">return</span> <span class="n">corr_keys</span>
+
+
+<span class="k">def</span> <span class="nf">_keys_correlations</span><span class="p">(</span>
+    <span class="n">durations</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
+    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+    <span class="c1"># Construct pitch-profile values for each key</span>
+    <span class="n">keys</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">note</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">durations</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">major_key</span><span class="p">,</span> <span class="n">minor_key</span> <span class="o">=</span> <span class="p">{},</span> <span class="p">{}</span>
+        <span class="n">note_idx</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">durations</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">durations</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">values</span><span class="p">[</span><span class="n">note_idx</span><span class="p">:]</span> <span class="o">+</span> <span class="n">values</span><span class="p">[:</span><span class="n">note_idx</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">l_note</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">durations</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+            <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;k-k&quot;</span><span class="p">:</span>
+                <span class="n">major_key</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">l_note</span><span class="p">:</span> <span class="p">(</span><span class="n">KrumhanslKessler</span><span class="p">()</span><span class="o">.</span><span class="n">major</span><span class="p">[</span><span class="n">l_note</span><span class="p">],</span> <span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">])})</span>
+                <span class="n">minor_key</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">l_note</span><span class="p">:</span> <span class="p">(</span><span class="n">KrumhanslKessler</span><span class="p">()</span><span class="o">.</span><span class="n">minor</span><span class="p">[</span><span class="n">l_note</span><span class="p">],</span> <span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">])})</span>
+            <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;temperley&quot;</span><span class="p">:</span>
+                <span class="n">major_key</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">l_note</span><span class="p">:</span> <span class="p">(</span><span class="n">Temperley</span><span class="p">()</span><span class="o">.</span><span class="n">major</span><span class="p">[</span><span class="n">l_note</span><span class="p">],</span> <span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">])})</span>
+                <span class="n">minor_key</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">l_note</span><span class="p">:</span> <span class="p">(</span><span class="n">Temperley</span><span class="p">()</span><span class="o">.</span><span class="n">minor</span><span class="p">[</span><span class="n">l_note</span><span class="p">],</span> <span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">])})</span>
+            <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;a-s&quot;</span><span class="p">:</span>
+                <span class="n">major_key</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">l_note</span><span class="p">:</span> <span class="p">(</span><span class="n">AlbrechtShanahan</span><span class="p">()</span><span class="o">.</span><span class="n">major</span><span class="p">[</span><span class="n">l_note</span><span class="p">],</span> <span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">])})</span>
+                <span class="n">minor_key</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">l_note</span><span class="p">:</span> <span class="p">(</span><span class="n">AlbrechtShanahan</span><span class="p">()</span><span class="o">.</span><span class="n">minor</span><span class="p">[</span><span class="n">l_note</span><span class="p">],</span> <span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">])})</span>
+        <span class="n">keys</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">note</span> <span class="o">+</span> <span class="s2">&quot;_MAJOR&quot;</span><span class="p">:</span> <span class="n">major_key</span><span class="p">})</span>
+        <span class="n">keys</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">note</span> <span class="o">+</span> <span class="s2">&quot;_MINOR&quot;</span><span class="p">:</span> <span class="n">minor_key</span><span class="p">})</span>
+
+    <span class="n">corr_keys</span> <span class="o">=</span> <span class="n">_correlation</span><span class="p">(</span><span class="n">keys</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">corr_keys</span>
+
+
+<span class="k">def</span> <span class="nf">signature_fifths_profiles</span><span class="p">(</span>
+    <span class="n">notes_axes</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+    <span class="c1"># Get the possible keys</span>
+    <span class="n">major</span><span class="p">,</span> <span class="n">minor</span> <span class="o">=</span> <span class="n">_signature_fifths_keys</span><span class="p">(</span><span class="n">notes_axes</span><span class="p">)</span>
+    
+    <span class="n">keys</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">major_key</span><span class="p">,</span> <span class="n">minor_key</span> <span class="o">=</span> <span class="n">major</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">minor</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">major_key_tonic</span><span class="p">,</span> <span class="n">minor_key_tonic</span> <span class="o">=</span> <span class="n">major_key</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_MAJOR&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="n">minor_key</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_MINOR&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">major_note_idx</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">notes_axes</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">major_key_tonic</span><span class="p">)</span>
+    <span class="n">minor_note_idx</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">notes_axes</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">minor_key_tonic</span><span class="p">)</span>
+    <span class="n">major_values</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">notes_axes</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+    <span class="n">major_values</span> <span class="o">=</span> <span class="n">major_values</span><span class="p">[</span><span class="n">major_note_idx</span><span class="p">:]</span> <span class="o">+</span> <span class="n">major_values</span><span class="p">[:</span><span class="n">major_note_idx</span><span class="p">]</span>
+    <span class="n">minor_values</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">notes_axes</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+    <span class="n">minor_values</span> <span class="o">=</span> <span class="n">minor_values</span><span class="p">[</span><span class="n">minor_note_idx</span><span class="p">:]</span> <span class="o">+</span> <span class="n">minor_values</span><span class="p">[:</span><span class="n">minor_note_idx</span><span class="p">]</span>
+    <span class="n">maj</span><span class="p">,</span> <span class="n">mi</span> <span class="o">=</span> <span class="p">{},</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">l_note</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">notes_axes</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+        <span class="n">maj</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">l_note</span><span class="p">:</span> <span class="p">(</span><span class="n">KrumhanslKessler</span><span class="p">()</span><span class="o">.</span><span class="n">major</span><span class="p">[</span><span class="n">l_note</span><span class="p">],</span> <span class="n">major_values</span><span class="p">[</span><span class="n">i</span><span class="p">])})</span>
+        <span class="n">mi</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">l_note</span><span class="p">:</span> <span class="p">(</span><span class="n">KrumhanslKessler</span><span class="p">()</span><span class="o">.</span><span class="n">minor</span><span class="p">[</span><span class="n">l_note</span><span class="p">],</span> <span class="n">minor_values</span><span class="p">[</span><span class="n">i</span><span class="p">])})</span>
+    <span class="n">keys</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">major_key</span><span class="p">:</span> <span class="n">maj</span><span class="p">})</span>
+    <span class="n">keys</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">minor_key</span><span class="p">:</span> <span class="n">mi</span><span class="p">})</span>
+
+    <span class="n">corr_keys</span> <span class="o">=</span> <span class="n">_correlation</span><span class="p">(</span><span class="n">keys</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">corr_keys</span>
+
+
+<span class="k">def</span> <span class="nf">_eights_per_pitch_class</span><span class="p">(</span><span class="n">notes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Note</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Computes the number of eight notes per pitch class&quot;&quot;&quot;</span>
+    <span class="n">pitches_ticks</span> <span class="o">=</span> <span class="p">{}</span> <span class="c1"># A dict with the duration ticks of each</span>
+    <span class="c1"># pitch class: Dict[str, int] {&quot;C&quot;: 245...}</span>
+    <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">notes</span><span class="p">:</span>
+        <span class="n">dur</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">end_ticks</span> <span class="o">-</span> <span class="n">note</span><span class="o">.</span><span class="n">start_ticks</span>
+        <span class="k">if</span> <span class="n">note</span><span class="o">.</span><span class="n">note_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">pitches_ticks</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">pitches_ticks</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">note</span><span class="o">.</span><span class="n">note_name</span><span class="p">:</span> <span class="n">dur</span><span class="p">})</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">pitches_ticks</span><span class="p">[</span><span class="n">note</span><span class="o">.</span><span class="n">note_name</span><span class="p">]</span> <span class="o">+=</span> <span class="n">dur</span>
+
+    <span class="c1"># Divide the total ticks per pitch class by the ticks that corr. to 1 8th note</span>
+    <span class="n">ticks_eight</span> <span class="o">=</span> <span class="n">NoteLengths</span><span class="o">.</span><span class="n">EIGHT</span><span class="o">.</span><span class="n">ticks</span><span class="p">()</span>
+    <span class="n">durations</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">pitch</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">pitches_ticks</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">durations</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">pitch</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">v</span> <span class="o">/</span> <span class="n">ticks_eight</span><span class="p">)})</span>
+    
+    <span class="c1"># Add the pitch classes that are not present in the passed notes</span>
+    <span class="n">dur</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">durations</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="c1"># TODO: Possible bug if the pitch class is a flat and not # </span>
+        <span class="n">new_note</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">,</span> <span class="s2">&quot;_SHARP&quot;</span><span class="p">)</span>
+        <span class="n">new_note</span> <span class="o">=</span> <span class="n">new_note</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;_FLAT&quot;</span><span class="p">)</span>
+        <span class="n">dur</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">new_note</span><span class="p">:</span> <span class="n">durations</span><span class="p">[</span><span class="n">note</span><span class="p">]})</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">ORDERED_CIRCLE_FIFTHS</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">dur</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">dur</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">n</span><span class="p">:</span> <span class="mi">0</span><span class="p">})</span>
+    <span class="n">pitches</span> <span class="o">=</span> <span class="n">NoteClassBase</span><span class="o">.</span><span class="n">get_notes_chromatic_scale</span><span class="p">(</span><span class="s2">&quot;SHARP&quot;</span><span class="p">)</span>
+    <span class="n">pitches</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pitches</span><span class="p">]</span>
+    <span class="n">dur</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">dur</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">pitches</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+    <span class="n">dur</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">dur</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">dur</span>
+
+
+<div class="viewcode-block" id="key_detection"><a class="viewcode-back" href="../../../generated/musicaiz.algorithms.key_detection.html#musicaiz.algorithms.key_detection">[docs]</a><span class="k">def</span> <span class="nf">key_detection</span><span class="p">(</span><span class="n">notes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Note</span><span class="p">],</span> <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;k-k&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Algorithm description:</span>
+
+<span class="sd">    1. Count the number of eights of each pitch class.</span>
+<span class="sd">    2. Store the duration values in the `durations` dict (input arg. of this function).</span>
+<span class="sd">    3. Calculate the correlation between pitch weights and the durations</span>
+<span class="sd">    (this in done with :func:`~musicaiz.algorithms._keys_correlations`.)</span>
+<span class="sd">    4. The higher correlation is corresponds to the key.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+
+<span class="sd">    durations (Dict[str, int]): _description_</span>
+<span class="sd">        method (str, optional): _description_. Defaults to &quot;k-k&quot;.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    </span>
+<span class="sd">    _type_: _description_</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">method</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">KeyDetectionAlgorithms</span><span class="o">.</span><span class="n">all_values</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Not key detection algorithm found.&quot;</span><span class="p">)</span>
+
+    <span class="n">durations</span> <span class="o">=</span> <span class="n">_eights_per_pitch_class</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">method</span> <span class="ow">in</span> <span class="n">KeyDetectionAlgorithms</span><span class="o">.</span><span class="n">KRUMHANSL_KESSLER</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
+        <span class="n">corr</span> <span class="o">=</span> <span class="n">_keys_correlations</span><span class="p">(</span><span class="n">durations</span><span class="p">,</span> <span class="s2">&quot;k-k&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">method</span> <span class="ow">in</span> <span class="n">KeyDetectionAlgorithms</span><span class="o">.</span><span class="n">TEMPERLEY</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
+        <span class="n">corr</span> <span class="o">=</span> <span class="n">_keys_correlations</span><span class="p">(</span><span class="n">durations</span><span class="p">,</span> <span class="s2">&quot;temperley&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">method</span> <span class="ow">in</span> <span class="n">KeyDetectionAlgorithms</span><span class="o">.</span><span class="n">ALBRETCH_SHANAHAN</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
+        <span class="n">corr</span> <span class="o">=</span> <span class="n">_keys_correlations</span><span class="p">(</span><span class="n">durations</span><span class="p">,</span> <span class="s2">&quot;a-s&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">method</span> <span class="ow">in</span> <span class="n">KeyDetectionAlgorithms</span><span class="o">.</span><span class="n">SIGNATURE_FIFTHS</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
+        <span class="n">notes_axes</span> <span class="o">=</span> <span class="n">signature_fifths</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+        <span class="n">corr</span> <span class="o">=</span> <span class="n">signature_fifths_profiles</span><span class="p">(</span><span class="n">notes_axes</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">corr</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="n">operator</span><span class="o">.</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Carlos Hernandez-Olivan.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

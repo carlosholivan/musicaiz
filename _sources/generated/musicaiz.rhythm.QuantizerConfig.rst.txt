@@ -1,0 +1,30 @@
+﻿musicaiz.rhythm.QuantizerConfig
+===============================
+
+.. currentmodule:: musicaiz.rhythm
+
+.. autoclass:: QuantizerConfig
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~QuantizerConfig.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~QuantizerConfig.delta_qr
+      ~QuantizerConfig.strength
+      ~QuantizerConfig.type_q
+   
+   

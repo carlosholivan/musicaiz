@@ -1,0 +1,6 @@
+﻿musicaiz.features.get\_structure\_boundaries\_notes
+===================================================
+
+.. currentmodule:: musicaiz.features
+
+.. autofunction:: get_structure_boundaries_notes

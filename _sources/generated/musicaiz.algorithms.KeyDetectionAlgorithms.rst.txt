@@ -1,0 +1,31 @@
+﻿musicaiz.algorithms.KeyDetectionAlgorithms
+==========================================
+
+.. currentmodule:: musicaiz.algorithms
+
+.. autoclass:: KeyDetectionAlgorithms
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~KeyDetectionAlgorithms.all_values
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~KeyDetectionAlgorithms.KRUMHANSL_KESSLER
+      ~KeyDetectionAlgorithms.TEMPERLEY
+      ~KeyDetectionAlgorithms.SIGNATURE_FIFTHS
+      ~KeyDetectionAlgorithms.ALBRETCH_SHANAHAN
+   
+   

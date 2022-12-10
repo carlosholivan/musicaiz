@@ -1,0 +1,29 @@
+﻿musicaiz.algorithms.KrumhanslKessler
+====================================
+
+.. currentmodule:: musicaiz.algorithms
+
+.. autoclass:: KrumhanslKessler
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~KrumhanslKessler.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~KrumhanslKessler.major
+      ~KrumhanslKessler.minor
+   
+   

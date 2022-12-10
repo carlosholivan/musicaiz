@@ -62,6 +62,7 @@
       ~Tonality.A_SHARP_MINOR
       ~Tonality.C_FLAT_MAJOR
       ~Tonality.A_FLAT_MINOR
+      ~Tonality.relative
       ~Tonality.root_note
       ~Tonality.num_accidentals
       ~Tonality.symbol_accidentals

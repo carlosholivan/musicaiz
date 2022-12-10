@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>musicaiz.algorithms.harmonic_shift &mdash; Musicaiz 0.0.2 documentation</title>
+  <title>musicaiz.algorithms.harmonic_shift &mdash; Musicaiz 0.1.0 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/plot_directive.css" type="text/css" />
@@ -40,7 +40,7 @@
             <img src="../../../_static/logo_square_dark.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.0.2
+                0.1.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -72,7 +72,6 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/2-write_midi.html">Writing a MIDI file from scratch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../notebooks/3-plot.html">Plotting</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">References:</span></p>
@@ -108,23 +107,23 @@
              
   <h1>Source code for musicaiz.algorithms.harmonic_shift</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">pretty_midi</span> <span class="k">as</span> <span class="nn">pm</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Dict</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 
 
 <span class="kn">from</span> <span class="nn">musicaiz.harmony</span> <span class="kn">import</span> <span class="n">Tonality</span>
 <span class="kn">from</span> <span class="nn">musicaiz.structure</span> <span class="kn">import</span> <span class="n">NoteClassBase</span><span class="p">,</span> <span class="n">Note</span>
-<span class="kn">from</span> <span class="nn">musicaiz.converters</span> <span class="kn">import</span> <span class="n">pretty_midi_note_to_musanalysis</span>
+<span class="kn">from</span> <span class="nn">musicaiz.converters</span> <span class="kn">import</span> <span class="n">prettymidi_note_to_musicaiz</span>
 
 
 <div class="viewcode-block" id="harmonic_shifting"><a class="viewcode-back" href="../../../generated/musicaiz.algorithms.harmonic_shifting.html#musicaiz.algorithms.harmonic_shifting">[docs]</a><span class="k">def</span> <span class="nf">harmonic_shifting</span><span class="p">(</span>
-    <span class="n">origin_notes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Note</span><span class="p">],</span>
+    <span class="n">origin_notes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Note</span><span class="p">]],</span>
     <span class="n">origin_progression</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
     <span class="n">origin_tonality</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">origin_scale</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">target_progression</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
     <span class="n">target_tonality</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">target_scale</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Note</span><span class="p">]:</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Note</span><span class="p">]]:</span>
 
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This function maps the pitches of a midi to a new scale and chord progression.</span>
@@ -294,6 +293,135 @@
     <span class="k">return</span> <span class="n">origin_notes</span></div>
 
 
+<span class="k">def</span> <span class="nf">scale_change</span><span class="p">(</span>
+    <span class="n">origin_notes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Note</span><span class="p">],</span>
+    <span class="n">origin_tonality</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">origin_scale</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">target_tonality</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">target_scale</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">correction</span><span class="p">:</span> <span class="nb">bool</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Note</span><span class="p">]:</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function maps the pitches of a midi to a new scale.</span>
+<span class="sd">    To do that, the position of the note in the original scale is</span>
+<span class="sd">    extracted and then it is used to obtain the pitch in the target</span>
+<span class="sd">    scale.</span>
+<span class="sd">    The pitches are mapped to the same octave than the original ones.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    origin_notes: List[Note]</span>
+<span class="sd">        the original midi data.</span>
+
+<span class="sd">    origin_tonality: str</span>
+<span class="sd">        the origin tonality.</span>
+
+<span class="sd">    origin_scale: str</span>
+<span class="sd">        the origin scale.</span>
+
+<span class="sd">    target_tonality: str</span>
+<span class="sd">        the target scale.</span>
+
+<span class="sd">    target_scale: str</span>
+<span class="sd">        the target scale.</span>
+<span class="sd">    </span>
+<span class="sd">    correction: bool</span>
+<span class="sd">        if we want to correct the &quot;wrong&quot; input notes.</span>
+<span class="sd">        If True it corrects the non belonging notes by adding a semitone to the</span>
+<span class="sd">        input note that does not belong to the origin_scale.</span>
+<span class="sd">        If False the algorithm does not correct the input notes. The note that does</span>
+<span class="sd">        not belong to the input scale will be mapped by calculating the</span>
+<span class="sd">        difference in semitones between the note and the tonic of the scale, and</span>
+<span class="sd">        then the semitones are added to the tonic of the target scale to obtain the target note.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    origin_notes: List[Note]</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    Example of 2 bars, 1st bar with 3 notes and 2nd bar with 1 note:</span>
+
+<span class="sd">    &gt;&gt;&gt; origin_notes = [</span>
+<span class="sd">    &gt;&gt;&gt;         Note(pitch=43, start=0, end=96, velocity=82), # G</span>
+<span class="sd">    &gt;&gt;&gt;         Note(pitch=58, start=96, end=96*2, velocity=82), # A#</span>
+<span class="sd">    &gt;&gt;&gt;         Note(pitch=60, start=96*2, end=96*3, velocity=82), # C</span>
+<span class="sd">    &gt;&gt;&gt;         Note(pitch=72, start=96*4, end=96*5, velocity=44) # C</span>
+<span class="sd">    &gt;&gt;&gt; ]</span>
+<span class="sd">    &gt;&gt;&gt; origin_tonality = &quot;G_MINOR&quot;</span>
+<span class="sd">    &gt;&gt;&gt; origin_scale = &quot;NATURAL&quot;</span>
+<span class="sd">    &gt;&gt;&gt; target_tonality = &quot;C_MINOR&quot;</span>
+<span class="sd">    &gt;&gt;&gt; target_scale = &quot;NATURAL&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Get the note position in the scale</span>
+    <span class="n">orig_tonality</span> <span class="o">=</span> <span class="n">Tonality</span><span class="p">[</span><span class="n">origin_tonality</span><span class="p">]</span>
+    <span class="n">orig_scale_notes</span> <span class="o">=</span> <span class="p">[</span><span class="n">note</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">orig_tonality</span><span class="o">.</span><span class="n">scale_notes</span><span class="p">(</span><span class="n">origin_scale</span><span class="p">)]</span>
+
+    <span class="n">target_tonality</span> <span class="o">=</span> <span class="n">Tonality</span><span class="p">[</span><span class="n">target_tonality</span><span class="p">]</span>
+    <span class="n">target_scale_notes</span> <span class="o">=</span> <span class="p">[</span><span class="n">note</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">target_tonality</span><span class="o">.</span><span class="n">scale_notes</span><span class="p">(</span><span class="n">target_scale</span><span class="p">)]</span>
+
+    <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">origin_notes</span><span class="p">:</span>
+        <span class="n">orig_note_name</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">note_number_to_name</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">pitch</span><span class="p">)</span>
+
+        <span class="c1"># Extract octave</span>
+        <span class="n">octave</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">isdigit</span><span class="p">,</span> <span class="n">orig_note_name</span><span class="p">)))</span>
+
+        <span class="c1"># Get the note name without the octave</span>
+        <span class="n">orig_note_name</span> <span class="o">=</span> <span class="n">orig_note_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">octave</span><span class="p">),</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">orig_note_name</span> <span class="ow">in</span> <span class="n">orig_scale_notes</span><span class="p">:</span>
+            <span class="n">note_position</span> <span class="o">=</span> <span class="n">orig_scale_notes</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">orig_note_name</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">correction</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="c1"># Get note 1 semitone up than the original</span>
+                <span class="n">orig_note_name</span> <span class="o">=</span> <span class="n">orig_note_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">,</span> <span class="s2">&quot;_SHARP&quot;</span><span class="p">)</span>
+                <span class="n">orig_note_name</span> <span class="o">=</span> <span class="n">orig_note_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;_FLAT&quot;</span><span class="p">)</span>
+                <span class="n">orig_note_name</span> <span class="o">=</span> <span class="n">NoteClassBase</span><span class="p">[</span><span class="n">orig_note_name</span><span class="p">]</span><span class="o">.</span><span class="n">add_sharp</span><span class="o">.</span><span class="n">name</span>
+                <span class="n">note_position</span> <span class="o">=</span> <span class="n">orig_scale_notes</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">orig_note_name</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">orig_tonic</span> <span class="o">=</span> <span class="n">orig_scale_notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">orig_tonic</span> <span class="o">=</span> <span class="n">orig_tonic</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;_SHARP&quot;</span><span class="p">,</span> <span class="s2">&quot;#&quot;</span><span class="p">)</span>
+                <span class="n">orig_tonic</span> <span class="o">=</span> <span class="n">orig_tonic</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;_FLAT&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">)</span>
+                <span class="n">orig_tonic_pitch</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">note_name_to_number</span><span class="p">(</span><span class="n">orig_tonic</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">octave</span><span class="p">))</span>
+                <span class="n">diff_semitones</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">pitch</span> <span class="o">-</span> <span class="n">orig_tonic_pitch</span><span class="p">)</span>
+
+                <span class="n">target_tonic</span> <span class="o">=</span> <span class="n">target_scale_notes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">target_tonic</span> <span class="o">=</span> <span class="n">target_tonic</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;_SHARP&quot;</span><span class="p">,</span> <span class="s2">&quot;#&quot;</span><span class="p">)</span>
+                <span class="n">target_tonic</span> <span class="o">=</span> <span class="n">target_tonic</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;_FLAT&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">)</span>
+                <span class="n">target_tonic_pitch</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">note_name_to_number</span><span class="p">(</span><span class="n">target_tonic</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">octave</span><span class="p">))</span>
+                <span class="n">target_pitch</span> <span class="o">=</span> <span class="n">diff_semitones</span> <span class="o">+</span> <span class="n">target_tonic_pitch</span>
+                <span class="n">target_note_name</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">note_number_to_name</span><span class="p">(</span><span class="n">target_pitch</span><span class="p">)</span>
+
+                <span class="n">target_octave</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="nb">str</span><span class="o">.</span><span class="n">isdigit</span><span class="p">,</span> <span class="n">target_note_name</span><span class="p">)))</span>
+                <span class="k">if</span> <span class="n">target_octave</span> <span class="o">&lt;</span> <span class="n">octave</span><span class="p">:</span>
+                    <span class="n">target_pitch</span> <span class="o">+=</span> <span class="mi">12</span>
+                <span class="k">elif</span> <span class="n">target_octave</span> <span class="o">&gt;</span> <span class="n">octave</span><span class="p">:</span>
+                    <span class="n">target_pitch</span> <span class="o">-=</span> <span class="mi">12</span>
+                <span class="n">new_note_name</span> <span class="o">=</span> <span class="n">target_note_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">octave</span><span class="p">),</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+                <span class="n">new_note_name</span> <span class="o">=</span> <span class="n">new_note_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;_SHARP&quot;</span><span class="p">,</span> <span class="s2">&quot;#&quot;</span><span class="p">)</span>
+                <span class="n">new_note_name</span> <span class="o">=</span> <span class="n">new_note_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;_FLAT&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">)</span>
+
+                <span class="n">note</span><span class="o">.</span><span class="n">pitch</span> <span class="o">=</span> <span class="n">target_pitch</span>
+                <span class="n">note</span><span class="o">.</span><span class="n">note_name</span> <span class="o">=</span> <span class="n">new_note_name</span>
+                <span class="n">note</span><span class="o">.</span><span class="n">pitch_name</span> <span class="o">=</span> <span class="n">target_note_name</span>
+                <span class="k">continue</span>
+
+        <span class="n">target_note_name</span> <span class="o">=</span> <span class="n">target_scale_notes</span><span class="p">[</span><span class="n">note_position</span><span class="p">]</span>
+
+        <span class="n">target_note_name</span> <span class="o">=</span> <span class="n">target_note_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;_SHARP&quot;</span><span class="p">,</span> <span class="s2">&quot;#&quot;</span><span class="p">)</span>
+        <span class="n">target_note_name</span> <span class="o">=</span> <span class="n">target_note_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;_FLAT&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">)</span>
+
+        <span class="n">new_note_name</span> <span class="o">=</span> <span class="n">target_note_name</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">octave</span><span class="p">)</span>
+        <span class="n">new_pitch</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">note_name_to_number</span><span class="p">(</span><span class="n">new_note_name</span><span class="p">)</span>
+
+        <span class="n">note</span><span class="o">.</span><span class="n">pitch</span> <span class="o">=</span> <span class="n">new_pitch</span>
+        <span class="n">note</span><span class="o">.</span><span class="n">note_name</span> <span class="o">=</span> <span class="n">target_note_name</span>
+        <span class="n">note</span><span class="o">.</span><span class="n">pitch_name</span> <span class="o">=</span> <span class="n">new_note_name</span>
+    <span class="k">return</span> <span class="n">origin_notes</span>
+
+
 <span class="k">def</span> <span class="nf">_map_passing_note</span><span class="p">(</span>
     <span class="n">origin_pitch</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="n">origin_tonality</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -327,7 +455,7 @@
     <span class="c1"># Check if target pitch corresponds to a note in the scale, if not,</span>
     <span class="c1"># convert the note to the closest note in the scale</span>
     <span class="n">target_name</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">note_number_to_name</span><span class="p">(</span><span class="n">target_pitch</span><span class="p">)</span>
-    <span class="n">target_name</span><span class="p">,</span> <span class="n">target_octave</span> <span class="o">=</span> <span class="n">pretty_midi_note_to_musanalysis</span><span class="p">(</span><span class="n">target_name</span><span class="p">)</span>
+    <span class="n">target_name</span><span class="p">,</span> <span class="n">target_octave</span> <span class="o">=</span> <span class="n">prettymidi_note_to_musicaiz</span><span class="p">(</span><span class="n">target_name</span><span class="p">)</span>
 
     <span class="c1"># Get the notes in the scale</span>
     <span class="n">all_degs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;I&quot;</span><span class="p">,</span> <span class="s2">&quot;II&quot;</span><span class="p">,</span> <span class="s2">&quot;III&quot;</span><span class="p">,</span> <span class="s2">&quot;IV&quot;</span><span class="p">,</span> <span class="s2">&quot;V&quot;</span><span class="p">,</span> <span class="s2">&quot;VI&quot;</span><span class="p">,</span> <span class="s2">&quot;VII&quot;</span><span class="p">]</span>

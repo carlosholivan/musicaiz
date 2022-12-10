@@ -14,8 +14,6 @@
    .. autosummary::
    
       ~Instrument.__init__
-      ~Instrument.concatenate_instruments
-      ~Instrument.fluidsynth
    
    
 

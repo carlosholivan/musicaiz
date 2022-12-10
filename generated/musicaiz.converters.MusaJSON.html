@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>musicaiz.converters.MusaJSON &mdash; Musicaiz 0.0.2 documentation</title>
+  <title>musicaiz.converters.MusaJSON &mdash; Musicaiz 0.1.0 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
@@ -30,7 +30,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="musicaiz.converters.pretty_midi_note_to_musanalysis" href="musicaiz.converters.pretty_midi_note_to_musanalysis.html" />
+    <link rel="next" title="musicaiz.converters.prettymidi_note_to_musicaiz" href="musicaiz.converters.prettymidi_note_to_musicaiz.html" />
     <link rel="prev" title="Converters" href="../converters.html" /> 
 </head>
 
@@ -43,7 +43,7 @@
             <img src="../_static/logo_square_dark.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.0.2
+                0.1.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -82,7 +82,6 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../notebooks/2-write_midi.html">Writing a MIDI file from scratch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notebooks/3-plot.html">Plotting</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">References:</span></p>
@@ -145,9 +144,13 @@
 <h1>musicaiz.converters.MusaJSON<a class="headerlink" href="#musicaiz-converters-musajson" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="musicaiz.converters.MusaJSON">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">musicaiz.converters.</span></span><span class="sig-name descname"><span class="pre">MusaJSON</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">musa_obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="musicaiz.loaders.Musa.html#musicaiz.loaders.Musa" title="musicaiz.loaders.Musa"><span class="pre">musicaiz.loaders.Musa</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/musicaiz/converters/musa_json.html#MusaJSON"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#musicaiz.converters.MusaJSON" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">musicaiz.converters.</span></span><span class="sig-name descname"><span class="pre">MusaJSON</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">musa_obj</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/musicaiz/converters/musa_json.html#MusaJSON"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#musicaiz.converters.MusaJSON" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class converst a <cite>musicaiz</cite> <a class="reference internal" href="musicaiz.loaders.Musa.html#musicaiz.loaders.Musa" title="musicaiz.loaders.Musa"><code class="xref py py-func docutils literal notranslate"><span class="pre">Musa()</span></code></a> object
-into a JSON format.</p>
+into a JSON format.
+Note that this conversion is different that the .json method of Musa class,
+since that is intended for encoding musicaiz objects and this class here
+can be encoded and decoded with other softwares since it does not encode
+musicaiz objects.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">file</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../0.mid&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">midi</span> <span class="o">=</span> <span class="n">Musa</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">structure</span><span class="o">=</span><span class="s2">&quot;bars&quot;</span><span class="p">,</span> <span class="n">absolute_timing</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -168,7 +171,7 @@ into a JSON format.</p>
 </div>
 <dl class="py method">
 <dt class="sig sig-object py" id="musicaiz.converters.MusaJSON.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">musa_obj</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="musicaiz.loaders.Musa.html#musicaiz.loaders.Musa" title="musicaiz.loaders.Musa"><span class="pre">musicaiz.loaders.Musa</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/musicaiz/converters/musa_json.html#MusaJSON.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#musicaiz.converters.MusaJSON.__init__" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">musa_obj</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/musicaiz/converters/musa_json.html#MusaJSON.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#musicaiz.converters.MusaJSON.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p class="rubric">Methods</p>
@@ -222,7 +225,7 @@ into a JSON format.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../converters.html" class="btn btn-neutral float-left" title="Converters" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="musicaiz.converters.pretty_midi_note_to_musanalysis.html" class="btn btn-neutral float-right" title="musicaiz.converters.pretty_midi_note_to_musanalysis" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="musicaiz.converters.prettymidi_note_to_musicaiz.html" class="btn btn-neutral float-right" title="musicaiz.converters.prettymidi_note_to_musicaiz" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

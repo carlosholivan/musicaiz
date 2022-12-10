@@ -1,0 +1,29 @@
+﻿musicaiz.algorithms.AlbrechtShanahan
+====================================
+
+.. currentmodule:: musicaiz.algorithms
+
+.. autoclass:: AlbrechtShanahan
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~AlbrechtShanahan.__init__
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~AlbrechtShanahan.major
+      ~AlbrechtShanahan.minor
+   
+   

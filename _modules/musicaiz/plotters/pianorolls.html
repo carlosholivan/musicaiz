@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>musicaiz.plotters.pianorolls &mdash; Musicaiz 0.0.2 documentation</title>
+  <title>musicaiz.plotters.pianorolls &mdash; Musicaiz 0.1.0 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/plot_directive.css" type="text/css" />
@@ -40,7 +40,7 @@
             <img src="../../../_static/logo_square_dark.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.0.2
+                0.1.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -72,7 +72,6 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/2-write_midi.html">Writing a MIDI file from scratch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../notebooks/3-plot.html">Plotting</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">References:</span></p>
@@ -107,10 +106,11 @@
            <div itemprop="articleBody">
              
   <h1>Source code for musicaiz.plotters.pianorolls</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span></span><span class="kn">from</span> <span class="nn">re</span> <span class="kn">import</span> <span class="n">sub</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">matplotlib.ticker</span> <span class="kn">import</span> <span class="n">MultipleLocator</span>
 <span class="kn">import</span> <span class="nn">plotly.graph_objects</span> <span class="k">as</span> <span class="nn">go</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Optional</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 
@@ -120,11 +120,11 @@
     <span class="n">get_subdivisions</span><span class="p">,</span>
     <span class="n">TimingConsts</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">musicaiz.structure</span> <span class="kn">import</span> <span class="n">Note</span>
+<span class="kn">from</span> <span class="nn">musicaiz.structure</span> <span class="kn">import</span> <span class="n">Note</span><span class="p">,</span> <span class="n">Instrument</span>
+<span class="kn">from</span> <span class="nn">musicaiz.loaders</span> <span class="kn">import</span> <span class="n">Musa</span>
 
-
+<span class="c1"># TODO: Add more colors. This only handles 10 instruments per plot</span>
 <span class="n">COLOR_EDGES</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s1">&#39;#C232FF&#39;</span><span class="p">,</span>
     <span class="s1">&#39;#C232FF&#39;</span><span class="p">,</span>
     <span class="s1">&#39;#89FFAE&#39;</span><span class="p">,</span>
     <span class="s1">&#39;#FFFF8B&#39;</span><span class="p">,</span>
@@ -134,11 +134,20 @@
     <span class="s1">&#39;#FDB0F8&#39;</span><span class="p">,</span>
     <span class="s1">&#39;#FFDC9C&#39;</span><span class="p">,</span>
     <span class="s1">&#39;#F3A3C4&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;#E7E7E7&#39;</span>
+    <span class="s1">&#39;#E7E7E7&#39;</span><span class="p">,</span>
+    <span class="s2">&quot;#AA7DBB&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;#7DBB90&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;#83C0B9&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;#83AFC0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;#8AA7C3&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;#8A94C3&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;#C793CB&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;#CB93B9&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;#CA97A0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;#CAB697&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 
 <span class="n">COLOR</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s1">&#39;#D676FF&#39;</span><span class="p">,</span>
     <span class="s1">&#39;#D676FF&#39;</span><span class="p">,</span>
     <span class="s1">&#39;#0AFE57&#39;</span><span class="p">,</span>
     <span class="s1">&#39;#FEFF00&#39;</span><span class="p">,</span>
@@ -148,15 +157,22 @@
     <span class="s1">&#39;#FF4CF4&#39;</span><span class="p">,</span>
     <span class="s1">&#39;#FFB225&#39;</span><span class="p">,</span>
     <span class="s1">&#39;#C25581&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;#737D73&#39;</span>
+    <span class="s1">&#39;#737D73&#39;</span><span class="p">,</span>
+    <span class="s2">&quot;#E3A4FB&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;#A7F6BF&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;#A7F6ED&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;#ADE4F9&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;#ADD4F9&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;#B5C1F9&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;#F5B5F9&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;#FEBDE9&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;#FEBDC9&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;#F3DFC0&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 
 
 <span class="c1"># TODO: subdivisions in plotly</span>
-<span class="c1"># TODO: Plot all instruments in one plot plt and plotly</span>
 <span class="c1"># TODO: Hide note by clicking pitch in legend plotly</span>
-<span class="c1"># TODO: plot bars plotly</span>
-<span class="c1"># TODO: rethink bar plotting in plt</span>
 <span class="c1"># TODO: method to save plot in png or html</span>
 
 
@@ -184,7 +200,11 @@
 <span class="sd">        )</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="Pianoroll.__init__"><a class="viewcode-back" href="../../../generated/musicaiz.plotters.Pianoroll.html#musicaiz.plotters.Pianoroll.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dark</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="Pianoroll.__init__"><a class="viewcode-back" href="../../../generated/musicaiz.plotters.Pianoroll.html#musicaiz.plotters.Pianoroll.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">musa</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Musa</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">dark</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">):</span>
 
         <span class="k">if</span> <span class="n">dark</span><span class="p">:</span>
             <span class="n">background_color</span> <span class="o">=</span> <span class="s2">&quot;#282828&quot;</span>
@@ -195,7 +215,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">MultipleLocator</span><span class="p">(</span><span class="mi">12</span><span class="p">))</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="n">background_color</span><span class="p">)</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time (bar.beat.subdivision)&quot;</span><span class="p">)</span></div>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time (bar)&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">musa</span> <span class="o">=</span> <span class="n">musa</span></div>
 
     <span class="k">def</span> <span class="nf">plot_grid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subdivisions</span><span class="p">):</span>
         <span class="c1"># TODO: If we have lots of subdivisions (subdivision arg is small), then</span>
@@ -204,54 +226,41 @@
         <span class="c1"># TODO: The same happens with pitch (y ticks). We should make smth to avoid</span>
         <span class="c1"># all the pitch values to be written in the axis</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">subdivisions</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
-        <span class="c1"># Add 1st subdivision of new bar after last bar for better plotting the last bar</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_add_new_bar_subdiv</span><span class="p">(</span><span class="n">subdivisions</span><span class="p">)</span>
         <span class="c1"># Each subdivision has a vertical lines (grid)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([</span><span class="n">s</span><span class="p">[</span><span class="s2">&quot;ticks&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">subdivisions</span><span class="p">])</span>
-        <span class="c1">##labels = [str(s[&quot;ticks&quot;]) for s in subdivisions]</span>
-        <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="s2">&quot;bar&quot;</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="s2">&quot;bar_beat&quot;</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="s2">&quot;bar_subdivision&quot;</span><span class="p">])</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">subdivisions</span><span class="p">]</span>
+        <span class="n">prev_bar_idx</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">labels</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">subdivisions</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">bar_idx</span> <span class="o">!=</span> <span class="n">prev_bar_idx</span><span class="p">:</span>
+                <span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">bar_idx</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="n">prev_bar_idx</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">bar_idx</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([</span><span class="n">s</span><span class="o">.</span><span class="n">start_ticks</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">subdivisions</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">which</span><span class="o">=</span><span class="s2">&quot;major&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
         <span class="c1"># Get labels for bar and beats</span>
         <span class="n">prev_bar</span><span class="p">,</span> <span class="n">prev_beat</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
         <span class="n">bars_labels</span><span class="p">,</span> <span class="n">beats_labels</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">subdivisions</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="s2">&quot;bar&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">prev_bar</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">prev_bar</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">bar_idx</span> <span class="o">!=</span> <span class="n">prev_bar</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">prev_bar</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="n">bars_labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">s</span><span class="p">[</span><span class="s2">&quot;ticks&quot;</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="s2">&quot;bar_beat&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">prev_beat</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">prev_beat</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">s</span><span class="o">.</span><span class="n">start_ticks</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">beat_idx</span> <span class="o">!=</span> <span class="n">prev_beat</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">prev_beat</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="n">beats_labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">s</span><span class="p">[</span><span class="s2">&quot;ticks&quot;</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
-            <span class="n">prev_bar</span><span class="p">,</span> <span class="n">prev_beat</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="s2">&quot;bar&quot;</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="s2">&quot;bar_beat&quot;</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">s</span><span class="o">.</span><span class="n">start_ticks</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">)</span>
+            <span class="n">prev_bar</span><span class="p">,</span> <span class="n">prev_beat</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">bar_idx</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">beat_idx</span>
 
-    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">_add_new_bar_subdiv</span><span class="p">(</span><span class="n">subdivisions</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;In `rhythm.get_subdivisions` method, we get all the subdivisions (starting times).</span>
-<span class="sd">        We can add the 1st subdivision of a new bar after the subdivisions dict for plotting.&quot;&quot;&quot;</span>
-        <span class="n">range_sec</span> <span class="o">=</span> <span class="n">subdivisions</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;sec&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">subdivisions</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">][</span><span class="s2">&quot;sec&quot;</span><span class="p">]</span>
-        <span class="n">range_ticks</span> <span class="o">=</span> <span class="n">subdivisions</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;ticks&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">subdivisions</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">][</span><span class="s2">&quot;ticks&quot;</span><span class="p">]</span>
-        <span class="n">subdivisions</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-            <span class="s2">&quot;bar&quot;</span><span class="p">:</span> <span class="n">subdivisions</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;bar&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
-            <span class="s2">&quot;piece_beat&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-            <span class="s2">&quot;piece_subdivision&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-            <span class="s2">&quot;bar_beat&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-            <span class="s2">&quot;bar_subdivision&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-            <span class="s2">&quot;sec&quot;</span><span class="p">:</span> <span class="n">subdivisions</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;sec&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">range_sec</span><span class="p">,</span>
-            <span class="s2">&quot;ticks&quot;</span><span class="p">:</span> <span class="n">subdivisions</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;ticks&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">range_ticks</span><span class="p">,</span>
-        <span class="p">})</span>
-
-    <span class="k">def</span> <span class="nf">_notes_loop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">notes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Note</span><span class="p">],</span> <span class="n">show_pitch_labels</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_notes_loop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">notes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Note</span><span class="p">],</span> <span class="n">idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Pitch&quot;</span><span class="p">)</span>
         <span class="c1">#highest_pitch = get_highest_pitch(track.instrument)</span>
         <span class="c1">#lowest_pitch = get_lowest_pitch(track.instrument)</span>
         <span class="c1">#  plt.ylim((0, (highest_pitch - lowest_pitch) - 1))</span>
 
-        <span class="n">pitches</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">notes</span><span class="p">:</span>
             <span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">note</span><span class="o">.</span><span class="n">start_ticks</span><span class="p">,</span>
                        <span class="n">ymin</span><span class="o">=</span><span class="n">note</span><span class="o">.</span><span class="n">pitch</span><span class="p">,</span>
                        <span class="n">ymax</span><span class="o">=</span><span class="n">note</span><span class="o">.</span><span class="n">pitch</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
-                       <span class="n">color</span><span class="o">=</span><span class="n">COLOR_EDGES</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                       <span class="n">color</span><span class="o">=</span><span class="n">COLOR_EDGES</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span>
                        <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span>
@@ -259,90 +268,100 @@
                               <span class="n">width</span><span class="o">=</span><span class="n">note</span><span class="o">.</span><span class="n">end_ticks</span> <span class="o">-</span> <span class="n">note</span><span class="o">.</span><span class="n">start_ticks</span><span class="p">,</span>
                               <span class="n">height</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
                               <span class="n">alpha</span><span class="o">=</span><span class="n">note</span><span class="o">.</span><span class="n">velocity</span> <span class="o">/</span> <span class="mi">127</span><span class="p">,</span>
-                              <span class="n">edgecolor</span><span class="o">=</span><span class="n">COLOR_EDGES</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-                              <span class="n">facecolor</span><span class="o">=</span><span class="n">COLOR</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+                              <span class="n">edgecolor</span><span class="o">=</span><span class="n">COLOR_EDGES</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span>
+                              <span class="n">facecolor</span><span class="o">=</span><span class="n">COLOR</span><span class="p">[</span><span class="n">idx</span><span class="p">]))</span>
 
-    <span class="k">def</span> <span class="nf">plot_instrument</span><span class="p">(</span>
+    <span class="k">def</span> <span class="nf">plot_instruments</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">track</span><span class="p">,</span>
-        <span class="n">total_bars</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-        <span class="n">subdivision</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">time_sig</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">TimingConsts</span><span class="o">.</span><span class="n">DEFAULT_TIME_SIGNATURE</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
-        <span class="n">bpm</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">TimingConsts</span><span class="o">.</span><span class="n">DEFAULT_BPM</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
-        <span class="n">resolution</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">TimingConsts</span><span class="o">.</span><span class="n">RESOLUTION</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
-        <span class="n">quantized</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">program</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]],</span>
+        <span class="n">bar_start</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">bar_end</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="n">print_measure_data</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-        <span class="n">show_bar_labels</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">show_bar_labels</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">show_grid</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">show</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">):</span>
 
         <span class="k">if</span> <span class="n">print_measure_data</span><span class="p">:</span>
             <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
-                <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.3</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Measure: </span><span class="si">{</span><span class="n">time_sig</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span>
+                <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.3</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Measure: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">musa</span><span class="o">.</span><span class="n">time_signature_changes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span>
                 <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">verticalalignment</span><span class="o">=</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 
             <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
-                <span class="mi">0</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Displayed bars: </span><span class="si">{</span><span class="n">total_bars</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span>
+                <span class="mi">0</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Displayed bars: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">musa</span><span class="o">.</span><span class="n">total_bars</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span>
                 <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">verticalalignment</span><span class="o">=</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 
             <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
-                <span class="mi">0</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Quantized: </span><span class="si">{</span><span class="n">quantized</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span>
+                <span class="mi">0</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Quantized: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">musa</span><span class="o">.</span><span class="n">is_quantized</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span>
                 <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">verticalalignment</span><span class="o">=</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 
             <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
-                <span class="mi">1</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Tempo: </span><span class="si">{</span><span class="n">bpm</span><span class="si">}</span><span class="s2">bpm&quot;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span>
+                <span class="mi">1</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Tempo: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">musa</span><span class="o">.</span><span class="n">tempo_changes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">bpm&quot;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span>
                 <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="n">verticalalignment</span><span class="o">=</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 
             <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
-                <span class="mi">1</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Subdivision: </span><span class="si">{</span><span class="n">subdivision</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span>
+                <span class="mi">1</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Subdivision: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">musa</span><span class="o">.</span><span class="n">subdivision_note</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span>
                 <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="n">verticalalignment</span><span class="o">=</span><span class="s1">&#39;top&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 
-            <span class="c1">#plt.text(</span>
-                <span class="c1">#1, 1.1, f&quot;Instrument: {track.name}&quot;, transform=self.ax.transAxes,</span>
-                <span class="c1">#horizontalalignment=&#39;right&#39;, verticalalignment=&#39;top&#39;, fontsize=12)</span>
-
-        <span class="n">subdivisions</span> <span class="o">=</span> <span class="n">get_subdivisions</span><span class="p">(</span><span class="n">total_bars</span><span class="p">,</span> <span class="n">subdivision</span><span class="p">,</span> <span class="n">time_sig</span><span class="p">,</span> <span class="n">bpm</span><span class="p">,</span> <span class="n">resolution</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">plot_grid</span><span class="p">(</span><span class="n">subdivisions</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_notes_loop</span><span class="p">(</span><span class="n">track</span><span class="p">)</span>
+        <span class="n">subdivisions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">musa</span><span class="o">.</span><span class="n">get_subbeats_in_bars</span><span class="p">(</span><span class="n">bar_start</span><span class="p">,</span> <span class="n">bar_end</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">show_grid</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">plot_grid</span><span class="p">(</span><span class="n">subdivisions</span><span class="p">)</span>
+        <span class="n">notes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">musa</span><span class="o">.</span><span class="n">get_notes_in_bars</span><span class="p">(</span><span class="n">bar_start</span><span class="p">,</span> <span class="n">bar_end</span><span class="p">,</span> <span class="n">program</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">program</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">program</span><span class="p">):</span>
+                <span class="n">notes_i</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">musa</span><span class="o">.</span><span class="n">_filter_by_instruments</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">notes</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">notes_i</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_notes_loop</span><span class="p">(</span><span class="n">notes_i</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_notes_loop</span><span class="p">(</span><span class="n">notes</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">show_bar_labels</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">get_yaxis</span><span class="p">()</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">get_xaxis</span><span class="p">()</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">get_xaxis</span><span class="p">()</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">show</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="PianorollHTML"><a class="viewcode-back" href="../../../generated/musicaiz.plotters.PianorollHTML.html#musicaiz.plotters.PianorollHTML">[docs]</a><span class="k">class</span> <span class="nc">PianorollHTML</span><span class="p">:</span>
 
-    <span class="sd">&quot;&quot;&quot;The Musa object need to be initialized with the argument</span>
-<span class="sd">    structure = `bars` for a good visualization of the pianoroll.&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="PianorollHTML.__init__"><a class="viewcode-back" href="../../../generated/musicaiz.plotters.PianorollHTML.html#musicaiz.plotters.PianorollHTML.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">musa</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Musa</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
 
-    <span class="c1">#ax.yaxis.set_major_locator(MultipleLocator(1))</span>
-    <span class="c1">#ax.grid(linewidth=0.25)</span>
-    <span class="c1">#ax.set_facecolor(&#39;#282828&#39;)</span>
-    <span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span>
-        <span class="n">data</span><span class="o">=</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(),</span>
-        <span class="n">layout</span><span class="o">=</span><span class="n">go</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span>
-            <span class="p">{</span>
-                <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-                <span class="c1">#&quot;template&quot;: &quot;plotly_dark&quot;,</span>
-                <span class="s2">&quot;xaxis&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s2">&quot;subdivisions (bar.beat.subdivision)&quot;</span><span class="p">},</span> 
-                <span class="s2">&quot;yaxis&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;pitch&#39;</span><span class="p">},</span>
-            <span class="p">}</span>
-        <span class="p">)</span>
-    <span class="p">)</span>
+        <span class="sd">&quot;&quot;&quot;The Musa object need to be initialized with the argument</span>
+<span class="sd">        structure = `bars` for a good visualization of the pianoroll.&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">_notes_loop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">notes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Note</span><span class="p">]):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">musa</span> <span class="o">=</span> <span class="n">musa</span>
+        <span class="c1">#ax.yaxis.set_major_locator(MultipleLocator(1))</span>
+        <span class="c1">#ax.grid(linewidth=0.25)</span>
+        <span class="c1">#ax.set_facecolor(&#39;#282828&#39;)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span>
+            <span class="n">data</span><span class="o">=</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(),</span>
+            <span class="n">layout</span><span class="o">=</span><span class="n">go</span><span class="o">.</span><span class="n">Layout</span><span class="p">(</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+                    <span class="c1">#&quot;template&quot;: &quot;plotly_dark&quot;,</span>
+                    <span class="s2">&quot;xaxis&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s2">&quot;subdivisions (bar)&quot;</span><span class="p">},</span> 
+                    <span class="s2">&quot;yaxis&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;pitch&#39;</span><span class="p">},</span>
+                <span class="p">}</span>
+            <span class="p">)</span>
+        <span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_notes_loop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">notes</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Note</span><span class="p">],</span> <span class="n">idx</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">notes</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">add_shape</span><span class="p">(</span>
                 <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;rect&quot;</span><span class="p">,</span>
                 <span class="n">x0</span><span class="o">=</span><span class="n">note</span><span class="o">.</span><span class="n">start_ticks</span><span class="p">,</span>
                 <span class="n">y0</span><span class="o">=</span><span class="n">note</span><span class="o">.</span><span class="n">pitch</span><span class="p">,</span>
                 <span class="n">x1</span><span class="o">=</span><span class="n">note</span><span class="o">.</span><span class="n">end_ticks</span><span class="p">,</span>
-                <span class="n">y1</span><span class="o">=</span><span class="n">note</span><span class="o">.</span><span class="n">pitch</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span>
+                <span class="n">y1</span><span class="o">=</span><span class="n">note</span><span class="o">.</span><span class="n">pitch</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
                 <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
-                    <span class="n">color</span><span class="o">=</span><span class="n">COLOR_EDGES</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                    <span class="n">color</span><span class="o">=</span><span class="n">COLOR_EDGES</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span>
                     <span class="n">width</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
                 <span class="p">),</span>
-                <span class="n">fillcolor</span><span class="o">=</span><span class="n">COLOR</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="n">fillcolor</span><span class="o">=</span><span class="n">COLOR</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span>
             <span class="p">)</span>
-            
+
             <span class="c1"># this is to add a hover information on each note</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
                 <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
@@ -355,37 +374,41 @@
                     <span class="p">],</span>
                     <span class="n">y</span><span class="o">=</span><span class="p">[</span>
                         <span class="n">note</span><span class="o">.</span><span class="n">pitch</span><span class="p">,</span>
-                        <span class="n">note</span><span class="o">.</span><span class="n">pitch</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span>
-                        <span class="n">note</span><span class="o">.</span><span class="n">pitch</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span>
+                        <span class="n">note</span><span class="o">.</span><span class="n">pitch</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                        <span class="n">note</span><span class="o">.</span><span class="n">pitch</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
                         <span class="n">note</span><span class="o">.</span><span class="n">pitch</span><span class="p">,</span>
                         <span class="n">note</span><span class="o">.</span><span class="n">pitch</span>
-                    <span class="p">],</span> 
+                    <span class="p">],</span>
                     <span class="n">fill</span><span class="o">=</span><span class="s2">&quot;toself&quot;</span><span class="p">,</span>
                     <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;lines&quot;</span><span class="p">,</span>
-                    <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;pitch=</span><span class="si">{</span><span class="n">note</span><span class="o">.</span><span class="n">pitch</span><span class="si">}</span><span class="s2">&lt;br&gt;</span><span class="se">\n</span><span class="s2">&quot;</span>\
-                         <span class="sa">f</span><span class="s2">&quot;velocity=</span><span class="si">{</span><span class="n">note</span><span class="o">.</span><span class="n">velocity</span><span class="si">}</span><span class="s2">&lt;br&gt;</span><span class="se">\n</span><span class="s2">&quot;</span>\
-                         <span class="sa">f</span><span class="s2">&quot;start_ticks=</span><span class="si">{</span><span class="n">note</span><span class="o">.</span><span class="n">start_ticks</span><span class="si">}</span><span class="s2">&lt;br&gt;</span><span class="se">\n</span><span class="s2">&quot;</span>\
+                    <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;pitch=</span><span class="si">{</span><span class="n">note</span><span class="o">.</span><span class="n">pitch</span><span class="si">}</span><span class="s2">&lt;br&gt;</span><span class="se">\n</span><span class="s2">&quot;</span>
+                         <span class="sa">f</span><span class="s2">&quot;velocity=</span><span class="si">{</span><span class="n">note</span><span class="o">.</span><span class="n">velocity</span><span class="si">}</span><span class="s2">&lt;br&gt;</span><span class="se">\n</span><span class="s2">&quot;</span>
+                         <span class="sa">f</span><span class="s2">&quot;start_ticks=</span><span class="si">{</span><span class="n">note</span><span class="o">.</span><span class="n">start_ticks</span><span class="si">}</span><span class="s2">&lt;br&gt;</span><span class="se">\n</span><span class="s2">&quot;</span>
                          <span class="sa">f</span><span class="s2">&quot;end_ticks=</span><span class="si">{</span><span class="n">note</span><span class="o">.</span><span class="n">end_ticks</span><span class="si">}</span><span class="s2">&lt;br&gt;&quot;</span><span class="p">,</span>
                     <span class="n">opacity</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
                     <span class="n">showlegend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                 <span class="p">)</span>
             <span class="p">)</span>
 
-    
     <span class="k">def</span> <span class="nf">plot_grid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subdivisions</span><span class="p">):</span>
         <span class="c1"># all the pitch values to be written in the axis</span>
         <span class="c1">#self.fig.update_xaxes(range[0, len(subdivisions) - 1])</span>
         <span class="c1">#plt.xlim((0, len(subdivisions) - 1))</span>
-        <span class="c1"># Add 1st subdivision of new bar after last bar for better plotting the last bar</span>
-        <span class="n">Pianoroll</span><span class="o">.</span><span class="n">_add_new_bar_subdiv</span><span class="p">(</span><span class="n">subdivisions</span><span class="p">)</span>
         <span class="c1"># Each subdivision has a vertical lines (grid)</span>
         <span class="c1">#self.fig.set_xticks([s[&quot;ticks&quot;] for s in subdivisions])</span>
         <span class="c1">##labels = [str(s[&quot;ticks&quot;]) for s in subdivisions]</span>
-        <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="s2">&quot;bar&quot;</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="s2">&quot;bar_beat&quot;</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="s2">&quot;bar_subdivision&quot;</span><span class="p">])</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">subdivisions</span><span class="p">]</span>
+        <span class="n">prev_bar_idx</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">labels</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">subdivisions</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">bar_idx</span> <span class="o">!=</span> <span class="n">prev_bar_idx</span><span class="p">:</span>
+                <span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">bar_idx</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="n">prev_bar_idx</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">bar_idx</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
             <span class="n">xaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
                 <span class="n">tickmode</span><span class="o">=</span><span class="s2">&quot;array&quot;</span><span class="p">,</span>
-                <span class="n">tickvals</span><span class="o">=</span><span class="p">[</span><span class="n">s</span><span class="p">[</span><span class="s2">&quot;ticks&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">subdivisions</span><span class="p">],</span>
+                <span class="n">tickvals</span><span class="o">=</span><span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">start_ticks</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">subdivisions</span><span class="p">],</span>
                 <span class="n">ticktext</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span>
                 <span class="n">tickfont</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
                     <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
@@ -397,56 +420,44 @@
         <span class="n">prev_bar</span><span class="p">,</span> <span class="n">prev_beat</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
         <span class="n">bars_labels</span><span class="p">,</span> <span class="n">beats_labels</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">subdivisions</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="s2">&quot;bar&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">prev_bar</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">prev_bar</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">bar_idx</span> <span class="o">!=</span> <span class="n">prev_bar</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">prev_bar</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="n">bars_labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">add_vline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">s</span><span class="p">[</span><span class="s2">&quot;ticks&quot;</span><span class="p">],</span> <span class="n">line_width</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">line_color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">s</span><span class="p">[</span><span class="s2">&quot;bar_beat&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">prev_beat</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">prev_beat</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">add_vline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">s</span><span class="o">.</span><span class="n">start_ticks</span><span class="p">,</span> <span class="n">line_width</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">line_color</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">beat_idx</span> <span class="o">!=</span> <span class="n">prev_beat</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">prev_beat</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="n">beats_labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">add_vline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">s</span><span class="p">[</span><span class="s2">&quot;ticks&quot;</span><span class="p">],</span> <span class="n">line_width</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">line_color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
-            <span class="n">prev_bar</span><span class="p">,</span> <span class="n">prev_beat</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="s2">&quot;bar&quot;</span><span class="p">],</span> <span class="n">s</span><span class="p">[</span><span class="s2">&quot;bar_beat&quot;</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">add_vline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">s</span><span class="o">.</span><span class="n">start_ticks</span><span class="p">,</span> <span class="n">line_width</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">line_color</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">)</span>
+            <span class="n">prev_bar</span><span class="p">,</span> <span class="n">prev_beat</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">bar_idx</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">beat_idx</span>
 
-    
-    <span class="k">def</span> <span class="nf">plot_instrument</span><span class="p">(</span>
+    <span class="k">def</span> <span class="nf">plot_instruments</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">track</span><span class="p">,</span>
+        <span class="n">program</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]],</span>
         <span class="n">bar_start</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="n">bar_end</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-        <span class="n">subdivision</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">),</span>
         <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;title&quot;</span><span class="p">,</span>
         <span class="n">save_plot</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-        <span class="n">time_sig</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">TimingConsts</span><span class="o">.</span><span class="n">DEFAULT_TIME_SIGNATURE</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
-        <span class="n">bpm</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">TimingConsts</span><span class="o">.</span><span class="n">DEFAULT_BPM</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
-        <span class="n">resolution</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">TimingConsts</span><span class="o">.</span><span class="n">RESOLUTION</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
-        <span class="n">print_measure_data</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">show_grid</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="n">show</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="p">):</span>
 
-        <span class="n">pitches</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">if</span> <span class="n">track</span><span class="o">.</span><span class="n">bars</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Track has no bars. You probably initialized the Musa object with structure=`instruments`. </span><span class="se">\n</span><span class="s2"> </span><span class="se">\</span>
-<span class="s2">                          You can use `structure=`bars` to get the track bars. </span><span class="se">\n</span><span class="s2"> </span><span class="se">\</span>
-<span class="s2">                          The plotter is going to ignore the bars and it&#39;ll plot all the notes in the track.&quot;</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_notes_loop</span><span class="p">(</span><span class="n">track</span><span class="o">.</span><span class="n">notes</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">track</span><span class="o">.</span><span class="n">notes</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">note</span><span class="o">.</span><span class="n">pitch</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">pitches</span><span class="p">:</span>
-                    <span class="n">pitches</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">pitch</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="c1"># TODO</span>
-            <span class="k">for</span> <span class="n">bar</span> <span class="ow">in</span> <span class="n">track</span><span class="o">.</span><span class="n">bars</span><span class="p">[</span><span class="n">bar_start</span><span class="p">:</span><span class="n">bar_end</span><span class="p">]:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_notes_loop</span><span class="p">(</span><span class="n">bar</span><span class="o">.</span><span class="n">notes</span><span class="p">)</span>
-                <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">bar</span><span class="o">.</span><span class="n">notes</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="n">note</span><span class="o">.</span><span class="n">pitch</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">pitches</span><span class="p">:</span>
-                        <span class="n">pitches</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">pitch</span><span class="p">)</span>
-
-            <span class="n">total_bars</span> <span class="o">=</span> <span class="n">bar_end</span> <span class="o">-</span> <span class="n">bar_start</span>
-            <span class="n">subdivisions</span> <span class="o">=</span> <span class="n">get_subdivisions</span><span class="p">(</span><span class="n">total_bars</span><span class="p">,</span> <span class="n">subdivision</span><span class="p">,</span> <span class="n">time_sig</span><span class="p">,</span> <span class="n">bpm</span><span class="p">,</span> <span class="n">resolution</span><span class="p">)</span>
+        <span class="n">subdivisions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">musa</span><span class="o">.</span><span class="n">get_subbeats_in_bars</span><span class="p">(</span><span class="n">bar_start</span><span class="p">,</span> <span class="n">bar_end</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">show_grid</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">plot_grid</span><span class="p">(</span><span class="n">subdivisions</span><span class="p">)</span>
-        
+        <span class="n">notes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">musa</span><span class="o">.</span><span class="n">get_notes_in_bars</span><span class="p">(</span><span class="n">bar_start</span><span class="p">,</span> <span class="n">bar_end</span><span class="p">,</span> <span class="n">program</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">program</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">program</span><span class="p">):</span>
+                <span class="n">notes_i</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">musa</span><span class="o">.</span><span class="n">_filter_by_instruments</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">notes</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">notes_i</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_notes_loop</span><span class="p">(</span><span class="n">notes_i</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_notes_loop</span><span class="p">(</span><span class="n">notes</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+        <span class="n">pitches</span> <span class="o">=</span> <span class="p">[</span><span class="n">note</span><span class="o">.</span><span class="n">pitch</span> <span class="k">for</span> <span class="n">note</span> <span class="ow">in</span> <span class="n">notes</span><span class="p">]</span>
+
         <span class="c1"># this is to add the yaxis labels# horizontal line for pitch grid</span>
         <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">pitches</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">pitches</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)]</span>
         <span class="k">for</span> <span class="n">pitch</span> <span class="ow">in</span> <span class="n">labels</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">add_hline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">pitch</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">line_width</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">line_color</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">add_hline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">pitch</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">line_width</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">line_color</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
         <span class="c1"># if we do have too many pitches, we won&#39;t label all of them in the yaxis</span>
         <span class="k">if</span> <span class="nb">max</span><span class="p">(</span><span class="n">pitches</span><span class="p">)</span> <span class="o">-</span> <span class="nb">min</span><span class="p">(</span><span class="n">pitches</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">24</span><span class="p">:</span>
             <span class="n">cleaned_labels</span> <span class="o">=</span> <span class="p">[</span><span class="n">label</span> <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">labels</span> <span class="k">if</span> <span class="n">label</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
@@ -454,19 +465,21 @@
             <span class="n">cleaned_labels</span> <span class="o">=</span> <span class="n">labels</span>
 
         <span class="c1"># Adjust y labels (pitch)</span>
-        <span class="c1"># TODO: label in the middle of the pitch</span>
+        <span class="c1"># TODO: label between pitches</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
             <span class="n">yaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
                 <span class="n">tickmode</span><span class="o">=</span><span class="s2">&quot;array&quot;</span><span class="p">,</span>
-                <span class="n">tickvals</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span>
-                <span class="n">ticktext</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span>
+                <span class="n">tickvals</span><span class="o">=</span><span class="n">cleaned_labels</span><span class="p">,</span>
+                <span class="n">ticktext</span><span class="o">=</span><span class="n">cleaned_labels</span><span class="p">,</span>
                 <span class="n">tickfont</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
                     <span class="n">size</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
                 <span class="p">),</span>
             <span class="p">),</span>
         <span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">legend</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;xanchor&quot;</span><span class="p">:</span><span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="s2">&quot;yanchor&quot;</span><span class="p">:</span><span class="s2">&quot;top&quot;</span><span class="p">})</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">legend</span><span class="o">=</span><span class="p">{</span>
+            <span class="s2">&quot;xanchor&quot;</span><span class="p">:</span> <span class="s2">&quot;center&quot;</span><span class="p">,</span> <span class="s2">&quot;yanchor&quot;</span><span class="p">:</span> <span class="s2">&quot;top&quot;</span>
+        <span class="p">})</span>
 
         <span class="k">if</span> <span class="n">save_plot</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">write_html</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">filename</span> <span class="o">+</span> <span class="s2">&quot;.html&quot;</span><span class="p">))</span>

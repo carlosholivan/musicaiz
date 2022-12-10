@@ -1,0 +1,6 @@
+﻿musicaiz.converters.musicaiz\_note\_to\_prettymidi
+==================================================
+
+.. currentmodule:: musicaiz.converters
+
+.. autofunction:: musicaiz_note_to_prettymidi

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>musicaiz.converters.pretty_midi_note_to_musanalysis &mdash; Musicaiz 0.0.2 documentation</title>
+  <title>musicaiz.converters.pretty_midi_note_to_musanalysis &mdash; Musicaiz 0.1.0 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
@@ -29,9 +29,7 @@
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Datasets" href="../datasets.html" />
-    <link rel="prev" title="musicaiz.converters.MusaJSON" href="musicaiz.converters.MusaJSON.html" /> 
+    <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -43,7 +41,7 @@
             <img src="../_static/logo_square_dark.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.0.2
+                0.1.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -59,7 +57,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Musicaiz Documentation:</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../loaders.html">Loaders</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../structure.html">Structure</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../harmony.html">Harmony</a></li>
@@ -69,20 +67,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../tokenizers.html">Tokenizers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../evaluation.html">Evaluation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../plotters.html">Plotters</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../converters.html">Converters</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../converters.html#json">JSON</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="../converters.html#pretty-midi">Pretty MIDI</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">musicaiz.converters.pretty_midi_note_to_musanalysis</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../converters.html">Converters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../datasets.html">Datasets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../models.html">Models</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../notebooks/2-write_midi.html">Writing a MIDI file from scratch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notebooks/3-plot.html">Plotting</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">References:</span></p>
@@ -106,7 +96,6 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../converters.html">Converters</a> &raquo;</li>
       <li>musicaiz.converters.pretty_midi_note_to_musanalysis</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/generated/musicaiz.converters.pretty_midi_note_to_musanalysis.rst.txt" rel="nofollow"> View page source</a>
@@ -143,20 +132,12 @@
 </style>
 <section id="musicaiz-converters-pretty-midi-note-to-musanalysis">
 <h1>musicaiz.converters.pretty_midi_note_to_musanalysis<a class="headerlink" href="#musicaiz-converters-pretty-midi-note-to-musanalysis" title="Permalink to this headline">¶</a></h1>
-<dl class="py function">
-<dt class="sig sig-object py" id="musicaiz.converters.pretty_midi_note_to_musanalysis">
-<span class="sig-prename descclassname"><span class="pre">musicaiz.converters.</span></span><span class="sig-name descname"><span class="pre">pretty_midi_note_to_musanalysis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">note</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/musicaiz/converters/pretty_midi_musa.html#pretty_midi_note_to_musanalysis"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#musicaiz.converters.pretty_midi_note_to_musanalysis" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
 </section>
 
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="musicaiz.converters.MusaJSON.html" class="btn btn-neutral float-left" title="musicaiz.converters.MusaJSON" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../datasets.html" class="btn btn-neutral float-right" title="Datasets" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
+          <footer>
 
   <hr/>
 

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Features &mdash; Musicaiz 0.0.2 documentation</title>
+  <title>Features &mdash; Musicaiz 0.1.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/plot_directive.css" type="text/css" />
@@ -43,7 +43,7 @@
             <img src="_static/logo_square_dark.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.0.2
+                0.1.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -120,6 +120,16 @@
 <li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.features.plot_novelty_from_ssm.html">musicaiz.features.plot_novelty_from_ssm</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#graphs">Graphs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.features.musa_to_graph.html">musicaiz.features.musa_to_graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.features.plot_graph.html">musicaiz.features.plot_graph</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#structure">Structure</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.features.get_structure_boundaries_notes.html">musicaiz.features.get_structure_boundaries_notes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/musicaiz.features.get_structure_boundaries_beats.html">musicaiz.features.get_structure_boundaries_beats</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="algorithms.html">Algorithms</a></li>
@@ -132,7 +142,6 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="notebooks/2-write_midi.html">Writing a MIDI file from scratch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="notebooks/3-plot.html">Plotting</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">References:</span></p>
@@ -424,6 +433,57 @@ MusicPlot: Interactive Self-Similarity Matrix for Music Structure Visualization.
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="generated/musicaiz.features.plot_novelty_from_ssm.html#musicaiz.features.plot_novelty_from_ssm" title="musicaiz.features.plot_novelty_from_ssm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_novelty_from_ssm</span></code></a>(ssm[, segments, ...])</p></td>
 <td><p>Plots the novelty curve from a SSM.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="graphs">
+<h2>Graphs<a class="headerlink" href="#graphs" title="Permalink to this headline">¶</a></h2>
+<p>This submodule presents different implementations of self-similarity matrices.</p>
+<p>The papers that are implemented in this sumbodule are the following:</p>
+<div class="sphinx-bs container pb-4 docutils">
+<div class="row docutils">
+<div class="d-flex col-lg-6 col-md-6 col-sm-6 col-xs-12 p-2 docutils">
+<div class="card w-100 shadow docutils">
+<div class="card-body docutils">
+<p class="card-text">[1] Jeong, D., Kwon, T., Kim, Y., &amp; Nam, J. (2019)
+Graph neural network for music score data and modeling expressive piano performance.
+In International Conference on Machine Learning, 3060-3070
+<a class="reference external" href="https://proceedings.mlr.press/v97/jeong19a.html">https://proceedings.mlr.press/v97/jeong19a.html</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/musicaiz.features.musa_to_graph.html#musicaiz.features.musa_to_graph" title="musicaiz.features.musa_to_graph"><code class="xref py py-obj docutils literal notranslate"><span class="pre">musa_to_graph</span></code></a>(musa_object)</p></td>
+<td><p>Converts a Musa object into a Graph where nodes are the notes and edges are connections between notes.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/musicaiz.features.plot_graph.html#musicaiz.features.plot_graph" title="musicaiz.features.plot_graph"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_graph</span></code></a>(graph[, show])</p></td>
+<td><p>Plots a graph with matplotlib.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="structure">
+<h2>Structure<a class="headerlink" href="#structure" title="Permalink to this headline">¶</a></h2>
+<p>This submodule segments symbolic music in its form or structure.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="generated/musicaiz.features.get_structure_boundaries_notes.html#musicaiz.features.get_structure_boundaries_notes" title="musicaiz.features.get_structure_boundaries_notes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_structure_boundaries_notes</span></code></a>(musa_obj, level)</p></td>
+<td><p>Get the note indexes where a section ends.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="generated/musicaiz.features.get_structure_boundaries_beats.html#musicaiz.features.get_structure_boundaries_beats" title="musicaiz.features.get_structure_boundaries_beats"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_structure_boundaries_beats</span></code></a>(musa_obj, level)</p></td>
+<td><p>Get the beat indexes where a section ends.</p></td>
 </tr>
 </tbody>
 </table>

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>musicaiz.tokenizers.MMMTokenizer &mdash; Musicaiz 0.0.2 documentation</title>
+  <title>musicaiz.tokenizers.MMMTokenizer &mdash; Musicaiz 0.1.0 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
@@ -30,8 +30,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Evaluation" href="../evaluation.html" />
-    <link rel="prev" title="musicaiz.tokenizers.EncodeBase" href="musicaiz.tokenizers.EncodeBase.html" /> 
+    <link rel="next" title="musicaiz.tokenizers.REMITokenizerArguments" href="musicaiz.tokenizers.REMITokenizerArguments.html" />
+    <link rel="prev" title="musicaiz.tokenizers.MMMTokenizerArguments" href="musicaiz.tokenizers.MMMTokenizerArguments.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -43,7 +43,7 @@
             <img src="../_static/logo_square_dark.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.0.2
+                0.1.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -69,7 +69,11 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../tokenizers.html">Tokenizers</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../tokenizers.html#basic-encoding">Basic Encoding</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="../tokenizers.html#multi-track-music-machine">Multi-Track Music Machine</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="musicaiz.tokenizers.TokenizerArguments.html">musicaiz.tokenizers.TokenizerArguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="musicaiz.tokenizers.MMMTokenizerArguments.html">musicaiz.tokenizers.MMMTokenizerArguments</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">musicaiz.tokenizers.MMMTokenizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="musicaiz.tokenizers.REMITokenizerArguments.html">musicaiz.tokenizers.REMITokenizerArguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="musicaiz.tokenizers.REMITokenizer.html">musicaiz.tokenizers.REMITokenizer</a></li>
 </ul>
 </li>
 </ul>
@@ -82,7 +86,6 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../notebooks/2-write_midi.html">Writing a MIDI file from scratch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../notebooks/3-plot.html">Plotting</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">References:</span></p>
@@ -145,22 +148,18 @@
 <h1>musicaiz.tokenizers.MMMTokenizer<a class="headerlink" href="#musicaiz-tokenizers-mmmtokenizer" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="musicaiz.tokenizers.MMMTokenizer">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">musicaiz.tokenizers.</span></span><span class="sig-name descname"><span class="pre">MMMTokenizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">TextIO</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.10)"><span class="pre">pathlib.Path</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/musicaiz/tokenizers/mmm.html#MMMTokenizer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#musicaiz.tokenizers.MMMTokenizer" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">musicaiz.tokenizers.</span></span><span class="sig-name descname"><span class="pre">MMMTokenizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">TextIO</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.11)"><span class="pre">pathlib.Path</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="musicaiz.tokenizers.MMMTokenizerArguments.html#musicaiz.tokenizers.MMMTokenizerArguments" title="musicaiz.tokenizers.mmm.MMMTokenizerArguments"><span class="pre">musicaiz.tokenizers.mmm.MMMTokenizerArguments</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/musicaiz/tokenizers/mmm.html#MMMTokenizer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#musicaiz.tokenizers.MMMTokenizer" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class presents methods to compute the Multi-Track Music Machine Encoding.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Attributes</dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>file: Optional[Union[str, TextIO, Path]] = None,</strong></dt><dd><p>genre: Optional[str] = None,
-subgenre: Optional[str] = None,
-chords: bool = False,
-key: bool = False,</p>
-</dd>
+<dt><strong>file: Optional[Union[str, TextIO, Path]] = None</strong></dt><dd></dd>
 </dl>
 </dd>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="musicaiz.tokenizers.MMMTokenizer.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">TextIO</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.10)"><span class="pre">pathlib.Path</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/musicaiz/tokenizers/mmm.html#MMMTokenizer.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#musicaiz.tokenizers.MMMTokenizer.__init__" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">TextIO</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.11)"><span class="pre">pathlib.Path</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="musicaiz.tokenizers.MMMTokenizerArguments.html#musicaiz.tokenizers.MMMTokenizerArguments" title="musicaiz.tokenizers.mmm.MMMTokenizerArguments"><span class="pre">musicaiz.tokenizers.mmm.MMMTokenizerArguments</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/musicaiz/tokenizers/mmm.html#MMMTokenizer.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#musicaiz.tokenizers.MMMTokenizer.__init__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <p class="rubric">Methods</p>
@@ -170,43 +169,40 @@ key: bool = False,</p>
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#musicaiz.tokenizers.MMMTokenizer.__init__" title="musicaiz.tokenizers.MMMTokenizer.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>([file])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#musicaiz.tokenizers.MMMTokenizer.__init__" title="musicaiz.tokenizers.MMMTokenizer.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>([file, args])</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_token_to_vocabulary</span></code>()</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_tokens_analytics</span></code>(tokens)</p></td>
-<td><p>Extracts features to aanlyze the given token sequence.</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_pieces_tokens</span></code>(tokens)</p></td>
+<td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_vocabulary</span></code>([vocab_filename])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_tokens_analytics</span></code>(tokens)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_vocabulary</span></code>([vocab_filename])</p></td>
 <td><p>This method gets the vocabulary of a tokenize dataset in all the <cite>token-sequences.txt</cite> files in the directory <cite>dataset_path</cite>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">split_tokens_by_bar</span></code>(instr_tokens)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">split_tokens_by_bar</span></code>(instr_tokens)</p></td>
 <td><p>Split tokens list by bars</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">split_tokens_by_track</span></code>(piece_tokens)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">split_tokens_by_track</span></code>(piece_tokens)</p></td>
 <td><p>Split tokens list by instrument</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_txt</span></code>(all_files_tokens, file_name, path)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_txt</span></code>(all_files_tokens, file_name, path)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tokenize_file</span></code>(file[, prev_tokens, ...])</p></td>
-<td><p>Tokenizes a MIDI file.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tokenize_musa_obj</span></code>([prev_tokens, windowing, ...])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tokenize_file</span></code>()</p></td>
 <td><p>This method tokenizes a Musa (MIDI) object.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tokenize_path</span></code>(*args, **kwargs)</p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tokenize_track_bars</span></code>(bars[, tokens, ...])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tokenize_track_bars</span></code>(bars, program[, tokens])</p></td>
 <td><p>This method tokenizes a given list of musicaiz bar objects.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tokenize_tracks</span></code>(instruments, bar_start[, ...])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tokenize_tracks</span></code>(instruments, bar_start[, ...])</p></td>
 <td><p>This method tokenizes a Musa (MIDI) object.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tokens_to_musa</span></code>(tokens[, absolute_timing, ...])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">tokens_to_musa</span></code>(tokens[, absolute_timing, ...])</p></td>
 <td><p></p></td>
 </tr>
 </tbody>
@@ -219,8 +215,8 @@ key: bool = False,</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="musicaiz.tokenizers.EncodeBase.html" class="btn btn-neutral float-left" title="musicaiz.tokenizers.EncodeBase" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../evaluation.html" class="btn btn-neutral float-right" title="Evaluation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="musicaiz.tokenizers.MMMTokenizerArguments.html" class="btn btn-neutral float-left" title="musicaiz.tokenizers.MMMTokenizerArguments" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="musicaiz.tokenizers.REMITokenizerArguments.html" class="btn btn-neutral float-right" title="musicaiz.tokenizers.REMITokenizerArguments" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

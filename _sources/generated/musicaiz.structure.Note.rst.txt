@@ -41,5 +41,9 @@
       ~Note.bpm
       ~Note.resolution
       ~Note.ligated
+      ~Note.instrument_prog
+      ~Note.bar_idx
+      ~Note.instrument_idx
+      ~Note.is_drum
    
    

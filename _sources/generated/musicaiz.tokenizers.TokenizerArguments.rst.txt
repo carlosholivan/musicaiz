@@ -1,0 +1,23 @@
+﻿musicaiz.tokenizers.TokenizerArguments
+======================================
+
+.. currentmodule:: musicaiz.tokenizers
+
+.. autoclass:: TokenizerArguments
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~TokenizerArguments.__init__
+      ~TokenizerArguments.save
+   
+   
+
+   
+   
+   

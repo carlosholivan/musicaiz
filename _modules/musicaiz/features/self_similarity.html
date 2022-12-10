@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>musicaiz.features.self_similarity &mdash; Musicaiz 0.0.2 documentation</title>
+  <title>musicaiz.features.self_similarity &mdash; Musicaiz 0.1.0 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/plot_directive.css" type="text/css" />
@@ -40,7 +40,7 @@
             <img src="../../../_static/logo_square_dark.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.0.2
+                0.1.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -72,7 +72,6 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../notebooks/2-write_midi.html">Writing a MIDI file from scratch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../notebooks/3-plot.html">Plotting</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">References:</span></p>
@@ -223,8 +222,8 @@
 <span class="sd">    s: np.ndarray [shape=(n_bars, n_bars)]</span>
 <span class="sd">        The SSM computed from the ``feature_vector``.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">musa_obj</span> <span class="o">=</span> <span class="n">__initialization</span><span class="p">(</span><span class="n">file</span><span class="p">)</span> 
-    <span class="n">all_subdiv_notes</span> <span class="o">=</span> <span class="n">group_notes_in_subdivisions_bars</span><span class="p">(</span><span class="n">musa_obj</span><span class="p">)</span>
+    <span class="n">musa_obj</span> <span class="o">=</span> <span class="n">__initialization</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+    <span class="n">all_subdiv_notes</span> <span class="o">=</span> <span class="n">musa_obj</span><span class="o">.</span><span class="n">get_notes_in_beats</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">musa_obj</span><span class="o">.</span><span class="n">beats</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
     <span class="n">bar_highest_subdiv_notes</span> <span class="o">=</span> <span class="n">get_highest_subdivision_bars_notes</span><span class="p">(</span><span class="n">all_subdiv_notes</span><span class="p">)</span>
     <span class="n">m</span> <span class="o">=</span> <span class="n">feature_vector</span><span class="p">(</span><span class="n">bar_highest_subdiv_notes</span><span class="p">)</span>
     <span class="n">s</span> <span class="o">=</span> <span class="n">_self_similarity</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
@@ -237,7 +236,7 @@
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Computes the SSM with the selected measure for all the bars.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 
@@ -246,17 +245,17 @@
 
 <span class="sd">    measure: str</span>
 <span class="sd">        The measure or feature used to compute the SSM.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 
 <span class="sd">    s: np.ndarray [shape=(n_bars, n_bars)]</span>
 <span class="sd">        The SSM computed from the selected measure.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">musa_obj</span> <span class="o">=</span> <span class="n">__initialization</span><span class="p">(</span><span class="n">file</span><span class="p">)</span> 
-    <span class="n">bars</span> <span class="o">=</span> <span class="n">loaders</span><span class="o">.</span><span class="n">Musa</span><span class="o">.</span><span class="n">group_instrument_bar_notes</span><span class="p">(</span><span class="n">musa_obj</span><span class="p">)</span>
+    <span class="n">musa_obj</span> <span class="o">=</span> <span class="n">__initialization</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
     <span class="n">bar_measures</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">bar</span> <span class="ow">in</span> <span class="n">bars</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">musa_obj</span><span class="o">.</span><span class="n">bars</span><span class="p">:</span>
+        <span class="n">bar</span> <span class="o">=</span> <span class="n">musa_obj</span><span class="o">.</span><span class="n">get_notes_in_bar</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
         <span class="n">bar_measures</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">get_eval_measures</span><span class="p">(</span><span class="n">bar</span><span class="p">,</span> <span class="n">measures</span><span class="o">=</span><span class="p">[</span><span class="n">measure</span><span class="p">]))</span>
     <span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">bar_measures</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">bar_measures</span><span class="p">)))</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">bar_measures</span><span class="p">)):</span>
@@ -270,12 +269,12 @@
                 <span class="n">m_j</span> <span class="o">=</span> <span class="n">bar_measures</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">measure</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">m_j</span> <span class="o">=</span> <span class="n">bar_measures</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">measure</span><span class="p">]</span>
-            
+
             <span class="c1"># Append zeros to any vector if shapes do not match</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">m_i</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">m_j</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
-                 <span class="n">m_i</span><span class="p">,</span> <span class="n">m_j</span> <span class="o">=</span> <span class="n">_append_zeros_array</span><span class="p">(</span><span class="n">m_i</span><span class="p">,</span> <span class="n">m_j</span><span class="p">)</span>
+                <span class="n">m_i</span><span class="p">,</span> <span class="n">m_j</span> <span class="o">=</span> <span class="n">_append_zeros_array</span><span class="p">(</span><span class="n">m_i</span><span class="p">,</span> <span class="n">m_j</span><span class="p">)</span>
 
-            <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">spatial</span><span class="o">.</span><span class="n">distance</span><span class="o">.</span><span class="n">cosine</span><span class="p">(</span><span class="n">m_i</span><span class="p">,</span> <span class="n">m_j</span><span class="p">)</span>
+            <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">spatial</span><span class="o">.</span><span class="n">distance</span><span class="o">.</span><span class="n">cosine</span><span class="p">(</span><span class="n">m_i</span><span class="p">,</span> <span class="n">m_j</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">s</span></div>
 
 
@@ -284,7 +283,7 @@
     <span class="n">measures</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Computes the SSM with the selected measure for all the bars.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 
@@ -294,14 +293,14 @@
 <span class="sd">    measure: str</span>
 <span class="sd">        The list of measures used to compute the SSM. It also accepts ``all`` as a value if</span>
 <span class="sd">        we want to compute the SSM with all the available measures.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 
 <span class="sd">    s: np.ndarray [shape=(n_bars, n_bars)]</span>
 <span class="sd">        The SSM computed from the selected measures.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">musa_obj</span> <span class="o">=</span> <span class="n">__initialization</span><span class="p">(</span><span class="n">file</span><span class="p">)</span> 
+    <span class="n">musa_obj</span> <span class="o">=</span> <span class="n">__initialization</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">measures</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">measures</span> <span class="o">==</span> <span class="s2">&quot;all&quot;</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;For input arg `measures` you must provide a list of valid measures or `all`.&quot;</span><span class="p">)</span>
@@ -310,9 +309,10 @@
     <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">measures</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">m</span> <span class="ow">in</span> <span class="n">_DEFAULT_MEASURES</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">measures</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Measures arg must be a list of valid measures </span><span class="si">{</span><span class="n">_DEFAULT_MEASURES</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
 
-    <span class="n">bars</span> <span class="o">=</span> <span class="n">loaders</span><span class="o">.</span><span class="n">Musa</span><span class="o">.</span><span class="n">group_instrument_bar_notes</span><span class="p">(</span><span class="n">musa_obj</span><span class="p">)</span>
+    <span class="n">musa_obj</span> <span class="o">=</span> <span class="n">__initialization</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
     <span class="n">bar_measures</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">bar</span> <span class="ow">in</span> <span class="n">bars</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">musa_obj</span><span class="o">.</span><span class="n">bars</span><span class="p">:</span>
+        <span class="n">bar</span> <span class="o">=</span> <span class="n">musa_obj</span><span class="o">.</span><span class="n">get_notes_in_bar</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
         <span class="n">bar_measures</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">get_eval_measures</span><span class="p">(</span><span class="n">bar</span><span class="p">,</span> <span class="n">measures</span><span class="o">=</span><span class="n">measures</span><span class="p">))</span>
     <span class="n">s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">bar_measures</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">bar_measures</span><span class="p">)))</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">bar_measures</span><span class="p">)):</span>
@@ -328,7 +328,7 @@
                     <span class="n">m_j</span> <span class="o">=</span> <span class="n">bar_measures</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">measure</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">m_j</span> <span class="o">=</span> <span class="n">bar_measures</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">measure</span><span class="p">]</span>
-                
+
                 <span class="c1"># Append zeros to any vector if shapes do not match</span>
                 <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">m_i</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">m_j</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
                     <span class="n">m_i</span><span class="p">,</span> <span class="n">m_j</span> <span class="o">=</span> <span class="n">_append_zeros_array</span><span class="p">(</span><span class="n">m_i</span><span class="p">,</span> <span class="n">m_j</span><span class="p">)</span>
@@ -360,11 +360,11 @@
 
 <span class="sd">    ssm: np.ndarray [shape=(n_bars, n_bars)]</span>
 <span class="sd">        The SSM.</span>
-<span class="sd">    </span>
+
 <span class="sd">    segments: bool</span>
 <span class="sd">        Plot the sections boundaries over the SSM by computing the</span>
 <span class="sd">        novelty function. Default is False.</span>
-<span class="sd">    </span>
+
 <span class="sd">    threshold: float</span>
 <span class="sd">        The threshold for peak picking in the novelty curve if ``segments=True``.</span>
 <span class="sd">        Default is 0.5.</span>
@@ -372,7 +372,7 @@
 <span class="sd">    window: float</span>
 <span class="sd">        The window for peak picking in the novelty curve if ``segments=True``.</span>
 <span class="sd">        Default is 2.</span>
-<span class="sd">    </span>
+
 <span class="sd">    save: Optional[bool]</span>
 <span class="sd">        True if we want to save the output plot in disk. Defaults to True.</span>
 
@@ -391,7 +391,7 @@
 
 <span class="sd">    dpi: int</span>
 <span class="sd">        dpi of the plot. Defaults to ``300``.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
 
@@ -411,7 +411,7 @@
         <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">filename</span> <span class="o">+</span> <span class="s2">&quot;.png&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">colorbar</span><span class="p">:</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
-    <span class="k">if</span> <span class="n">segments</span><span class="p">:</span>    
+    <span class="k">if</span> <span class="n">segments</span><span class="p">:</span>
         <span class="n">segment_boundaries</span> <span class="o">=</span> <span class="n">get_segment_boundaries</span><span class="p">(</span><span class="n">ssm</span><span class="p">,</span> <span class="n">threshold</span><span class="p">,</span> <span class="n">window</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">segment_boundaries</span><span class="p">)):</span>
             <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">segment_boundaries</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">)</span>
@@ -423,14 +423,14 @@
 <div class="viewcode-block" id="_self_similarity"><a class="viewcode-back" href="../../../generated/musicaiz.features._self_similarity.html#musicaiz.features._self_similarity">[docs]</a><span class="k">def</span> <span class="nf">_self_similarity</span><span class="p">(</span><span class="n">feature_vector</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Note</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Converts a feature vector with the highest notes per subdivision and bar</span>
 <span class="sd">    in a Self-Similarity Matrix with the  cosine distance.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 
 <span class="sd">    feature_vector: List[List[Note]]</span>
 <span class="sd">        A vector with all bars and subdivisions in which each element represents</span>
 <span class="sd">        the note with the highest pitch.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 
@@ -443,7 +443,7 @@
             <span class="c1"># Flatten lists to convert them in 1D vectors</span>
             <span class="n">m_i</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">feature_vector</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">,()))</span>
             <span class="n">m_j</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">feature_vector</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="p">,()))</span>
-            <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">spatial</span><span class="o">.</span><span class="n">distance</span><span class="o">.</span><span class="n">cosine</span><span class="p">(</span><span class="n">m_i</span><span class="p">,</span> <span class="n">m_j</span><span class="p">)</span>
+            <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">spatial</span><span class="o">.</span><span class="n">distance</span><span class="o">.</span><span class="n">cosine</span><span class="p">(</span><span class="n">m_i</span><span class="p">,</span> <span class="n">m_j</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">s</span></div>
 
 
@@ -457,7 +457,7 @@
             <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">:</span>
                 <span class="n">bin_s</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
                 <span class="k">continue</span>
-            <span class="k">if</span> <span class="n">ssm</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">threshold</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">ssm</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">threshold</span><span class="p">:</span>
                 <span class="n">bin_s</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">bin_s</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span>
@@ -489,9 +489,9 @@
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">note</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">bar</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">bar</span><span class="p">):</span>
                 <span class="k">break</span>
-            <span class="n">y</span> <span class="o">=</span> <span class="n">bar</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">pitch</span> <span class="o">-</span> <span class="n">bar</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">pitch</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">bar</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">pitch</span> <span class="o">-</span> <span class="n">bar</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">pitch</span>
             <span class="k">if</span> <span class="n">bar</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">start_ticks</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">bar</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">end_ticks</span> <span class="o">-</span> <span class="n">bar</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">start_ticks</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">bar</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">end_ticks</span> <span class="o">-</span> <span class="n">bar</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">start_ticks</span><span class="p">)</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">bar</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">end_ticks</span> <span class="o">-</span> <span class="n">bar</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">start_ticks</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">bar</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">end_ticks</span> <span class="o">-</span> <span class="n">bar</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">start_ticks</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="n">bar_m</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span>
@@ -511,7 +511,7 @@
 
 <span class="sd">    ssm: np.ndarray [shape=(n_bars, n_bars)]</span>
 <span class="sd">        The SSM.</span>
-<span class="sd">    </span>
+
 <span class="sd">    is_normalized: bool</span>
 <span class="sd">        Normalizes the Novelty curve. Defaults is True.</span>
 
@@ -522,10 +522,10 @@
 <span class="sd">        The normalized novelty function as a 1D array.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">ssm</span><span class="p">[:,</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">ssm</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">ssm</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">ssm</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">is_normalized</span><span class="p">:</span>
-        <span class="n">c_norm</span> <span class="o">=</span> <span class="p">(</span><span class="n">c</span> <span class="o">-</span> <span class="n">c</span><span class="o">.</span><span class="n">min</span><span class="p">())</span> <span class="o">/</span> <span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">c</span><span class="o">.</span><span class="n">min</span><span class="p">())</span> <span class="c1">#  normalization of c</span>
+        <span class="n">c_norm</span> <span class="o">=</span> <span class="p">(</span><span class="n">c</span> <span class="o">-</span> <span class="n">c</span><span class="o">.</span><span class="n">min</span><span class="p">())</span> <span class="o">/</span> <span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">c</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>  <span class="c1"># normalization of c</span>
         <span class="k">return</span> <span class="n">c_norm</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">c</span></div>
@@ -563,28 +563,28 @@
     <span class="c1"># where boundaries are (this is simple to compute with the rhythm submodule.)</span>
     <span class="n">novelty</span> <span class="o">=</span> <span class="n">get_novelty_func</span><span class="p">(</span><span class="n">ssm</span><span class="o">=</span><span class="n">ssm</span><span class="p">,</span> <span class="n">is_normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-    <span class="c1">#Peaks detection - sliding window</span>
-    <span class="n">lamda</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">window</span><span class="p">)</span> <span class="c1">#window length</span>
+    <span class="c1"># Peaks detection - sliding window</span>
+    <span class="n">lamda</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">window</span><span class="p">)</span>  <span class="c1"># window length</span>
     <span class="n">peaks_position</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">find_peaks</span><span class="p">(</span>
         <span class="n">novelty</span><span class="p">,</span>
         <span class="n">height</span><span class="o">=</span><span class="n">threshold</span><span class="p">,</span>
         <span class="n">distance</span><span class="o">=</span><span class="n">lamda</span><span class="p">,</span>
         <span class="n">width</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">threshold</span><span class="p">)</span>
-    <span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="c1">#array of peaks</span>
+    <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># array of peaks</span>
     <span class="n">peaks_values</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">find_peaks</span><span class="p">(</span>
         <span class="n">novelty</span><span class="p">,</span>
         <span class="n">height</span><span class="o">=</span><span class="n">threshold</span><span class="p">,</span>
         <span class="n">distance</span><span class="o">=</span><span class="n">lamda</span><span class="p">,</span>
         <span class="n">width</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="n">threshold</span><span class="p">)</span>
-    <span class="p">)[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;peak_heights&#39;</span><span class="p">]</span> <span class="c1">#array of peaks</span>
+    <span class="p">)[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;peak_heights&#39;</span><span class="p">]</span>  <span class="c1">#array of peaks</span>
     <span class="n">b</span> <span class="o">=</span> <span class="n">peaks_position</span>
 
-    <span class="c1">#Adding elements 1 and N&#39; to the begining and end of the array</span>
+    <span class="c1"># Adding elements 1 and N&#39; to the begining and end of the array</span>
     <span class="k">if</span> <span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([[</span><span class="mi">0</span><span class="p">],</span> <span class="n">b</span><span class="p">])</span> <span class="c1">#  b: segment boundaries</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([[</span><span class="mi">0</span><span class="p">],</span> <span class="n">b</span><span class="p">])</span>  <span class="c1"># b: segment boundaries</span>
     <span class="k">if</span> <span class="n">b</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">ssm</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">b</span><span class="p">,</span> <span class="p">[</span><span class="n">ssm</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
-    
+        <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">b</span><span class="p">,</span> <span class="p">[</span><span class="n">ssm</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]])</span>
+
     <span class="k">return</span> <span class="n">b</span></div>
 
 
@@ -600,7 +600,7 @@
 <span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Plots the novelty curve from a SSM.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 
@@ -618,7 +618,7 @@
 <span class="sd">    window: float</span>
 <span class="sd">        The window for peak picking in the novelty curve if ``segments=True``.</span>
 <span class="sd">        Default is 2.</span>
-<span class="sd">    </span>
+
 <span class="sd">    save: Optional[bool]</span>
 <span class="sd">        True if we want to save the output plot in disk. Defaults to True.</span>
 
@@ -631,20 +631,20 @@
 <span class="sd">    dpi: int</span>
 <span class="sd">        dpi of the plot. Defaults to ``300``.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1">#Plot novelty function with boundaries</span>
+    <span class="c1"># Plot novelty function with boundaries</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="n">dpi</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">title</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">save</span><span class="p">:</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">filename</span> <span class="o">+</span> <span class="s2">&quot;.png&quot;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
-    
+
     <span class="n">novelty</span> <span class="o">=</span> <span class="n">get_novelty_func</span><span class="p">(</span><span class="n">ssm</span><span class="p">)</span>
     <span class="n">frames</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">novelty</span><span class="p">))</span>
-    <span class="k">if</span> <span class="n">segments</span><span class="p">:</span>    
+    <span class="k">if</span> <span class="n">segments</span><span class="p">:</span>
         <span class="n">segment_boundaries</span> <span class="o">=</span> <span class="n">get_segment_boundaries</span><span class="p">(</span><span class="n">ssm</span><span class="p">,</span> <span class="n">threshold</span><span class="p">,</span> <span class="n">window</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">segment_boundaries</span><span class="p">)):</span>
-            <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">segment_boundaries</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span> 
+            <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">segment_boundaries</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">frames</span><span class="p">,</span> <span class="n">novelty</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
 </pre></div>

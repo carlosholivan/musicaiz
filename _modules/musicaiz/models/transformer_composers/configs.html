@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>musicaiz.models.transformer_composers.configs &mdash; Musicaiz 0.0.2 documentation</title>
+  <title>musicaiz.models.transformer_composers.configs &mdash; Musicaiz 0.1.0 documentation</title>
       <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../../_static/plot_directive.css" type="text/css" />
@@ -40,7 +40,7 @@
             <img src="../../../../_static/logo_square_dark.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.0.2
+                0.1.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
@@ -72,7 +72,6 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/2-write_midi.html">Writing a MIDI file from scratch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/3-plot.html">Plotting</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">References:</span></p>
@@ -118,11 +117,28 @@
 <span class="sd">    must be placed in the dataset path (this file is generated when</span>
 <span class="sd">    tokenizing).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">N_DECODERS</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">N_DECODERS</span> <span class="o">=</span> <span class="mi">6</span>
     <span class="n">SEQ_LEN</span> <span class="o">=</span> <span class="mi">512</span>
-    <span class="n">EMBED_DIM</span> <span class="o">=</span> <span class="mi">128</span>  <span class="c1"># also d_model</span>
+    <span class="n">EMBED_DIM</span> <span class="o">=</span> <span class="mi">64</span>  <span class="c1"># also d_model</span>
     <span class="n">N_HEADS</span> <span class="o">=</span> <span class="mi">8</span>  <span class="c1"># must be divisor of embed dim</span>
     <span class="n">DROPOUT</span> <span class="o">=</span> <span class="mf">0.1</span></div>
+
+
+<span class="k">class</span> <span class="nc">PerceiverARConfigs</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    ...</span>
+<span class="sd">    The vocabulary size is given by the ``vocabulary.txt`` file that</span>
+<span class="sd">    must be placed in the dataset path (this file is generated when</span>
+<span class="sd">    tokenizing).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">NUM_TOKENS</span> <span class="o">=</span> <span class="mi">20000</span>             <span class="c1"># number of tokens</span>
+    <span class="n">DIM</span> <span class="o">=</span> <span class="mi">512</span>                      <span class="c1"># model dimensions</span>
+    <span class="n">DEPTH</span> <span class="o">=</span> <span class="mi">8</span>                      <span class="c1"># model depth</span>
+    <span class="n">DIM_HEAD</span> <span class="o">=</span> <span class="mi">64</span>                  <span class="c1"># attention head dimension</span>
+    <span class="n">HEADS</span> <span class="o">=</span> <span class="mi">8</span>                      <span class="c1"># attention heads</span>
+    <span class="n">MAX_SEQ_LEN</span> <span class="o">=</span> <span class="mi">4096</span>             <span class="c1"># total max sequence length</span>
+    <span class="n">CROSS_ATTN_SEQ_LEN</span> <span class="o">=</span> <span class="mi">3072</span>      <span class="c1"># the sequence length in which to attend to, but does not undergo self attention (must be less than max_seq_len)</span>
+    <span class="n">CROSS_ATTN_DROPOUT</span> <span class="o">=</span> <span class="mf">0.5</span>       <span class="c1"># what percentage of the prefix to dropout during training, in paper they had extensive experimentation to show up to 50% dropout helped prevent overfitting</span>
 
 
 <div class="viewcode-block" id="TrainConfigs"><a class="viewcode-back" href="../../../../generated/generated/musicaiz.models.transformer_composers.TrainConfigs.html#musicaiz.models.transformer_composers.TrainConfigs">[docs]</a><span class="k">class</span> <span class="nc">TrainConfigs</span><span class="p">:</span>
@@ -132,8 +148,8 @@
     <span class="n">MODEL_NAME</span> <span class="o">=</span> <span class="s2">&quot;gpt&quot;</span>
     <span class="n">WEIGHT_DECAY</span> <span class="o">=</span> <span class="mf">0.01</span>
     <span class="n">EPOCHS</span> <span class="o">=</span> <span class="mi">250</span>
-    <span class="n">BATCH_SIZE</span> <span class="o">=</span> <span class="mi">64</span>
-    <span class="n">LR</span> <span class="o">=</span> <span class="mf">5e-3</span>
+    <span class="n">BATCH_SIZE</span> <span class="o">=</span> <span class="mi">128</span>
+    <span class="n">LR</span> <span class="o">=</span> <span class="mf">.01</span>
     <span class="n">ADAM_EPSILON</span> <span class="o">=</span> <span class="mf">1e-6</span>
     <span class="n">CKPT_STEPS</span> <span class="o">=</span> <span class="mi">100</span>  <span class="c1"># steps to save checkpoint</span>
     <span class="n">LOG_STEPS</span> <span class="o">=</span> <span class="mi">1</span>

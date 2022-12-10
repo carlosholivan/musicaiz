@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>musicaiz.models.transformer_composers.train &mdash; Musicaiz 0.0.2 documentation</title>
+  <title>musicaiz.models.transformer_composers.train &mdash; Musicaiz 0.1.0 documentation</title>
       <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../../_static/plot_directive.css" type="text/css" />
@@ -40,7 +40,7 @@
             <img src="../../../../_static/logo_square_dark.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                0.0.2
+                0.1.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
@@ -72,7 +72,6 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/2-write_midi.html">Writing a MIDI file from scratch</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../notebooks/3-plot.html">Plotting</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">References:</span></p>
@@ -109,8 +108,13 @@
   <h1>Source code for musicaiz.models.transformer_composers.train</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
 <span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
-<span class="kn">from</span> <span class="nn">apex</span> <span class="kn">import</span> <span class="n">amp</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">apex</span> <span class="kn">import</span> <span class="n">amp</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">amp</span> <span class="o">=</span> <span class="kc">None</span>
+
 <span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">import</span> <span class="nn">argparse</span>
@@ -123,17 +127,20 @@
 <span class="kn">from</span> <span class="nn">torch.optim</span> <span class="kn">import</span> <span class="n">AdamW</span>
 <span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
 
+
 <span class="c1"># gpt_composer sub-package</span>
 <span class="kn">from</span> <span class="nn">musicaiz.models.transformer_composers.configs</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">GPTConfigs</span><span class="p">,</span>
     <span class="n">TrainConfigs</span><span class="p">,</span>
+    <span class="n">PerceiverARConfigs</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="kn">from</span> <span class="nn">musicaiz.models.transformer_composers.dataset</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">build_torch_loaders</span><span class="p">,</span>
     <span class="n">get_vocabulary</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">musicaiz.models.transformer_composers.transformers</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span> <span class="nn">musicaiz.models.transformer_composers.musicaiz_transformers</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">GPT2</span><span class="p">,</span>
+    <span class="n">PerceiverAR</span>
 <span class="p">)</span>
 
 
@@ -151,6 +158,17 @@
             <span class="n">sequence_len</span><span class="o">=</span><span class="n">confs</span><span class="p">[</span><span class="s2">&quot;SEQ_LEN&quot;</span><span class="p">],</span>
             <span class="n">n_heads</span><span class="o">=</span><span class="n">confs</span><span class="p">[</span><span class="s2">&quot;N_HEADS&quot;</span><span class="p">],</span>
             <span class="n">device</span><span class="o">=</span><span class="n">device</span>
+        <span class="p">)</span>
+    <span class="k">elif</span> <span class="n">model_name</span> <span class="o">==</span> <span class="s2">&quot;perceiver_ar&quot;</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">PerceiverAR</span><span class="p">(</span>
+            <span class="n">num_tokens</span><span class="o">=</span><span class="n">confs</span><span class="p">[</span><span class="s2">&quot;NUM_TOKENS&quot;</span><span class="p">],</span>
+            <span class="n">dim</span><span class="o">=</span><span class="n">confs</span><span class="p">[</span><span class="s2">&quot;DIM&quot;</span><span class="p">],</span>
+            <span class="n">depth</span><span class="o">=</span><span class="n">confs</span><span class="p">[</span><span class="s2">&quot;DEPTH&quot;</span><span class="p">],</span>
+            <span class="n">dim_head</span><span class="o">=</span><span class="n">confs</span><span class="p">[</span><span class="s2">&quot;DIM_HEAD&quot;</span><span class="p">],</span>
+            <span class="n">heads</span><span class="o">=</span><span class="n">confs</span><span class="p">[</span><span class="s2">&quot;HEADS&quot;</span><span class="p">],</span>
+            <span class="n">max_seq_len</span><span class="o">=</span><span class="n">confs</span><span class="p">[</span><span class="s2">&quot;MAX_SEQ_LEN&quot;</span><span class="p">],</span>
+            <span class="n">cross_attn_seq_len</span><span class="o">=</span><span class="n">confs</span><span class="p">[</span><span class="s2">&quot;CROSS_ATTN_SEQ_LEN&quot;</span><span class="p">],</span>
+            <span class="n">cross_attn_dropout</span><span class="o">=</span><span class="n">confs</span><span class="p">[</span><span class="s2">&quot;CROSS_ATTN_DROPOUT&quot;</span><span class="p">],</span>
         <span class="p">)</span>
     <span class="k">return</span> <span class="n">model</span>
 
@@ -274,6 +292,10 @@
         <span class="n">model_configs</span> <span class="o">=</span> <span class="p">{</span>
             <span class="n">key</span><span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">GPTConfigs</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="s2">&quot;__&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">key</span>
         <span class="p">}</span>
+    <span class="k">elif</span> <span class="n">model_name</span> <span class="o">==</span> <span class="s2">&quot;perceiver_ar&quot;</span><span class="p">:</span>
+        <span class="n">model_configs</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">key</span><span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">PerceiverARConfigs</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="s2">&quot;__&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">key</span>
+        <span class="p">}</span>
     <span class="n">model_configs</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;VOCAB_SIZE&quot;</span><span class="p">:</span> <span class="n">vocab_size</span><span class="p">})</span>
     <span class="n">train_configs</span> <span class="o">=</span> <span class="p">{</span>
         <span class="n">key</span><span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">TrainConfigs</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="s2">&quot;__&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">key</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">Path</span><span class="p">)</span>
@@ -287,10 +309,29 @@
         <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">configs_dict</span><span class="p">,</span> <span class="n">outfile</span><span class="p">)</span>
     <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Saved configs.json in </span><span class="si">{</span><span class="n">dir_configs</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    <span class="c1"># Initialize model</span>
     <span class="n">device</span> <span class="o">=</span> <span class="s2">&quot;cuda:0&quot;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span>
-    <span class="n">model</span> <span class="o">=</span> <span class="n">initialize_model</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span> <span class="n">configs_dict</span><span class="p">,</span> <span class="n">device</span><span class="p">)</span>
-    <span class="n">model</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+    <span class="c1"># Transfer Learning</span>
+    <span class="nb">breakpoint</span><span class="p">()</span>
+    <span class="c1"># TODO: Estas 3 constantes tienen que ir como args de la función</span>
+    <span class="n">transfer</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">dataset_name</span> <span class="o">=</span> <span class="s2">&quot;jsbchorales&quot;</span>
+    <span class="n">model_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;results/gpt_jsbchorales&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">transfer</span><span class="p">:</span>
+        <span class="c1"># Initialize model</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">initialize_model</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span> <span class="n">configs_dict</span><span class="p">,</span> <span class="n">device</span><span class="p">)</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Load pretrained weights and initialize the model</span>
+        <span class="n">configs_file</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span> <span class="n">model_name</span> <span class="o">+</span> <span class="s2">&quot;_configs.json&quot;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">configs_file</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+            <span class="n">configs</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">initialize_model</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span> <span class="n">configs</span><span class="p">,</span> <span class="n">device</span><span class="p">)</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span> <span class="n">model_name</span> <span class="o">+</span> <span class="s2">&quot;.pth&quot;</span><span class="p">),</span> <span class="n">map_location</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="n">device</span><span class="p">))[</span><span class="s2">&quot;model_state_dict&quot;</span><span class="p">])</span>
+        <span class="c1"># Freeze all the decoders except for the last one</span>
+        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">decoders</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">parameters</span><span class="p">():</span>
+            <span class="n">param</span><span class="o">.</span><span class="n">requires_grad</span> <span class="o">=</span> <span class="kc">False</span>
 
     <span class="k">def</span> <span class="nf">count_parameters</span><span class="p">(</span><span class="n">model</span><span class="p">):</span>
         <span class="n">table</span> <span class="o">=</span> <span class="n">PrettyTable</span><span class="p">([</span><span class="s2">&quot;Modules&quot;</span><span class="p">,</span> <span class="s2">&quot;Parameters&quot;</span><span class="p">])</span>
@@ -304,7 +345,7 @@
     <span class="n">table</span><span class="p">,</span> <span class="n">total_params</span> <span class="o">=</span> <span class="n">count_parameters</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
     <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total trainable params: </span><span class="si">{</span><span class="n">total_params</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
+    <span class="nb">breakpoint</span><span class="p">()</span>
     <span class="c1"># write model params in txt</span>
     <span class="n">dir_params</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">log_dir</span><span class="p">),</span> <span class="n">model_name</span> <span class="o">+</span> <span class="s2">&quot;_model.txt&quot;</span><span class="p">)</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">dir_params</span><span class="p">,</span> <span class="s1">&#39;a+&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">results_file</span><span class="p">:</span>
@@ -370,6 +411,7 @@
                 <span class="k">continue</span>
             <span class="n">inputs</span> <span class="o">=</span> <span class="n">batch</span>  <span class="c1"># _ is input_mask</span>
             <span class="n">inputs</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+            <span class="nb">breakpoint</span><span class="p">()</span>
             <span class="n">lm_logits</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
             <span class="n">shift_logits</span> <span class="o">=</span> <span class="n">lm_logits</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">contiguous</span><span class="p">()</span>
 
@@ -480,7 +522,7 @@
             <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
             <span class="n">start_step</span> <span class="o">=</span> <span class="mi">0</span>
 
-            <span class="k">if</span> <span class="n">global_steps</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">global_steps</span> <span class="o">%</span> <span class="n">ckpt_steps</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">({</span>
                     <span class="s1">&#39;epoch&#39;</span><span class="p">:</span> <span class="n">epoch</span><span class="p">,</span>
                     <span class="s1">&#39;model_state_dict&#39;</span><span class="p">:</span> <span class="n">model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span>
