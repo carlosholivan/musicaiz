@@ -23,13 +23,13 @@ from musicaiz.structure import (
 def _extract_note_positions(note_seq: List[Note]) -> List[int]:
     """
     Extracts the note positions in the chromatic scale of the notes in a notes sequence.
-    
+
     Parameters
     ----------
-    
+
     notes: List[Note]
         A list of `musicaiz` :func:`~musicaiz.structure.Note` objects.
-    
+
     Returns
     -------
 
@@ -48,19 +48,19 @@ def _order_note_seq_by_chromatic_idx(note_seq: List[Note]) -> List[int]:
     """
     Sorts a note seq (list of note objects) by the index of the notes
     in the chromatic scale.
-    
+
     Parameters
     ----------
-    
+
     notes: List[Note]
         A list of `musicaiz` :func:`~musicaiz.structure.Note` objects.
-    
+
     Returns
     -------
 
     sorted_note_seq: List[int]
         Sorts the positions of the notes in the chromatic scale.
-    
+
     """
     # Extract the notes indexes in the natural scale
     positions = _extract_note_positions(note_seq)
@@ -84,7 +84,7 @@ def get_chord_type_from_note_seq(note_seq: List[Note]) -> str:
     This functions return the minimum chord type of a note seq.
     3 different note names are a triad, 4 notes a 7th or 9th (7th the minimum),
     5 notes a 9th with the 7th and so on.
-    
+
     Parameters
     ----------
     
@@ -93,7 +93,7 @@ def get_chord_type_from_note_seq(note_seq: List[Note]) -> str:
 
     Returns
     -------
-    
+
     chord_type: str
         The type of the chord :func:`~musicaiz.harmony.ChordType`.
     """
@@ -110,13 +110,13 @@ def get_intervals_note_seq(note_seq: List[Note]) -> List[List[IntervalSemitones]
     the notes in the note seq) of a sorted note seq.
     This computes all the intervals between 2 notes, taking into account the
     notes enharmonics.
-    
+
     Parameters
     ----------
-    
+
     notes: List[Note]
         A list of `musicaiz` :func:`~musicaiz.structure.Note` objects.
-    
+
     """
     intervals = []
     for i in range(1, len(note_seq)):
@@ -130,13 +130,13 @@ def predict_chords(
 ) -> List[Tuple[NoteClassBase, AllChords]]:
     """Predicts a chord in a note sequence with only note values,
     so no note durations atr taken into account.
-    
+
     Parameters
     ----------
-    
+
     notes: List[Note]
         A list of `musicaiz` :func:`~musicaiz.structure.Note` objects.
-    
+
     """
     # Check note seq length
     if len(note_seq) <= 1:

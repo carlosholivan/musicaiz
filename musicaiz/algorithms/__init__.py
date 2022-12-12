@@ -48,6 +48,20 @@ Music Perception: An Interdisciplinary Journal, 31(1), 59-67.
     Temperley
     AlbrechtShanahan
     key_detection
+
+Chord Prediction
+----------------
+
+Predict chords at beat-level.
+
+.. autosummary::
+    :toctree: generated/
+
+    predict_chords
+    get_chords
+    get_chords_candidates
+    compute_chord_notes_dist
+    _notes_to_onehot
 """
 
 from .harmonic_shift import (
@@ -76,7 +90,6 @@ from .chord_prediction import (
     get_chords_candidates,
     compute_chord_notes_dist,
     _notes_to_onehot,
-    _group_notes_in_beats,
 )
 
 
@@ -100,5 +113,4 @@ __all__ = [
     "get_chords_candidates",
     "compute_chord_notes_dist",
     "_notes_to_onehot",
-    "_group_notes_in_beats",
 ]

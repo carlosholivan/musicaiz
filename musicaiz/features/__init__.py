@@ -143,6 +143,17 @@ The papers that are implemented in this sumbodule are the following:
 
     musa_to_graph
     plot_graph
+
+
+Form or Structure
+-----------------
+
+.. autosummary::
+    :toctree: generated/
+
+    PeltArgs
+    StructurePrediction
+
 """
 
 

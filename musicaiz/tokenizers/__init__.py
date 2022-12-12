@@ -16,6 +16,7 @@ Basic Encoding
     :toctree: generated/
 
     EncodeBase
+    TokenizerArguments
 
 
 Multi-Track Music Machine
@@ -23,21 +24,29 @@ Multi-Track Music Machine
 
 This submodule contains the implementation of the MMM encoding:
 
-.. panels::
-
-    [1] Ens, J., & Pasquier, P. (2020).
-    Flexible generation with the multi-track music machine.
-    In Proceedings of the 21st International Society for Music Information Retrieval Conference, ISMIR.
-
-    [2] 
-
+[1] Ens, J., & Pasquier, P. (2020).
+Flexible generation with the multi-track music machine.
+In Proceedings of the 21st International Society for Music Information Retrieval Conference, ISMIR.
 
 .. autosummary::
     :toctree: generated/
 
-    TokenizerArguments
     MMMTokenizerArguments
     MMMTokenizer
+
+
+Multi-Track Music Machine
+-------------------------
+
+This submodule contains the implementation of the REMI encoding:
+
+[2] Huang, Y. S., & Yang, Y. H. (2020).
+Pop music transformer: Beat-based modeling and generation of expressive pop piano compositions.
+In Proceedings of the 28th ACM International Conference on Multimedia (pp. 1180-1188).
+
+.. autosummary::
+    :toctree: generated/
+
     REMITokenizerArguments
     REMITokenizer
 

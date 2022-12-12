@@ -23,6 +23,15 @@ Pretty MIDI
     prettymidi_note_to_musicaiz
     musicaiz_note_to_prettymidi
 
+
+Protobufs
+----------
+
+.. autosummary::
+    :toctree: generated/
+
+    musa_to_proto
+    proto_to_musa
 """
 
 from .musa_json import (
