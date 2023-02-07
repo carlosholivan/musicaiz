@@ -143,7 +143,7 @@ class MMMTokenizer(EncodeBase):
             else:
                 time_sig_tok = ""
             if self.args.tempo:
-                tempo_tok = f"TEMPO={self.midi_object.bpm} "
+                tempo_tok = f"TEMPO={self.midi_object.tempo_changes['tempo'][0]} "
             else:
                 tempo_tok = ""
             tokens = self.tokenize_tracks(
@@ -207,10 +207,10 @@ class MMMTokenizer(EncodeBase):
                 tokens += f"DENSITY={len(inst.notes)} "
             # loop in bars
             if bar_end is None:
-                bar_end = len(inst.bars)
+                bar_end = len(self.midi_object.bars)
             bars = self.midi_object.bars[bar_start:bar_end]
             tokens = self.tokenize_track_bars(
-                bars, inst.program, tokens
+                bars, int(inst.program), tokens
             )
             if inst_idx + 1 == len(instruments):
                 tokens += "TRACK_END"
