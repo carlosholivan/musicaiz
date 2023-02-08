@@ -143,7 +143,7 @@ class MMMTokenizer(EncodeBase):
             else:
                 time_sig_tok = ""
             if self.args.tempo:
-                tempo_tok = f"TEMPO={self.midi_object.tempo_changes['tempo'][0]} "
+                tempo_tok = f"TEMPO={self.midi_object.tempo_changes[0]['tempo']} "
             else:
                 tempo_tok = ""
             tokens = self.tokenize_tracks(
