@@ -210,7 +210,7 @@ class MMMTokenizer(EncodeBase):
                 bar_end = len(self.midi_object.bars)
             bars = self.midi_object.bars[bar_start:bar_end]
             tokens = self.tokenize_track_bars(
-                bars, int(inst.program), tokens
+                bar_start, bars, int(inst.program), tokens
             )
             if inst_idx + 1 == len(instruments):
                 tokens += "TRACK_END"
@@ -220,6 +220,7 @@ class MMMTokenizer(EncodeBase):
 
     def tokenize_track_bars(
         self,
+        bar_start_idx: int,
         bars: List[Bar],
         program: int,
         tokens: Optional[str] = None,
@@ -248,11 +249,11 @@ class MMMTokenizer(EncodeBase):
         if self.args.time_unit not in VALID_TIME_UNITS:
             raise ValueError(f"Invalid time unit: {self.args.time_unit}")
 
-        for b, bar in enumerate(bars):
+        for b, bar in enumerate(bars, bar_start_idx):
             bar_start = bar.start_ticks
             bar_end = bar.end_ticks
             # sort notes by start_ticks
-            notes = self.midi_object.get_notes_in_bar(b, program)
+            notes = self.midi_object.get_notes_in_bars(b, b+1, int(program))
 
             tokens += "BAR_START "
             if len(notes) == 0:
@@ -276,8 +277,8 @@ class MMMTokenizer(EncodeBase):
                     delta_val = int(
                         NoteLengths[delta_symb].value / NoteLengths[self.args.time_unit].value
                     )
-                    if delta_val - bar_start != 0:
-                        tokens += f"TIME_DELTA={delta_val - bar_start} "
+                    if delta_val != 0:
+                        tokens += f"TIME_DELTA={delta_val} "
 
             all_time_events = all_note_starts + all_note_ends
             num_notes = len(all_note_starts)
