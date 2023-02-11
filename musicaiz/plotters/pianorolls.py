@@ -172,6 +172,8 @@ class Pianoroll:
         show_bar_labels: bool = True,
         show_grid: bool = True,
         show: bool = False,
+        save: bool = False,
+        save_path: Optional[Union[Path, str]] = None,
     ):
 
         if print_measure_data:
@@ -211,6 +213,13 @@ class Pianoroll:
             self.ax.get_xaxis().set_visible(False)
         if show:
             plt.show()
+        if save:
+            plt.margins(0,0)
+            plt.subplots_adjust(
+                top = 1, bottom = 0, right = 1, left = 0, 
+                hspace = 0, wspace = 0
+            )
+            plt.savefig(f"{save_path}.png", dpi=300, bbox_inches='tight', pad_inches=0)
 
 
 class PianorollHTML:
