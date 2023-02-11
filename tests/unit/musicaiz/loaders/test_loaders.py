@@ -103,9 +103,9 @@ def test_Musa(midi_sample):
     assert len([n.bar_idx for n in beats if n.bar_idx != 30]) == 0
 
     beat = midi.get_beat_in_bar(
-        beat_idx=0, bar_idx=80
+        beat_idx=0, bar_idx=60
     )
-    assert beat.bar_idx == 80
+    assert beat.bar_idx == 60
 
     subbeats = midi.get_subbeats_in_bar(bar_idx=1)
     assert len([n.bar_idx for n in subbeats if n.bar_idx != 1]) == 0
