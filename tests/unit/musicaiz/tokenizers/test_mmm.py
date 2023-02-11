@@ -278,6 +278,7 @@ def test_MMMTokenizer_tokenize_track_bars(musa_obj_abs, mmm_tokens):
     tokenizer.midi_object.bars = musa_obj_abs.bars
     tokenizer.midi_object.instruments_progs = [musa_obj_abs.instruments[0].program]
     got = tokenizer.tokenize_track_bars(
+        bar_start_idx=0,
         bars=tokenizer.midi_object.bars,
         program=30
     )
