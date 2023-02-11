@@ -17,6 +17,7 @@ from typing import TextIO, Union, List, Optional, Type
 import pretty_midi as pm
 from pathlib import Path
 from enum import Enum
+import copy
 
 
 # Our modules
@@ -186,18 +187,23 @@ class Musa:
                     "ms": 0.0
                 }
             ]
+        # delete time signature changes if the time signature is equal to the next one
+        ts_changes = copy.deepcopy(self.time_signature_changes)
+        for i in range(len(ts_changes) - 1):
+            if ts_changes[i]["time_sig"].num == ts_changes[i+1]["time_sig"].num and \
+            ts_changes[i]["time_sig"].denom == ts_changes[i+1]["time_sig"].denom:
+                del self.time_signature_changes[i+1]
 
         # For whatever reason, get_tempo_changes() returns a tuple
         # of arrays with 2 elements per array, the 1st is the time and
         # the 2nd is the tempo. In other cases, only 2 arrays are returned
         # each one with one element, the 1st array is the time and the 2nd, the tempo
         tempo_changes = pm_inst.get_tempo_changes()
-        if tempo_changes[0].size == 2:
-            for tempo_changes in tempo_changes:
-                if tempo_changes.size == 2:
-                    self.tempo_changes.append(
-                        {"tempo": tempo_changes[1], "ms": tempo_changes[0] * 1000}
-                    )
+        if tempo_changes[0].size >= 2:
+            for tc in zip(tempo_changes[0], tempo_changes[1]):
+                self.tempo_changes.append(
+                    {"tempo": tc[1], "ms": tc[0] * 1000}
+                )
         elif tempo_changes[0].size == 1 and len(tempo_changes) == 2:
             self.tempo_changes.append(
                 {"tempo": tempo_changes[1][0], "ms": tempo_changes[0][0] * 1000}
@@ -212,10 +218,16 @@ class Musa:
         last_note_end = self._get_last_note_end(pm_inst)
 
         # Add last note end to the time signature changes
-        # (for easier bars laoding)
+        # (for easier bars loading)
         self.tempo_changes.append(
             {"tempo": self.tempo_changes[-1]["tempo"], "ms": last_note_end * 1000}
         )
+        # delete tempo changes if next one is at the same time
+        #self.tempo_changes = [
+        #    self.tempo_changes[i]
+        #    for i in range(len(self.tempo_changes) - 1)
+        #    if self.tempo_changes[i-1]["ms"] + 20 >= self.tempo_changes[i]["ms"]
+        #]
 
         # Load beats
         self._load_beats(last_note_end)
@@ -637,7 +649,6 @@ class Musa:
             raise ValueError("Not method found.")
         elif method in KeyDetectionAlgorithms.SIGNATURE_FIFTHS.value:
             # get notes in 2 1st bars (excluding drums)
-            # TODO: Exclude drums
             all_notes = self.get_notes_in_bars(0, 2)
             notes = [note for note in all_notes if not note.is_drum]
             key = key_detection(notes, method)
@@ -681,6 +692,7 @@ class Musa:
                 )
                 beat_ms = bar_ms / time_sig["time_sig"].num
                 beat_end = start_beat_ms + beat_ms
+
                 if beat_end > ms_next_change:
                     beat_end = ms_next_change
                 # If there's a tempo_change inside a bar, we'll
@@ -699,6 +711,7 @@ class Musa:
                         )
                         beat_ms = bar_ms / time_sig["time_sig"].num
                         beat_end = start_beat_ms + ms_in_prev_tempo + beat_ms * perc
+
                 beat = Beat(
                     time_sig=time_sig["time_sig"],
                     start=start_beat_ms / 1000,
