@@ -218,6 +218,12 @@ from .graphs import (
     musa_to_graph,
     plot_graph,
 )
+from .structure import(
+    PeltArgs,
+    StructurePrediction,
+    LevelsBPS,
+    LevelsSWD,
+)
 
 __all__ = [
     "get_highest_lowest_pitches",
@@ -268,4 +274,8 @@ __all__ = [
     "plot_novelty_from_ssm",
     "musa_to_graph",
     "plot_graph",
+    "PeltArgs",
+    "StructurePrediction",
+    "LevelsBPS",
+    "LevelsSWD",
 ]
