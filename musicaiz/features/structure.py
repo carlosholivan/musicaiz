@@ -76,7 +76,6 @@ class StructurePrediction:
 
     def beats(self, level: str) -> List[int]:
         result = self._get_structure_boundaries(level)
-        print(result)
         return [self.midi_object.notes[n].beat_idx for n in result]
 
     def bars(self, level: str) -> List[int]:

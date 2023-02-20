@@ -129,6 +129,7 @@ class EncodeBase(metaclass=ABCMeta):
             dataset_tokens.append(piece_tokens)
         return dataset_tokens
 
+    @staticmethod
     def get_vocabulary(
         dataset_path: str,
         vocab_filename: str = "vocabulary"
