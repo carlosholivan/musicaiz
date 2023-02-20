@@ -9,6 +9,7 @@ plotly==5.8.0
 mypy==0.960
 protobuf==4.21.3
 rich==12.6.0
+ruptures==1.1.7
 
 # For models submodule
 networkx==2.8.6
