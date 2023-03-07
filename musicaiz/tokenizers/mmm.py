@@ -379,10 +379,9 @@ class MMMTokenizer(EncodeBase):
         resolution: int = TimingConsts.RESOLUTION.value,
     ) -> Musa:
 
-        # TODO: Support time sig. changes
+        # TODO: Support time sig. changes and absolte_timing=False
 
-        if absolute_timing:
-            _, ticks_bar = ticks_per_bar(time_sig, resolution)
+        _, ticks_bar = ticks_per_bar(time_sig, resolution)
 
         """Converts a str valid tokens sequence in Musa objects."""
         # Initialize midi file to write
