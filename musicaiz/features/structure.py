@@ -1,3 +1,4 @@
+import warnings
 import ruptures as rpt
 import numpy as np
 import networkx as nx
@@ -71,19 +72,19 @@ class StructurePrediction:
         else:
             self.midi_object = Musa(file=None)
 
-    def notes(self, level: str) -> List[int]:
-        return self._get_structure_boundaries(level)
+    def notes(self, level: str, dataset: str) -> List[int]:
+        return self._get_structure_boundaries(level, dataset)
 
-    def beats(self, level: str) -> List[int]:
-        result = self._get_structure_boundaries(level)
+    def beats(self, level: str, dataset: str) -> List[int]:
+        result = self._get_structure_boundaries(level, dataset)
         return [self.midi_object.notes[n].beat_idx for n in result]
 
-    def bars(self, level: str) -> List[int]:
-        result = self._get_structure_boundaries(level)
+    def bars(self, level: str, dataset: str) -> List[int]:
+        result = self._get_structure_boundaries(level, dataset)
         return [self.midi_object.notes[n].bar_idx for n in result]
 
-    def ms(self, level: str) -> List[float]:
-        result = self._get_structure_boundaries(level)
+    def ms(self, level: str, dataset: str) -> List[float]:
+        result = self._get_structure_boundaries(level, dataset)
         return [self.midi_object.notes[n].start_sec * 1000 for n in result]
 
     def _get_structure_boundaries(
@@ -112,12 +113,16 @@ class StructurePrediction:
         n = get_novelty_func(mat)
         nn = np.reshape(n, (n.size, 1))
         # detection
-        algo = rpt.Pelt(
-            model="rbf",
-            min_size=pelt_args.alpha*(len(self.midi_object.notes)/15),
-            jump=int(pelt_args.betha*pelt_args.alpha*(len(self.midi_object.notes)/15)),
-        ).fit(nn)
-        result = algo.predict(pen=pelt_args.penalty)
+        try:
+            algo = rpt.Pelt(
+                model="rbf",
+                min_size=pelt_args.alpha*(len(self.midi_object.notes)/15),
+                jump=int(pelt_args.betha*pelt_args.alpha*(len(self.midi_object.notes)/15)),
+            ).fit(nn)
+            result = algo.predict(pen=pelt_args.penalty)
+        except:
+            warnings.warn("No structure found.")
+            result = [0, len(self.midi_object.notes)-1]
         
         return result
 
