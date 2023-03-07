@@ -372,7 +372,7 @@ class MMMTokenizer(EncodeBase):
     @classmethod
     def tokens_to_musa(
         cls,
-        tokens: List[str],
+        tokens: str,
         absolute_timing: bool = True,
         time_unit: str = "SIXTY_FOUR",
         time_sig: str = TimingConsts.DEFAULT_TIME_SIGNATURE.value,
@@ -387,14 +387,22 @@ class MMMTokenizer(EncodeBase):
         """Converts a str valid tokens sequence in Musa objects."""
         # Initialize midi file to write
         midi = Musa(file=None)
+        midi.resolution = resolution
         midi.time_signature_changes = [
             {
                 "time_sig": TimeSignature(time_sig),
                 "ms": 0.0
             }
         ]
+        midi.tempo_changes = [
+            {
+                "tempo": 120,
+                "ms": 0.0
+            }
+        ]
         tokens_list = tokens.split(" ")
         instruments_tokens = cls.split_tokens_by_track(tokens_list)
+        midi.instruments_progs = []
         for inst_idx, instr_tokens in enumerate(instruments_tokens):
             # First index in instr_tokens is the instr program
             # We just want the INST token in this loop
@@ -405,10 +413,19 @@ class MMMTokenizer(EncodeBase):
                 )
             )
             bar_tokens = cls.split_tokens_by_bar(instr_tokens)
+            midi.instruments_progs.append(midi.instruments[-1].program)
+            if inst_idx == 0:
+                for bar_idx, bar in enumerate(bar_tokens):
+                    bar_obj = Bar(
+                        time_sig=TimeSignature(time_sig),
+                        start = bar_idx * ticks_bar,
+                        end = (bar_idx + 1) * ticks_bar,
+                    )
+                    midi.total_bars += 1
+                    midi.bars.append(bar_obj)
+
             global_time_delta = 0
             for bar_idx, bar in enumerate(bar_tokens):
-                bar_obj = Bar()
-                midi.bars.append(bar_obj)
                 if absolute_timing:
                     global_time_delta_ticks = bar_idx * ticks_bar
                 else:
@@ -447,7 +464,7 @@ class MMMTokenizer(EncodeBase):
                                     end=end_time,
                                     velocity=int(vel),
                                     instrument_prog=midi.instruments[inst_idx].program,
-                                    bar_idx=idx
+                                    bar_idx=bar_idx
                                 )
                                 midi.notes.append(note)
                                 break

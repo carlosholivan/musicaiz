@@ -69,7 +69,7 @@ def musa_to_prettymidi(musa_obj):
         )
         notes = musa_obj.get_notes_in_bars(
             bar_start=0, bar_end=musa_obj.total_bars,
-            program=int(inst.program), instrument_idx=i
+            program=int(inst.program)
         )
         for note in notes:
             midi.instruments[i].notes.append(
