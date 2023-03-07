@@ -1,4 +1,4 @@
-![plot](docs/images/logo_rectangle.png?raw=true)
+![plot](https://github.com/carlosholivan/musicaiz/blob/main/docs/images/logo_rectangle.png?raw=true)
 
 # MUSICAIZ
 
@@ -32,14 +32,17 @@ A Python library for symbolic music generation, analysis and visualization.
     <tr>
       <th>PyPI</th>
       <td>
-        <a href="https://pypi.org/project/PyFLP">
+        <a href="https://pypi.org/project/musicaiz/">
           <img alt="PyPI - Package Version" src="https://img.shields.io/pypi/v/musicaiz"/>
         </a>
         <a href="https://pypi.org/project/musicaiz">
           <img alt="PyPI - Supported Python Versions" src="https://img.shields.io/pypi/pyversions/musicaiz?logo=python&amp;logoColor=white"/>
         </a>
-        <a href="https://pypi.org/project/PyFLP">
+        <a href="https://pypi.org/project/musicaiz">
           <img alt="PyPI - Wheel" src="https://img.shields.io/pypi/wheel/musicaiz"/>
+        </a>
+        <a href="hhttps://pypistats.org/packages/musicaiz">
+          <img alt="Downloads" src="https://img.shields.io/pypi/dm/musicaiz"/>
         </a>
       </td>
     </tr>
