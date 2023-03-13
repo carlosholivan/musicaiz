@@ -192,6 +192,7 @@ sphinx_gallery_conf = {
     },
     "reset_modules": (reset_mpl,),
     'capture_repr': ('_repr_html_',),
+    "download_all_examples": True,
 }
 	
 # Generate plots for example sections
