@@ -90,7 +90,11 @@ def sample_sequence(
     """
     # TODO: STOP generation if a PAD is generated
     vocabulary = get_vocabulary(dataset_path)
-    context = [vocabulary.index(context)]
+    if " " in context:
+        context = context.split(" ")
+    else:
+        context = list(context)
+    context = [vocabulary.index(c) for c in context]
     # Get configs file
     model_path = Path(checkpoint_path, model_name + "_" + dataset_name)
     configs_file = Path(model_path, model_name + "_configs.json")
