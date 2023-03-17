@@ -1,4 +1,9 @@
 ## Improvements
+
+### Tokenizerrs/Models
+
+- Vocabulary as a dictionary (now is a str)
+
 ### Converters
 - [ ] Add MusicXML
 - [ ] Add ABC notation.
