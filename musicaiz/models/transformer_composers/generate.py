@@ -103,7 +103,12 @@ def sample_sequence(
 
     model = initialize_model(model_name, configs, device)
     model.to(device)
-    model.load_state_dict(torch.load(Path(model_path, model_name + ".pth"))["model_state_dict"])
+    model.load_state_dict(
+        torch.load(
+            Path(model_path, model_name + ".pth"),
+            map_location=device
+    )["model_state_dict"]),
+    
     model.eval()
 
     if start_token is None:
