@@ -4,6 +4,8 @@
 
 A Python library for symbolic music generation, analysis and visualization.
 
+Published in SoftwareX 2023.
+
 <!-- SHIELDS -->
 <!-- markdownlint-disable -->
 <table>
@@ -26,6 +28,9 @@ A Python library for symbolic music generation, analysis and visualization.
       <td>
         <a href="https://arxiv.org/abs/2209.07974">
         <img alt= "arXiv" src="https://img.shields.io/badge/arXiv-1234.56789-00ff00.svg"/>
+        </a>
+        <a href="https://www.sciencedirect.com/science/article/pii/S2352711023000614">
+        <img alt= "journal" src="https://img.shields.io/static/v1?label=SoftwareX&message=article&color=blueviolet"/>
         </a>
       </td>
     </tr>
@@ -325,13 +330,16 @@ See docs.
 If you use this software for your research, please cite:
 
 ````
-@misc{hernandezolivan22musicaiz,
-  doi = {10.48550/ARXIV.2209.07974},
-  url = {https://arxiv.org/abs/2209.07974},
-  author = {Hernandez-Olivan, Carlos and Beltran, Jose R.},
-  title = {musicaiz: A Python Library for Symbolic Music Generation, Analysis and Visualization},
-  publisher = {arXiv},
-  year = {2022},
+@article{HERNANDEZOLIVAN2023101365,
+    title = {Musicaiz: A python library for symbolic music generation, analysis and visualization},
+    journal = {SoftwareX},
+    volume = {22},
+    pages = {101365},
+    year = {2023},
+    issn = {2352-7110},
+    doi = {https://doi.org/10.1016/j.softx.2023.101365},
+    url = {https://www.sciencedirect.com/science/article/pii/S2352711023000614},
+    author = {Carlos Hernandez-Olivan and Jose R. Beltran},
 }
 ````
 
