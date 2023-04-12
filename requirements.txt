@@ -3,6 +3,8 @@ pretty_midi==0.2.9
 pytest==6.2.4
 pytest-cov
 pytest-mpl
+numpy==1.20.0
+pandas==1.4.4
 matplotlib>=3.4.3
 seaborn
 coverage==6.2

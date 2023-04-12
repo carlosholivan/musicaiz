@@ -5,7 +5,6 @@ channels:
   - conda-forge
 
 dependencies:
-  - numpy>=1.17.0
   - jupyter
   - pip
   - coverage
