@@ -5,7 +5,6 @@ channels:
   - conda-forge
 
 dependencies:
-  - python==3.9.0
   - numpy>=1.17.0
   - jupyter
   - pip
