@@ -1,5 +1,7 @@
 import pytest
-
+import os
+from pathlib import Path
+import tempfile
 
 from musicaiz.tokenizers import (
     CPWordTokenizer,
@@ -25,3 +27,10 @@ def test_CPWordTokenizer_tokenize(midi_sample, cpword_tokens):
     tokenizer = CPWordTokenizer(midi_sample, args)
     tokens = tokenizer.tokenize_file()
     assert tokens == cpword_tokens
+
+    # write midi
+    midi = CPWordTokenizer.tokens_to_musa(tokens)
+    with tempfile.TemporaryDirectory() as output_path:
+        path = os.path.join(output_path, 'midi.mid')
+        midi.writemidi(path)
+        assert Path(path).is_file()
