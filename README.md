@@ -307,6 +307,10 @@ If you want to train the models in the [models](musicaiz/models/) submodule, you
 
 ### Conda dev environment
 
+Run the following commands to create a conda env. Note that if you skip the first command, a newer python version might be installed and the package will not work.
+
+`conda create --name python=3.9`
+
 `conda env update -f environment.yml`
 
 `conda activate musicaiz`
