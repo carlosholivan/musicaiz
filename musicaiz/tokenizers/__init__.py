@@ -35,8 +35,8 @@ In Proceedings of the 21st International Society for Music Information Retrieval
     MMMTokenizer
 
 
-Multi-Track Music Machine
--------------------------
+REMI and REMI+
+--------------
 
 This submodule contains the implementation of the REMI encoding:
 
@@ -44,12 +44,32 @@ This submodule contains the implementation of the REMI encoding:
 Pop music transformer: Beat-based modeling and generation of expressive pop piano compositions.
 In Proceedings of the 28th ACM International Conference on Multimedia (pp. 1180-1188).
 
+And REMI+ encoding:
+
+[3] von Rutte, D., Biggio, L., Kilcher, Y. & Hofmann, T. (2023).
+FIGARO: Controllable Muic Generation using Learned and Expert Features.
+ICLR 2023.
+
 .. autosummary::
     :toctree: generated/
 
     REMITokenizerArguments
     REMITokenizer
 
+Compound Word (CPWord)
+--------------
+
+This submodule contains the implementation of the CPWord encoding:
+
+[4] Hsiao, W. Y., Liu, J. Y., Yeh, Y. C & Yang, Y. H. (2021).
+Compund Word Transformer: Learning to compose full-song music over dynamic directed hypergraphs.
+In Proceedings of the AAAI Conference on Artificial Intelligence (Vol. 35, No. 1, pp. 178-186).
+
+.. autosummary::
+    :toctree: generated/
+
+    CPWordTokenizerArguments
+    CPWordTokenizer
 """
 
 from enum import Enum
@@ -66,6 +86,10 @@ from .remi import (
     REMITokenizer,
     REMITokenizerArguments,
 )
+from .cpword import (
+    CPWordTokenizerArguments,
+    CPWordTokenizer,
+)
 from .one_hot import (
     OneHot,
 )
@@ -74,12 +98,14 @@ from .one_hot import (
 TOKENIZER_ARGUMENTS = [
     MMMTokenizerArguments,
     REMITokenizerArguments,
+    CPWordTokenizerArguments
 ]
 
 
 class Tokenizers(Enum):
     MULTI_TRACK_MUSIC_MACHINE = ("MMM", MMMTokenizerArguments)
     REMI = ("REMI", REMITokenizerArguments)
+    CPWORD = ("CPWORD", CPWordTokenizerArguments)
 
     @property
     def name(self):
@@ -107,5 +133,7 @@ __all__ = [
     "MMMTokenizer",
     "REMITokenizerArguments",
     "REMITokenizer",
+    "CPWordTokenizerArguments",
+    "CPWordTokenizer",
     "OneHot"
 ]
